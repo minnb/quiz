@@ -16,9 +16,7 @@
     <script src="{{ asset('public/assets/js/fastclick.js') }}"></script>
     <script src="{{ asset('public/assets/js/jquery.blockUI.js') }}"></script>
     <script src="{{ asset('public/assets/js/jquery.nicescroll.js') }}"></script>
-    <script src="{{ asset('public/angular/lib/angular.min.js') }}"></script>
-    <script src="{{ asset('public/angular/app.js') }}"></script>
-    <script src="{{ asset('public/assets/js/pikeadmin.js') }}"></script>
+      <script src="{{ asset('public/assets/js/pikeadmin.js') }}"></script>
      <script src="{{ asset('public/js/script.js') }}"></script>
     @yield('javascript')
 </body>
