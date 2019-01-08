@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0.1
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th1 08, 2019 lúc 11:31 AM
--- Phiên bản máy phục vụ: 10.1.32-MariaDB
--- Phiên bản PHP: 7.2.5
+-- Thời gian đã tạo: Th1 08, 2019 lúc 05:52 PM
+-- Phiên bản máy phục vụ: 10.1.36-MariaDB
+-- Phiên bản PHP: 7.2.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -130,9 +130,11 @@ CREATE TABLE `m_exam` (
 
 CREATE TABLE `m_khoa_hoc` (
   `id` int(3) NOT NULL,
-  `code` smallint(2) NOT NULL,
+  `code` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `course` tinyint(1) NOT NULL,
   `class` smallint(2) NOT NULL,
   `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `alias` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `description` varchar(199) COLLATE utf8_unicode_ci DEFAULT NULL,
   `image` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `onpost` tinyint(1) DEFAULT '0',
@@ -141,6 +143,15 @@ CREATE TABLE `m_khoa_hoc` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `m_khoa_hoc`
+--
+
+INSERT INTO `m_khoa_hoc` (`id`, `code`, `course`, `class`, `name`, `alias`, `description`, `image`, `onpost`, `status`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 'HHQ50', 0, 5, 'Cơ bản', 'co-ban', '<p>test</p>', NULL, 0, 1, 13, '2019-01-08 16:25:25', '2019-01-08 16:15:17'),
+(4, 'HHQ51', 1, 5, 'Nâng cao', 'nang-cao', NULL, NULL, 0, 1, 13, '2019-01-08 16:42:41', '2019-01-08 16:42:41'),
+(5, 'HHQ40', 0, 4, 'Cơ bản', 'co-ban', NULL, NULL, 0, 1, 13, '2019-01-08 16:51:15', '2019-01-08 16:51:15');
 
 -- --------------------------------------------------------
 
@@ -346,7 +357,7 @@ ALTER TABLE `m_chuyen_de`
 -- AUTO_INCREMENT cho bảng `m_khoa_hoc`
 --
 ALTER TABLE `m_khoa_hoc`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `m_lop_hoc`

@@ -19,19 +19,15 @@
 						<tbody>
 							<?php foreach($data as $key=>$item) { ?>
 							<tr>
+								<?php $course = App\Models\ClassRoom::countCourseByClass($item->id); ?>
 								<td><?php echo $key + 1; ?></td>
 								<td><?php echo $item->name; ?></td>
 								<td>
-									<?php $course = App\Models\ClassRoom::countCourseByClass($item->id); ?>
-									@if( $course > 0)
-										{{ $course }} <span> khoá học</span>
-										@if($course = 1)
-											<a href="{{ route('get.admin.course.add',['class'=>fencrypt($item->id)]) }}"> <i class="fa fa-fw fa-plus"></i> Thêm khoá học</a>
-										@else
-											<a href="{{ route('get.admin.course.add',['class'=>fencrypt($item->id)]) }}" disable> <i class="fa fa-fw fa-plus"></i> Thêm khoá học</a>
-										@endif
+									{{ $course }} <span> khoá học</span> 
+									@if($course < 2)
+										<a href="{{ route('get.admin.course.add',['class'=>fencrypt($item->id)]) }}"> <i class="fa fa-fw fa-plus"></i> Thêm khoá học</a>
 									@else
-										<span>0 khoá học</span> <a href="{{ route('get.admin.course.add',['class'=>fencrypt($item->id)]) }}"><i class="fa fa-fw fa-plus"></i> Thêm khoá học</a>
+										<a href="#"><i class="fa fa-fw fa-plus"></i> Thêm khoá học</a>
 									@endif
 								</td>
 								<td>

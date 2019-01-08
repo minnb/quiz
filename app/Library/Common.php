@@ -10,7 +10,7 @@ function getStatus(){
 function getKhoaHoc(){
   return [
     '0' => 'Cơ bản',
-    '1' => 'Nâng cào',
+    '1' => 'Nâng cao',
   ];
 }
 function getTypeAnswer(){

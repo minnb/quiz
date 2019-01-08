@@ -12,3 +12,4 @@
 */
 
 include('admin.php');
+Route::get('/', ['as'=>'index', 'uses'=>'Admin\AdminController@index']);

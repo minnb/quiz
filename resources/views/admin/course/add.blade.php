@@ -8,20 +8,26 @@
 @include('admin.layouts.flash_message')
 <div class="container-fluid card">
 	<br>
-	<form name="create-question" action="#" method="POST" enctype="multipart/form-data">
+	<form name="create-question" action="{{ route('post.admin.course.add', ['class'=>fencrypt($class_id)] )}}" method="POST" enctype="multipart/form-data">
 		<input type="hidden" name="_token" value="<?php echo csrf_token() ?>">
 		<div class="row backgroud_white">
 			<div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
 				<div class="form-group">
 					<label>Lớp</label>
 					<select class="form-control" name="class" disabled="">
-						<option>Lớp</option>
+						<option>{{ App\Models\ClassRoom::find($class_id)->name }}</option>
 					</select>
 				</div>
 				<div class="form-group">
 					<label>Khoá học</label>
-					<select class="form-control" name="class" disabled="">
-						<option>Lớp</option>
+					<select class="form-control" name="course">
+						{{ selectedOption(getKhoahoc(),0) }}
+					</select>
+				</div>
+				<div class="form-group">
+					<label>Trạng thái</label>
+					<select class="form-control" name="status">
+						{{ selectedOption(getStatus(),1) }}
 					</select>
 				</div>
 			</div>
@@ -31,13 +37,10 @@
 					<input class="form-control" type="file" name="fileImage[]" id="filer_example2" multiple="multiple">
 				</div>
 			</div>
-			<div class="col-lg-3 col-md-3 col-xs-12 col-sm-12">
-				<div class="form-group">
-					<label>Trạng thái</label>
-					
-				</div>
+			<div class="col-lg-2 col-md-2 col-xs-12 col-sm-12">
+				<
 			</div>
-			<div class="col-lg-10 col-md-10 col-xs-12 col-sm-12">
+			<div class="col-lg-9 col-md-9 col-xs-12 col-sm-12">
 				<div class="form-group">
 					<label>Diễn giải</label>
 					<textarea  class="form-control" id="description" name="description">{{ old('description') }}</textarea>
@@ -48,6 +51,8 @@
 		<div class="row backgroud_white">
 			<div class="col-md-12 col-lg-12">
 				<button type="submit" class="btn btn-danger"><i class="fa fa-save bigfonts" aria-hidden="true"></i> Cập nhật</button>
+				<button type="submit" class="btn btn-info"><i class="fa fa-refresh bigfonts" aria-hidden="true"></i> Thực hiện lại</button>
+				<button type="submit" class="btn btn-primary"><i class="fa fa-list bigfonts" aria-hidden="true"></i> Danh sách khóa học</button>
 			</div>
 		</div>
 	</form>
