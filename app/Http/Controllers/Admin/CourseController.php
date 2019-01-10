@@ -1,11 +1,13 @@
 <?php
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use DB;
 use Auth;
 use App\Models\ClassRoom;
 use App\Models\Course;
+use App\Models\Course_Subject;
 class CourseController extends Controller
 {
     /**
@@ -55,6 +57,7 @@ class CourseController extends Controller
                     if(isset($file)){
                         $file_name = randomString().'.'.$file->getClientOriginalExtension();
                         $course->image = $destinationPath.'/'.$file_name;
+                        $file->move($destinationPath, $file_name);
                     }
                 }
             }
@@ -68,7 +71,7 @@ class CourseController extends Controller
             return redirect()->route('get.admin.course.list')->with(['flash_message'=>'Tạo mới thành công']); 
         }catch (Exception $e) {
             DB::rollBack();
-            return redirect()->route('get.admin.course.list')->with(['flash_message'=>'Caught exception: ',  $e->getMessage(), "\n"]); 
+            return back()->withError($e->getMessage())->withInput();
         }
     }
 
@@ -83,6 +86,7 @@ class CourseController extends Controller
         try{
             DB::beginTransaction();
             $course = Course::find($course_id);
+            $img_old = $course->image;
             $course->description = $request->description;
             $course->user_id = Auth::user()->id;
             $course->status = $request->status;
@@ -93,6 +97,8 @@ class CourseController extends Controller
                     if(isset($file)){
                         $file_name = randomString().'.'.$file->getClientOriginalExtension();
                         $course->image = $destinationPath.'/'.$file_name;
+                        $file->move($destinationPath, $file_name);
+                        delete_image_no_path($img_old);
                     }
                 }
             }
@@ -101,7 +107,49 @@ class CourseController extends Controller
             return redirect()->route('get.admin.course.list')->with(['flash_message'=>'Chỉnh sửa thành công']); 
         }catch (Exception $e) {
             DB::rollBack();
-            return redirect()->route('get.admin.course.list')->with(['flash_message'=>'Caught exception: ',  $e->getMessage(), "\n"]); 
+            return back()->withError($e->getMessage())->withInput();
         }
     }
+
+    public function getAddSubject($course){
+        $course_id = fdecrypt($course);
+        return view('admin.course.add_subject', compact('course_id'));
+    }
+
+     public function postAddSubject(Request $request, $course){
+        $course_id = fdecrypt($course);
+        try{
+            DB::beginTransaction();
+            $course = new Course_Subject();
+            $course->course = $course_id;
+            $course->subject = $request->subject;
+            $course->alias = '';
+            $course->user_id = Auth::user()->id;
+            $course->status = 1;
+            $course->onpost = 0;
+
+            if($request->file('fileImage')){
+                foreach(Input::file('fileImage') as $file ){
+                    $destinationPath = checkFolderImage();
+                    if(isset($file)){
+                        $file_name = randomString().'.'.$file->getClientOriginalExtension();
+                        $course->image = $destinationPath.'/'.$file_name;
+                        $file->move($destinationPath, $file_name);
+                    }
+                }
+            }
+            if(Course::checkSubjectInCourse($course_id, $request->subject) == 0){
+                $course->save();
+            }else{
+                return back()->withErrors('Môn học đã tồn tại trong khoá học')->withInput();
+            }
+            
+            DB::commit();
+            return redirect()->route('get.admin.course.list')->with(['flash_message'=>'Thêm mới thành công']); 
+        }catch (ModelNotFoundException $exception ) {
+            DB::rollBack();
+            return back()->withError($exception->getMessage())->withInput();
+        }
+    }
+
 }

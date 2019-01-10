@@ -1,5 +1,5 @@
 @extends('admin.app')
-@section('title', 'Danh mục lớp học')
+@section('title', 'Danh mục Môn học')
 @section('content')
 @include('admin.layouts.flash_message')
 <div class="row">
@@ -11,28 +11,32 @@
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>Lớp</th>
-								<th>Khoá học</th>
-								<th>Thao tác</th>
+								<th>Hình ảnh</th>
+								<th>Môn học</th>
+								<th>Trạng thái</th>
+								<th>
+									<a href="{{ route('get.admin.subject.add') }}" style="color:red"> <i class="fa fa-fw fa-plus"></i> Thêm mới môn học</a>
+								</th>
 							</tr>
 						</thead>										
 						<tbody>
 							<?php foreach($data as $key=>$item) { ?>
 							<tr>
-								<?php $course = App\Models\ClassRoom::countCourseByClass($item->id); ?>
 								<td><?php echo $key + 1; ?></td>
+								<td>
+									<img src="{{ asset($item->image) }}" class="thumbnail">
+								</td>
 								<td><?php echo $item->name; ?></td>
 								<td>
-									{{ $course }} <span> khoá học</span> 
-									@if($course < 2)
-										<a href="{{ route('get.admin.course.add',['class'=>fencrypt($item->id)]) }}"> <i class="fa fa-fw fa-plus"></i> Thêm khoá học</a>
+									@if($item->status == 0)
+										<span>Disable</span>
 									@else
-										<a href="#"><i class="fa fa-fw fa-plus"></i> Thêm khoá học</a>
+										<span>Active</span>
 									@endif
 								</td>
 								<td>
-									<a href="# "><i class="fa fa-fw fa-edit"></i> Edit </a>
-									<a href="#" style="color:red"><i class="fa fa-fw fa-trash"></i> Disable</a>
+									<a href="{{ route('get.admin.subject.edit',['id'=>fencrypt($item->id)])}} "><i class="fa fa-fw fa-edit"></i> Edit </a>
+									<a href="#" style="color:red"><i class="fa fa-fw fa-trash"></i> Delete</a>
 								</td>
 							</tr>
 							<?php } ?>

@@ -1204,3 +1204,8 @@ a.btn:focus {
 .label-info {
     background-color: #5bc0de;
 }
+.thumbnail{
+  height: 50px;
+  width: auto;
+}
+.css_number{ text-align: right; }

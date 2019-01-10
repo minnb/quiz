@@ -1,5 +1,5 @@
 @extends('admin.app')
-@section('title', 'Thêm mới khoá học')
+@section('title', 'Thêm môn học vào khoá học')
 @section('stylesheet')
 	<link href="{{ asset('public/assets/plugins/jquery.filer/css/jquery.filer.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{  asset('public/assets/plugins/jquery.filer/css/themes/jquery.filer-dragdropbox-theme.css') }}" rel="stylesheet" type="text/css" />
@@ -9,51 +9,30 @@
 @include('admin.layouts.alert')
 <div class="container-fluid card">
 	<br>
-	<form name="create-question" action="{{ route('post.admin.course.add', ['class'=>fencrypt($class_id)] )}}" method="POST" enctype="multipart/form-data">
+	<form name="create-question" action="{{ route('post.admin.course.add.subject', ['class'=>fencrypt($course_id)] )}}" method="POST" enctype="multipart/form-data">
 		<input type="hidden" name="_token" value="<?php echo csrf_token() ?>">
 		<div class="row backgroud_white">
-			<div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
-				<div class="form-group">
-					<label>Lớp</label>
-					<select class="form-control" name="class" disabled="">
-						<option>{{ App\Models\ClassRoom::find($class_id)->name }}</option>
-					</select>
-				</div>
+			<div class="col-md-3 offset-md-1 col-xs-12 col-sm-12">
 				<div class="form-group">
 					<label>Khoá học</label>
 					<select class="form-control" name="course">
-						{{ selectedOption(getKhoahoc(),0) }}
+						<option value="{{ $course_id }}">{{ App\Models\Course::getFullNameCourse($course_id) }}</option>
 					</select>
 				</div>
 				<div class="form-group">
-					<label>Trạng thái</label>
-					<select class="form-control" name="status">
-						{{ selectedOption(getStatus(),1) }}
+					<label>Môn học</label>
+					<select class="form-control" name="subject">
+						{{ getSelectForm(App\Models\Subject::getSelectSubject(), 0) }}
 					</select>
 				</div>
-			</div>
-			<div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
 				<div class="form-group">
 					<label>Hình ảnh</label>
 					<input class="form-control" type="file" name="fileImage[]" id="filer_example2" multiple="multiple">
 				</div>
-			</div>
-			<div class="col-lg-2 col-md-2 col-xs-12 col-sm-12">
-				<
-			</div>
-			<div class="col-lg-9 col-md-9 col-xs-12 col-sm-12">
-				<div class="form-group">
-					<label>Diễn giải</label>
-					<textarea  class="form-control" id="description" name="description">{{ old('description') }}</textarea>
-				</div>
-			</div>
-		</div>
-		<hr>
-		<div class="row backgroud_white">
-			<div class="col-md-12 col-lg-12">
+				<br>
+				<hr>
 				<button type="submit" class="btn btn-danger"><i class="fa fa-save bigfonts" aria-hidden="true"></i> Cập nhật</button>
-				<button type="submit" class="btn btn-info"><i class="fa fa-refresh bigfonts" aria-hidden="true"></i> Thực hiện lại</button>
-				<button type="submit" class="btn btn-primary"><i class="fa fa-list bigfonts" aria-hidden="true"></i> Danh sách khóa học</button>
+				<a class="btn btn-primary" href="{{ route('get.admin.course.list') }}"><i class="fa fa-list bigfonts" aria-hidden="true"></i> Danh sách khoá học</a>
 			</div>
 		</div>
 	</form>
@@ -61,8 +40,6 @@
 </div>
 @endsection
 @section('javascript')
-<script src="<?php echo asset('public/assets/plugins/func_ckfinder.js'); ?>"></script>
-<script src="<?php echo asset('public/assets/plugins/ckeditor/ckeditor.js'); ?>"></script>
 <script src="<?php echo asset('public/assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js'); ?>"></script>
 <script src="<?php echo asset('public/assets/plugins/waypoints/lib/jquery.waypoints.min.js') ; ?>"></script>
 <script src="<?php echo asset('public/assets/plugins/counterup/jquery.counterup.min.js') ; ?>"></script>	
@@ -79,9 +56,5 @@
 	        addMore: true
 	    });
 	});
-	$(document).ready(function(){
-        ckeditor('description')
-        $('.textarea').wysihtml5();
-      });
 </script>
 @endsection

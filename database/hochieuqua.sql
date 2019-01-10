@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th1 08, 2019 lúc 05:52 PM
--- Phiên bản máy phục vụ: 10.1.36-MariaDB
--- Phiên bản PHP: 7.2.11
+-- Thời gian đã tạo: Th1 10, 2019 lúc 11:51 AM
+-- Phiên bản máy phục vụ: 10.1.32-MariaDB
+-- Phiên bản PHP: 7.2.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -83,12 +83,13 @@ CREATE TABLE `m_cau_hoi` (
 
 CREATE TABLE `m_chuyen_de` (
   `id` int(11) NOT NULL,
-  `course` smallint(2) NOT NULL,
+  `course` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `class` smallint(2) NOT NULL,
   `subject` smallint(2) NOT NULL,
   `name` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
   `alias` varchar(191) COLLATE utf8_unicode_ci DEFAULT NULL,
   `description` text COLLATE utf8_unicode_ci,
+  `keywords` varchar(191) COLLATE utf8_unicode_ci DEFAULT NULL,
   `image` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `onpost` tinyint(1) NOT NULL DEFAULT '0',
   `status` tinyint(1) NOT NULL DEFAULT '1',
@@ -97,6 +98,14 @@ CREATE TABLE `m_chuyen_de` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `m_chuyen_de`
+--
+
+INSERT INTO `m_chuyen_de` (`id`, `course`, `class`, `subject`, `name`, `alias`, `description`, `keywords`, `image`, `onpost`, `status`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 'HHQ40', 4, 1, 'Từ và động từ 1', 'tu-va-dong-tu-1', '<p>test</p>', NULL, NULL, 0, 1, 13, '2019-01-10 05:42:07', '2019-01-10 05:41:50'),
+(2, 'HHQ40', 4, 2, 'Số tự nhiên', 'so-tu-nhien', NULL, 'a', NULL, 0, 1, 13, '2019-01-10 05:35:30', '2019-01-10 05:35:30');
+
 -- --------------------------------------------------------
 
 --
@@ -104,14 +113,14 @@ CREATE TABLE `m_chuyen_de` (
 --
 
 CREATE TABLE `m_exam` (
-  `id` int(11) NOT NULL,
-  `type` smallint(2) NOT NULL,
+  `id` smallint(2) NOT NULL,
+  `type` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `name` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
   `alias` varchar(191) COLLATE utf8_unicode_ci DEFAULT NULL,
   `description` text COLLATE utf8_unicode_ci,
   `image` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
   `work_time` smallint(3) DEFAULT NULL,
-  `number_quession` smallint(2) NOT NULL,
+  `number_quesstion` smallint(2) NOT NULL,
   `lv1` smallint(2) NOT NULL,
   `lv2` smallint(2) NOT NULL,
   `lv3` smallint(2) NOT NULL,
@@ -121,6 +130,42 @@ CREATE TABLE `m_exam` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `m_exam`
+--
+
+INSERT INTO `m_exam` (`id`, `type`, `name`, `alias`, `description`, `image`, `work_time`, `number_quesstion`, `lv1`, `lv2`, `lv3`, `lv4`, `status`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 'TUAN', 'Thi tuần', 'thi-tuan', '<p>test</p>', NULL, 32, 11, 4, 3, 2, 2, 1, 13, '2019-01-10 10:37:57', '2019-01-10 10:37:57');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `m_khoahoc_monhoc`
+--
+
+CREATE TABLE `m_khoahoc_monhoc` (
+  `id` int(5) NOT NULL,
+  `course` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `subject` smallint(2) NOT NULL,
+  `alias` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `image` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `onpost` tinyint(1) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `user_id` int(5) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `m_khoahoc_monhoc`
+--
+
+INSERT INTO `m_khoahoc_monhoc` (`id`, `course`, `subject`, `alias`, `image`, `onpost`, `status`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 'HHQ40', 1, '', NULL, 0, 1, 13, '2019-01-09 10:51:00', '2019-01-09 10:51:00'),
+(2, 'HHQ40', 2, '', NULL, 0, 1, 13, '2019-01-10 02:49:55', '2019-01-10 02:49:55'),
+(10, 'HHQ51', 1, '', NULL, 0, 1, 13, '2019-01-10 05:45:33', '2019-01-10 05:45:33'),
+(11, 'HHQ50', 2, '', NULL, 0, 1, 13, '2019-01-10 06:54:27', '2019-01-10 06:54:27');
 
 -- --------------------------------------------------------
 
@@ -186,8 +231,9 @@ INSERT INTO `m_lop_hoc` (`id`, `code`, `name`, `note`) VALUES
 CREATE TABLE `m_mon_hoc` (
   `id` int(11) NOT NULL,
   `class` smallint(2) NOT NULL,
-  `course` smallint(2) NOT NULL,
-  `name` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
+  `course` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `alias` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `description` text COLLATE utf8_unicode_ci,
   `image` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `onpost` tinyint(1) DEFAULT '0',
@@ -197,6 +243,14 @@ CREATE TABLE `m_mon_hoc` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `m_mon_hoc`
+--
+
+INSERT INTO `m_mon_hoc` (`id`, `class`, `course`, `name`, `alias`, `description`, `image`, `onpost`, `sort`, `status`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 0, '0', 'Tiếng Việt', 'tieng-viet', '<p>test</p>', 'public/uploads/images/201901/LPZjXGptYG.png', 0, 0, 1, 13, '2019-01-09 09:56:07', '2019-01-09 09:56:07'),
+(2, 0, '0', 'Toán học', 'toan-hoc', NULL, NULL, 0, 0, 1, 13, '2019-01-10 02:49:36', '2019-01-10 02:49:36');
 
 -- --------------------------------------------------------
 
@@ -289,6 +343,19 @@ ALTER TABLE `m_chuyen_de`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Chỉ mục cho bảng `m_exam`
+--
+ALTER TABLE `m_exam`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `m_khoahoc_monhoc`
+--
+ALTER TABLE `m_khoahoc_monhoc`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `course` (`course`,`subject`);
+
+--
 -- Chỉ mục cho bảng `m_khoa_hoc`
 --
 ALTER TABLE `m_khoa_hoc`
@@ -351,7 +418,19 @@ ALTER TABLE `m_cau_hoi`
 -- AUTO_INCREMENT cho bảng `m_chuyen_de`
 --
 ALTER TABLE `m_chuyen_de`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT cho bảng `m_exam`
+--
+ALTER TABLE `m_exam`
+  MODIFY `id` smallint(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT cho bảng `m_khoahoc_monhoc`
+--
+ALTER TABLE `m_khoahoc_monhoc`
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT cho bảng `m_khoa_hoc`
@@ -369,7 +448,7 @@ ALTER TABLE `m_lop_hoc`
 -- AUTO_INCREMENT cho bảng `m_mon_hoc`
 --
 ALTER TABLE `m_mon_hoc`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `roles`

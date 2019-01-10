@@ -63,7 +63,7 @@ function getImageInContent($content){
 }
 
 function fdecrypt($string) {
-    $key ='gk17mZg0hYI3TOOtx0OAmeuvbn7tHUoCZWjzOfpb1BE';
+    $key ='11223344556677889900ABCSDESASFSFAFSFSFSFSFSFA';
     $result = '';
     $string = base64_decode($string);
     for($i=0; $i<strlen($string); $i++) {
@@ -76,7 +76,7 @@ function fdecrypt($string) {
 }
 
 function fencrypt($string) {
-    $key ='gk17mZg0hYI3TOOtx0OAmeuvbn7tHUoCZWjzOfpb1BE';
+    $key ='11223344556677889900ABCSDESASFSFAFSFSFSFSFSFA';
     $result = '';
     for($i=0; $i<strlen($string); $i++) {
       $char = substr($string, $i, 1);
@@ -111,10 +111,33 @@ function getSelectForm($data,$select = 0){
 }
 
 function checkFolderImage(){
+  $path_server = 'public/uploads/images';
   $str = date("Ym");
-  $path = env('APP_DIR_IMAGE').'/'.$str;
+  $path = $path_server.'/'.$str;
   if (!file_exists($path)) {
     mkdir($path, 0777, true);
   }
   return $path;
+}
+
+function randomString($length = 10){
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
+
+function delete_image_by_path($image,$path){
+  $img = $path.'/'.$image;
+  if(File::exists($img)){
+      File::delete($img);
+  }
+}
+function delete_image_no_path($img){
+  if(File::exists($img)){
+    File::delete($img);
+  }
 }

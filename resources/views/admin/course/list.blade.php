@@ -1,5 +1,5 @@
 @extends('admin.app')
-@section('title', 'Danh mục lớp học')
+@section('title', 'Danh sách khoá học')
 @section('content')
 @include('admin.layouts.flash_message')
 <div class="row">
@@ -14,7 +14,7 @@
 								<th>Mã khóa học</th>
 								<th>Lớp</th>
 								<th>Tên khóa học</th>
-								<th>Môn học</th>
+								<th colspan="2">Môn học</th>
 								<th>Học phí</th>
 								<th>Trạng thái</th>
 								<th>Thao tác</th>
@@ -27,7 +27,19 @@
 								<td><?php echo $item->code; ?></td>
 								<td><?php echo App\Models\ClassRoom::find($item->class)->name; ?></td>
 								<td><?php echo $item->name; ?></td>
-								<td></td>
+								<td>
+									<?php $lst_subject = App\Models\Course_Subject::getListSubjectInCourse($item->code); ?>
+									@if(isset($lst_subject))
+										<ol>
+										@foreach($lst_subject as $value)
+											<li>{{ $value->name }}</li>
+										@endforeach
+										</ol>
+									@endif
+								</td>
+								<td>
+									<a href="{{ route('get.admin.course.add.subject',['id'=>fencrypt($item->code)])}} "><i class="fa fa-fw fa-edit"></i> Thêm môn học </a>
+								</td>
 								<td></td>
 								<td>
 									@if($item->status == 0)
@@ -51,9 +63,8 @@
 </div>
 @endsection
 @section('javascript')
-    <script src="{{ asset('public/angular/controller/UnitController.js') }}"></script>
-	<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-	<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+	<script src="{{ asset('public/assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+	<script src="{{ asset('public/assets/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
 	<script type="text/javascript">
 		$(function() {
 			$('#data_table').DataTable();

@@ -13,6 +13,14 @@ function getKhoaHoc(){
     '1' => 'Nâng cao',
   ];
 }
+function getLoaiDeThi(){
+  return [
+    'TUAN' => 'Đề thi tuần',
+    'THANG' => 'Đề thi tháng',
+    'HOCKY1' => 'Đề thi học kỳ 1',
+    'HOCKY2' => 'Đề thi học kỳ 1'
+  ];
+}
 function getTypeAnswer(){
     $arrStatus = [
       'radio' => 'Một đáp án',

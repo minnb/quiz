@@ -35,6 +35,9 @@
 				<div class="form-group">
 					<label>Hình ảnh</label>
 					<input class="form-control" type="file" name="fileImage[]" id="filer_example2" multiple="multiple">
+					@if($data['image'] != '')
+						<img src="{{ asset($data['image']) }}" class="thumbnail">
+					@endif
 				</div>
 			</div>
 			<div class="col-lg-2 col-md-2 col-xs-12 col-sm-12">

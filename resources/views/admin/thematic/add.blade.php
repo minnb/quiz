@@ -1,5 +1,5 @@
 @extends('admin.app')
-@section('title', 'Thêm mới khoá học')
+@section('title', 'Tạo chuyên đề cho khoá học')
 @section('stylesheet')
 	<link href="{{ asset('public/assets/plugins/jquery.filer/css/jquery.filer.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{  asset('public/assets/plugins/jquery.filer/css/themes/jquery.filer-dragdropbox-theme.css') }}" rel="stylesheet" type="text/css" />
@@ -9,21 +9,13 @@
 @include('admin.layouts.alert')
 <div class="container-fluid card">
 	<br>
-	<form name="create-question" action="{{ route('post.admin.course.add', ['class'=>fencrypt($class_id)] )}}" method="POST" enctype="multipart/form-data">
+	<form name="create-question" action="{{ route('post.admin.thematic.add', ['course'=>fencrypt($course_id), 'subject'=>fencrypt($subject_id)] )}}" method="POST" enctype="multipart/form-data">
 		<input type="hidden" name="_token" value="<?php echo csrf_token() ?>">
 		<div class="row backgroud_white">
-			<div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
+			<div class="col-md-4 offset-md-1 col-xs-12 col-sm-12">
 				<div class="form-group">
-					<label>Lớp</label>
-					<select class="form-control" name="class" disabled="">
-						<option>{{ App\Models\ClassRoom::find($class_id)->name }}</option>
-					</select>
-				</div>
-				<div class="form-group">
-					<label>Khoá học</label>
-					<select class="form-control" name="course">
-						{{ selectedOption(getKhoahoc(),0) }}
-					</select>
+					<label>Tên chuyên đề</label>
+					<input type="text" name="name" required="" class="form-control" value="{{ old('name') }}" placeholder="Chuyên đề">
 				</div>
 				<div class="form-group">
 					<label>Trạng thái</label>
@@ -31,29 +23,38 @@
 						{{ selectedOption(getStatus(),1) }}
 					</select>
 				</div>
+				<div class="form-group">
+					<label>Từ khoá</label>
+					<input type="text" name="keywords" required="" class="form-control" value="{{ old('keywords') }}" placeholder="#Từ khoá">
+				</div>
 			</div>
-			<div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
+			<div class="col-md-3 offset-md-1 col-xs-12 col-sm-12">
+				<div class="form-group">
+					<label>Khoá học</label>
+					<select class="form-control" name="course">
+						<option value="{{ $course_id }}">{{ App\Models\Course::getFullNameCourse($course_id) }}</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label>Môn học</label>
+					<select class="form-control" name="subject">
+						<option value="{{ $subject_id }}">{{ App\Models\Subject::find($subject_id)->name }}</option>
+					</select>
+				</div>
 				<div class="form-group">
 					<label>Hình ảnh</label>
 					<input class="form-control" type="file" name="fileImage[]" id="filer_example2" multiple="multiple">
 				</div>
 			</div>
-			<div class="col-lg-2 col-md-2 col-xs-12 col-sm-12">
-				<
-			</div>
-			<div class="col-lg-9 col-md-9 col-xs-12 col-sm-12">
+			<div class="col-md-8 offset-md-1 col-xs-12 col-sm-12">
 				<div class="form-group">
 					<label>Diễn giải</label>
 					<textarea  class="form-control" id="description" name="description">{{ old('description') }}</textarea>
 				</div>
-			</div>
-		</div>
-		<hr>
-		<div class="row backgroud_white">
-			<div class="col-md-12 col-lg-12">
+				<br>
+				<hr>
 				<button type="submit" class="btn btn-danger"><i class="fa fa-save bigfonts" aria-hidden="true"></i> Cập nhật</button>
-				<button type="submit" class="btn btn-info"><i class="fa fa-refresh bigfonts" aria-hidden="true"></i> Thực hiện lại</button>
-				<button type="submit" class="btn btn-primary"><i class="fa fa-list bigfonts" aria-hidden="true"></i> Danh sách khóa học</button>
+				<a class="btn btn-primary" href="{{ route('get.admin.thematic.list') }}"><i class="fa fa-list bigfonts" aria-hidden="true"></i> Danh sách chuyên đề</a>
 			</div>
 		</div>
 	</form>
