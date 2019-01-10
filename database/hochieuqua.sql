@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0.1
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th1 10, 2019 lúc 11:51 AM
--- Phiên bản máy phục vụ: 10.1.32-MariaDB
--- Phiên bản PHP: 7.2.5
+-- Thời gian đã tạo: Th1 10, 2019 lúc 04:39 PM
+-- Phiên bản máy phục vụ: 10.1.36-MariaDB
+-- Phiên bản PHP: 7.2.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -43,7 +43,7 @@ CREATE TABLE `migrations` (
 CREATE TABLE `m_cau_dap_an` (
   `id` int(11) NOT NULL,
   `stt` smallint(2) NOT NULL,
-  `quession_id` int(11) NOT NULL,
+  `quesstion_id` int(11) NOT NULL,
   `name` varchar(191) COLLATE utf8_unicode_ci DEFAULT NULL,
   `alias` varchar(191) COLLATE utf8_unicode_ci DEFAULT NULL,
   `value` varchar(191) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -53,6 +53,16 @@ CREATE TABLE `m_cau_dap_an` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `m_cau_dap_an`
+--
+
+INSERT INTO `m_cau_dap_an` (`id`, `stt`, `quesstion_id`, `name`, `alias`, `value`, `result`, `image`, `created_at`, `updated_at`) VALUES
+(1, 1, 6, '1', '', '', 1, '', '2019-01-10 15:26:44', '2019-01-10 15:26:44'),
+(2, 2, 6, '2', '', '', 1, '', '2019-01-10 15:26:44', '2019-01-10 15:26:44'),
+(3, 3, 6, '3', '', '', 1, '', '2019-01-10 15:26:44', '2019-01-10 15:26:44'),
+(4, 4, 6, '4', '', '', 1, '', '2019-01-10 15:26:44', '2019-01-10 15:26:44');
+
 -- --------------------------------------------------------
 
 --
@@ -61,19 +71,26 @@ CREATE TABLE `m_cau_dap_an` (
 
 CREATE TABLE `m_cau_hoi` (
   `id` int(11) NOT NULL,
-  `sourse` smallint(2) NOT NULL,
-  `subject` smallint(2) NOT NULL,
+  `type` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `used` tinyint(1) NOT NULL,
+  `course` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `thematic` int(5) NOT NULL,
   `name` tinytext COLLATE utf8_unicode_ci NOT NULL,
   `alias` tinytext COLLATE utf8_unicode_ci,
-  `image` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `image` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `level` smallint(2) NOT NULL,
-  `type` smallint(2) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '1',
   `user_id` int(5) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `m_cau_hoi`
+--
+
+INSERT INTO `m_cau_hoi` (`id`, `type`, `used`, `course`, `thematic`, `name`, `alias`, `image`, `level`, `status`, `user_id`, `created_at`, `updated_at`) VALUES
+(6, 'radio', 1, 'HHQ40', 2, 'test', 'test', NULL, 1, 1, 13, '2019-01-10 15:26:44', '2019-01-10 15:26:44');
 
 -- --------------------------------------------------------
 
@@ -406,13 +423,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT cho bảng `m_cau_dap_an`
 --
 ALTER TABLE `m_cau_dap_an`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `m_cau_hoi`
 --
 ALTER TABLE `m_cau_hoi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT cho bảng `m_chuyen_de`

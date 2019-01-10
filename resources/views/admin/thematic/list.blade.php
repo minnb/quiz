@@ -12,9 +12,10 @@
 							<tr>
 								<th>#</th>
 								<th>Hình ảnh</th>
+								<th>Chuyên đề</th>
 								<th>Khoá học</th>
 								<th>Môn học</th>
-								<th>Chuyên đề</th>
+								<th>Câu hỏi</th>
 								<th>Trạng thái</th>
 								<th>
 									<a href="#" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fa fa-fw fa-plus"></i> Thêm mới chuyên đề</a>
@@ -32,10 +33,14 @@
 										<span></span>
 									@endif
 								</td>
+								<td>
+									<a href="{{ route('get.admin.thematic.edit',['id'=>fencrypt($item->id)])}}"><?php echo $item->name; ?></a>
+								</td>
 								<td>{{ App\Models\Course::getFullNameCourse($item->course) }}</td>
 								<td>{{ App\Models\Subject::find($item->subject)->name }}</td>
 								<td>
-									<a href="{{ route('get.admin.thematic.edit',['id'=>fencrypt($item->id)])}}"><?php echo $item->name; ?></a>
+									<span>(0)</span>
+									<a href="{{ route('get.admin.quesstion.add.thematic',['thematic'=>fencrypt($item->id)]) }}"><i class="fa fa-fw fa-plus"></i> Thêm mới câu hỏi</a>
 								</td>
 								<td>
 									@if($item->status == 0)

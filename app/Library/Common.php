@@ -21,14 +21,6 @@ function getLoaiDeThi(){
     'HOCKY2' => 'Đề thi học kỳ 1'
   ];
 }
-function getTypeAnswer(){
-    $arrStatus = [
-      'radio' => 'Một đáp án',
-      'checkbox' => 'Nhiều đáp án',
-      //'value'  => 'Tự điền đáp án'
-    ];
-    return $arrStatus;
-}
 function getQuizUsed(){
     $arrStatus = [
       '0' => 'Sử dụng cho đề thi',
@@ -54,18 +46,18 @@ function getAnswerNumber(){
 
 function getLevelQuestion(){
     $arrStatus = [
-      '0' => 'Nhận biết',
-      '1' => 'Hiểu',
-      '2' => 'Vận dụng',
-	  '3' => 'Vận dụng sáng tạo'
+      '1' => 'Nhận biết',
+      '2' => 'Hiểu',
+      '3' => 'Vận dụng',
+	    '4' => 'Vận dụng sáng tạo'
     ];
     return $arrStatus;
 }
-function getTypeAnswerImage(){
+function getTypeAnswer(){
     $arrStatus = [
-      'null' => 'Loại trả lời text',
-      'image' => 'Loại trả lời bằng hình ảnh',
-      //'text'  => 'Tự điền đáp án'
+      'radio' => 'Trả lời 1 đáp án',
+      //'checkbox' => 'Chọn nhiều đáp án',
+      //'value'  => 'Điền đáp án',
     ];
     return $arrStatus;
 }

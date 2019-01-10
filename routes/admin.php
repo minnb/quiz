@@ -65,3 +65,17 @@ Route::group(['prefix'=> 'admin'], function(){
 		});
 	});
 
+Route::group(['prefix'=> 'admin'], function(){
+		Route::group(['prefix'=> 'quesstion'], function(){
+			Route::get('list', ['as'=>'get.admin.quesstion.list','uses'=>'Admin\QuesstionController@getList']);
+			Route::get('add', ['as'=>'get.admin.quesstion.add','uses'=>'Admin\QuesstionController@getAdd']);
+			Route::post('add', ['as'=>'post.admin.quesstion.add','uses'=>'Admin\QuesstionController@postAdd']);
+			Route::get('add/thematic/{thematic}', ['as'=>'get.admin.quesstion.add.thematic','uses'=>'Admin\QuesstionController@getAddByThematic']);
+			Route::post('add/thematic/{thematic}', ['as'=>'post.admin.quesstion.add.thematic','uses'=>'Admin\QuesstionController@postAddByThematic']);
+			Route::get('edit/{id}', ['as'=>'get.admin.quesstion.edit','uses'=>'Admin\QuesstionController@getEdit']);
+			Route::post('edit/{id}', ['as'=>'post.admin.quesstion.edit','uses'=>'Admin\QuesstionController@postEdit']);
+			Route::get('delete/{id}', ['as'=>'get.admin.quesstion.delete','uses'=>'Admin\QuesstionController@getDelete']);
+		
+		});
+	});
+

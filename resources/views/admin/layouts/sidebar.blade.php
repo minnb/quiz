@@ -20,7 +20,7 @@
                 <li class="submenu">
                     <a href="#"><i class="fa fa-leanpub bigfonts"></i> <span> Học & Thi </span> <span class="menu-arrow"></span></a>
 					<ul class="list-unstyled">
-						<li><a href="#">Danh sách câu hỏi</a></li>
+						<li><a href="{{ route('get.admin.quesstion.list') }}">Danh sách câu hỏi</a></li>
 						<li><a href="#">Danh sách bài giảng</a></li>
 						<li><a href="{{ route('get.admin.exam.list') }}">Đề thi</a></li>
 					</ul>
