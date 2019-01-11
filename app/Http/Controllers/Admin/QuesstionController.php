@@ -73,10 +73,12 @@ class QuesstionController  extends Controller
     	    		$answer->name = $answer_value;
     	    		$answer->alias = '';
     	    		$answer->value ='';
-    	    		$answer->result = $request->result;
     	    		$answer->image = '';
     	    		$stt = $i+1;
                     $answer->stt = $stt;
+                    if($request->result == $stt){
+                        $answer->result = $stt;
+                    }
     	    		$answer->save();
     	   	}
 
@@ -88,4 +90,65 @@ class QuesstionController  extends Controller
         }
     }
 
+    public function getEdit($idd){
+        $id = fdecrypt($idd); 
+        $data = Quesstion::findOrFail($id)->toArray();
+        $answer = Answer::where('quesstion_id', $id)->get();
+        return view('admin.quesstion.edit', compact('data','answer','id'));
+    }
+
+    public function postEdit(Request $request, $idd){
+        $id = fdecrypt($idd); 
+        try{
+            DB::beginTransaction();
+            $quesstion = Quesstion::findOrFail($id);
+            $old_img = $quesstion->image;
+
+            $quesstion->course = $course[0]->course;
+            $quesstion->thematic = $thematic_id;
+            $quesstion->name = $request->name;
+            $quesstion->alias = makeUnicode($request->name);
+            $quesstion->level = $request->level;
+            $quesstion->type = $request->type;
+            $quesstion->status = 1;
+            $quesstion->used = $request->used;
+            $quesstion->name = $request->name;
+            $quesstion->user_id = Auth::user()->id;
+            if($request->file('fileImage')){
+                foreach(Input::file('fileImage') as $file ){
+                    $destinationPath = checkFolderImage();
+                    if(isset($file)){
+                        $file_name = randomString().'.'.$file->getClientOriginalExtension();
+                        $quesstion->image = $destinationPath.'/'.$file_name;
+                        $file->move($destinationPath, $file_name);
+                        delete_image_no_path($img_old);
+                    }
+                }
+            }
+            $quesstion->save();
+            $quesstion_id = $quesstion->id;
+            foreach(Input::get('answer') as $i=>$answer_value ){
+                    $answer = new Answer();
+                    $answer->quesstion_id = $quesstion_id;
+                    $answer->name = $answer_value;
+                    $answer->alias = '';
+                    $answer->value ='';
+                    $answer->image = '';
+                    $stt = $i+1;
+                    $answer->stt = $stt;
+                    if($request->result == $stt){
+                        $answer->result = $stt;
+                    }else{
+                        $answer->result = 0;
+                    }
+                    $answer->save();
+            }
+
+            DB::commit();
+            return redirect()->route('get.admin.quesstion.list')->with(['flash_message'=>'Chỉnh sửa thành công']);
+        }catch (Exception $e) {
+            DB::rollBack();
+            return back()->withError($e->getMessage())->withInput();
+        }
+    }
 }

@@ -19,7 +19,7 @@
 				</div>
 				<div class="form-group">
 					<label>Nội dung Câu hỏi</label>
-					<textarea class="form-control" name="name" placeholder="Nội dung câu hỏi" rows="3"></textarea> 
+					<textarea class="form-control" name="name" placeholder="Nội dung câu hỏi" rows="3">{{ old('name')}}</textarea> 
 				</div>
 
 				<div class="form-group">

@@ -39,7 +39,7 @@
 								<td>{{ App\Models\Course::getFullNameCourse($item->course) }}</td>
 								<td>{{ App\Models\Subject::find($item->subject)->name }}</td>
 								<td>
-									<span>(0)</span>
+									<span>({{ App\Models\Quesstion::countQuesstionInThematic($item->id) }})</span>
 									<a href="{{ route('get.admin.quesstion.add.thematic',['thematic'=>fencrypt($item->id)]) }}"><i class="fa fa-fw fa-plus"></i> Thêm mới câu hỏi</a>
 								</td>
 								<td>
