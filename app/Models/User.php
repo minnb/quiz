@@ -3,11 +3,12 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
-
+    protected $table ="users";
     /**
      * The attributes that are mass assignable.
      *
@@ -69,5 +70,15 @@ class User extends Authenticatable
       $role = Role_User::where('user_id', $id)->get();
       return Role::find($role[0]->role_id)->name;
 
+    }
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 }
