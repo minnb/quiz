@@ -9,7 +9,7 @@ class HomeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('guest:api');
     }
 
     public function index()
@@ -18,6 +18,6 @@ class HomeController extends Controller
     }
 
     public function getLogin(){
-    	return view('home.auth.login');
+    	return view('dashboard.auth.login');
     }
 }
