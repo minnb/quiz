@@ -16,6 +16,7 @@
 								<th>Khoá học</th>
 								<th>Môn học</th>
 								<th>Câu hỏi</th>
+								<th>Bài giảng</th>
 								<th>Trạng thái</th>
 								<th>
 									<a href="#" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fa fa-fw fa-plus"></i> Thêm mới chuyên đề</a>
@@ -40,7 +41,11 @@
 								<td>{{ App\Models\Subject::find($item->subject)->name }}</td>
 								<td>
 									<span>({{ App\Models\Quesstion::countQuesstionInThematic($item->id) }})</span>
-									<a href="{{ route('get.admin.quesstion.add.thematic',['thematic'=>fencrypt($item->id)]) }}"><i class="fa fa-fw fa-plus"></i> Thêm mới câu hỏi</a>
+									<a href="{{ route('get.admin.quesstion.add.thematic',['thematic'=>fencrypt($item->id)]) }}"><i class="fa fa-fw fa-plus"></i> Thêm mới</a>
+								</td>
+								<td>
+									<span>({{ App\Models\Lesson::countLessonInThematic($item->id) }})</span>
+									<a href="{{ route('get.admin.lesson.add.thematic',['thematic'=>fencrypt($item->id)]) }}" style="color:blue"><i class="fa fa-fw fa-plus"></i> Thêm mới</a>
 								</td>
 								<td>
 									@if($item->status == 0)

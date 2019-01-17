@@ -13,34 +13,7 @@ use JWTFactory;
 use DB; 
 class UserController extends Controller
 {
-	/*
-    public function register(RegisterFormRequest $request)
-    {
-        $params = $request->only('email', 'name', 'password');
-        $user = new User();
-        $user->email = $params['email'];
-        $user->name = $params['name'];
-        $user->password = bcrypt($params['password']);
-        $user->save();
 
-        return response()->json($user, Response::HTTP_OK);
-    }
-
-
-    public function login(Request $request)
-    {
-        $credentials = $request->only('email', 'password');
-        if (!($token = JWTAuth::attempt($credentials))) {
-            return response()->json([
-                'status' => 'error',
-                'error' => 'invalid.credentials',
-                'msg' => 'Invalid Credentials.'
-            ], Response::HTTP_BAD_REQUEST);
-        }
-
-        return response()->json(['token' => $token], Response::HTTP_OK);
-    }
-*/
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [

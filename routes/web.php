@@ -12,5 +12,7 @@
 */
 
 include('admin.php');
-Route::get('/', ['as'=>'index', 'uses'=>'Admin\AdminController@index']);
+Route::get('/', ['as'=>'index', 'uses'=>'Home\HomeController@index']);
+Route::get('/dashboard', ['as'=>'dashboard', 'uses'=>'Dashboard\DashboardController@index']);
 
+Route::get('/dang-nhap', ['as'=>'home.login', 'uses'=>'Home\HomeController@getLogin']);

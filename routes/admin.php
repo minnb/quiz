@@ -1,7 +1,7 @@
 <?php
 Auth::routes();
 Route::get('/admin', ['as'=>'admin', 'uses'=>'Admin\AdminController@index']);
-
+Route::get('/admin/logout', ['as'=>'admin.logout', 'uses'=>'Admin\AdminController@getLogout']);
 Route::group(['prefix'=> 'admin'], function(){
 		Route::group(['prefix'=> 'class'], function(){
 			Route::get('list', ['as'=>'get.admin.class.list','uses'=>'Admin\ClassController@getList']);
@@ -79,3 +79,16 @@ Route::group(['prefix'=> 'admin'], function(){
 		});
 	});
 
+Route::group(['prefix'=> 'admin'], function(){
+		Route::group(['prefix'=> 'lesson'], function(){
+			Route::get('list', ['as'=>'get.admin.lesson.list','uses'=>'Admin\LessonController@getList']);
+			Route::get('add', ['as'=>'get.admin.lesson.add','uses'=>'Admin\LessonController@getAdd']);
+			Route::post('add', ['as'=>'post.admin.lesson.add','uses'=>'Admin\LessonController@postAdd']);
+			Route::get('add/thematic/{thematic}', ['as'=>'get.admin.lesson.add.thematic','uses'=>'Admin\LessonController@getAddByThematic']);
+			Route::post('add/thematic/{thematic}', ['as'=>'post.admin.lesson.add.thematic','uses'=>'Admin\LessonController@postAddByThematic']);
+			Route::get('edit/{id}', ['as'=>'get.admin.lesson.edit','uses'=>'Admin\LessonController@getEdit']);
+			Route::post('edit/{id}', ['as'=>'post.admin.lesson.edit','uses'=>'Admin\LessonController@postEdit']);
+			Route::get('delete/{id}', ['as'=>'get.admin.lesson.delete','uses'=>'Admin\LessonController@getDelete']);
+		
+		});
+	});

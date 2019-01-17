@@ -26,4 +26,9 @@ class AdminController extends Controller
     {
         return view('admin.layouts.index');
     }
+
+    public function getLogout(){
+        Auth::logout();
+        return redirect()->route('index');
+    }
 }
