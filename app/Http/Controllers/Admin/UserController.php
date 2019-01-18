@@ -29,6 +29,7 @@ class UserController extends Controller
             'email' => $request->get('email'),
             'password' => bcrypt($request->get('password')),
         ]);
+        
         $user = User::first();
         $token = JWTAuth::fromUser($user);
         
@@ -37,20 +38,16 @@ class UserController extends Controller
     
     public function login(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|string|email|max:255',
-            'password'=> 'required'
-        ]);
-        if ($validator->fails()) {
-            return response()->json($validator->errors());
-        }
         $credentials = $request->only('email', 'password');
         try {
-            if (! $token = JWTAuth::attempt($credentials)) {
-                return response()->json(['error' => 'invalid_credentials'], 401);
+            if (! $token = JWTAuth::attempt($credentials)) 
+            {
+                return response(['token'=>'@@@@@@401'])->header('Content-Type', 'text/plain');
+            }else{
+
             }
         } catch (JWTException $e) {
-            return response()->json(['error' => 'could_not_create_token'], 500);
+            return response(['token'=>'@@@@@@500'])->header('Content-Type', 'text/plain');
         }
         return response()->json(compact('token'));
     }

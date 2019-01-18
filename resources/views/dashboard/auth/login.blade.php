@@ -18,6 +18,7 @@
     <!-- App CSS -->
     <link type="text/css" href="{{ asset('public/dashboard/css/app.css') }}" rel="stylesheet">
     <link type="text/css" href="{{ asset('public/dashboard/css/app.rtl.css') }}" rel="stylesheet">
+    <link type="text/css" href="{{ asset('public/dashboard/css/style.css') }}" rel="stylesheet">
 </head>
 <body class="login">
     <div class="d-flex align-items-center" style="min-height: 100vh">
@@ -45,12 +46,21 @@
                     <div class="page-separator">
                         <div class="page-separator__text">or</div>
                     </div>
-
-                    <form action="student-dashboard.html" novalidate method="get">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul class="message-errors">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    <form action="{{ route('home.login.post') }}" novalidate method="post">
+                        @csrf
                         <div class="form-group">
                             <label class="form-label" for="email">Địa chỉ email:</label>
                             <div class="input-group input-group-merge">
-                                <input id="email" type="email" required="" class="form-control form-control-prepended" placeholder="Địa chỉ email">
+                                <input id="email" type="email" class="form-control form-control-prepended" placeholder="Địa chỉ email" name="email" required="" value="{{ old('email') }}">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
                                         <span class="far fa-envelope"></span>
@@ -61,7 +71,7 @@
                         <div class="form-group">
                             <label class="form-label" for="password">Mật khẩu:</label>
                             <div class="input-group input-group-merge">
-                                <input id="password" type="password" required="" class="form-control form-control-prepended" placeholder="Mật khẩu">
+                                <input id="password" type="password" class="form-control form-control-prepended" placeholder="Mật khẩu" name="password" required="">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
                                         <span class="far fa-key"></span>

@@ -14,5 +14,8 @@
 include('admin.php');
 Route::get('/', ['as'=>'index', 'uses'=>'Home\HomeController@index']);
 Route::get('/dashboard', ['as'=>'dashboard', 'uses'=>'Dashboard\DashboardController@index']);
+Route::get('/dashboard/logout', ['as'=>'dashboard.logout', 'uses'=>'Dashboard\DashboardController@getLogout']);
 
-Route::get('/dang-nhap', ['as'=>'home.login', 'uses'=>'Home\HomeController@getLogin']);
+Route::get('/dang-nhap', ['as'=>'home.login', 'uses'=>'Home\LoginController@getLogin']);
+Route::post('/dang-nhap', ['as'=>'home.login.post', 'uses'=>'Home\LoginController@postLogin']);
+

@@ -2,6 +2,7 @@
 Auth::routes();
 Route::get('/admin', ['as'=>'admin', 'uses'=>'Admin\AdminController@index']);
 Route::get('/admin/logout', ['as'=>'admin.logout', 'uses'=>'Admin\AdminController@getLogout']);
+Route::post('/admin/login', ['as'=>'admin.login.post', 'uses'=>'Auth\LoginController@postLogin']);
 Route::group(['prefix'=> 'admin'], function(){
 		Route::group(['prefix'=> 'class'], function(){
 			Route::get('list', ['as'=>'get.admin.class.list','uses'=>'Admin\ClassController@getList']);

@@ -22,9 +22,13 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin.layouts.index');
+        if($request->user()->authorizeRoles(['manager'])){
+            return view('admin.layouts.index');
+        }else{
+            return redirect('/');
+        }
     }
 
     public function getLogout(){

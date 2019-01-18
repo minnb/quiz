@@ -4,7 +4,8 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
-
+use App\Models\Role;
+use App\Models\Role_User;
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
@@ -80,5 +81,15 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public static function checkRole($email){
+      $roleName = '';
+      $user = User::where('email', $email)->get();
+      if($user->count()>0){
+        $user_id = $user[0]->id;
+        $roleName = User::getRoleName($user_id);
+      }
+      return $roleName;
     }
 }

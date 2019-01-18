@@ -1,9 +1,8 @@
 <?php
 namespace App\Http\Middleware;
-use Illuminate\Auth\Middleware\Authenticate as Middleware;
-use Session;
 use Closure;
-class AuthenticationMember //extends Middleware
+use Session;
+class RedirectIfMemberNotLogin
 {
     /**
      * Handle an incoming request.
@@ -14,10 +13,9 @@ class AuthenticationMember //extends Middleware
      */
     public function handle($request, Closure $next)
     {
-        if (!Session::has('hochieuqua_vn')) {
-            return redirect('/dang-nhap');
+        if (Session::has('hochieuqua_vn')) {
+            return redirect('/dashboard');
         }
         return $next($request);
     }
-
 }
