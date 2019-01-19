@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use DB;
 use Auth;
+use App\Models\User;
 class AdminController extends Controller
 {
     /**
@@ -34,5 +35,35 @@ class AdminController extends Controller
     public function getLogout(){
         Auth::logout();
         return redirect()->route('index');
+    }
+
+    public function getListUser(){
+        $data = DB::table('users')->where('status', 1)->get();
+        return view('admin.user.list', compact('data'));
+    }
+
+    public function getAddUser(){
+
+    }
+    public function postAddUser(Request  $request){
+        
+    }
+    public function getEditUser($idd){
+        $id = fdecrypt($thematic); 
+    }
+    public function postEditUser(Request  $request, $idd){
+        $id = fdecrypt($thematic); 
+        
+    }
+    public function getDeleteUser($idd){
+        $id = fdecrypt($idd); 
+        $data = User::findOrFail($id);
+        if($data->count() > 0){
+            $data->status = 0;
+            $data->save();
+            return redirect()->route('get.admin.user.list')->with(['flash_message'=>'Block thành công']);
+        }else{
+            return redirect()->route('get.admin.user.list')->with(['flash_message'=>'Có lỗi xảy ra, vui lòng thực hiện lại']);
+        }
     }
 }

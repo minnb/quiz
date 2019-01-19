@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\RegisterFormRequest;
 use Illuminate\Http\Response;
 use App\Models\User;
+use App\Models\Role_User;
 use JWTAuth;
 use Validator;
 use JWTFactory;
@@ -24,16 +25,31 @@ class UserController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors());
         }
-        User::create([
-            'name' => $request->get('name'),
-            'email' => $request->get('email'),
-            'password' => bcrypt($request->get('password')),
-        ]);
-        
-        $user = User::first();
-        $token = JWTAuth::fromUser($user);
-        
-        return response()->json(compact('token'));
+        try{
+            DB::beginTransaction();
+            User::create([
+                'name' => $request->get('name'),
+                'email' => $request->get('email'),
+                'password' => bcrypt($request->get('password')),
+            ]);
+
+            $user = User::first();
+            $user_id = $user->id;
+            Role_User::create([
+                'user_id' => $user_id,
+                'role_id' => 3
+            ]);
+
+            DB::commit();
+
+            $token = JWTAuth::fromUser($user);
+            return response()->json(compact('token'));
+            
+        }catch (Exception $e) {
+            DB::rollBack();
+            return response(['token'=>'@@@@@@500'])->header('Content-Type', 'text/plain');
+        }
+       
     }
     
     public function login(Request $request)

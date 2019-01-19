@@ -78,6 +78,8 @@ class QuesstionController  extends Controller
                     $answer->stt = $stt;
                     if($request->result == $stt){
                         $answer->result = $stt;
+                    }else{
+                        $answer->result = 0;
                     }
     	    		$answer->save();
     	   	}
@@ -104,8 +106,6 @@ class QuesstionController  extends Controller
             $quesstion = Quesstion::findOrFail($id);
             $old_img = $quesstion->image;
 
-            $quesstion->course = $course[0]->course;
-            $quesstion->thematic = $thematic_id;
             $quesstion->name = $request->name;
             $quesstion->alias = makeUnicode($request->name);
             $quesstion->level = $request->level;
@@ -128,20 +128,22 @@ class QuesstionController  extends Controller
             $quesstion->save();
             $quesstion_id = $quesstion->id;
             foreach(Input::get('answer') as $i=>$answer_value ){
-                    $answer = new Answer();
-                    $answer->quesstion_id = $quesstion_id;
-                    $answer->name = $answer_value;
-                    $answer->alias = '';
-                    $answer->value ='';
-                    $answer->image = '';
-                    $stt = $i+1;
-                    $answer->stt = $stt;
-                    if($request->result == $stt){
-                        $answer->result = $stt;
-                    }else{
-                        $answer->result = 0;
+                $stt = $i+1;
+                $result = 0;
+                if($request->result == $stt){
+                        $result = $stt;
                     }
-                    $answer->save();
+
+                $update = [
+                        'name' =>$answer_value,
+                        'value'=>'',
+                        'result' => $result
+                    ];
+                
+                DB::table('m_cau_dap_an')->where([
+                        ['quesstion_id', $quesstion_id],
+                        ['stt', $i+1 ]
+                    ])->update($update);
             }
 
             DB::commit();
@@ -150,5 +152,18 @@ class QuesstionController  extends Controller
             DB::rollBack();
             return back()->withError($e->getMessage())->withInput();
         }
+    }
+
+    public function getDelete($idd){
+        $id = fdecrypt($idd); 
+        $quesstion = Quesstion::findOrFail($id);
+        if($quesstion->count() > 0){
+            $quesstion->status = 0;
+            $quesstion->save();
+            return redirect()->route('get.admin.quesstion.list')->with(['flash_message'=>'Block câu hỏi thành công']);
+        }else{
+            return redirect()->route('get.admin.quesstion.list')->with(['flash_message'=>'Có lỗi dữ liệu, vui lòng thử lại']);
+        }
+
     }
 }

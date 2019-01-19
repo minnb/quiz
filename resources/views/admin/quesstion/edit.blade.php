@@ -41,6 +41,12 @@
 			</div>
 			<div class="col-md-3 offset-md-1 col-xs-12 col-sm-12">
 				<div class="form-group">
+					<label>Trạng thái</label>
+					<select class="form-control" name="used">
+						{{ selectedOption(getStatus(), old('status', isset($data) ? $data['status'] : 1)) }}
+					</select>
+				</div>
+				<div class="form-group">
 					<label>Sử dụng</label>
 					<select class="form-control" name="used">
 						{{ selectedOption(getQuizUsed(), old('used', isset($data) ? $data['used'] : 1)) }}

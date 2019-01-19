@@ -69,8 +69,11 @@ class User extends Authenticatable implements JWTSubject
 
     public static function getRoleName($id){
       $role = Role_User::where('user_id', $id)->get();
-      return Role::find($role[0]->role_id)->name;
-
+      $roleName = '';
+      if($role->count()>0){
+        $roleName = Role::find($role[0]->role_id)->name;
+      }
+      return $roleName;
     }
 
     public function getJWTIdentifier()

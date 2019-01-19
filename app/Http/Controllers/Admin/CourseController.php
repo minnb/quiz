@@ -152,4 +152,16 @@ class CourseController extends Controller
         }
     }
 
+    public function getDelete($idd){
+        $id = fdecrypt($idd); 
+        $data = Course::findOrFail($id);
+        if($data->count() > 0){
+            $data->status = 0;
+            $data->save();
+            return redirect()->route('get.admin.course.list')->with(['flash_message'=>'Block thành công']);
+        }else{
+            return redirect()->route('get.admin.course.list')->with(['flash_message'=>'Có lỗi xảy ra, vui lòng thực hiện lại']);
+        }
+
+    }
 }

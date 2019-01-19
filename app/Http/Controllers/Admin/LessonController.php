@@ -118,4 +118,17 @@ class LessonController  extends Controller
             return back()->withError($e->getMessage())->withInput();
         }
     }
+
+    public function getDelete($idd){
+        $id = fdecrypt($idd); 
+        $data = Lesson::findOrFail($id);
+        if($data->count() > 0){
+            $data->status = 0;
+            $data->save();
+            return redirect()->route('get.admin.lesson.list')->with(['flash_message'=>'Block thành công']);
+        }else{
+            return redirect()->route('get.admin.lesson.list')->with(['flash_message'=>'Có lỗi xảy ra, vui lòng thực hiện lại']);
+        }
+
+    }
 }

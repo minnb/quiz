@@ -1,5 +1,5 @@
 @extends('admin.app')
-@section('title', 'Tạo câu hỏi')
+@section('title', 'Thêm mới bài giảng')
 @section('stylesheet')
 	<link href="{{ asset('public/assets/plugins/jquery.filer/css/jquery.filer.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{  asset('public/assets/plugins/jquery.filer/css/themes/jquery.filer-dragdropbox-theme.css') }}" rel="stylesheet" type="text/css" />

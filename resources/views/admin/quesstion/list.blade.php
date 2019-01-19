@@ -18,7 +18,7 @@
 								<th>Loại</th>
 								<th>Trạng thái</th>
 								<th>
-									<a href="#" ><i class="fa fa-fw fa-plus"></i> Thêm mới câu hỏi</a>
+									<a href="#" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fa fa-fw fa-plus"></i> Thêm mới câu hỏi</a>
 								</th>
 							</tr>
 						</thead>										
@@ -51,6 +51,55 @@
 		</div>
 	</div>				
 </div>
+<!-- Large modal -->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="customModal" id="customModal" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+	<div class="modal-content">
+		<div class="modal-header">
+		<h5 class="modal-title">Lựa chọn Chuyên đề</h5>
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		  <span aria-hidden="true">&times;</span>
+		</button>
+		</div>
+		<div class="modal-body">
+			<table id="data_table_modal" class="table table-bordered table-hover display">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Khoá học</th>
+						<th>Môn học</th>
+						<th>Chuyên đề</th>
+					</tr>
+				</thead>										
+				<tbody>
+					<?php $lst = App\Models\Thematic::where('status', 1)->get();
+						foreach($lst as $key=>$item) { ?>
+					<tr>
+						<td><?php echo $key + 1; ?></td>
+						<td>
+							<a href="{{ route('get.admin.quesstion.add.thematic',['thematic'=>fencrypt($item->id)]) }}">
+								{{ $item->course }} - {{ App\Models\Course::getFullNameCourse($item->course) }}</td>
+							</a>
+						<td>
+							<a href="{{ route('get.admin.quesstion.add.thematic',['thematic'=>fencrypt($item->id)]) }}">
+								{{ App\Models\Subject::find($item->subject)->name }}
+							</a>
+						</td>
+						<td>
+							<a href="{{ route('get.admin.quesstion.add.thematic',['thematic'=>fencrypt($item->id)]) }}">
+							{{ $item->name }}</a>
+						</td>
+					</tr>
+					<?php } ?>
+				</tbody>
+			</table>
+		</div>
+		<div class="modal-footer">
+		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	  </div>
+	</div>
+  </div>
+</div>
 @endsection
 @section('javascript')
 	<script src="{{ asset('public/assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
@@ -58,6 +107,10 @@
 	<script type="text/javascript">
 		$(function() {
 			$('#data_table').DataTable();
+		});
+
+		$(function() {
+			$('#data_table_modal').DataTable();
 		});
 	</script>
 @endsection
