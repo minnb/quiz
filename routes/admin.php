@@ -45,6 +45,7 @@ Route::group(['prefix'=> 'admin'], function(){
 Route::group(['prefix'=> 'admin'], function(){
 		Route::group(['prefix'=> 'thematic'], function(){
 			Route::get('list', ['as'=>'get.admin.thematic.list','uses'=>'Admin\ThematicController@getList']);
+			Route::get('list/{id}', ['as'=>'get.admin.thematic.list.byid','uses'=>'Admin\ThematicController@getListById']);
 			Route::get('add/{course}/{subject}', ['as'=>'get.admin.thematic.add','uses'=>'Admin\ThematicController@getAdd']);
 			Route::post('add/{course}/{subject}', ['as'=>'post.admin.thematic.add','uses'=>'Admin\ThematicController@postAdd']);
 			Route::get('edit/{id}', ['as'=>'get.admin.thematic.edit','uses'=>'Admin\ThematicController@getEdit']);

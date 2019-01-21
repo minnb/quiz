@@ -108,4 +108,9 @@
 			$('#data_table').DataTable();
 		});
 	</script>
+	<script type="text/javascript">
+		$(function() {
+			$('#data_table_modal').DataTable();
+		});
+	</script>
 @endsection

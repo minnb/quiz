@@ -69,7 +69,7 @@ class LessonController  extends Controller
             }
             $lesson->save();
             DB::commit();
-            return redirect()->route('get.admin.lesson.list')->with(['flash_message'=>'Tạo mới thành công']);
+            return redirect()->route('get.admin.thematic.list.byid',['id'=>fencrypt($thematic_id)])->with(['flash_message'=>'Tạo mới thành công']);
         }catch (Exception $e) {
             DB::rollBack();
             return back()->withError($e->getMessage())->withInput();

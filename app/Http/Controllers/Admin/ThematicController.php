@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use DB; use Auth;
 use App\Models\Subject;
 use App\Models\Course;
-use App\Models\Thematic;
+use App\Models\Thematic;use App\Models\Lesson;
 class ThematicController extends Controller
 {
     /**
@@ -22,6 +22,15 @@ class ThematicController extends Controller
     public function getList(){
     	$data = Thematic::where('status', 1)->orderBy('id','desc')->get();
         return view('admin.thematic.list', compact('data'));
+    }
+
+    public function getListById($idd){
+        $thematic_id = fdecrypt($idd); 
+        $data = Lesson::where([
+            ['status', 1],
+            ['thematic', $thematic_id]
+        ])->get();
+        return view('admin.lesson.list_by_thematic', compact('data','thematic_id'));
     }
 
     public function getAdd($course, $subject){
