@@ -1,5 +1,5 @@
 @extends('admin.app')
-@section('title', 'Danh sách user')
+@section('title', 'Học viên - Khóa học')
 @section('content')
 @include('admin.layouts.flash_message')
 <div class="row">
@@ -11,13 +11,13 @@
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>User Name</th>
+								<th>Name</th>
 								<th>Email</th>
-								<th>Level</th>
-								<th>Access</th>
+								<th>Khóa học</th>
+								<th>Từ ngày</th>
 								<th>Trạng thái</th>
 								<th>
-									<a href="{{ route('get.admin.user.add') }}"><i class="fa fa-fw fa-plus"></i> Thêm mới User</a>
+									
 								</th>
 							</tr>
 						</thead>										
@@ -26,13 +26,11 @@
 							<tr>
 								<td><?php echo $key + 1; ?></td>
 								<td>
-									<?php echo $item->name; ?></a>
+									<?php echo App\Models\User::find($item->user_id)->name; ?>
 								</td>
-								<td>{{ $item->email }}</td>
-								<td>{{ App\Models\User::getRoleName($item->id) }}</td>
-								<td>
-									
-								</td>
+								<td>{{ App\Models\User::find($item->user_id)->email }}</td>
+								<td>Lớp {{ App\Models\Course::find($item->course)->class}} - {{ App\Models\Course::find($item->course)->name }}</td>
+								<td>{{ $item->begin_date }}</td>
 								<td>
 									@if($item->status == 0)
 										<span>Disable</span>

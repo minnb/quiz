@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th1 21, 2019 lúc 04:57 PM
+-- Thời gian đã tạo: Th1 30, 2019 lúc 04:06 PM
 -- Phiên bản máy phục vụ: 10.1.36-MariaDB
 -- Phiên bản PHP: 7.2.11
 
@@ -368,7 +368,9 @@ CREATE TABLE `role_user` (
 --
 
 INSERT INTO `role_user` (`id`, `role_id`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 1, 13, '2019-01-21 15:13:26', '0000-00-00 00:00:00');
+(1, 1, 13, '2019-01-21 15:13:26', '0000-00-00 00:00:00'),
+(2, 3, 15, '2019-01-30 14:14:44', '0000-00-00 00:00:00'),
+(3, 2, 17, '2019-01-30 14:29:28', '2019-01-30 14:23:11');
 
 -- --------------------------------------------------------
 
@@ -394,7 +396,33 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `provider`, `provider_id`, `remember_token`, `status`, `created_at`, `updated_at`) VALUES
-(13, 'minhnb', 'minhnb.it@gmail.com', '$2y$10$j.DBpGEVvmJnjVfz7WhC1eq81efPWM3gkpZQ4QFfMZq1e/m/SGsfq', NULL, NULL, '2G0Awsvp2y1slrGFeBlNHGZgCC0Tr0kxmGrwMOYbr0Y9YlQUzMITD5L5d9Cy', 1, '2019-01-08 03:57:04', '2019-01-08 03:57:04');
+(13, 'minhnb', 'minhnb.it@gmail.com', '$2y$10$j.DBpGEVvmJnjVfz7WhC1eq81efPWM3gkpZQ4QFfMZq1e/m/SGsfq', NULL, NULL, '2G0Awsvp2y1slrGFeBlNHGZgCC0Tr0kxmGrwMOYbr0Y9YlQUzMITD5L5d9Cy', 1, '2019-01-08 03:57:04', '2019-01-08 03:57:04'),
+(15, 'Binh Minh', 'congdantoancau2018@gmail.com', '$2y$10$qT/oM3UE2a.YP.pQfjCCb.Z8G0VSLfVuhtFSv6/kpNP9R29tRhPCa', NULL, NULL, NULL, 1, '2019-01-30 14:06:55', '2019-01-30 14:06:55'),
+(17, 'test test', 'lop4@gmail.com', '$2y$10$EsKzfoqVmaSJzP2bwBeRY.4A3hpjhUUQH3b6wL4/rDSMgulI3Uk26', NULL, NULL, NULL, 1, '2019-01-30 14:23:11', '2019-01-30 14:29:28');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `user_course`
+--
+
+CREATE TABLE `user_course` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `course` smallint(4) NOT NULL,
+  `begin_date` datetime NOT NULL,
+  `end_date` datetime NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `user_course`
+--
+
+INSERT INTO `user_course` (`id`, `user_id`, `course`, `begin_date`, `end_date`, `status`, `created_at`, `updated_at`) VALUES
+(1, 17, 1, '2019-01-01 00:00:00', '2019-09-30 00:00:00', 1, '2019-01-30 14:56:01', '0000-00-00 00:00:00');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -481,6 +509,12 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
+-- Chỉ mục cho bảng `user_course`
+--
+ALTER TABLE `user_course`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT cho các bảng đã đổ
 --
 
@@ -554,13 +588,19 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT cho bảng `role_user`
 --
 ALTER TABLE `role_user`
-  MODIFY `id` tinyint(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` tinyint(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT cho bảng `user_course`
+--
+ALTER TABLE `user_course`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

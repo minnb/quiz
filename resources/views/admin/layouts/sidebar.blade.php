@@ -29,6 +29,7 @@
                     <a href="#"><i class="fa fa-cogs bigfonts"></i> <span> Quản trị</span> <span class="menu-arrow"></span></a>
 					<ul class="list-unstyled">
 						<li><a href="{{ route('get.admin.user.list') }}">Danh sách tài khoản</a></li>
+						<li><a href="{{ route('get.admin.user.list.course') }}">Học viên & khóa học</a></li>
 					</ul>
                 </li>
 
