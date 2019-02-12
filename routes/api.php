@@ -23,3 +23,11 @@ Route::post('auth/jwt/login', 'Admin\UserController@login');
 Route::get('/token/refresh', 'Admin\UserController@refresh');
 
 Route::get('api/get','Admin\UserController@get');
+
+Route::get('auth/jwt/{token}', 'Admin\UserController@getUserInfo');
+
+/*
+Route::group(['middleware' => 'quiz'], function () {
+    Route::get('auth/jwt/user', 'Admin\UserController@getUserInfo');
+});
+*/

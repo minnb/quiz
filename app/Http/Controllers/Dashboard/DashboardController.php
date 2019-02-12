@@ -14,12 +14,7 @@ class DashboardController extends Controller
    
     public function index()
     {
-    	$value='';
-    	if (Session::has('hochieuqua_vn')) {
-            $value =Session::get('hochieuqua_vn') ;
-        }
-        //Session::forget('hochieuqua_vn');
-        return view('dashboard.layouts.index', compact('value'));
+        return view('dashboard.layouts.index');
     }
 
     public function getLogout(){

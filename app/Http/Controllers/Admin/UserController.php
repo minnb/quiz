@@ -65,7 +65,8 @@ class UserController extends Controller
         } catch (JWTException $e) {
             return response(['token'=>'@@@@@@500'])->header('Content-Type', 'text/plain');
         }
-        return response()->json(compact('token'));
+        $user = JWTAuth::user();
+        return response()->json(compact('token','user'));
     }
 
     public function user(Request $request)
@@ -102,4 +103,8 @@ class UserController extends Controller
         return response(JWTAuth::getToken(), Response::HTTP_OK);
     }
 
+    public function getUserInfo(Request $request){
+        $user = JWTAuth::toUser($request->token);
+        return response()->json(['result' => $user]);
+    }
 }

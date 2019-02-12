@@ -28,6 +28,9 @@
         }, 5000);
     </script>
 </head>
+<?php
+    $infoUserHHQ = App\Models\User::getInfoUser();
+?>
 <body class=" layout-fluid">
 <div class="preloader">
     <div class="sk-double-bounce">
@@ -37,3 +40,4 @@
 </div>
 <!-- Header Layout -->
 <div class="mdk-header-layout js-mdk-header-layout">
+

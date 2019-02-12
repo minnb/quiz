@@ -12,6 +12,7 @@
 */
 
 include('admin.php');
+include('dashboard.php');
 Route::get('/', ['as'=>'index', 'uses'=>'Home\HomeController@index']);
 Route::get('/dashboard', ['as'=>'dashboard', 'uses'=>'Dashboard\DashboardController@index']);
 Route::get('/dashboard/logout', ['as'=>'dashboard.logout', 'uses'=>'Dashboard\DashboardController@getLogout']);

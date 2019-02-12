@@ -2,18 +2,20 @@
         <div class="mdk-drawer__content ">
             <div class="sidebar sidebar-left sidebar-dark bg-dark o-hidden" data-perfect-scrollbar>
                 <div class="sidebar-p-y">
-                    <div class="sidebar-heading">APPLICATIONS</div>
+                    <div class="sidebar-heading">Dashboard</div>
                     <ul class="sidebar-menu sm-active-button-bg">
                         <li class="sidebar-menu-item active">
-                            <a class="sidebar-menu-button" href="#">
-                                <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">account_box</i> Học viên
+                            <a class="sidebar-menu-button" href="{{ route('dashboard')}}">
+                                <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">account_box</i> {{ App\Models\User::getInfoUser()['name'] }}
                             </a>
                         </li>
+                        <!--
                         <li class="sidebar-menu-item">
                             <a class="sidebar-menu-button" href="#">
                                 <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">school</i> Instructor
                             </a>
                         </li>
+                    -->
                     </ul>
                     <!-- Account menu -->
                     <div class="sidebar-heading">Tài khoản</div>
@@ -64,6 +66,7 @@
                     </ul>
                     <div class="sidebar-heading">Học viên</div>
                     <ul class="sidebar-menu sm-active-button-bg">
+                        <!--
                         <li class="sidebar-menu-item">
                             <a class="sidebar-menu-button" href="#">
                                 <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">search</i> Khoá học
@@ -80,6 +83,17 @@
                                 <span class="sidebar-menu-badge badge badge-primary ml-auto">PRO</span>
                             </a>
                         </li>
+                        -->
+                        <li class="sidebar-menu-item">
+                            <a class="sidebar-menu-button" href="{{ route('get.dashboard.course.list') }}">
+                                <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">import_contacts</i> Danh sách khoá học
+                            </a>
+                        </li>
+                        <li class="sidebar-menu-item">
+                            <a class="sidebar-menu-button" href="{{ route('get.dashboard.course.mycourse') }}">
+                                <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">school</i> Khoá học của tôi
+                            </a>
+                        </li>
                         <li class="sidebar-menu-item">
                             <a class="sidebar-menu-button" href="#">
                                 <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">dvr</i> Làm bài kiểm tra
@@ -88,11 +102,6 @@
                         <li class="sidebar-menu-item">
                             <a class="sidebar-menu-button" href="#">
                                 <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">poll</i> Sổ điểm
-                            </a>
-                        </li>
-                        <li class="sidebar-menu-item">
-                            <a class="sidebar-menu-button" href="#">
-                                <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">school</i> Khoá học của tôi
                             </a>
                         </li>
                         <li class="sidebar-menu-item">
@@ -143,6 +152,4 @@
                 </div>
             </div>
         </div>
-    </div>
-
 </div>

@@ -5,7 +5,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use App\Models\Role;
-use App\Models\Role_User;
+use App\Models\Role_User;use Session;
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
@@ -95,4 +95,13 @@ class User extends Authenticatable implements JWTSubject
       }
       return $roleName;
     }
+
+    public static function getInfoUser(){
+      $infoUser = '';
+      if (Session::has('infoUser')) {
+          $infoUser = fdecrypt(Session::get('infoUser'));
+      }
+      return json_decode($infoUser,true);
+    }
+
 }

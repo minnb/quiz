@@ -1,6 +1,5 @@
 <?php
 include('Common.php');
-
 function print_result($array){
     echo "<pre>";
     print_r($array);
@@ -141,3 +140,5 @@ function delete_image_no_path($img){
     File::delete($img);
   }
 }
+
+include('Jwt.php');

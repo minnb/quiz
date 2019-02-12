@@ -29,7 +29,7 @@ class LoginController extends Controller
 
 	public function postLogin(Request $request)
 	{
-		$url = 'http://localhost:8000/quiz/api/auth/jwt/login';
+		$url = env('APP_API').'auth/jwt/login';
 
 		$request->validate([
     		'email' => 'required|string|email|max:191',
@@ -48,6 +48,7 @@ class LoginController extends Controller
 	        		return back()->withErrors(['errors'=>'Địa chỉ email hoặc mật khẩu không đúng'])->withInput();
 	        	}else{
 			        Session::put('hochieuqua_vn', $result['token']);
+					Session::put('infoUser', fencrypt(json_encode($result['user'])));
 	        		return redirect()->route('dashboard')->with(['flash_message'=>'Đăng nhập thành công']);
 	        	}
 	        	
