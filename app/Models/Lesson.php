@@ -13,4 +13,10 @@ class Lesson extends Model
     	])->get()->count();
     }
 
+    public static function countLessonByCourse($course){
+    	return Lesson::where([
+    		['course', $course]
+    	])->get()->count();
+    }
+
 }

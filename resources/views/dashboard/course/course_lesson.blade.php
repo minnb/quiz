@@ -7,9 +7,9 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
                 <li class="breadcrumb-item"><a href="{{ route('get.dashboard.course.mycourse') }}">Khóa học</a></li>
-                <li class="breadcrumb-item active">{{ App\Models\Course::getFullNameCourse($course) }}</li>
+                <li class="breadcrumb-item active">{{ App\Models\Course::getFullNameCourse($course_id) }}</li>
             </ol>
-            <h1 class="h2">{{ $lesson_data[0]->name }}</h1>
+            <h1 class="h2">{{ $lesson_detail['name'] }}</h1>
             <div class="row">
                 <div class="col-md-8">
                     <div class="card">
@@ -17,13 +17,13 @@
                             <iframe class="embed-responsive-item" src="{!! $lesson_data[0]->link_video !!}" allowfullscreen=""></iframe>
                         </div>
                         <div class="card-body">
-                           {!! $lesson_data[0]->description !!}
+                           {!! $lesson_detail['description'] !!}
                         </div>
                     </div>
                     <!-- Lessons -->
                     <ul class="card list-group list-group-fit">
                         @foreach($lesson_data as $key=>$item)
-                            @if($key == 0)
+                            @if($item->id == $lesson_id)
                                 <li class="list-group-item active">
                             @else
                                 <li class="list-group-item">
@@ -33,7 +33,7 @@
                                         <div class="text-muted">{{ $key + 1}}.</div>
                                     </div>
                                     <div class="media-body">
-                                        @if($key == 0)
+                                         @if($item->id == $lesson_id)
                                             <a href="{{ route('get.dashboard.course.detail.lesson',['course'=>fencrypt($item->course), 'lesson'=>fencrypt($item->id)])}}" class="text-white">{{ $item->name }}</a>
                                         @else
                                             <a href="{{ route('get.dashboard.course.detail.lesson',['course'=>fencrypt($item->course), 'lesson'=>fencrypt($item->id) ])}}">{{ $item->name }}</a>
@@ -48,7 +48,6 @@
                     </ul>
                 </div>
                 <div class="col-md-4">
-                    
                     <div class="card">
                         <div class="card-header">
                             <div class="media align-items-center">

@@ -43,8 +43,15 @@ class Course extends Model
         $data =  Course::where('code', $code)->get();
         return $data[0]->class;
     }
+    
     public static function getFullNameCourse($code){
         $data =  Course::where('code', $code)->get();
+        $class = ClassRoom::find($data[0]->class)->name;
+        return $class.' - '.$data[0]->name;
+    }
+
+    public static function getFullNameCourseById($id){
+        $data =  Course::where('id', $id)->get();
         $class = ClassRoom::find($data[0]->class)->name;
         return $class.' - '.$data[0]->name;
     }

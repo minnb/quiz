@@ -7,9 +7,9 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
                 <li class="breadcrumb-item"><a href="{{ route('get.dashboard.course.mycourse') }}">Khóa học</a></li>
-                <li class="breadcrumb-item active">{{ App\Models\Course::getFullNameCourse($course) }}</li>
+                <li class="breadcrumb-item active">{{ App\Models\Course::getFullNameCourse($course_id) }}</li>
             </ol>
-            <h1 class="h2">{{ $lesson_data[0]->name }}</h1>
+            <h1 class="h2">{{ $lesson_detail['name'] }}</h1>
             <div class="row">
                 <div class="col-md-8">
                     <div class="card">
@@ -17,38 +17,68 @@
                             <iframe class="embed-responsive-item" src="{!! $lesson_data[0]->link_video !!}" allowfullscreen=""></iframe>
                         </div>
                         <div class="card-body">
-                           {!! $lesson_data[0]->description !!}
+                           {!! $lesson_detail['description'] !!}
+                           <a href="#" class="btn btn-sm btn-danger">Luyệt tập Quiz</a>
+                           <a href="#" class="btn btn-sm btn-success">Hoàn thành bài học</a>
                         </div>
                     </div>
                     <!-- Lessons -->
                     <ul class="card list-group list-group-fit">
                         @foreach($lesson_data as $key=>$item)
-                            @if($key == 0)
-                                <li class="list-group-item active">
+                            @if($key < 3 )
+                                @if($item->id == $lesson_id)
+                                    <li class="list-group-item active">
+                                @else
+                                    <li class="list-group-item">
+                                @endif
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <div class="text-muted">{{ $key + 1}}.</div>
+                                        </div>
+                                        <div class="media-body">
+                                            @if($item->id == $lesson_id)
+                                                <a href="{{ route('get.dashboard.course.detail.lesson',['course'=>fencrypt($item->course), 'lesson'=>fencrypt($item->id)])}}" class="text-white">{{ $item->name }}</a>
+                                            @else
+                                                <a href="{{ route('get.dashboard.course.detail.lesson',['course'=>fencrypt($item->course), 'lesson'=>fencrypt($item->id) ])}}">{{ $item->name }}</a>
+                                            @endif
+                                        </div>
+                                        <div class="media-right">
+                                            <small class="text-muted-light">2:03</small>
+                                        </div>
+                                    </div>
+                                </li>
                             @else
                                 <li class="list-group-item">
+                                        <div class="media">
+                                            <div class="media-left">
+                                                <div class="text-muted">{{ $key + 1}}.</div>
+                                            </div>
+                                            <div class="media-body">
+                                                <div class="text-muted-light">{{ $item->name }}</div>
+                                            </div>
+                                            <div class="media-right">
+                                                <small class="badge badge-primary ">PRO</small>
+                                            </div>
+                                        </div>
+                                </li>
                             @endif
-                                <div class="media">
-                                    <div class="media-left">
-                                        <div class="text-muted">{{ $key + 1}}.</div>
-                                    </div>
-                                    <div class="media-body">
-                                        @if($key == 0)
-                                            <a href="{{ route('get.dashboard.course.detail.lesson',['course'=>fencrypt($item->course), 'lesson'=>fencrypt($item->id)])}}" class="text-white">{{ $item->name }}</a>
-                                        @else
-                                            <a href="{{ route('get.dashboard.course.detail.lesson',['course'=>fencrypt($item->course), 'lesson'=>fencrypt($item->id) ])}}">{{ $item->name }}</a>
-                                        @endif
-                                    </div>
-                                    <div class="media-right">
-                                        <small class="text-muted-light">2:03</small>
-                                    </div>
-                                </div>
-                            </li>
                         @endforeach
                     </ul>
                 </div>
                 <div class="col-md-4">
-                    
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <p>
+                                <a href="#" class="btn btn-success btn-block flex-column">
+                                    Đăng ký khóa học 
+                                </a>
+                            </p>
+                            <a href="student-cart.html" class="btn btn-white btn-block flex-column">
+                                            Học phí
+                                <strong>500.000 <ins>đ</ins></strong>
+                            </a>
+                        </div>
+                    </div>
                     <div class="card">
                         <div class="card-header">
                             <div class="media align-items-center">

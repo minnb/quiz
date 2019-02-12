@@ -8,5 +8,9 @@ class User_Course extends Model
 {
     protected $table ="user_course";
    
-
+    public static function getCourseByUserId($user_id){
+    	$data = DB::table('user_course')->where('user_id', $user_id)->get();
+    	return $data;
+    }
+    
 }

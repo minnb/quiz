@@ -23,32 +23,60 @@
                     <!-- Lessons -->
                     <ul class="card list-group list-group-fit">
                         @foreach($lesson_data as $key=>$item)
-                            @if($key == 0)
-                                <li class="list-group-item active">
+                            @if($key < 3 )
+                                @if($key == 0)
+                                    <li class="list-group-item active">
+                                @else
+                                    <li class="list-group-item">
+                                @endif
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <div class="text-muted">{{ $key + 1}}.</div>
+                                        </div>
+                                        <div class="media-body">
+                                            @if($key == 0)
+                                                <a href="{{ route('get.dashboard.course.detail.lesson',['course'=>fencrypt($item->course), 'lesson'=>fencrypt($item->id)])}}" class="text-white">{{ $item->name }}</a>
+                                            @else
+                                                <a href="{{ route('get.dashboard.course.detail.lesson',['course'=>fencrypt($item->course), 'lesson'=>fencrypt($item->id) ])}}">{{ $item->name }}</a>
+                                            @endif
+                                        </div>
+                                        <div class="media-right">
+                                            <small class="text-muted-light">2:03</small>
+                                        </div>
+                                    </div>
+                                </li>
                             @else
                                 <li class="list-group-item">
+                                        <div class="media">
+                                            <div class="media-left">
+                                                <div class="text-muted">{{ $key + 1}}.</div>
+                                            </div>
+                                            <div class="media-body">
+                                                <div class="text-muted-light">{{ $item->name }}</div>
+                                            </div>
+                                            <div class="media-right">
+                                                <small class="badge badge-primary ">PRO</small>
+                                            </div>
+                                        </div>
+                                </li>
                             @endif
-                                <div class="media">
-                                    <div class="media-left">
-                                        <div class="text-muted">{{ $key + 1}}.</div>
-                                    </div>
-                                    <div class="media-body">
-                                        @if($key == 0)
-                                            <a href="{{ route('get.dashboard.course.detail.lesson',['course'=>fencrypt($item->course), 'lesson'=>fencrypt($item->id)])}}" class="text-white">{{ $item->name }}</a>
-                                        @else
-                                            <a href="{{ route('get.dashboard.course.detail.lesson',['course'=>fencrypt($item->course), 'lesson'=>fencrypt($item->id) ])}}">{{ $item->name }}</a>
-                                        @endif
-                                    </div>
-                                    <div class="media-right">
-                                        <small class="text-muted-light">2:03</small>
-                                    </div>
-                                </div>
-                            </li>
                         @endforeach
                     </ul>
                 </div>
                 <div class="col-md-4">
-                    
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <p>
+                                <a href="#" class="btn btn-success btn-block flex-column">
+                                    Đăng ký khóa học 
+                                </a>
+                            </p>
+                            <a href="student-cart.html" class="btn btn-white btn-block flex-column">
+                                            Học phí
+                                <strong>500.000 <ins>đ</ins></strong>
+                            </a>
+                        </div>
+                    </div>
                     <div class="card">
                         <div class="card-header">
                             <div class="media align-items-center">
