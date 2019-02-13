@@ -1,5 +1,5 @@
 @extends('dashboard.app')
-@section('title', 'Dashboard')
+@section('title', 'Danh sách Khoá học')
 @section('content')
 <div data-push data-responsive-width="992px" class="mdk-drawer-layout js-mdk-drawer-layout">
     <div class="mdk-drawer-layout__content page ">
@@ -36,7 +36,7 @@
                                                         <small class="text-black-50"> Học viên: 34 </small>
                                                     </div>
                                                     <div class="d-flex align-items-center py-1">
-                                                        <p class="text-muted">Học phí: 500.000 <ins>đ</ins></p>
+                                                        <p class="text-muted">Học phí: {{ number_format($item->unit_price) }} <ins>đ</ins></p>
                                                     </div>
                                                 </div>
                                                 <div class="text-center">

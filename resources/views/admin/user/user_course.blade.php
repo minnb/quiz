@@ -29,7 +29,7 @@
 									<?php echo App\Models\User::find($item->user_id)->name; ?>
 								</td>
 								<td>{{ App\Models\User::find($item->user_id)->email }}</td>
-								<td>Lớp {{ App\Models\Course::find($item->course)->class}} - {{ App\Models\Course::find($item->course)->name }}</td>
+								<td>{{ App\Models\Course::getFullNameCourse($item->course) }}</td>
 								<td>{{ $item->begin_date }}</td>
 								<td>
 									@if($item->status == 0)

@@ -15,6 +15,7 @@ function getKhoaHoc(){
 }
 function getLoaiDeThi(){
   return [
+    'CHUYENDE'=>'Luyện tập theo chuyên đề',
     'TUAN' => 'Đề thi tuần',
     'THANG' => 'Đề thi tháng',
     'HOCKY1' => 'Đề thi học kỳ 1',

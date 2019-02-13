@@ -22,7 +22,7 @@
 					<ul class="list-unstyled">
 						<li><a href="{{ route('get.admin.quesstion.list') }}">Danh sách câu hỏi</a></li>
 						<li><a href="{{ route('get.admin.lesson.list') }}">Danh sách bài giảng</a></li>
-						<li><a href="{{ route('get.admin.exam.list') }}">Đề thi</a></li>
+						<li><a href="{{ route('get.admin.exam.list') }}">Cấu hình Đề thi</a></li>
 					</ul>
                 </li>
                 <li class="submenu">

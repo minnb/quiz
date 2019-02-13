@@ -6,7 +6,7 @@
 
         <div class="container-fluid page__container">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">HỌC HIỆU QUẢ</a></li>
                 <li class="breadcrumb-item active">Dashboard</li>
             </ol>
             <h1 class="h2">Dashboard</h1>
@@ -24,91 +24,43 @@
                                 </div>
                             </div>
                         </div>
-                       <ul class="list-group list-group-fit mb-0" style="z-index: initial;">
-
-                            <li class="list-group-item" style="z-index: initial;">
-                                <div class="d-flex align-items-center">
-                                    <a href="student-take-course.html" class="avatar avatar-4by3 avatar-sm mr-3">
-                                        <img src="assets/images/gulp.png" alt="course" class="avatar-img rounded">
-                                    </a>
-                                    <div class="flex">
-                                        <a href="student-take-course.html" class="text-body"><strong>Learn Vue.js Fundamentals</strong></a>
-                                        <div class="d-flex align-items-center">
-                                            <div class="progress" style="width: 100px;">
-                                                <div class="progress-bar bg-primary" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                            <small class="text-muted ml-2">25%</small>
-                                        </div>
-                                    </div>
-                                    <div class="dropdown ml-3">
-                                        <a href="#" class="dropdown-toggle text-muted" data-caret="false" data-toggle="dropdown">
-                                            <i class="material-icons">more_vert</i>
+                        @if(isset($lesson_recent))
+                        <ul class="list-group list-group-fit mb-0" style="z-index: initial;">
+                            @foreach($lesson_recent as $key=>$item)
+                                <li class="list-group-item" style="z-index: initial;">
+                                    <div class="d-flex align-items-center">
+                                        <a href="{{ route('get.dashboard.course.detail.lesson',['course'=>fencrypt($item->course), 'lesson'=>fencrypt($item->id)])}}" class="avatar avatar-4by3 avatar-sm mr-3">
+                                            <img src="{{ asset('public/dashboard/images/gulp.png') }}" alt="course" class="avatar-img rounded">
                                         </a>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="student-take-course.html">Continue</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li class="list-group-item" style="z-index: initial;">
-                                <div class="d-flex align-items-center">
-                                    <a href="student-take-course.html" class="avatar avatar-4by3 avatar-sm mr-3">
-                                        <img src="assets/images/vuejs.png" alt="course" class="avatar-img rounded">
-                                    </a>
-                                    <div class="flex">
-                                        <a href="student-take-course.html" class="text-body"><strong>Angular in Steps</strong></a>
-                                        <div class="d-flex align-items-center">
-                                            <div class="progress" style="width: 100px;">
-                                                <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="flex">
+                                            <a href="{{ route('get.dashboard.course.detail.lesson',['course'=>fencrypt($item->course), 'lesson'=>fencrypt($item->id)])}}" class="text-body"><strong>{{ $item->name }}</strong></a>
+                                            <div class="d-flex align-items-center">
+                                                <div class="progress" style="width: 100px;">
+                                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                                <small class="text-muted ml-2">25%</small>
                                             </div>
-                                            <small class="text-muted ml-2">100%</small>
                                         </div>
-                                    </div>
-                                    <div class="dropdown ml-3">
-                                        <a href="#" class="dropdown-toggle text-muted" data-caret="false" data-toggle="dropdown">
-                                            <i class="material-icons">more_vert</i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="student-take-course.html">Continue</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li class="list-group-item" style="z-index: initial;">
-                                <div class="d-flex align-items-center">
-                                    <a href="student-take-course.html" class="avatar avatar-4by3 avatar-sm mr-3">
-                                        <img src="assets/images/nodejs.png" alt="course" class="avatar-img rounded">
-                                    </a>
-                                    <div class="flex">
-                                        <a href="student-take-course.html" class="text-body"><strong>Bootstrap Foundations</strong></a>
-                                        <div class="d-flex align-items-center">
-                                            <div class="progress" style="width: 100px;">
-                                                <div class="progress-bar bg-warning" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="dropdown ml-3">
+                                            <a href="#" class="dropdown-toggle text-muted" data-caret="false" data-toggle="dropdown">
+                                                <i class="material-icons">more_vert</i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="{{ route('get.dashboard.course.detail.lesson',['course'=>fencrypt($item->course), 'lesson'=>fencrypt($item->id)])}}">Tiếp tục</a>
                                             </div>
-                                            <small class="text-muted ml-2">80%</small>
                                         </div>
                                     </div>
-                                    <div class="dropdown ml-3">
-                                        <a href="#" class="dropdown-toggle text-muted" data-caret="false" data-toggle="dropdown">
-                                            <i class="material-icons">more_vert</i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="student-take-course.html">Continue</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
+                                </li>
+                            @endforeach
                         </ul>
+                        @endif
                     </div>
 
                     <div class="card">
                         <div class="card-header">
                             <div class="media align-items-center">
                                 <div class="media-body">
-                                    <h4 class="card-title">Bài thi</h4>
+                                    <h4 class="card-title">Luyện tập Quiz</h4>
                                     <p class="card-subtitle">Thống kê gần đây</p>
                                 </div>
                                 <div class="media-right">

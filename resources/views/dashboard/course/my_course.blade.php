@@ -1,5 +1,5 @@
 @extends('dashboard.app')
-@section('title', 'Dashboard')
+@section('title', 'Khoá học của tôi')
 @section('content')
 <div data-push data-responsive-width="992px" class="mdk-drawer-layout js-mdk-drawer-layout">
     <div class="mdk-drawer-layout__content page ">
@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="card-columns">
-                @if(isset($user_course))
+                @if($user_course->count() > 0)
                     @foreach($user_course as $item)
                         <?php $course_name = App\Models\Course::getFullNameCourse($item->course); ?>
                         <div class="card">
@@ -40,6 +40,14 @@
                             </div>
                         </div>
                     @endforeach
+                @else
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="media-body">
+                                <p class="card-title m-0">Bạn chưa đăng ký khoá học nào</p>
+                            </div>
+                        </div>
+                    </div>
                 @endif
             </div>
         </div>

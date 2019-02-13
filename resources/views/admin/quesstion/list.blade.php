@@ -1,5 +1,5 @@
 @extends('admin.app')
-@section('title', 'Danh sách câu hỏi ôn tập')
+@section('title', 'Danh sách câu hỏi luyện thi Quiz')
 @section('content')
 @include('admin.layouts.flash_message')
 <div class="row">

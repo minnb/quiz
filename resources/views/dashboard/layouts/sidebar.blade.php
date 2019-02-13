@@ -96,7 +96,7 @@
                         </li>
                         <li class="sidebar-menu-item">
                             <a class="sidebar-menu-button" href="#">
-                                <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">dvr</i> Làm bài kiểm tra
+                                <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">dvr</i> Luyện tập Quiz
                             </a>
                         </li>
                         <li class="sidebar-menu-item">

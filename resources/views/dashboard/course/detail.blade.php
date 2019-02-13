@@ -1,5 +1,5 @@
 @extends('dashboard.app')
-@section('title', 'Dashboard')
+@section('title', 'Khóa học')
 @section('content')
 <div data-push data-responsive-width="992px" class="mdk-drawer-layout js-mdk-drawer-layout">
     <div class="mdk-drawer-layout__content page ">
@@ -18,6 +18,8 @@
                         </div>
                         <div class="card-body">
                            {!! $lesson_data[0]->description !!}
+                            <a href="{{ route('get.dashboard.quiz.take',['type'=>fencrypt('CHUYENDE'),'course'=>fencrypt($lesson_data[0]->course),'thematic'=>fencrypt($lesson_data[0]->thematic), 'id'=>fencrypt($lesson_data[0]->id)])}}" class="btn btn-sm btn-danger">Luyệt tập Quiz</a>
+                           <a href="#" class="btn btn-sm btn-success">Hoàn thành bài học</a>
                         </div>
                     </div>
                     <!-- Lessons -->
@@ -48,7 +50,13 @@
                     </ul>
                 </div>
                 <div class="col-md-4">
-                    
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <a href="#" class="btn btn-white btn-block flex-column">Khoá học
+                                <strong>{{ App\Models\Course::getFullNameCourse($lesson_data[0]->course) }}</strong>
+                            </a>
+                        </div>
+                    </div>
                     <div class="card">
                         <div class="card-header">
                             <div class="media align-items-center">

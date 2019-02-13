@@ -15,7 +15,8 @@ class Lesson extends Model
 
     public static function countLessonByCourse($course){
     	return Lesson::where([
-    		['course', $course]
+    		['course', $course],
+            ['status', 1]
     	])->get()->count();
     }
 

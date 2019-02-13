@@ -7,4 +7,11 @@ Route::group(['prefix'=> 'dashboard'], function(){
 		Route::get('detail/{id}', ['as'=>'get.dashboard.course.detail','uses'=>'Dashboard\CourseController@getDetail']);
 		Route::get('detail/{course}/{lesson}', ['as'=>'get.dashboard.course.detail.lesson','uses'=>'Dashboard\CourseController@getDetailLesson']);
 	});
+
+	Route::group(['prefix'=> 'quiz'], function(){
+		Route::get('take-quiz/{type}/{course}/{thematic}/{id}', ['as'=>'get.dashboard.quiz.take','uses'=>'Dashboard\QuizController@getTakeQuiz']);
+		Route::get('take-quiz/{type}/{course}/{thematic}/{id}/{question_id}', ['as'=>'get.dashboard.quiz.take.detail','uses'=>'Dashboard\QuizController@getTakeQuizDetail']);
+		Route::post('take-quiz/{type}/{course}/{thematic}/{id}/{question_id}', ['as'=>'post.dashboard.quiz.take.detail','uses'=>'Dashboard\QuizController@postTakeQuizDetail']);
+	});
+
 });

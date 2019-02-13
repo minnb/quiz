@@ -1,5 +1,5 @@
 @extends('dashboard.app')
-@section('title', 'Dashboard')
+@section('title', 'Khóa học')
 @section('content')
 <div data-push data-responsive-width="992px" class="mdk-drawer-layout js-mdk-drawer-layout">
     <div class="mdk-drawer-layout__content page ">
@@ -18,6 +18,8 @@
                         </div>
                         <div class="card-body">
                            {!! $lesson_data[0]->description !!}
+                           <a href="{{ route('get.dashboard.quiz.take',['type'=>fencrypt('CHUYENDE'),'course'=>fencrypt($lesson_data[0]->course),'thematic'=>fencrypt($lesson_data[0]->thematic), 'id'=>fencrypt($lesson_data[0]->id)])}}" class="btn btn-sm btn-danger">Luyệt tập Quiz</a>
+                           <a href="#" class="btn btn-sm btn-success">Hoàn thành bài học</a>
                         </div>
                     </div>
                     <!-- Lessons -->
@@ -73,7 +75,7 @@
                             </p>
                             <a href="student-cart.html" class="btn btn-white btn-block flex-column">
                                             Học phí
-                                <strong>500.000 <ins>đ</ins></strong>
+                                <strong>{{ number_format($item->unit_price) }} <ins>đ</ins></strong>
                             </a>
                         </div>
                     </div>

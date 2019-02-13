@@ -25,9 +25,14 @@ class CourseController extends Controller
     }
 
     public function getMyCourse(){
-        $user_id = User::getInfoUser()['id'];
-        $user_course = User_Course::getCourseByUserId($user_id);
-        return view('dashboard.course.my_course', compact('user_course', 'user_id'));
+        try{
+            $user_id = User::getInfoUser()['id'];
+            $user_course = User_Course::getCourseByUserId($user_id);
+            return view('dashboard.course.my_course', compact('user_course', 'user_id'));
+        }catch(Exception $e){
+            return back();
+        }
+        
     }
 
     public function getDetail($idd){

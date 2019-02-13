@@ -66,7 +66,7 @@
 		<div class="row backgroud_white">
 			<div class="col-md-10 offset-md-1 col-lg-12">
 				<button type="submit" class="btn btn-danger"><i class="fa fa-save bigfonts" aria-hidden="true"></i> Cập nhật</button>
-				<a class="btn btn-primary" href="{{ route('get.admin.exam.list') }}"><i class="fa fa-list bigfonts" aria-hidden="true"></i> Danh sách câu hỏi</a>
+				<a class="btn btn-primary" href="{{ route('get.admin.quesstion.list') }}"><i class="fa fa-list bigfonts" aria-hidden="true"></i> Danh sách câu hỏi</a>
 			</div>
 		</div>
 	</form>
