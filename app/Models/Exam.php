@@ -15,9 +15,6 @@ class Exam extends Model
     	$heder_quiz_id = 0;
     	try{
             DB::beginTransaction();
-            DB::table('m_ket_qua_quiz')->delete();
-            DB::table('m_ket_qua_quiz_question')->delete();
-
             $heder_quiz = new HeaderQuiz();
             $heder_quiz->type = $type;
             $heder_quiz->user_id = User::getInfoUser()['id'];
@@ -60,7 +57,7 @@ class Exam extends Model
 				$detail_quiz->question_id = $value->id;
 				$detail_quiz->answer = 0;
 				$detail_quiz->comment = '';
-				$detail_quiz->result = 0;
+				$detail_quiz->result = $value->answer;
 				$detail_quiz->answer_time = 0;
 				$detail_quiz->save();
 			}

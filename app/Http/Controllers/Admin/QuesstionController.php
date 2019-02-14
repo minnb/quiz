@@ -54,6 +54,7 @@ class QuesstionController  extends Controller
 			$quesstion->status = 1;
 			$quesstion->used = $request->used;
 			$quesstion->name = $request->name;
+            $quesstion->answer = 0;
             $quesstion->user_id = Auth::user()->id;
             if($request->file('fileImage')){
                 foreach(Input::file('fileImage') as $file ){
@@ -78,6 +79,9 @@ class QuesstionController  extends Controller
                     $answer->stt = $stt;
                     if($request->result == $stt){
                         $answer->result = $stt;
+                        DB::table('m_cau_hoi')
+                            ->where('quesstion_id', $quesstion->id)
+                            ->update(['answer' => $stt]);
                     }else{
                         $answer->result = 0;
                     }
@@ -132,6 +136,9 @@ class QuesstionController  extends Controller
                 $result = 0;
                 if($request->result == $stt){
                         $result = $stt;
+                        DB::table('m_cau_hoi')
+                            ->where('id', $quesstion->id)
+                            ->update(['answer' => $result]);
                     }
 
                 $update = [

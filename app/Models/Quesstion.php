@@ -33,17 +33,25 @@ class Quesstion extends Model
 	    	$quiz_line->type = $value->type;
 	    	$quiz_line->name = $value->name;
 
-	    	$answer_data = Answer::where('quesstion_id',$value->question_id)->get();
+	    	$answer_data = DB::table('m_cau_dap_an')
+			            ->join('m_ket_qua_quiz_question', 'm_ket_qua_quiz_question.question_id','=','m_cau_dap_an.quesstion_id')
+			            ->select('m_ket_qua_quiz_question.id',"m_ket_qua_quiz_question.question_id", 'm_cau_dap_an.name','m_cau_dap_an.stt','m_cau_dap_an.value','m_cau_dap_an.result','m_cau_dap_an.image')
+			            ->where([
+			            		['m_ket_qua_quiz_question.quiz_id', $quiz_id],
+			            		['m_ket_qua_quiz_question.question_id', $value->question_id],
+			            	])
+			            ->get();
 	    	if($answer_data->count() > 0){
 	    		$arrAnswer = [];
 	    		foreach($answer_data as $item){
 		    		$arr = array(
-						'question_id'=>$item->quesstion_id,
+		    			'answer_id'=>$item->id,
+						'question_id'=>$item->question_id,
 						'stt'=>$item->stt,
 						'name'=>$item->name,
 						'value'=>$item->value,
 						'result'=>$item->result,
-						'result'=>$item->image
+						'image'=>$item->image
 					);
 					array_push($arrAnswer,$arr);
 	    		}
