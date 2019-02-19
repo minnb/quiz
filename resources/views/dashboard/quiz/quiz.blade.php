@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Smart Wizard - a JavaScript jQuery Step Wizard plugin</title>
+    <title>Luyện tập: {{App\Models\Thematic::find($thematic_id)->name}}</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href = "{{ asset('public/assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
@@ -12,44 +12,48 @@
 </head>
 <body>
     <br>
-
     <div class="container">
-       <form action="{{ route('post.dashboard.quiz.take.detail',['quiz_id'=>fencrypt($quiz_id)])}}" method="POST">
-         <input type="hidden" name="_token" value="{!! csrf_token() !!}">
-        <div id="smartwizard">
-              <h4 class="border-bottom border-gray pb-2"><small>Chuyên đề: {{App\Models\Thematic::find($thematic_id)->name}}</small></h4>
-              <ul>
-                @foreach($question_data as $key=>$item)
-                  <li><a href="#step-{{$key+1}}">Câu {{$key+1}}<br /></a></li>
-                @endforeach
-              </ul>
-              <div>
-                @foreach($question_data as $key=>$item)
-                  <div id="step-{{$key+1}}" class="">
-                      <div class="card">
-                          <div class="card-header">
-                            <strong>Câu hỏi {{$key+1}}:</strong>
-                            <span>{{$item['name']}}</span>
-                          </div>
-                          <div class="card-block p-0 form-check">
-                            @foreach($item['answer'] as $i=>$value)
-                              <div class="checkbox line-answer">
-                                <input class="" type="radio" name="answer[{{$value['question_id']}}]" value="{{$value['stt']}}">
-                                <label class="form-check-label" for="exampleRadios1">
-                                  {{$value['name']}}
-                                </label>  
+      <div class="row justify-content-md-center">
+        <div class="col-lg-9">
+         <form action="{{ route('post.dashboard.quiz.take.detail',['quiz_id'=>fencrypt($quiz_id)])}}" method="POST">
+           <input type="hidden" name="_token" value="{!! csrf_token() !!}">
+            <div id="smartwizard">
+                  <h4 class="border-bottom border-gray pb-2"><small>Chuyên đề: {{App\Models\Thematic::find($thematic_id)->name}}</small></h4>
+                  <ul>
+                    @foreach($question_data as $key=>$item)
+                      <li><a href="#step-{{$key+1}}">Câu {{$key+1}}<br /></a></li>
+                    @endforeach
+                  </ul>
+                  <div>
+                    @foreach($question_data as $key=>$item)
+                      <input type="hidden" name="questions[{{ $item['question_id'] }}]" value="{{ $item['question_id'] }}">
+                      <div id="step-{{$key+1}}" class="">
+                          <div class="card">
+                              <div class="card-header">
+                                <strong>Câu hỏi {{$key+1}}:</strong>
+                                <span>{{$item['name']}}</span>
                               </div>
-                            @endforeach
+                              <div class="card-block p-0 form-check">
+                                @foreach($item['answer'] as $i=>$value)
+                                  <div class="checkbox line-answer">
+                                    <input class="" type="radio" name="answer[{{$value['question_id']}}]" value="{{$value['stt']}}">
+                                    <label class="form-check-label" for="exampleRadios1">
+                                      {{$value['name']}}
+                                    </label>  
+                                  </div>
+                                @endforeach
+                              </div>
                           </div>
                       </div>
+                    @endforeach
                   </div>
-                @endforeach
-              </div>
+            </div>
+          </form>
         </div>
-        </form>
-    </div>
-    <div class="container">
-        <a class="btn btn-primary" href="{{route('dashboard')}}">Quay về trang bài giảng</a>
+        <div class="col-lg-9">
+            <a class="btn btn-primary" href="{{route('dashboard')}}">Quay về trang bài giảng</a>
+        </div>
+      </div>
     </div>
     <script type="text/javascript" src="{{ asset('public/assets/js/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/assets/js/popper.min.js') }}"></script>

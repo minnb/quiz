@@ -62,7 +62,38 @@ class QuizController extends Controller
 
     public function postTakeQuizDetail(Request $request, $idd){
     	$quiz_id = fdecrypt($idd); 
-        return $request->all();
+        $result = [];
+        try{
+            DB::beginTransaction();
+
+            foreach ($request->input('questions', []) as $key => $question){
+                if($request->input('questions', [$key]) != null){
+                    $result[$key] = $request->answer[$key];
+                    DetailQuiz::where('quiz_id', $quiz_id)
+                        ->where('question_id', $question)
+                        ->update(['answer' => $request->answer[$key]]);
+                }               
+            }
+            HeaderQuiz::where('id', $quiz_id)->update(['status' => 1]);
+            DB::commit();
+            return redirect()->route('get.dashboard.quiz.take.result', ['quiz_id'=>fencrypt($quiz_id)]);
+
+        }catch(Exception $e){
+            DB::rollBack();
+            return back();
+        }       
+    }
+
+    public function getTakeQuizResult($idd){
+        $quiz_id = fdecrypt($idd); 
+        try{
+            $data_result = HeaderQuiz::find($quiz_id);
+            $answer_result = DetailQuiz::where('quiz_id', $quiz_id)->get();
+            return view('dashboard.quiz.quiz_result', compact('data_result','answer_result','quiz_id'));
+        }catch(Exception $e){
+            return back();
+        }
+        
     }
 
 }

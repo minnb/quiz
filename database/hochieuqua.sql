@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th2 14, 2019 lúc 05:03 PM
+-- Thời gian đã tạo: Th2 19, 2019 lúc 05:22 PM
 -- Phiên bản máy phục vụ: 10.1.36-MariaDB
 -- Phiên bản PHP: 7.2.11
 
@@ -42,6 +42,7 @@ CREATE TABLE `migrations` (
 
 CREATE TABLE `m_bai_giang` (
   `id` int(11) NOT NULL,
+  `teacher` smallint(3) DEFAULT NULL,
   `course` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `thematic` smallint(5) NOT NULL,
   `name` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
@@ -62,20 +63,20 @@ CREATE TABLE `m_bai_giang` (
 -- Đang đổ dữ liệu cho bảng `m_bai_giang`
 --
 
-INSERT INTO `m_bai_giang` (`id`, `course`, `thematic`, `name`, `alias`, `description`, `content`, `link_video`, `image`, `sort`, `keywords`, `user_id`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'HHQ40', 2, 'Dãy số tự nhiên', 'day-so-tu-nhien', '<p>B&agrave;i học nằm trong khối kiến thức to&aacute;n lớp 4, thuộc kh&oacute;a học to&aacute;n lớp 4 học kỳ 1</p>', '<p>B&agrave;i học nằm trong khối kiến thức to&aacute;n lớp 4, thuộc kh&oacute;a học to&aacute;n lớp 4 học kỳ 1</p>', 'https://youtu.be/xhl65FGIf8o', NULL, 0, 'Bài học nằm trong khối kiến thức toán lớp 4, thuộc khóa học toán lớp 4 học kỳ 1', 13, 0, '2019-01-21 15:20:36', '2019-01-21 15:20:36'),
-(2, 'HHQ50', 9, 'Khái niệm, tính chất cơ bản của phân số', 'khai-niem,-tinh-chat-co-ban-cua-phan-so', '<p>Kh&aacute;i niệm, t&iacute;nh chất cơ bản của ph&acirc;n số</p>', '<p>Kh&aacute;i niệm, t&iacute;nh chất cơ bản của ph&acirc;n số</p>', 'https://youtu.be/xhl65FGIf8o', NULL, 0, 'Khái niệm, tính chất cơ bản của phân số', 13, 1, '2019-01-21 15:22:37', '2019-01-21 15:22:37'),
-(3, 'HHQ50', 9, 'So sánh phân số', 'so-sanh-phan-so', '<p>So s&aacute;nh ph&acirc;n số</p>', '<p>So s&aacute;nh ph&acirc;n số</p>', 'https://youtu.be/xhl65FGIf8o', NULL, 0, 'So sánh phân số', 13, 1, '2019-01-21 15:23:08', '2019-01-21 15:23:08'),
-(4, 'HHQ50', 9, 'Tìm một số khi biết một số phần của nó', 'tim-mot-so-khi-biet-mot-so-phan-cua-no', '<p>T&igrave;m một số khi biết một số phần của n&oacute;</p>', '<p>T&igrave;m một số khi biết một số phần của n&oacute;</p>', 'https://youtu.be/xhl65FGIf8o', NULL, 0, 'Tìm một số khi biết một số phần của nó', 13, 1, '2019-01-21 15:35:12', '2019-01-21 15:35:12'),
-(5, 'HHQ50', 9, 'Tính thuận tiện với phân số', 'tinh-thuan-tien-voi-phan-so', '<p>T&iacute;nh thuận tiện với ph&acirc;n số</p>', '<p>T&iacute;nh thuận tiện với ph&acirc;n số</p>', 'https://youtu.be/xhl65FGIf8o', NULL, 0, 'Tính thuận tiện với phân số', 13, 1, '2019-01-21 15:41:04', '2019-01-21 15:41:04'),
-(6, 'HHQ50', 9, 'Tính thuận tiện với phân số', 'tinh-thuan-tien-voi-phan-so', '<p>T&iacute;nh thuận tiện với ph&acirc;n số</p>', '<p>T&iacute;nh thuận tiện với ph&acirc;n số</p>', 'https://youtu.be/xhl65FGIf8o', NULL, 0, 'Tính thuận tiện với phân số', 13, 0, '2019-02-13 04:28:37', '2019-02-13 04:28:37'),
-(7, 'HHQ51', 15, 'Tìm số trung bình cộng', 'tim-so-trung-binh-cong', '<p>T&igrave;m số trung b&igrave;nh cộng</p>', '<p>T&igrave;m số trung b&igrave;nh cộng</p>', NULL, NULL, 0, 'Tìm số trung bình cộng', 13, 1, '2019-01-21 15:42:54', '2019-01-21 15:42:54'),
-(8, 'HHQ50', 10, 'Tỉ lệ thuận', 'ti-le-thuan', '<p>Tỉ lệ thuận</p>', '<p>Tỉ lệ thuận</p>', NULL, NULL, 0, 'Tỉ lệ thuận', 13, 1, '2019-01-21 15:51:58', '2019-01-21 15:51:58'),
-(9, 'HHQ50', 10, 'Tỉ lệ nghịch', 'ti-le-nghich', '<p>Tỉ lệ nghịch</p>', '<p>Tỉ lệ nghịch</p>', 'https://youtu.be/xhl65FGIf8o', NULL, 0, 'Tỉ lệ nghịch', 13, 1, '2019-01-21 15:52:13', '2019-01-21 15:52:13'),
-(10, 'HHQ50', 11, 'Khái niệm, đọc, viết số thập phân', 'khai-niem,-doc,-viet-so-thap-phan', '<p>Kh&aacute;i niệm, đọc, viết số thập ph&acirc;n</p>', '<p>Kh&aacute;i niệm, đọc, viết số thập ph&acirc;n</p>', 'https://youtu.be/xhl65FGIf8o', NULL, 0, 'Khái niệm, đọc, viết số thập phân', 13, 1, '2019-01-21 15:53:46', '2019-01-21 15:53:46'),
-(11, 'HHQ50', 12, 'Tìm tỉ số phần trăm của 2 số', 'tim-ti-so-phan-tram-cua-2-so', '<p>T&igrave;m tỉ số phần trăm của 2 số</p>', '<p>T&igrave;m tỉ số phần trăm của 2 số</p>', 'https://youtu.be/xhl65FGIf8o', NULL, 0, 'Tìm tỉ số phần trăm của 2 số', 13, 1, '2019-01-21 15:54:25', '2019-01-21 15:54:25'),
-(12, 'HHQ50', 13, 'Hình tam giác', 'hinh-tam-giac', '<p>H&igrave;nh tam gi&aacute;c</p>', '<p>H&igrave;nh tam gi&aacute;c</p>', 'https://youtu.be/xhl65FGIf8o', NULL, 0, 'Hình tam giác', 13, 1, '2019-01-21 15:54:51', '2019-01-21 15:54:51'),
-(13, 'HHQ50', 14, 'Số đo thời gian', 'so-do-thoi-gian', '<p>Số đo thời gian</p>', '<p>Số đo thời gian</p>', 'https://youtu.be/xhl65FGIf8o', NULL, 0, 'Số đo thời gian', 13, 1, '2019-01-21 15:55:18', '2019-01-21 15:55:18');
+INSERT INTO `m_bai_giang` (`id`, `teacher`, `course`, `thematic`, `name`, `alias`, `description`, `content`, `link_video`, `image`, `sort`, `keywords`, `user_id`, `status`, `created_at`, `updated_at`) VALUES
+(1, NULL, 'HHQ40', 2, 'Dãy số tự nhiên', 'day-so-tu-nhien', '<p>B&agrave;i học nằm trong khối kiến thức to&aacute;n lớp 4, thuộc kh&oacute;a học to&aacute;n lớp 4 học kỳ 1</p>', '<p>B&agrave;i học nằm trong khối kiến thức to&aacute;n lớp 4, thuộc kh&oacute;a học to&aacute;n lớp 4 học kỳ 1</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 0, 'Bài học nằm trong khối kiến thức toán lớp 4, thuộc khóa học toán lớp 4 học kỳ 1', 13, 0, '2019-02-19 15:48:27', '2019-01-21 15:20:36'),
+(2, NULL, 'HHQ50', 9, 'Khái niệm, tính chất cơ bản của phân số', 'khai-niem,-tinh-chat-co-ban-cua-phan-so', '<p>Kh&aacute;i niệm, t&iacute;nh chất cơ bản của ph&acirc;n số</p>', '<p>Kh&aacute;i niệm, t&iacute;nh chất cơ bản của ph&acirc;n số</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 0, 'Khái niệm, tính chất cơ bản của phân số', 13, 1, '2019-02-19 15:48:27', '2019-01-21 15:22:37'),
+(3, NULL, 'HHQ50', 9, 'So sánh phân số', 'so-sanh-phan-so', '<p>So s&aacute;nh ph&acirc;n số</p>', '<p>So s&aacute;nh ph&acirc;n số</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 0, 'So sánh phân số', 13, 1, '2019-02-19 15:48:27', '2019-01-21 15:23:08'),
+(4, NULL, 'HHQ50', 9, 'Tìm một số khi biết một số phần của nó', 'tim-mot-so-khi-biet-mot-so-phan-cua-no', '<p>T&igrave;m một số khi biết một số phần của n&oacute;</p>', '<p>T&igrave;m một số khi biết một số phần của n&oacute;</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 0, 'Tìm một số khi biết một số phần của nó', 13, 1, '2019-02-19 15:48:27', '2019-01-21 15:35:12'),
+(5, NULL, 'HHQ50', 9, 'Tính thuận tiện với phân số', 'tinh-thuan-tien-voi-phan-so', '<p>T&iacute;nh thuận tiện với ph&acirc;n số</p>', '<p>T&iacute;nh thuận tiện với ph&acirc;n số</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 0, 'Tính thuận tiện với phân số', 13, 1, '2019-02-19 15:48:27', '2019-01-21 15:41:04'),
+(6, NULL, 'HHQ50', 9, 'Tính thuận tiện với phân số', 'tinh-thuan-tien-voi-phan-so', '<p>T&iacute;nh thuận tiện với ph&acirc;n số</p>', '<p>T&iacute;nh thuận tiện với ph&acirc;n số</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 0, 'Tính thuận tiện với phân số', 13, 0, '2019-02-19 15:48:27', '2019-02-13 04:28:37'),
+(7, NULL, 'HHQ51', 15, 'Tìm số trung bình cộng', 'tim-so-trung-binh-cong', '<p>T&igrave;m số trung b&igrave;nh cộng</p>', '<p>T&igrave;m số trung b&igrave;nh cộng</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 0, 'Tìm số trung bình cộng', 13, 1, '2019-02-19 15:48:27', '2019-01-21 15:42:54'),
+(8, NULL, 'HHQ50', 10, 'Tỉ lệ thuận', 'ti-le-thuan', '<p>Tỉ lệ thuận</p>', '<p>Tỉ lệ thuận</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 0, 'Tỉ lệ thuận', 13, 1, '2019-02-19 15:48:27', '2019-01-21 15:51:58'),
+(9, NULL, 'HHQ50', 10, 'Tỉ lệ nghịch', 'ti-le-nghich', '<p>Tỉ lệ nghịch</p>', '<p>Tỉ lệ nghịch</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 0, 'Tỉ lệ nghịch', 13, 1, '2019-02-19 15:48:27', '2019-01-21 15:52:13'),
+(10, NULL, 'HHQ50', 11, 'Khái niệm, đọc, viết số thập phân', 'khai-niem,-doc,-viet-so-thap-phan', '<p>Kh&aacute;i niệm, đọc, viết số thập ph&acirc;n</p>', '<p>Kh&aacute;i niệm, đọc, viết số thập ph&acirc;n</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 0, 'Khái niệm, đọc, viết số thập phân', 13, 1, '2019-02-19 15:48:27', '2019-01-21 15:53:46'),
+(11, NULL, 'HHQ50', 12, 'Tìm tỉ số phần trăm của 2 số', 'tim-ti-so-phan-tram-cua-2-so', '<p>T&igrave;m tỉ số phần trăm của 2 số</p>', '<p>T&igrave;m tỉ số phần trăm của 2 số</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 0, 'Tìm tỉ số phần trăm của 2 số', 13, 1, '2019-02-19 15:48:27', '2019-01-21 15:54:25'),
+(12, NULL, 'HHQ50', 13, 'Hình tam giác', 'hinh-tam-giac', '<p>H&igrave;nh tam gi&aacute;c</p>', '<p>H&igrave;nh tam gi&aacute;c</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 0, 'Hình tam giác', 13, 1, '2019-02-19 15:48:27', '2019-01-21 15:54:51'),
+(13, NULL, 'HHQ50', 14, 'Số đo thời gian', 'so-do-thoi-gian', '<p>Số đo thời gian</p>', '<p>Số đo thời gian</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 0, 'Số đo thời gian', 13, 1, '2019-02-19 15:48:27', '2019-01-21 15:55:18');
 
 -- --------------------------------------------------------
 
@@ -246,6 +247,23 @@ INSERT INTO `m_exam` (`id`, `type`, `name`, `alias`, `description`, `image`, `wo
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `m_giao_vien`
+--
+
+CREATE TABLE `m_giao_vien` (
+  `id` int(11) NOT NULL,
+  `name` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8_unicode_ci,
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `avata` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `m_ket_qua_quiz`
 --
 
@@ -270,8 +288,10 @@ CREATE TABLE `m_ket_qua_quiz` (
 --
 
 INSERT INTO `m_ket_qua_quiz` (`id`, `type`, `user_id`, `result`, `description`, `comment`, `course`, `thematic`, `lesson`, `status`, `success`, `created_at`, `updated_at`) VALUES
-(67, 'CHUYENDE', 17, 0, '', 'CHUYENDE', 'HHQ50', 9, 2, 0, 0, '2019-02-14 15:21:31', '2019-02-14 15:21:31'),
-(68, 'CHUYENDE', 17, 0, '', 'CHUYENDE', 'HHQ50', 9, 4, 0, 0, '2019-02-14 15:22:19', '2019-02-14 15:22:19');
+(67, 'CHUYENDE', 17, 0, '', 'CHUYENDE', 'HHQ50', 9, 2, 1, 0, '2019-02-14 15:21:31', '2019-02-19 15:36:22'),
+(68, 'CHUYENDE', 17, 0, '', 'CHUYENDE', 'HHQ50', 9, 4, 0, 0, '2019-02-14 15:22:19', '2019-02-14 15:22:19'),
+(69, 'CHUYENDE', 17, 0, '', 'CHUYENDE', 'HHQ50', 14, 13, 0, 0, '2019-02-19 16:02:31', '2019-02-19 16:02:31'),
+(70, 'CHUYENDE', 17, 0, '', 'CHUYENDE', 'HHQ50', 9, 3, 1, 0, '2019-02-19 16:02:48', '2019-02-19 16:03:02');
 
 -- --------------------------------------------------------
 
@@ -296,16 +316,21 @@ CREATE TABLE `m_ket_qua_quiz_question` (
 --
 
 INSERT INTO `m_ket_qua_quiz_question` (`id`, `quiz_id`, `question_id`, `answer`, `comment`, `result`, `answer_time`, `created_at`, `updated_at`) VALUES
-(303, 67, 8, 0, '', 4, 0, '2019-02-14 15:21:31', '2019-02-14 15:21:31'),
-(304, 67, 12, 0, '', 1, 0, '2019-02-14 15:21:31', '2019-02-14 15:21:31'),
-(305, 67, 9, 0, '', 2, 0, '2019-02-14 15:21:31', '2019-02-14 15:21:31'),
-(306, 67, 11, 0, '', 2, 0, '2019-02-14 15:21:31', '2019-02-14 15:21:31'),
-(307, 67, 10, 0, '', 3, 0, '2019-02-14 15:21:31', '2019-02-14 15:21:31'),
+(303, 67, 8, 2, '', 4, 0, '2019-02-19 15:36:22', '2019-02-19 15:36:22'),
+(304, 67, 12, 4, '', 1, 0, '2019-02-19 15:36:22', '2019-02-19 15:36:22'),
+(305, 67, 9, 3, '', 2, 0, '2019-02-19 15:36:22', '2019-02-19 15:36:22'),
+(306, 67, 11, 2, '', 2, 0, '2019-02-19 15:36:22', '2019-02-19 15:36:22'),
+(307, 67, 10, 1, '', 3, 0, '2019-02-19 15:36:22', '2019-02-19 15:36:22'),
 (308, 68, 12, 0, '', 1, 0, '2019-02-14 15:22:19', '2019-02-14 15:22:19'),
 (309, 68, 13, 0, '', 1, 0, '2019-02-14 15:22:19', '2019-02-14 15:22:19'),
 (310, 68, 9, 0, '', 2, 0, '2019-02-14 15:22:19', '2019-02-14 15:22:19'),
 (311, 68, 11, 0, '', 2, 0, '2019-02-14 15:22:19', '2019-02-14 15:22:19'),
-(312, 68, 10, 0, '', 3, 0, '2019-02-14 15:22:19', '2019-02-14 15:22:19');
+(312, 68, 10, 0, '', 3, 0, '2019-02-14 15:22:19', '2019-02-14 15:22:19'),
+(313, 70, 8, 4, '', 4, 0, '2019-02-19 16:03:02', '2019-02-19 16:03:02'),
+(314, 70, 13, 4, '', 1, 0, '2019-02-19 16:03:02', '2019-02-19 16:03:02'),
+(315, 70, 9, 3, '', 2, 0, '2019-02-19 16:03:02', '2019-02-19 16:03:02'),
+(316, 70, 11, 2, '', 2, 0, '2019-02-19 16:03:02', '2019-02-19 16:03:02'),
+(317, 70, 10, 1, '', 3, 0, '2019-02-19 16:03:02', '2019-02-19 16:03:02');
 
 -- --------------------------------------------------------
 
@@ -576,6 +601,12 @@ ALTER TABLE `m_exam`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Chỉ mục cho bảng `m_giao_vien`
+--
+ALTER TABLE `m_giao_vien`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `m_ket_qua_quiz`
 --
 ALTER TABLE `m_ket_qua_quiz`
@@ -672,16 +703,22 @@ ALTER TABLE `m_exam`
   MODIFY `id` smallint(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT cho bảng `m_giao_vien`
+--
+ALTER TABLE `m_giao_vien`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT cho bảng `m_ket_qua_quiz`
 --
 ALTER TABLE `m_ket_qua_quiz`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT cho bảng `m_ket_qua_quiz_question`
 --
 ALTER TABLE `m_ket_qua_quiz_question`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=313;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=318;
 
 --
 -- AUTO_INCREMENT cho bảng `m_khoahoc_monhoc`
