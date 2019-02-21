@@ -61,16 +61,17 @@
                         <div class="card-header">
                             <div class="media align-items-center">
                                 <div class="media-left">
-                                    <img src="{{ asset('public/dashboard/images/people/110/guy-6.jpg') }}" alt="About Adrian" width="50" class="rounded-circle">
+                                   <?php $teacher = App\Models\Teacher::find($lesson_detail['teacher']); ?>
+                                    <img src="{{ asset($teacher->avata) }}" alt="" width="50" class="rounded-circle">
                                 </div>
                                 <div class="media-body">
-                                    <h4 class="card-title"><a href="student-profile.html">Đặng Văn Hiếu</a></h4>
+                                    <h4 class="card-title"><a href="student-profile.html">{{ $teacher->name }}</a></h4>
                                     <p class="card-subtitle">Giảng viên</p>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body">
-                            <p>Người truyền cảm hứng toán học cho hàng nghìn học sinh trên cả nước, giúp trên 2000 học sinh trên cả nước luyện thi và đỗ vào các trường chuyên chất lượng cao trong các kì thi tuyển sinh Trung học cơ sở và Trung học phổ thông.</p>
+                            <p>{!! $teacher->description !!}</p>
                             <a href="" class="btn btn-light"><i class="fab fa-facebook"></i></a>
                         </div>
                     </div>

@@ -15,6 +15,7 @@
 						<li><a href="{{ route('get.admin.subject.list') }}">Môn học</a></li>
 						<li><a href="{{ route('get.admin.course.list') }}">Khoá học</a></li>
 						<li><a href="{{ route('get.admin.class.list') }}">Lớp học</a></li>
+						<li><a href="{{ route('get.admin.teacher.list') }}">Giáo viên</a></li>
 					</ul>
                 </li>
                 <li class="submenu">

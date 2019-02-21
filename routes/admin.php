@@ -77,7 +77,9 @@ Route::group(['prefix'=> 'admin'], function(){
 			Route::get('edit/{id}', ['as'=>'get.admin.quesstion.edit','uses'=>'Admin\QuesstionController@getEdit']);
 			Route::post('edit/{id}', ['as'=>'post.admin.quesstion.edit','uses'=>'Admin\QuesstionController@postEdit']);
 			Route::get('delete/{id}', ['as'=>'get.admin.quesstion.delete','uses'=>'Admin\QuesstionController@getDelete']);
-		
+			
+			Route::get('import', ['as'=>'get.admin.quesstion.import','uses'=>'Admin\QuesstionController@getImportExcel']);
+			Route::get('import/{id}', ['as'=>'post.admin.quesstion.import','uses'=>'Admin\QuesstionController@postImportExcel']);
 		});
 	});
 
@@ -105,5 +107,16 @@ Route::group(['prefix'=> 'admin'], function(){
 			Route::get('delete/{id}', ['as'=>'get.admin.user.delete','uses'=>'Admin\AdminController@getDeleteUser']);
 			
 			Route::get('course', ['as'=>'get.admin.user.list.course','uses'=>'Admin\AdminController@getListUserCourse']);
+		});
+	});
+
+Route::group(['prefix'=> 'admin'], function(){
+		Route::group(['prefix'=> 'teacher'], function(){
+			Route::get('list', ['as'=>'get.admin.teacher.list','uses'=>'Admin\TeacherController@getList']);
+			Route::get('add', ['as'=>'get.admin.teacher.add','uses'=>'Admin\TeacherController@getAdd']);
+			Route::post('add', ['as'=>'post.admin.teacher.add','uses'=>'Admin\TeacherController@postAdd']);
+			Route::get('edit/{id}', ['as'=>'get.admin.teacher.edit','uses'=>'Admin\TeacherController@getEdit']);
+			Route::post('edit/{id}', ['as'=>'post.admin.teacher.edit','uses'=>'Admin\TeacherController@postEdit']);
+			Route::get('delete/{id}', ['as'=>'get.admin.teacher.delete','uses'=>'Admin\TeacherController@getDelete']);
 		});
 	});

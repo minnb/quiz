@@ -96,4 +96,14 @@ class QuizController extends Controller
         
     }
 
+    public function getPractice(){
+        try{
+            $user_id = User::getInfoUser()['id'];
+            $user_course = User_Course::getCourseByUserId($user_id);
+            return view('dashboard.quiz.practice', compact('user_course', 'user_id'));
+        }catch(Exception $e){
+            return back();
+        }
+    }
+
 }

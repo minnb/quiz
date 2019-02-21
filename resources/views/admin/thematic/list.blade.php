@@ -55,8 +55,10 @@
 									@endif
 								</td>
 								<td>
+									<a href="{{ route('get.admin.quesstion.import',['id'=>fencrypt($item->id)])}} " style="color:blue"><i class="fa fa-fw fa-file-excel-o"></i> Import Excel </a>
 									<a href="{{ route('get.admin.thematic.edit',['id'=>fencrypt($item->id)])}} "><i class="fa fa-fw fa-edit"></i> Edit </a>
 									<a href="{{ route('get.admin.thematic.delete',['id'=>fencrypt($item->id)])}}" style="color:red" onclick="return alertDelete();"><i class="fa fa-fw fa-trash"></i> Delete</a>
+
 								</td>
 							</tr>
 							<?php } ?>

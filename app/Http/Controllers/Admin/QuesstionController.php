@@ -173,4 +173,17 @@ class QuesstionController  extends Controller
         }
 
     }
+
+    public function getImportExcel($idd){
+        $thematic_id = fdecrypt($idd);
+        $thematic = Thematic::find($thematic_id);
+        return view('admin.question.import', compact('thematic'));
+    }
+
+    public function postImportExcel(Request $request, $idd){
+        $thematic_id = fdecrypt($idd); 
+        $thematic = Thematic::find($thematic_id);
+
+        
+    }
 }
