@@ -8,7 +8,8 @@ use App\Models\Subject;
 use App\Models\Answer;
 use App\Models\Course;
 use App\Models\Thematic;
-use App\Models\Quesstion;
+use App\Models\Quesstion;use Excel;
+use App\Models\QuestionImport;use App\Models\TempQuestion;
 class QuesstionController  extends Controller
 {
     /**
@@ -177,9 +178,32 @@ class QuesstionController  extends Controller
     public function getImportExcel($idd){
         $thematic_id = fdecrypt($idd);
         $thematic = Thematic::find($thematic_id);
-        return view('admin.question.import', compact('thematic'));
+        $data = TempQuestion::where('user_id', Auth::user()->id)->get();
+        return view('admin.quesstion.import', compact('thematic','thematic_id', 'data'));
     }
 
+    public function postUploadExcel(Request $request, $idd){
+        $user_id = Auth::user()->id;
+        $file_name = '';
+        $thematic_id = fdecrypt($idd);
+         try{
+            if($request->hasFile('fileExcel')){
+                $file = Input::file('fileExcel');
+                $destinationPath = env('APP_DIR_DATA_FILE');
+                $file_name =  'tmp_import_question'.'.'.$file->getClientOriginalExtension();
+                $file->move($destinationPath, $file_name);
+
+                DB::beginTransaction();
+                DB::table('temp_questions')->where('user_id', $user_id)->delete();
+                Excel::import(new QuestionImport, $destinationPath.'/'.$file_name);
+                DB::commit();
+                return back()->with(['flash_message'=>'Upload thành công']);
+            }
+        }catch (Exception $e) {
+            DB::rollBack();
+            return back()->withError($e->getMessage())->withInput();
+        }
+    }
     public function postImportExcel(Request $request, $idd){
         $thematic_id = fdecrypt($idd); 
         $thematic = Thematic::find($thematic_id);

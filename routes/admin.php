@@ -78,8 +78,9 @@ Route::group(['prefix'=> 'admin'], function(){
 			Route::post('edit/{id}', ['as'=>'post.admin.quesstion.edit','uses'=>'Admin\QuesstionController@postEdit']);
 			Route::get('delete/{id}', ['as'=>'get.admin.quesstion.delete','uses'=>'Admin\QuesstionController@getDelete']);
 			
-			Route::get('import', ['as'=>'get.admin.quesstion.import','uses'=>'Admin\QuesstionController@getImportExcel']);
-			Route::get('import/{id}', ['as'=>'post.admin.quesstion.import','uses'=>'Admin\QuesstionController@postImportExcel']);
+			Route::get('import/{id}', ['as'=>'get.admin.question.import','uses'=>'Admin\QuesstionController@getImportExcel']);
+			Route::post('import/upload/{id}', ['as'=>'post.admin.question.import.upload','uses'=>'Admin\QuesstionController@postUploadExcel']);
+			Route::post('import/{id}', ['as'=>'post.admin.question.import','uses'=>'Admin\QuesstionController@postImportExcel']);
 		});
 	});
 
