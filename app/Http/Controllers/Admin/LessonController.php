@@ -46,6 +46,7 @@ class LessonController  extends Controller
     	try{
             DB::beginTransaction();
             $lesson = new Lesson();
+            $lesson->teacher = $request->teacher;
             $lesson->course = $course[0]->course;
             $lesson->thematic = $thematic_id;
             $lesson->name = $request->name;
@@ -88,15 +89,14 @@ class LessonController  extends Controller
             DB::beginTransaction();
             $lesson = Lesson::findOrFail($id);
             $old_img = $lesson->image;
-            $lesson->course = $course[0]->course;
-            $lesson->thematic = $thematic_id;
+            $lesson->teacher = $request->teacher;
             $lesson->name = $request->name;
             $lesson->alias = makeUnicode($request->name);
             $lesson->link_video = $request->link_video;
             $lesson->description = $request->description;
             $lesson->content = $request->content;
             $lesson->keywords = $request->keywords;
-            $lesson->status = 1;
+            $lesson->status = $request->status;
             $lesson->sort = 0;
             $lesson->user_id = Auth::user()->id;
             if($request->file('fileImage')){
@@ -106,7 +106,7 @@ class LessonController  extends Controller
                         $file_name = randomString().'.'.$file->getClientOriginalExtension();
                         $lesson->image = $destinationPath.'/'.$file_name;
                         $file->move($destinationPath, $file_name);
-                        delete_image_no_path($img_old);
+                        delete_image_no_path($old_img);
                     }
                 }
             }

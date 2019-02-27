@@ -81,6 +81,7 @@ Route::group(['prefix'=> 'admin'], function(){
 			Route::get('import/{id}', ['as'=>'get.admin.question.import','uses'=>'Admin\QuesstionController@getImportExcel']);
 			Route::post('import/upload/{id}', ['as'=>'post.admin.question.import.upload','uses'=>'Admin\QuesstionController@postUploadExcel']);
 			Route::post('import/{id}', ['as'=>'post.admin.question.import','uses'=>'Admin\QuesstionController@postImportExcel']);
+			Route::get('import/undo/{id}', ['as'=>'get.admin.question.import.undo','uses'=>'Admin\QuesstionController@getImportUndo']);
 		});
 	});
 
@@ -108,6 +109,8 @@ Route::group(['prefix'=> 'admin'], function(){
 			Route::get('delete/{id}', ['as'=>'get.admin.user.delete','uses'=>'Admin\AdminController@getDeleteUser']);
 			
 			Route::get('course', ['as'=>'get.admin.user.list.course','uses'=>'Admin\AdminController@getListUserCourse']);
+			Route::get('add/course/{id}', ['as'=>'get.admin.user.add.course','uses'=>'Admin\AdminController@getUserAddCourse']);
+			Route::post('add/course/{id}', ['as'=>'post.admin.user.add.course','uses'=>'Admin\AdminController@postUserAddCourse']);
 		});
 	});
 

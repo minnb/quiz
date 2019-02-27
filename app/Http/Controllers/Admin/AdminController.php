@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use DB;
 use Auth;
 use App\Models\User;
-use App\Models\Role_User;
+use App\Models\Role_User;use App\Models\User_Course;
 class AdminController extends Controller
 {
     /**
@@ -126,5 +126,31 @@ class AdminController extends Controller
     public function getListUserCourse(){
         $data = DB::table('user_course')->where('status', 1)->get();
         return view('admin.user.user_course', compact('data')); 
+    }
+
+    public function getUserAddCourse($idd){
+        $user_id = fdecrypt($idd); 
+        $data = User::findOrFail($user_id);
+        return view('admin.user.add_course', compact('user_id', 'data'));
+    }
+    public function postUserAddCourse(Request $request, $idd){
+        $user_id = fdecrypt($idd); 
+        try{
+            DB::beginTransaction();
+            $data = new User_Course;
+            $data->user_id = $user_id;
+            $data->course = $request->course;
+            $data->begin_date = '2019-01-01';
+            $data->end_date = '9999-01-01';
+            $data->user_create = Auth::user()->id;
+            $data->status = $request->status;
+            $data->save();
+
+            DB::commit();
+            return redirect()->route('get.admin.user.list.course')->with(['flash_message'=>'Chỉnh sửa thành công']);
+        }catch (Exception $e) {
+            DB::rollBack();
+            return back()->withError($e->getMessage())->withInput();
+        }   
     }
 }

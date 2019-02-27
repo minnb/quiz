@@ -15,6 +15,10 @@ class Course extends Model
     	}
     }
 
+    public static function getCourseSelect($status){
+        return DB::table('m_khoa_hoc')->where('status', $status)->select('code as id', 'full_name as name')->get();
+    }
+
     public static function checkSourceOnClass($class, $course){
     	$count = Course::where([
     		['class', $class],

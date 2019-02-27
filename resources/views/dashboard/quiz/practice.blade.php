@@ -13,73 +13,41 @@
                             <div class="media-body">
                                 <h1 class="h2">Luyện tập đề thi</h1>
                             </div>
-                            <div class="media-right">
-                                <a href="#" class="btn btn-success">
-                                    Have a Question <i class="material-icons btn__icon--right">help_outline</i>
-                                </a>
-                            </div>
                         </div>
                         <div class="card-columns">
                             <div class="card">
                                 <div class="card-header d-flex align-items-center">
                                     <div class="flex">
                                         <h4 class="card-title">Thi theo chuyên đề</h4>
-                                        <div class="card-subtitle">Getting started</div>
+                                        <div class="card-subtitle">{{App\Models\Course::getFullNameCourse($course_code)}}</div>
                                     </div>
                                     <i class="material-icons text-muted-light">info_outline</i>
                                 </div>
+                                @if(isset($lessonOfUser))
                                 <ul class="list-group list-group-fit">
+                                    @foreach($lessonOfUser as $key=>$item)
                                     <li class="list-group-item">
-                                        <a href=""><i class="material-icons float-right text-muted-light">trending_flat</i> Basic Setup</a>
+                                        <a href="{{ route('get.dashboard.quiz.take',['type'=>fencrypt('CHUYENDE'),'course'=>fencrypt($course_code),'thematic'=>fencrypt($item->id), 'id'=>fencrypt(0)]) }}"><i class="material-icons float-right text-muted-light">trending_flat</i>{{ $key+1 }}. {{ $item->name }}</a>
                                     </li>
-                                    <li class="list-group-item">
-                                        <a href=""><i class="material-icons float-right text-muted-light">trending_flat</i> Working with the Dev</a>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <a href=""><i class="material-icons float-right text-muted-light">trending_flat</i> Your first deploy</a>
-                                    </li>
+                                    @endforeach
                                 </ul>
+                                @endif
                             </div>
-                            <div class="card">
-                                <div class="card-header d-flex align-items-center">
-                                    <div class="flex">
-                                        <h4 class="card-title">Thi tuần</h4>
-                                        <div class="card-subtitle">Documentation</div>
-                                    </div>
-                                    <i class="material-icons text-muted-light">info_outline</i>
-                                </div>
-                                <ul class="list-group list-group-fit">
-                                    <li class="list-group-item">
-                                        <a href=""><i class="material-icons float-right text-muted-light">trending_flat</i> Styling with SASS</a>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <a href=""><i class="material-icons float-right text-muted-light">trending_flat</i> Editing the Pages</a>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <a href=""><i class="material-icons float-right text-muted-light">trending_flat</i> Saving for later</a>
-                                    </li>
-                                </ul>
-                            </div>
+
                             <div class="card">
                                 <div class="card-header d-flex align-items-center">
                                     <div class="flex">
                                         <h4 class="card-title">Thi tháng</h4>
-                                        <div class="card-subtitle">Documentation</div>
+                                        <div class="card-subtitle">{{App\Models\Course::getFullNameCourse($course_code)}}</div>
                                     </div>
                                     <i class="material-icons text-muted-light">info_outline</i>
                                 </div>
                                 <ul class="list-group list-group-fit">
                                     <li class="list-group-item">
-                                        <a href="">
-                                            <i class="material-icons float-right text-muted-light">trending_flat</i>
-                                            Course API Docs
-                                        </a>
+                                        <a href=""><i class="material-icons float-right text-muted-light">trending_flat</i> Tháng 1</a>
                                     </li>
                                     <li class="list-group-item">
-                                        <a href=""><i class="material-icons float-right text-muted-light">trending_flat</i> Student API Docs</a>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <a href=""> <i class="material-icons float-right text-muted-light">trending_flat</i>Instructor API Docs</a>
+                                        <a href=""> <i class="material-icons float-right text-muted-light">trending_flat</i> Tháng 2</a>
                                     </li>
                                 </ul>
                             </div>
@@ -87,7 +55,7 @@
                                 <div class="card-header d-flex align-items-center">
                                     <div class="flex">
                                         <h4 class="card-title">Thi học kỳ</h4>
-                                        <div class="card-subtitle">Documentation</div>
+                                        <div class="card-subtitle">{{App\Models\Course::getFullNameCourse($course_code)}}</div>
                                     </div>
                                     <i class="material-icons text-muted-light">info_outline</i>
                                 </div>

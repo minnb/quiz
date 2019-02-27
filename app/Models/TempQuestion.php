@@ -5,5 +5,5 @@ use DB;
 class TempQuestion extends Model
 {
     protected $table ="temp_questions";
-    protected  $fillable = array('user_id','thematic', 'question', 'stt', 'answer', 'result');
+    protected  $fillable = array('question_id', 'user_id','thematic', 'question', 'stt', 'answer', 'result', 'used');
 }

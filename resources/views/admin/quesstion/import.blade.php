@@ -27,10 +27,11 @@
 <br>
 <div class="container-fluid card" style="padding:10px">
 	<div>
-		<form method="POST" action="#">
+		<form method="POST" action="{{ route('post.admin.question.import', ['id'=>fencrypt($thematic_id)])}}">
 			<input type="hidden" name="_token" value="<?php echo csrf_token() ?>">
 			<input type="hidden" name="thematic" value="{{ $thematic_id }}">
 			<button type="submit" class="btn btn-info" style="margin:10px"><i class="fa fa-save bigfonts" aria-hidden="true"></i> Lưu dữ liệu</button>
+			<a class="btn btn-success" href="{{ route('get.admin.question.import.undo', ['id'=>fencrypt($thematic_id)]) }}" style="margin:10px"><i class="fa fa-undo bigfonts" aria-hidden="true"></i> Làm lại</a>
 		</form>
 	</div>
 	<hr>
@@ -38,6 +39,7 @@
 		<table id="data_table" class="table table-bordered table-hover display">
 			<thead>
 				<tr>
+					<th>Loại</th>
 					<th>#</th>
 					<th>Câu hỏi</th>
 					<th>STT</th>
@@ -49,7 +51,14 @@
 			@if($data->count() > 0)
 				@foreach($data as $key=>$item)
 					<tr>
-						<td>{{ $key + 1 }}</td>
+						<td>
+							@if($item->used == 0)
+								<span>Quiz</span>
+							@else
+								<span>Practice</span>
+							@endif
+						</td>
+						<td>{{ $item->question_id }}</td>
 						<td>{{$item->question}}</td>
 						<td>{{$item->stt}}</td>
 						<td>{{$item->answer}}</td>

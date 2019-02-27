@@ -182,6 +182,12 @@ class QuesstionController  extends Controller
         return view('admin.quesstion.import', compact('thematic','thematic_id', 'data'));
     }
 
+    public function getImportUndo($idd){
+        $thematic_id = fdecrypt($idd);
+        TempQuestion::where('user_id', Auth::user()->id)->delete();
+        return redirect()->route('get.admin.question.import', ['id'=>fencrypt($thematic_id)]);
+    }
+
     public function postUploadExcel(Request $request, $idd){
         $user_id = Auth::user()->id;
         $file_name = '';
@@ -207,7 +213,8 @@ class QuesstionController  extends Controller
     public function postImportExcel(Request $request, $idd){
         $thematic_id = fdecrypt($idd); 
         $thematic = Thematic::find($thematic_id);
-
+        $data = TempQuestion::where('user_id', Auth::user()->id)->get();
+        
         
     }
 }

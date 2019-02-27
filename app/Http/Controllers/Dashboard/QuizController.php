@@ -29,7 +29,7 @@ class QuizController extends Controller
     	$quiz_type = fdecrypt($type); 
         $quiz_id = 0;
     	try{
-             $check = HeaderQuiz::where([
+            $check = HeaderQuiz::where([
                     ['lesson', $id],
                     ['user_id', User::getInfoUser()['id']]
                 ])->get();
@@ -99,8 +99,9 @@ class QuizController extends Controller
     public function getPractice(){
         try{
             $user_id = User::getInfoUser()['id'];
-            $user_course = User_Course::getCourseByUserId($user_id);
-            return view('dashboard.quiz.practice', compact('user_course', 'user_id'));
+            $course_code = User_Course::getCourseByUserId($user_id)[0]->course;
+            $lessonOfUser = User_Course::getLessonByUser(User::getInfoUser()['id']);
+            return view('dashboard.quiz.practice', compact('course_code', 'user_id', 'lessonOfUser'));
         }catch(Exception $e){
             return back();
         }

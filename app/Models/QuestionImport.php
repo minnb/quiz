@@ -3,8 +3,9 @@ namespace App\Models;
 use App\Models\TempQuestion;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Auth;
-class QuestionImport implements ToModel
+class QuestionImport implements ToModel, WithHeadingRow
 {
     /**
      * @param array $row
@@ -15,12 +16,14 @@ class QuestionImport implements ToModel
     {
         $user_id = Auth::user()->id;
         return new TempQuestion([
+           'question_id'=> $row['id'],
            'user_id'    => $user_id,
            'thematic'   => 0,
-           'question'   => $row[0],
-           'stt'        => $row[1],
-           'answer'     => $row[2],
-           'result'     => $row[3]
+           'question'   => $row['question'],
+           'stt'        => $row['stt'],
+           'answer'     => $row['answer'],
+           'result'     => $row['result'],
+           'used'       => $row['used'],
         ]);
     }
 }

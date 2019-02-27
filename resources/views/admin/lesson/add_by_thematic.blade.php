@@ -22,6 +22,10 @@
 					<input type="text" name="name" class="form-control" value="{{ old('name')}}" placeholder="Tên bài giảng" required="">  
 				</div>
 				<div class="form-group">
+					<label>Link video</label>
+					<input type="text" name="link_video" class="form-control" value="{{ old('link_video')}}" placeholder="">  
+				</div>
+				<div class="form-group">
 					<label>Tóm tắt nội dung</label>
 					<textarea class="form-control" name="description" rows="2" id="description" >{{ old('description')}}</textarea> 
 				</div>
@@ -32,12 +36,14 @@
 			</div>
 			<div class="col-md-3 offset-md-1 col-xs-12 col-sm-12">
 				<div class="form-group">
-					<label>Từ khoá</label>
-					<textarea class="form-control" name="keywords" rows="3" id="keywords" >{{ old('keywords')}}</textarea> 
+					<label>Giáo viên</label>
+					<select class="form-control" name="teacher">
+						{{ getSelectForm(App\Models\Teacher::getSelectTeacher(),old('teacher')) }}
+					</select>
 				</div>
 				<div class="form-group">
-					<label>Link video</label>
-					<input type="text" name="link_video" class="form-control" value="{{ old('link_video')}}" placeholder="">  
+					<label>Từ khoá</label>
+					<textarea class="form-control" name="keywords" rows="3" id="keywords" >{{ old('keywords')}}</textarea> 
 				</div>
 				<div class="form-group">
 					<label>Hình ảnh</label>

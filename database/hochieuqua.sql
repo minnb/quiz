@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th2 21, 2019 lúc 04:06 PM
+-- Thời gian đã tạo: Th2 27, 2019 lúc 05:29 PM
 -- Phiên bản máy phục vụ: 10.1.36-MariaDB
 -- Phiên bản PHP: 7.2.11
 
@@ -65,7 +65,7 @@ CREATE TABLE `m_bai_giang` (
 
 INSERT INTO `m_bai_giang` (`id`, `teacher`, `course`, `thematic`, `name`, `alias`, `description`, `content`, `link_video`, `image`, `sort`, `keywords`, `user_id`, `status`, `created_at`, `updated_at`) VALUES
 (1, 1, 'HHQ40', 2, 'Dãy số tự nhiên', 'day-so-tu-nhien', '<p>B&agrave;i học nằm trong khối kiến thức to&aacute;n lớp 4, thuộc kh&oacute;a học to&aacute;n lớp 4 học kỳ 1</p>', '<p>B&agrave;i học nằm trong khối kiến thức to&aacute;n lớp 4, thuộc kh&oacute;a học to&aacute;n lớp 4 học kỳ 1</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 0, 'Bài học nằm trong khối kiến thức toán lớp 4, thuộc khóa học toán lớp 4 học kỳ 1', 13, 0, '2019-02-21 14:11:14', '2019-01-21 15:20:36'),
-(2, 1, 'HHQ50', 9, 'Khái niệm, tính chất cơ bản của phân số', 'khai-niem,-tinh-chat-co-ban-cua-phan-so', '<p>Kh&aacute;i niệm, t&iacute;nh chất cơ bản của ph&acirc;n số</p>', '<p>Kh&aacute;i niệm, t&iacute;nh chất cơ bản của ph&acirc;n số</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 0, 'Khái niệm, tính chất cơ bản của phân số', 13, 1, '2019-02-21 14:11:14', '2019-01-21 15:22:37'),
+(2, 2, 'HHQ50', 9, 'Khái niệm, tính chất cơ bản của phân số', 'khai-niem,-tinh-chat-co-ban-cua-phan-so', '<p>Kh&aacute;i niệm, t&iacute;nh chất cơ bản của ph&acirc;n số</p>', '<p>Kh&aacute;i niệm, t&iacute;nh chất cơ bản của ph&acirc;n số</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 0, 'Khái niệm, tính chất cơ bản của phân số', 13, 1, '2019-02-27 15:04:49', '2019-02-27 15:04:49'),
 (3, 1, 'HHQ50', 9, 'So sánh phân số', 'so-sanh-phan-so', '<p>So s&aacute;nh ph&acirc;n số</p>', '<p>So s&aacute;nh ph&acirc;n số</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 0, 'So sánh phân số', 13, 1, '2019-02-21 14:11:14', '2019-01-21 15:23:08'),
 (4, 1, 'HHQ50', 9, 'Tìm một số khi biết một số phần của nó', 'tim-mot-so-khi-biet-mot-so-phan-cua-no', '<p>T&igrave;m một số khi biết một số phần của n&oacute;</p>', '<p>T&igrave;m một số khi biết một số phần của n&oacute;</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 0, 'Tìm một số khi biết một số phần của nó', 13, 1, '2019-02-21 14:11:14', '2019-01-21 15:35:12'),
 (5, 1, 'HHQ50', 9, 'Tính thuận tiện với phân số', 'tinh-thuan-tien-voi-phan-so', '<p>T&iacute;nh thuận tiện với ph&acirc;n số</p>', '<p>T&iacute;nh thuận tiện với ph&acirc;n số</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 0, 'Tính thuận tiện với phân số', 13, 1, '2019-02-21 14:11:14', '2019-01-21 15:41:04'),
@@ -76,7 +76,8 @@ INSERT INTO `m_bai_giang` (`id`, `teacher`, `course`, `thematic`, `name`, `alias
 (10, 1, 'HHQ50', 11, 'Khái niệm, đọc, viết số thập phân', 'khai-niem,-doc,-viet-so-thap-phan', '<p>Kh&aacute;i niệm, đọc, viết số thập ph&acirc;n</p>', '<p>Kh&aacute;i niệm, đọc, viết số thập ph&acirc;n</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 0, 'Khái niệm, đọc, viết số thập phân', 13, 1, '2019-02-21 14:11:14', '2019-01-21 15:53:46'),
 (11, 1, 'HHQ50', 12, 'Tìm tỉ số phần trăm của 2 số', 'tim-ti-so-phan-tram-cua-2-so', '<p>T&igrave;m tỉ số phần trăm của 2 số</p>', '<p>T&igrave;m tỉ số phần trăm của 2 số</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 0, 'Tìm tỉ số phần trăm của 2 số', 13, 1, '2019-02-21 14:11:14', '2019-01-21 15:54:25'),
 (12, 1, 'HHQ50', 13, 'Hình tam giác', 'hinh-tam-giac', '<p>H&igrave;nh tam gi&aacute;c</p>', '<p>H&igrave;nh tam gi&aacute;c</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 0, 'Hình tam giác', 13, 1, '2019-02-21 14:11:14', '2019-01-21 15:54:51'),
-(13, 1, 'HHQ50', 14, 'Số đo thời gian', 'so-do-thoi-gian', '<p>Số đo thời gian</p>', '<p>Số đo thời gian</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 0, 'Số đo thời gian', 13, 1, '2019-02-21 14:11:14', '2019-01-21 15:55:18');
+(13, 1, 'HHQ50', 14, 'Số đo thời gian', 'so-do-thoi-gian', '<p>Số đo thời gian</p>', '<p>Số đo thời gian</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 0, 'Số đo thời gian', 13, 1, '2019-02-21 14:11:14', '2019-01-21 15:55:18'),
+(14, 1, 'HHQ40', 1, 'VinFast Klara lội nước gần 1 mét và cái kết', 'vinfast-klara-loi-nuoc-gan-1-met-va-cai-ket', '<p>test</p>', NULL, 'https://www.youtube.com/embed/ZnOAK04tJhc', 'public/uploads/images/201902/oaSrGZLPWq.png', 0, 'testg', 13, 1, '2019-02-27 14:51:52', '2019-02-27 14:51:52');
 
 -- --------------------------------------------------------
 
@@ -185,6 +186,7 @@ CREATE TABLE `m_chuyen_de` (
   `image` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `onpost` tinyint(1) NOT NULL DEFAULT '0',
   `status` tinyint(1) NOT NULL DEFAULT '1',
+  `sort` tinyint(2) DEFAULT NULL,
   `user_id` int(5) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
@@ -194,22 +196,22 @@ CREATE TABLE `m_chuyen_de` (
 -- Đang đổ dữ liệu cho bảng `m_chuyen_de`
 --
 
-INSERT INTO `m_chuyen_de` (`id`, `course`, `class`, `subject`, `name`, `alias`, `description`, `keywords`, `image`, `onpost`, `status`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 'HHQ40', 4, 1, 'Từ và động từ 1', 'tu-va-dong-tu-1', '<p>test</p>', NULL, NULL, 0, 1, 13, '2019-01-10 05:42:07', '2019-01-10 05:41:50'),
-(2, 'HHQ40', 4, 2, 'Số tự nhiên', 'so-tu-nhien', NULL, 'a', NULL, 0, 1, 13, '2019-01-10 05:35:30', '2019-01-10 05:35:30'),
-(3, 'HHQ51', 5, 2, 'Phân số', 'phan-so', NULL, 'phân số', NULL, 0, 1, 13, '2019-01-21 15:15:43', '2019-01-21 15:15:43'),
-(4, 'HHQ51', 5, 2, 'Tỉ lệ', 'ti-le', NULL, 'Tỉ lệ', NULL, 0, 1, 13, '2019-01-21 15:15:58', '2019-01-21 15:15:58'),
-(5, 'HHQ51', 5, 2, 'Số thập phân', 'so-thap-phan', NULL, 'Số thập phân', NULL, 0, 1, 13, '2019-01-21 15:16:11', '2019-01-21 15:16:11'),
-(6, 'HHQ51', 5, 2, 'Tỉ số phần trăm', 'ti-so-phan-tram', NULL, 'Tỉ số phần trăm', NULL, 0, 1, 13, '2019-01-21 15:16:25', '2019-01-21 15:16:25'),
-(7, 'HHQ51', 5, 2, 'Hình học', 'hinh-hoc', NULL, 'Hình học', NULL, 0, 1, 13, '2019-01-21 15:16:40', '2019-01-21 15:16:40'),
-(8, 'HHQ51', 5, 2, 'Chuyển động', 'chuyen-dong', NULL, 'Chuyển động', NULL, 0, 1, 13, '2019-01-21 15:16:51', '2019-01-21 15:16:51'),
-(9, 'HHQ50', 5, 2, 'Phân số', 'phan-so', NULL, 'Phân số', NULL, 0, 1, 13, '2019-01-21 15:18:44', '2019-01-21 15:18:44'),
-(10, 'HHQ50', 5, 2, 'Tỉ lệ', 'ti-le', NULL, 'Tỉ lệ', NULL, 0, 1, 13, '2019-01-21 15:19:05', '2019-01-21 15:19:05'),
-(11, 'HHQ50', 5, 2, 'Số thập phân', 'so-thap-phan', NULL, 'Số thập phân', NULL, 0, 1, 13, '2019-01-21 15:19:30', '2019-01-21 15:19:30'),
-(12, 'HHQ50', 5, 2, 'Tỉ số phần trăm', 'ti-so-phan-tram', NULL, 'Tỉ số phần trăm', NULL, 0, 1, 13, '2019-01-21 15:19:48', '2019-01-21 15:19:48'),
-(13, 'HHQ50', 5, 2, 'Hình học', 'hinh-hoc', NULL, 'Hình học', NULL, 0, 1, 13, '2019-01-21 15:19:59', '2019-01-21 15:19:59'),
-(14, 'HHQ50', 5, 2, 'Chuyển động', 'chuyen-dong', NULL, 'Chuyển động', NULL, 0, 1, 13, '2019-01-21 15:20:11', '2019-01-21 15:20:11'),
-(15, 'HHQ51', 5, 2, 'Ôn tập về giải toán', '0n-tap-ve-giai-toan', '<p>&Ocirc;n tập về giải to&aacute;n</p>', 'Ôn tập về giải toán', NULL, 0, 1, 13, '2019-01-21 15:42:32', '2019-01-21 15:42:32');
+INSERT INTO `m_chuyen_de` (`id`, `course`, `class`, `subject`, `name`, `alias`, `description`, `keywords`, `image`, `onpost`, `status`, `sort`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 'HHQ40', 4, 1, 'Từ và động từ 1', 'tu-va-dong-tu-1', '<p>test</p>', NULL, NULL, 0, 1, NULL, 13, '2019-01-10 05:42:07', '2019-01-10 05:41:50'),
+(2, 'HHQ40', 4, 2, 'Số tự nhiên', 'so-tu-nhien', NULL, 'a', NULL, 0, 1, NULL, 13, '2019-01-10 05:35:30', '2019-01-10 05:35:30'),
+(3, 'HHQ51', 5, 2, 'Phân số', 'phan-so', NULL, 'phân số', NULL, 0, 1, NULL, 13, '2019-01-21 15:15:43', '2019-01-21 15:15:43'),
+(4, 'HHQ51', 5, 2, 'Tỉ lệ', 'ti-le', NULL, 'Tỉ lệ', NULL, 0, 1, NULL, 13, '2019-01-21 15:15:58', '2019-01-21 15:15:58'),
+(5, 'HHQ51', 5, 2, 'Số thập phân', 'so-thap-phan', NULL, 'Số thập phân', NULL, 0, 1, NULL, 13, '2019-01-21 15:16:11', '2019-01-21 15:16:11'),
+(6, 'HHQ51', 5, 2, 'Tỉ số phần trăm', 'ti-so-phan-tram', NULL, 'Tỉ số phần trăm', NULL, 0, 1, NULL, 13, '2019-01-21 15:16:25', '2019-01-21 15:16:25'),
+(7, 'HHQ51', 5, 2, 'Hình học', 'hinh-hoc', NULL, 'Hình học', NULL, 0, 1, NULL, 13, '2019-01-21 15:16:40', '2019-01-21 15:16:40'),
+(8, 'HHQ51', 5, 2, 'Chuyển động', 'chuyen-dong', NULL, 'Chuyển động', NULL, 0, 1, NULL, 13, '2019-01-21 15:16:51', '2019-01-21 15:16:51'),
+(9, 'HHQ50', 5, 2, 'Phân số', 'phan-so', NULL, 'Phân số', NULL, 0, 1, NULL, 13, '2019-01-21 15:18:44', '2019-01-21 15:18:44'),
+(10, 'HHQ50', 5, 2, 'Tỉ lệ', 'ti-le', NULL, 'Tỉ lệ', NULL, 0, 1, NULL, 13, '2019-01-21 15:19:05', '2019-01-21 15:19:05'),
+(11, 'HHQ50', 5, 2, 'Số thập phân', 'so-thap-phan', NULL, 'Số thập phân', NULL, 0, 1, NULL, 13, '2019-01-21 15:19:30', '2019-01-21 15:19:30'),
+(12, 'HHQ50', 5, 2, 'Tỉ số phần trăm', 'ti-so-phan-tram', NULL, 'Tỉ số phần trăm', NULL, 0, 1, NULL, 13, '2019-01-21 15:19:48', '2019-01-21 15:19:48'),
+(13, 'HHQ50', 5, 2, 'Hình học', 'hinh-hoc', NULL, 'Hình học', NULL, 0, 1, NULL, 13, '2019-01-21 15:19:59', '2019-01-21 15:19:59'),
+(14, 'HHQ50', 5, 2, 'Chuyển động', 'chuyen-dong', NULL, 'Chuyển động', NULL, 0, 1, NULL, 13, '2019-01-21 15:20:11', '2019-01-21 15:20:11'),
+(15, 'HHQ51', 5, 2, 'Ôn tập về giải toán', '0n-tap-ve-giai-toan', '<p>&Ocirc;n tập về giải to&aacute;n</p>', 'Ôn tập về giải toán', NULL, 0, 1, NULL, 13, '2019-01-21 15:42:32', '2019-01-21 15:42:32');
 
 -- --------------------------------------------------------
 
@@ -267,7 +269,8 @@ CREATE TABLE `m_giao_vien` (
 --
 
 INSERT INTO `m_giao_vien` (`id`, `name`, `email`, `phone`, `description`, `status`, `avata`, `created_at`, `updated_at`) VALUES
-(1, 'Đặng Thế Hiếu', 'dangthehieu80@gmail.com', '097852148', '<p>Người truyền cảm hứng to&aacute;n học cho h&agrave;ng ngh&igrave;n học sinh tr&ecirc;n cả nước, gi&uacute;p tr&ecirc;n 2000 học sinh tr&ecirc;n cả nước luyện thi v&agrave; đỗ v&agrave;o c&aacute;c trường chuy&ecirc;n chất lượng cao trong c&aacute;c k&igrave; thi tuyển sinh Trung học cơ sở v&agrave; Trung học phổ th&ocirc;ng.</p>', 1, 'public/uploads/images/201902/jiE4TM9iXQ.png', '2019-02-21 14:10:24', '2019-02-21 14:10:24');
+(1, 'Đặng Thế Hiếu', 'dangthehieu80@gmail.com', '097852148', '<p>Người truyền cảm hứng to&aacute;n học cho h&agrave;ng ngh&igrave;n học sinh tr&ecirc;n cả nước, gi&uacute;p tr&ecirc;n 2000 học sinh tr&ecirc;n cả nước luyện thi v&agrave; đỗ v&agrave;o c&aacute;c trường chuy&ecirc;n chất lượng cao trong c&aacute;c k&igrave; thi tuyển sinh Trung học cơ sở v&agrave; Trung học phổ th&ocirc;ng.</p>', 1, 'public/uploads/images/201902/gBWRqet1ki.jpg', '2019-02-27 15:06:22', '2019-02-27 15:06:22'),
+(2, 'Nguyễn Thị Hợi', 'congdantoancau2018@gmail.com', '097852149654', NULL, 1, 'public/uploads/images/201902/qBg202nAkV.jpg', '2019-02-27 15:04:03', '2019-02-27 15:04:03');
 
 -- --------------------------------------------------------
 
@@ -299,7 +302,13 @@ INSERT INTO `m_ket_qua_quiz` (`id`, `type`, `user_id`, `result`, `description`, 
 (67, 'CHUYENDE', 17, 0, '', 'CHUYENDE', 'HHQ50', 9, 2, 1, 0, '2019-02-14 15:21:31', '2019-02-19 15:36:22'),
 (68, 'CHUYENDE', 17, 0, '', 'CHUYENDE', 'HHQ50', 9, 4, 0, 0, '2019-02-14 15:22:19', '2019-02-14 15:22:19'),
 (69, 'CHUYENDE', 17, 0, '', 'CHUYENDE', 'HHQ50', 14, 13, 0, 0, '2019-02-19 16:02:31', '2019-02-19 16:02:31'),
-(70, 'CHUYENDE', 17, 0, '', 'CHUYENDE', 'HHQ50', 9, 3, 1, 0, '2019-02-19 16:02:48', '2019-02-19 16:03:02');
+(70, 'CHUYENDE', 17, 0, '', 'CHUYENDE', 'HHQ50', 9, 3, 1, 0, '2019-02-19 16:02:48', '2019-02-19 16:03:02'),
+(71, 'CHUYENDE', 17, 0, '', 'CHUYENDE', 'HHQ50', 10, 9, 0, 0, '2019-02-27 16:16:41', '2019-02-27 16:16:41'),
+(72, 'CHUYENDE', 17, 0, '', 'CHUYENDE', 'HHQ50', 12, 11, 0, 0, '2019-02-27 16:16:55', '2019-02-27 16:16:55'),
+(73, 'CHUYENDE', 17, 0, '', 'CHUYENDE', 'HHQ50', 10, 10, 0, 0, '2019-02-27 16:21:55', '2019-02-27 16:21:55'),
+(74, 'CHUYENDE', 17, 0, '', 'CHUYENDE', 'HHQ50', 12, 12, 0, 0, '2019-02-27 16:22:00', '2019-02-27 16:22:00'),
+(75, 'CHUYENDE', 17, 0, '', 'CHUYENDE', 'HHQ50', 14, 14, 0, 0, '2019-02-27 16:22:03', '2019-02-27 16:22:03'),
+(76, 'CHUYENDE', 17, 0, '', 'CHUYENDE', 'HHQ50', 9, 0, 0, 0, '2019-02-27 16:28:06', '2019-02-27 16:28:06');
 
 -- --------------------------------------------------------
 
@@ -338,7 +347,12 @@ INSERT INTO `m_ket_qua_quiz_question` (`id`, `quiz_id`, `question_id`, `answer`,
 (314, 70, 13, 4, '', 1, 0, '2019-02-19 16:03:02', '2019-02-19 16:03:02'),
 (315, 70, 9, 3, '', 2, 0, '2019-02-19 16:03:02', '2019-02-19 16:03:02'),
 (316, 70, 11, 2, '', 2, 0, '2019-02-19 16:03:02', '2019-02-19 16:03:02'),
-(317, 70, 10, 1, '', 3, 0, '2019-02-19 16:03:02', '2019-02-19 16:03:02');
+(317, 70, 10, 1, '', 3, 0, '2019-02-19 16:03:02', '2019-02-19 16:03:02'),
+(318, 76, 12, 0, '', 1, 0, '2019-02-27 16:28:06', '2019-02-27 16:28:06'),
+(319, 76, 13, 0, '', 1, 0, '2019-02-27 16:28:06', '2019-02-27 16:28:06'),
+(320, 76, 9, 0, '', 2, 0, '2019-02-27 16:28:06', '2019-02-27 16:28:06'),
+(321, 76, 11, 0, '', 2, 0, '2019-02-27 16:28:06', '2019-02-27 16:28:06'),
+(322, 76, 10, 0, '', 3, 0, '2019-02-27 16:28:06', '2019-02-27 16:28:06');
 
 -- --------------------------------------------------------
 
@@ -382,6 +396,7 @@ CREATE TABLE `m_khoa_hoc` (
   `course` tinyint(1) NOT NULL,
   `class` smallint(2) NOT NULL,
   `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `full_name` varchar(191) COLLATE utf8_unicode_ci DEFAULT NULL,
   `alias` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `description` varchar(199) COLLATE utf8_unicode_ci DEFAULT NULL,
   `image` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -397,10 +412,10 @@ CREATE TABLE `m_khoa_hoc` (
 -- Đang đổ dữ liệu cho bảng `m_khoa_hoc`
 --
 
-INSERT INTO `m_khoa_hoc` (`id`, `code`, `course`, `class`, `name`, `alias`, `description`, `image`, `onpost`, `unit_price`, `status`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 'HHQ50', 0, 5, 'Cơ bản', 'co-ban', '<p>test</p>', NULL, 0, 500000, 1, 13, '2019-02-13 04:24:07', '2019-01-08 16:15:17'),
-(4, 'HHQ51', 1, 5, 'Nâng cao', 'nang-cao', NULL, NULL, 0, 0, 1, 13, '2019-02-13 04:16:21', '2019-01-08 16:42:41'),
-(5, 'HHQ40', 0, 4, 'Cơ bản', 'co-ban', NULL, NULL, 0, 0, 1, 13, '2019-02-13 04:16:21', '2019-01-08 16:51:15');
+INSERT INTO `m_khoa_hoc` (`id`, `code`, `course`, `class`, `name`, `full_name`, `alias`, `description`, `image`, `onpost`, `unit_price`, `status`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 'HHQ50', 0, 5, 'Cơ bản', 'Lớp 5 - Cơ bản ', 'co-ban', '<p>test</p>', NULL, 0, 500000, 1, 13, '2019-02-27 15:44:25', '2019-01-08 16:15:17'),
+(4, 'HHQ51', 1, 5, 'Nâng cao', 'Lớp 5 - Nâng cao ', 'nang-cao', NULL, NULL, 0, 0, 1, 13, '2019-02-27 15:43:50', '2019-01-08 16:42:41'),
+(5, 'HHQ40', 0, 4, 'Cơ bản', 'Lớp 4 - Cơ bản ', 'co-ban', NULL, NULL, 0, 0, 1, 13, '2019-02-27 15:44:06', '2019-01-08 16:51:15');
 
 -- --------------------------------------------------------
 
@@ -519,6 +534,44 @@ INSERT INTO `role_user` (`id`, `role_id`, `user_id`, `created_at`, `updated_at`)
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `temp_questions`
+--
+
+CREATE TABLE `temp_questions` (
+  `id` int(11) NOT NULL,
+  `question_id` int(11) NOT NULL,
+  `user_id` int(10) NOT NULL,
+  `thematic` smallint(5) NOT NULL,
+  `question` text COLLATE utf8_unicode_ci NOT NULL,
+  `stt` int(5) NOT NULL,
+  `answer` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
+  `result` tinyint(2) NOT NULL,
+  `used` tinyint(2) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `temp_questions`
+--
+
+INSERT INTO `temp_questions` (`id`, `question_id`, `user_id`, `thematic`, `question`, `stt`, `answer`, `result`, `used`, `created_at`, `updated_at`) VALUES
+(281, 1, 13, 0, 'Chọn đáp án đúng 10 + 4', 1, '14', 1, 0, '2019-02-27 14:22:23', '2019-02-27 14:22:23'),
+(282, 1, 13, 0, 'Chọn đáp án đúng 10 + 4', 2, '15', 0, 0, '2019-02-27 14:22:23', '2019-02-27 14:22:23'),
+(283, 1, 13, 0, 'Chọn đáp án đúng 10 + 4', 3, '13', 0, 0, '2019-02-27 14:22:23', '2019-02-27 14:22:23'),
+(284, 1, 13, 0, 'Chọn đáp án đúng 10 + 4', 4, '16', 0, 0, '2019-02-27 14:22:23', '2019-02-27 14:22:23'),
+(285, 2, 13, 0, 'Chọn đáp án đúng 10 x 4', 1, '44', 0, 0, '2019-02-27 14:22:23', '2019-02-27 14:22:23'),
+(286, 2, 13, 0, 'Chọn đáp án đúng 10 x 4', 2, '34', 0, 0, '2019-02-27 14:22:23', '2019-02-27 14:22:23'),
+(287, 2, 13, 0, 'Chọn đáp án đúng 10 x 4', 3, '40', 3, 0, '2019-02-27 14:22:23', '2019-02-27 14:22:23'),
+(288, 2, 13, 0, 'Chọn đáp án đúng 10 x 4', 4, '41', 0, 0, '2019-02-27 14:22:23', '2019-02-27 14:22:23'),
+(289, 3, 13, 0, 'Chọn đáp án đúng 10 - 4', 1, '5', 0, 0, '2019-02-27 14:22:23', '2019-02-27 14:22:23'),
+(290, 3, 13, 0, 'Chọn đáp án đúng 10 - 4', 2, '6', 2, 0, '2019-02-27 14:22:23', '2019-02-27 14:22:23'),
+(291, 3, 13, 0, 'Chọn đáp án đúng 10 - 4', 3, '7', 0, 0, '2019-02-27 14:22:23', '2019-02-27 14:22:23'),
+(292, 3, 13, 0, 'Chọn đáp án đúng 10 - 4', 4, '8', 0, 0, '2019-02-27 14:22:23', '2019-02-27 14:22:23');
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `users`
 --
 
@@ -557,6 +610,7 @@ CREATE TABLE `user_course` (
   `begin_date` datetime NOT NULL,
   `end_date` datetime NOT NULL,
   `status` tinyint(1) NOT NULL,
+  `user_create` int(5) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -565,8 +619,8 @@ CREATE TABLE `user_course` (
 -- Đang đổ dữ liệu cho bảng `user_course`
 --
 
-INSERT INTO `user_course` (`id`, `user_id`, `course`, `begin_date`, `end_date`, `status`, `created_at`, `updated_at`) VALUES
-(1, 17, 'HHQ50', '2019-01-01 00:00:00', '2019-09-30 00:00:00', 1, '2019-02-13 03:07:56', '0000-00-00 00:00:00');
+INSERT INTO `user_course` (`id`, `user_id`, `course`, `begin_date`, `end_date`, `status`, `user_create`, `created_at`, `updated_at`) VALUES
+(1, 17, 'HHQ50', '2019-01-01 00:00:00', '2019-09-30 00:00:00', 1, 0, '2019-02-13 03:07:56', '0000-00-00 00:00:00');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -658,6 +712,12 @@ ALTER TABLE `role_user`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Chỉ mục cho bảng `temp_questions`
+--
+ALTER TABLE `temp_questions`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `users`
 --
 ALTER TABLE `users`
@@ -684,7 +744,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT cho bảng `m_bai_giang`
 --
 ALTER TABLE `m_bai_giang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT cho bảng `m_cau_dap_an`
@@ -714,19 +774,19 @@ ALTER TABLE `m_exam`
 -- AUTO_INCREMENT cho bảng `m_giao_vien`
 --
 ALTER TABLE `m_giao_vien`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `m_ket_qua_quiz`
 --
 ALTER TABLE `m_ket_qua_quiz`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT cho bảng `m_ket_qua_quiz_question`
 --
 ALTER TABLE `m_ket_qua_quiz_question`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=318;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=323;
 
 --
 -- AUTO_INCREMENT cho bảng `m_khoahoc_monhoc`
@@ -759,6 +819,12 @@ ALTER TABLE `role_user`
   MODIFY `id` tinyint(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT cho bảng `temp_questions`
+--
+ALTER TABLE `temp_questions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=293;
+
+--
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
@@ -768,7 +834,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT cho bảng `user_course`
 --
 ALTER TABLE `user_course`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
