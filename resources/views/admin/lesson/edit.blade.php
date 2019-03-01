@@ -42,6 +42,10 @@
 					</select>
 				</div>
 				<div class="form-group">
+					<label>Sắp xếp thứ tự</label>
+					<input type="number" class="form-control" name="sort" value="{{ old('sort', isset($data) ? $data['sort'] : 0)}}" />
+				</div>
+				<div class="form-group">
 					<label>Từ khoá</label>
 					<textarea class="form-control" name="keywords" rows="3" id="keywords" >{{ old('keywords', isset($data) ? $data['keywords'] : '')}}</textarea> 
 				</div>

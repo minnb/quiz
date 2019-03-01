@@ -1,5 +1,5 @@
 @extends('admin.app')
-@section('title', 'Import câu hỏi theo chuyên đề')
+@section('title', 'Import câu hỏi quiz theo bài giảng')
 @section('stylesheet')
 	<link href="{{ asset('public/assets/plugins/jquery.filer/css/jquery.filer.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{  asset('public/assets/plugins/jquery.filer/css/themes/jquery.filer-dragdropbox-theme.css') }}" rel="stylesheet" type="text/css" />
@@ -8,32 +8,30 @@
 @include('admin.layouts.flash_message')
 @include('admin.layouts.alert')
 <div class="container-fluid card">
-	<form name="create-question" action="{{ route('post.admin.question.import.upload',['id'=>fencrypt($thematic_id)])}}" method="POST" enctype="multipart/form-data" style="padding:10px">
-		<input type="hidden" name="_token" value="<?php echo csrf_token() ?>">
-		<div class="col-lg-12">
-			<h5>Chuyên đề: <strong> {{ App\Models\Thematic::find($thematic_id)->name }}</strong></h5>
+	<div class="col-lg-12">
+		<form name="create-question" action="{{ route('post.admin.import.quiz.lesson',['lesson'=>fencrypt($lesson_id)])}}" method="POST" enctype="multipart/form-data" style="padding:10px">
+			<input type="hidden" name="_token" value="<?php echo csrf_token() ?>">
+			<h5>Bài giảng: <strong> {{ App\Models\Lesson::find($lesson_id)->name }}</strong></h5>
 			<hr>
-			<div class="col-lg-5 col-md-5">
+			<div class="col-lg-5">
 				<div class="form-group">
 					<input type="file" class="form-control" name="fileExcel" value="{{ old('fileExcel') }}" required="">
-				</div>	
-			</div>
-			<div class="col-lg-5 col-md-5">
-				<div class="form-group">
-					<button type="submit" class="btn btn-danger"><i class="fa fa-cloud-upload bigfonts" aria-hidden="true"></i> Upload file</button>
 				</div>
 			</div>
-		</div>
-	</form>
+			<div class="col-lg-3">
+				<button type="submit" class="btn btn-danger"><i class="fa fa-cloud-upload bigfonts" aria-hidden="true"></i> Upload file</button>
+			</div>
+		</form>
+	</div>
 </div>
 <br>
 <div class="container-fluid card" style="padding:10px">
 	<div>
-		<form method="POST" action="{{ route('post.admin.question.import', ['id'=>fencrypt($thematic_id)])}}">
+		<form method="POST" action="{{ route('post.admin.import.quiz.lesson.data', ['id'=>fencrypt($lesson_id)])}}">
 			<input type="hidden" name="_token" value="<?php echo csrf_token() ?>">
-			<input type="hidden" name="thematic" value="{{ $thematic_id }}">
+			<input type="hidden" name="lesson" value="{{ $lesson_id }}">
 			<button type="submit" class="btn btn-info" style="margin:10px"><i class="fa fa-save bigfonts" aria-hidden="true"></i> Lưu dữ liệu</button>
-			<a class="btn btn-success" href="{{ route('get.admin.question.import.undo', ['id'=>fencrypt($thematic_id)]) }}" style="margin:10px"><i class="fa fa-undo bigfonts" aria-hidden="true"></i> Làm lại</a>
+			<a class="btn btn-success" href="{{ route('get.admin.import.quiz.lesson.undo', ['id'=>fencrypt($lesson_id)]) }}" style="margin:10px"><i class="fa fa-undo bigfonts" aria-hidden="true"></i> Làm lại</a>
 		</form>
 	</div>
 	<hr>
@@ -43,7 +41,7 @@
 				<tr>
 					<th>Loại</th>
 					<th>Level</th>
-					<th>Chuyên đề</th>
+					<th>Bài giảng</th>
 					<th>#id</th>
 					<th>Câu hỏi</th>
 					<th>STT</th>
@@ -64,7 +62,7 @@
 						</td>
 						<td>{{ $item->level }}</td>
 						<td>
-							{{ App\Models\Thematic::find($thematic_id)->name }}
+							{{ App\Models\Lesson::find($lesson_id)->name }}
 						</td>
 						<td>{{ $item->question_id }}</td>
 						<td>{{$item->question}}</td>

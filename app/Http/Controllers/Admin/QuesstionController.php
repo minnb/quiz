@@ -9,7 +9,10 @@ use App\Models\Answer;
 use App\Models\Course;
 use App\Models\Thematic;
 use App\Models\Quesstion;use Excel;
-use App\Models\QuestionImport;use App\Models\TempQuestion;
+use App\Models\AnswerImport;
+use App\Models\QuestionImport;
+use App\Models\TempQuestion;
+use App\Models\TempAnswer;
 class QuesstionController  extends Controller
 {
     /**
@@ -22,11 +25,16 @@ class QuesstionController  extends Controller
         $this->middleware('auth');
     }
 
-    public function getList(){
-    	$data = Quesstion::where('status', 1)->get();
+    public function getListQuiz(){
+    	$data = Quesstion::where([
+            ['status', 1],['used', 0] ])->get();
     	return view('admin.quesstion.list', compact('data'));
     }
-
+    public function getListQuest(){
+        $data = Quesstion::where([
+            ['status', 1],['used', 1] ])->get();
+        return view('admin.quesstion.list', compact('data'));
+    }
     public function getAdd(){
 
     }
@@ -184,7 +192,8 @@ class QuesstionController  extends Controller
 
     public function getImportUndo($idd){
         $thematic_id = fdecrypt($idd);
-        TempQuestion::where('user_id', Auth::user()->id)->delete();
+        DB::table('temp_questions')->where('user_id', Auth::user()->id)->delete();
+        DB::table('temp_answer')->delete();
         return redirect()->route('get.admin.question.import', ['id'=>fencrypt($thematic_id)]);
     }
 
@@ -200,8 +209,13 @@ class QuesstionController  extends Controller
                 $file->move($destinationPath, $file_name);
 
                 DB::beginTransaction();
+                
                 DB::table('temp_questions')->where('user_id', $user_id)->delete();
-                Excel::import(new QuestionImport, $destinationPath.'/'.$file_name);
+                DB::table('temp_answer')->delete();
+
+                Excel::import(new QuestionImport(), $destinationPath.'/'.$file_name);
+                Excel::import(new AnswerImport(), $destinationPath.'/'.$file_name);
+
                 DB::commit();
                 return back()->with(['flash_message'=>'Upload thành công']);
             }
@@ -212,9 +226,59 @@ class QuesstionController  extends Controller
     }
     public function postImportExcel(Request $request, $idd){
         $thematic_id = fdecrypt($idd); 
-        $thematic = Thematic::find($thematic_id);
-        $data = TempQuestion::where('user_id', Auth::user()->id)->get();
+        try{
+
+            $data_question = TempQuestion::where('result','>',0)->orderBy('question_id')->get();
+            $thematic = Thematic::find($thematic_id);
+            DB::beginTransaction();
+
+            if($data_question->count() > 0){
+                foreach($data_question as $key=>$item){
+                    $dtaq = new Quesstion;
+                    $dtaq->type = 'radio';
+                    $dtaq->used = $item->used;
+                    $dtaq->course = $thematic->course;
+                    $dtaq->thematic = $thematic_id;
+                    $dtaq->name = $item->question;
+                    $dtaq->alias = '';
+                    $dtaq->image = '';
+                    $dtaq->level = $item->level;
+                    $dtaq->status = 1;
+                    $dtaq->answer = $item->result;
+                    $dtaq->user_id = Auth::user()->id;
+                    $dtaq->save();
+                    $q_id = $dtaq->id;
+
+                    $data_answer = TempAnswer::where('question_id', $item->question_id)->orderBy('stt')->get();
+                    if($data_answer->count() > 0){
+                        foreach($data_answer as $key=>$value){
+                            $dtAnswer = new Answer;
+                            $dtAnswer->stt = $value->stt;
+                            $dtAnswer->quesstion_id = $q_id ;
+                            $dtAnswer->name = $value->answer;
+                            $dtAnswer->alias ='';
+                            $dtAnswer->value ='';
+                            $dtAnswer->result = $value->result;
+                            $dtAnswer->image ='';
+                            $dtAnswer->save();
+                        }
+                    }
+                }
+            }
+            
+            DB::table('temp_questions')->where('user_id', Auth::user()->id)->delete();
+            DB::table('temp_answer')->delete();
+
+            DB::commit();
+           return redirect()->route('get.admin.quesstion.list.question')->with(['flash_message'=>'Tạo mới thành công']);
+
+        }catch (Exception $e) {
+            DB::rollBack();
+            return back()->withError($e->getMessage())->withInput();
+        }
         
         
     }
+
+    
 }

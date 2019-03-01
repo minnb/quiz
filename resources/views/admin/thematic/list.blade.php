@@ -17,9 +17,9 @@
 								<th>Môn học</th>
 								<th>Câu hỏi</th>
 								<th>Bài giảng</th>
-								<th>Trạng thái</th>
+								<th>Status</th>
 								<th>
-									<a href="#" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fa fa-fw fa-plus"></i> Thêm mới chuyên đề</a>
+									<a href="#" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fa fa-fw fa-plus"></i> Thêm chuyên đề</a>
 								</th>
 							</tr>
 						</thead>										
@@ -35,13 +35,15 @@
 									@endif
 								</td>
 								<td>
-									<a href="{{ route('get.admin.thematic.edit',['id'=>fencrypt($item->id)])}}"><?php echo $item->name; ?></a>
+									<a href="{{ route('get.admin.thematic.edit',['id'=>fencrypt($item->id)])}}">
+										{{ ($item->sort > 0 ) ? $item->sort : 0 }}. {{ $item->name }} </a>
 								</td>
 								<td>{{ App\Models\Course::getFullNameCourse($item->course) }}</td>
 								<td>{{ App\Models\Subject::find($item->subject)->name }}</td>
 								<td>
 									<span>({{ App\Models\Quesstion::countQuesstionInThematic($item->id) }})</span>
 									<a href="{{ route('get.admin.quesstion.add.thematic',['thematic'=>fencrypt($item->id)]) }}"><i class="fa fa-fw fa-plus"></i> Thêm mới</a>
+									<a href="{{ route('get.admin.question.import',['id'=>fencrypt($item->id)] )}} " style="color:blue"><i class="fa fa-fw fa-file-excel-o"></i> Import Excel </a>
 								</td>
 								<td>
 									<span>({{ App\Models\Lesson::countLessonInThematic($item->id) }})</span>
@@ -55,7 +57,6 @@
 									@endif
 								</td>
 								<td>
-									<a href="{{ route('get.admin.question.import',['id'=>fencrypt($item->id)] )}} " style="color:blue"><i class="fa fa-fw fa-file-excel-o"></i> Import Excel </a>
 									<a href="{{ route('get.admin.thematic.edit',['id'=>fencrypt($item->id)])}} "><i class="fa fa-fw fa-edit"></i> Edit </a>
 									<a href="{{ route('get.admin.thematic.delete',['id'=>fencrypt($item->id)])}}" style="color:red" onclick="return alertDelete();"><i class="fa fa-fw fa-trash"></i> Delete</a>
 

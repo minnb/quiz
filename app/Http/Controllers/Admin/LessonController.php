@@ -56,7 +56,7 @@ class LessonController  extends Controller
             $lesson->content = $request->content;
             $lesson->keywords = $request->keywords;
 			$lesson->status = 1;
-			$lesson->sort = 0;
+			$lesson->sort = $request->sort;
             $lesson->user_id = Auth::user()->id;
             if($request->file('fileImage')){
                 foreach(Input::file('fileImage') as $file ){
@@ -97,7 +97,7 @@ class LessonController  extends Controller
             $lesson->content = $request->content;
             $lesson->keywords = $request->keywords;
             $lesson->status = $request->status;
-            $lesson->sort = 0;
+            $lesson->sort = $request->sort;
             $lesson->user_id = Auth::user()->id;
             if($request->file('fileImage')){
                 foreach(Input::file('fileImage') as $file ){

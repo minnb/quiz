@@ -15,6 +15,7 @@
 								<th>Tên bài giảng</th>
 								<th>Chuyên đề</th>
 								<th>Khoá học</th>
+								<th>Câu hỏi test Quiz</th>
 								<th>Trạng thái</th>
 								<th>
 									<a href="#" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fa fa-fw fa-plus"></i> Thêm mới bài giảng</a>
@@ -26,9 +27,12 @@
 							<tr>
 								<td><?php echo $key + 1; ?></td>
 								<td></td>
-								<td><a href="{{ route('get.admin.lesson.edit',['id'=>fencrypt($item->id)])}}">{{ $item->name }}</a></td>
+								<td><a href="{{ route('get.admin.lesson.edit',['id'=>fencrypt($item->id)])}}">{{$item->sort}}. {{ $item->name }}</a></td>
 								<td>{{ App\Models\Thematic::find($item->thematic)->name }}</td>
 								<td>{{ $item->course }}</td>
+								<td>
+										<a href="{{ route('get.admin.import.quiz.lesson',['id'=>fencrypt($item->id)] )}} " style="color:blue"><i class="fa fa-fw fa-file-excel-o"></i> Import Excel </a>
+								</td>
 								<td>
 									@if($item->status == 0)
 										<span>Disable</span>

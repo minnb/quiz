@@ -24,6 +24,10 @@
 					</select>
 				</div>
 				<div class="form-group">
+					<label>Sắp xếp</label>
+					<input type="number" name="sort" value="{{ old('status', isset($data) ? $data['sort'] : 0) }}" class="form-control" required="" style="text-align: center;">
+				</div>
+				<div class="form-group">
 					<label>Từ khoá</label>
 					<input type="text" name="keywords"  class="form-control" value="{{ old('keywords') }}" placeholder="#Từ khoá">
 				</div>

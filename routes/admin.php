@@ -69,7 +69,9 @@ Route::group(['prefix'=> 'admin'], function(){
 
 Route::group(['prefix'=> 'admin'], function(){
 		Route::group(['prefix'=> 'quesstion'], function(){
-			Route::get('list', ['as'=>'get.admin.quesstion.list','uses'=>'Admin\QuesstionController@getList']);
+			Route::get('list/quiz', ['as'=>'get.admin.quesstion.list.quiz','uses'=>'Admin\QuesstionController@getListQuiz']);
+			Route::get('list/question', ['as'=>'get.admin.quesstion.list.question','uses'=>'Admin\QuesstionController@getListQuest']);
+
 			Route::get('add', ['as'=>'get.admin.quesstion.add','uses'=>'Admin\QuesstionController@getAdd']);
 			Route::post('add', ['as'=>'post.admin.quesstion.add','uses'=>'Admin\QuesstionController@postAdd']);
 			Route::get('add/thematic/{thematic}', ['as'=>'get.admin.quesstion.add.thematic','uses'=>'Admin\QuesstionController@getAddByThematic']);
@@ -78,10 +80,16 @@ Route::group(['prefix'=> 'admin'], function(){
 			Route::post('edit/{id}', ['as'=>'post.admin.quesstion.edit','uses'=>'Admin\QuesstionController@postEdit']);
 			Route::get('delete/{id}', ['as'=>'get.admin.quesstion.delete','uses'=>'Admin\QuesstionController@getDelete']);
 			
-			Route::get('import/{id}', ['as'=>'get.admin.question.import','uses'=>'Admin\QuesstionController@getImportExcel']);
-			Route::post('import/upload/{id}', ['as'=>'post.admin.question.import.upload','uses'=>'Admin\QuesstionController@postUploadExcel']);
-			Route::post('import/{id}', ['as'=>'post.admin.question.import','uses'=>'Admin\QuesstionController@postImportExcel']);
-			Route::get('import/undo/{id}', ['as'=>'get.admin.question.import.undo','uses'=>'Admin\QuesstionController@getImportUndo']);
+			Route::get('import/question/{id}', ['as'=>'get.admin.question.import','uses'=>'Admin\QuesstionController@getImportExcel']);
+			Route::post('import/question/{id}', ['as'=>'post.admin.question.import.upload','uses'=>'Admin\QuesstionController@postUploadExcel']);
+			Route::post('import/question/data/{id}', ['as'=>'post.admin.question.import','uses'=>'Admin\QuesstionController@postImportExcel']);
+			Route::get('import/question/undo/{id}', ['as'=>'get.admin.question.import.undo','uses'=>'Admin\QuesstionController@getImportUndo']);
+
+			Route::get('import/quiz/{lesson}', ['as'=>'get.admin.import.quiz.lesson','uses'=>'Admin\ImportController@getImportQuizByLesson']);
+			Route::post('import/quiz/{lesson}', ['as'=>'post.admin.import.quiz.lesson','uses'=>'Admin\ImportController@postImportQuizByLesson']);
+			Route::get('import/quiz/undo/{lesson}', ['as'=>'get.admin.import.quiz.lesson.undo','uses'=>'Admin\ImportController@getUndoQuizByLesson']);
+			Route::post('import/quiz/data/{lesson}', ['as'=>'post.admin.import.quiz.lesson.data','uses'=>'Admin\ImportController@postDataQuizByLesson']);
+
 		});
 	});
 

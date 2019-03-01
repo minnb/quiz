@@ -19,7 +19,7 @@ function getLoaiDeThi(){
     'TUAN' => 'Đề thi tuần',
     'THANG' => 'Đề thi tháng',
     'HOCKY1' => 'Đề thi học kỳ 1',
-    'HOCKY2' => 'Đề thi học kỳ 1'
+    'HOCKY2' => 'Đề thi học kỳ 2'
   ];
 }
 function getQuizUsed(){

@@ -1,5 +1,5 @@
 @extends('admin.app')
-@section('title', 'Danh sách câu hỏi luyện thi Quiz')
+@section('title', 'Danh sách câu hỏi')
 @section('content')
 @include('admin.layouts.flash_message')
 <div class="row">
@@ -11,11 +11,11 @@
 						<thead>
 							<tr>
 								<th>#</th>
+								<th>Loại</th>
 								<th>Câu hỏi</th>
 								<th>Chuyên đề</th>
 								<th>Khóa học</th>
 								<th>Cấp độ</th>
-								<th>Loại</th>
 								<th>Trạng thái</th>
 								<th>
 									<a href="#" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fa fa-fw fa-plus"></i> Thêm mới câu hỏi</a>
@@ -26,11 +26,17 @@
 							<?php foreach($data as $key=>$item) { ?>
 							<tr>
 								<td><?php echo $key + 1; ?></td>
+								<td>
+									@if($item->used == 0)
+										<span>Quiz</span>
+									@else
+										<span>Practice</span>
+									@endif
+								</td>
 								<td><a href="{{ route('get.admin.exam.edit',['id'=>fencrypt($item->id)])}}">{{ $item->name }}</a></td>
 								<td>{{ App\Models\Thematic::find($item->thematic)->name }}</td>
 								<td>{{ $item->course }}</td>
 								<td>{{ $item->level }}</td>
-								<td>{{ $item->used }}</td>
 								<td>
 									@if($item->status == 0)
 										<span>Disable</span>
