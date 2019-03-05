@@ -45,7 +45,7 @@ class ImportController extends Controller
             if($request->hasFile('fileExcel')){
                 $file = Input::file('fileExcel');
                 $destinationPath = env('APP_DIR_DATA_FILE');
-                $file_name =  'tmp_import_question'.'.'.$file->getClientOriginalExtension();
+                $file_name =  'tmp_import_quiz'.'.'.$file->getClientOriginalExtension();
                 $file->move($destinationPath, $file_name);
 
                 DB::beginTransaction();
@@ -80,6 +80,7 @@ class ImportController extends Controller
                     $dtaq->used = $item->used;
                     $dtaq->course = $lesson->course;
                     $dtaq->thematic = $lesson->thematic;
+                    $dtaq->lesson = $lesson->id;
                     $dtaq->name = $item->question;
                     $dtaq->alias = '';
                     $dtaq->image = '';

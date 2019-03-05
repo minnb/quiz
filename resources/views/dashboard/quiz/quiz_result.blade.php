@@ -9,26 +9,19 @@
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dasboard</a></li>
                     <li class="breadcrumb-item active">Kết quả luyện tập</li>
                 </ol>
-                <div class="media mb-headings align-items-center">
-                    <div class="media-left">
-                        <img src="assets/images/vuejs.png" alt="" width="80" class="rounded">
-                    </div>
-                    <div class="media-body">
-                        <h1 class="h2">{{ App\Models\Thematic::find($data_result['thematic'])->name}}</h1>
-                        <p class="text-muted">Khóa học: {{ App\Models\Course::getFullNameCourse($data_result['course'])}}</p>
-                    </div>
-                </div>
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Kết quả</h4>
+                        <h2 style="font-family: Arial">Kết quả</h2>
+                        <p class="text-muted">Khóa học: {{ App\Models\Course::getFullNameCourse($data_result['course'])}}</p>
+                        <p class="text-muted">Chuyên đề: {{ App\Models\Thematic::find($data_result['thematic'])->name}}</p>
                     </div>
                     <div class="card-body media align-items-center">
                         <div class="media-body">
-                            <h4 class="mb-0">5.8</h4>
-                            <span class="text-muted-light">Good</span>
+                            <h4 class="mb-0"><span style="color:blue; font-size:180%;">{{ number_format($point, 1, '.', '') }}</span> điểm</h4>
+                            <span class="text-muted-light">{{ xeploai($point) }}</span>
                         </div>
                         <div class="media-right">
-                            <a href="student-take-quiz.html" class="btn btn-primary">Luyện tập lại <i class="material-icons btn__icon--right">refresh</i></a>
+                            <a href="{{ route('get.dashboard.quiz.take',['type'=>fencrypt($data_result->type), 'course'=>fencrypt($data_result->course),'thematic'=>fencrypt($data_result->thematic), 'id'=>fencrypt($data_result->lesson) ])}}" class="btn btn-primary">Luyện tập lại <i class="material-icons btn__icon--right">refresh</i></a>
                         </div>
                     </div>
                 </div>

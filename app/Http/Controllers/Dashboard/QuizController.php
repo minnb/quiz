@@ -31,19 +31,34 @@ class QuizController extends Controller
     	try{
             $check = HeaderQuiz::where([
                     ['lesson', $id],
+                    ['success', 0],
                     ['user_id', User::getInfoUser()['id']]
                 ])->get();
 
             if($check->count() > 0){
-                $quiz_id = $check[0]->id;
+                DetailQuiz::where('quiz_id', $check[0]->id)->delete();
+                HeaderQuiz::where([
+                    ['lesson', $id],
+                    ['success', 0],
+                    ['user_id', User::getInfoUser()['id']]
+                ])->delete();
+                
+                $quiz_id = Exam::insertTabkeQuiz($quiz_type,$course_id, $thematic_id, $id);
             }else{
                 $quiz_id = Exam::insertTabkeQuiz($quiz_type,$course_id, $thematic_id, $id);
-                if( $quiz_id > 0){
-                    $question_data = Quesstion::getQuestionData($thematic_id, $quiz_id)->toArray();
-                }
             }
+            /*
+            if( $quiz_id > 0){
+                $question_data = Quesstion::getQuestionData($thematic_id, $quiz_id)->toArray();
+            }
+            */
             $question_data = Quesstion::getQuestionData($thematic_id, $quiz_id)->toArray();
-            return view('dashboard.quiz.quiz', compact('question_data', 'id','course_id','thematic_id', 'quiz_type','quiz_id'));           
+            if(count($question_data) > 0){
+                return view('dashboard.quiz.quiz', compact('question_data', 'id','course_id','thematic_id', 'quiz_type','quiz_id'));           
+            }else{
+                HeaderQuiz::where('total', 0)->delete();
+                return back();
+            }
         }catch(Exception $e){
             return back();
         }
@@ -74,7 +89,9 @@ class QuizController extends Controller
                         ->update(['answer' => $request->answer[$key]]);
                 }               
             }
+
             HeaderQuiz::where('id', $quiz_id)->update(['status' => 1]);
+            HeaderQuiz::calcResultQuiz($quiz_id);
             DB::commit();
             return redirect()->route('get.dashboard.quiz.take.result', ['quiz_id'=>fencrypt($quiz_id)]);
 
@@ -88,8 +105,9 @@ class QuizController extends Controller
         $quiz_id = fdecrypt($idd); 
         try{
             $data_result = HeaderQuiz::find($quiz_id);
+            $point = calcPoint($data_result->total, $data_result->kq);
             $answer_result = DetailQuiz::where('quiz_id', $quiz_id)->get();
-            return view('dashboard.quiz.quiz_result', compact('data_result','answer_result','quiz_id'));
+            return view('dashboard.quiz.quiz_result', compact('data_result','answer_result','quiz_id','point'));
         }catch(Exception $e){
             return back();
         }

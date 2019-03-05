@@ -13,6 +13,7 @@ class Exam extends Model
 
     public static function insertTabkeQuiz($type, $course, $thematic, $lesson){
     	$heder_quiz_id = 0;
+    	$info_exam = Exam::where([['type',$type],['status', 1]])->get();
     	try{
             DB::beginTransaction();
             $heder_quiz = new HeaderQuiz();
@@ -26,14 +27,18 @@ class Exam extends Model
             $heder_quiz->lesson = $lesson;
 			$heder_quiz->status = 0;
 			$heder_quiz->success = 0;
+			$heder_quiz->kq = 0;
+			//$heder_quiz->total = $info_exam->number_quesstion;
 			$heder_quiz->save();
 			$heder_quiz_id = $heder_quiz->id;
 
-			$info_exam = Exam::where([['type',$type],['status', 1]])->get();
 			Exam::insertDetailQuiz($type, $heder_quiz_id, $course, $thematic, $lesson, $info_exam[0]->lv1, 1);
 			Exam::insertDetailQuiz($type, $heder_quiz_id, $course, $thematic, $lesson, $info_exam[0]->lv2, 2);
 			Exam::insertDetailQuiz($type, $heder_quiz_id, $course, $thematic, $lesson, $info_exam[0]->lv3, 3);
 			Exam::insertDetailQuiz($type, $heder_quiz_id, $course, $thematic, $lesson, $info_exam[0]->lv4, 4);
+
+			$total = DetailQuiz::where('quiz_id', $heder_quiz_id)->get();
+			HeaderQuiz::where('id', $heder_quiz_id)->update(['total'=>$total->count()]);
 
             DB::commit();
             return $heder_quiz_id;

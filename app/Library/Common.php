@@ -25,8 +25,8 @@ function getLoaiDeThi(){
 }
 function getQuizUsed(){
     $arrStatus = [
-      '0' => 'Sử dụng cho đề thi',
-      '1' => 'Sử dụng cho Quiz Test',
+      '1' => 'Sử dụng cho đề thi',
+      '0' => 'Sử dụng cho Quiz Test',
       //'value'  => 'Tự điền đáp án'
     ];
     return $arrStatus;
@@ -62,4 +62,20 @@ function getTypeAnswer(){
       //'value'  => 'Điền đáp án',
     ];
     return $arrStatus;
+}
+function calcPoint($total, $kq){
+  return round((10/$total)*$kq,1);
+}
+function xeploai($point){
+  $xep = '';
+  if($point < 5){
+    $xep = 'Điểm kém';
+  }elseif ($point >= 5 && $point < 7) {
+    $xep = 'Trung bình';
+  }elseif ($point >= 7 && $point < 9) {
+    $xep = 'Điểm khá';
+  }else{
+    $xep = 'Xuất sắc';
+  }
+  return $xep;
 }

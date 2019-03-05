@@ -239,6 +239,7 @@ class QuesstionController  extends Controller
                     $dtaq->used = $item->used;
                     $dtaq->course = $thematic->course;
                     $dtaq->thematic = $thematic_id;
+                    $dtaq->lesson = 0;
                     $dtaq->name = $item->question;
                     $dtaq->alias = '';
                     $dtaq->image = '';
