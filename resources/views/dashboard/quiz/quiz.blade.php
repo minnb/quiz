@@ -18,7 +18,7 @@
          <form action="{{ route('post.dashboard.quiz.take.detail',['quiz_id'=>fencrypt($quiz_id)])}}" method="POST">
            <input type="hidden" name="_token" value="{!! csrf_token() !!}">
             <div id="smartwizard">
-                  <h4 class="border-bottom border-gray pb-2"><small>Chuyên đề: {{App\Models\Thematic::find($thematic_id)->name}}</small></h4>
+                  <h4 class="border-bottom border-gray pb-2"><small>Chuyên đề: {{App\Models\Thematic::find($thematic_id)->name}} - {{$quiz_type}}</small></h4>
                   <ul>
                     @foreach($question_data as $key=>$item)
                       <li><a href="#step-{{$key+1}}">Câu {{$key+1}}<br /></a></li>

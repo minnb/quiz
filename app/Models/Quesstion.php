@@ -22,7 +22,7 @@ class Quesstion extends Model
 	            ->select('m_ket_qua_quiz_question.quiz_id', "m_cau_hoi.id as question_id", 'm_cau_hoi.name','m_cau_hoi.type')
 	            ->where([
 	            		['m_cau_hoi.thematic', $thematic_id],
-	            		['m_ket_qua_quiz_question.quiz_id', $quiz_id]
+	            		['m_ket_qua_quiz_question.quiz_id', $quiz_id],
 	            	])
 	            ->get();
 
@@ -39,6 +39,40 @@ class Quesstion extends Model
 			            ->where([
 			            		['m_ket_qua_quiz_question.quiz_id', $quiz_id],
 			            		['m_ket_qua_quiz_question.question_id', $value->question_id],
+			            	])
+			            ->get();
+	    	if($answer_data->count() > 0){
+	    		$arrAnswer = [];
+	    		foreach($answer_data as $item){
+		    		$arr = array(
+		    			'answer_id'=>$item->id,
+						'question_id'=>$item->question_id,
+						'stt'=>$item->stt,
+						'name'=>$item->name,
+						'value'=>$item->value,
+						'result'=>$item->result,
+						'image'=>$item->image
+					);
+					array_push($arrAnswer,$arr);
+	    		}
+	    		$quiz_line->answer = $arrAnswer;
+	    	}
+	    	$question->prepend($quiz_line);
+	    }
+		return $question;
+    }
+
+    public static function getQuizData($thematic_id){
+    	$question = new Collection();
+    	$data_question = DB::table('m_cau_hoi')->select('id','name','type','answer')
+	            ->where([
+	            		['thematic', $thematic_id],
+	            		['used', 0]
+	            	])->inRandomOrder()->offset(5)->limit(5)->get();
+	    foreach($data_question as $key=>$value){
+	    	$answer_data = DB::table('m_cau_dap_an')
+			            ->where([
+			            		['question_id', $value->id],
 			            	])
 			            ->get();
 	    	if($answer_data->count() > 0){

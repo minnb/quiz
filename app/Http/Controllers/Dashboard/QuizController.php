@@ -107,4 +107,7 @@ class QuizController extends Controller
         }
     }
 
+    public function getQuizData(){
+        
+    }
 }

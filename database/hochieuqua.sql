@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th3 04, 2019 lúc 04:40 PM
--- Phiên bản máy phục vụ: 10.1.36-MariaDB
--- Phiên bản PHP: 7.2.11
+-- Thời gian đã tạo: Th3 05, 2019 lúc 11:14 AM
+-- Phiên bản máy phục vụ: 10.1.32-MariaDB
+-- Phiên bản PHP: 7.2.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -184,6 +184,7 @@ CREATE TABLE `m_cau_hoi` (
   `used` tinyint(1) NOT NULL,
   `course` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `thematic` int(5) NOT NULL,
+  `lesson` int(11) DEFAULT NULL,
   `name` tinytext COLLATE utf8_unicode_ci NOT NULL,
   `alias` tinytext COLLATE utf8_unicode_ci,
   `image` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -199,24 +200,24 @@ CREATE TABLE `m_cau_hoi` (
 -- Đang đổ dữ liệu cho bảng `m_cau_hoi`
 --
 
-INSERT INTO `m_cau_hoi` (`id`, `type`, `used`, `course`, `thematic`, `name`, `alias`, `image`, `level`, `status`, `answer`, `user_id`, `created_at`, `updated_at`) VALUES
-(6, 'radio', 1, 'HHQ40', 2, 'Tính tổng 5 + 5', 'tinh-tong-5-+-5', NULL, 1, 1, 3, 13, '2019-02-14 14:59:16', '2019-02-13 04:47:12'),
-(8, 'radio', 1, 'HHQ50', 9, 'Phân số thập phân 834/10 được viết dưới dạng số thập phân là:', 'phan-so-thap-phan-834-10-duoc-viet-duoi-dang-so-thap-phan-la:', NULL, 1, 1, 4, 13, '2019-02-14 14:58:46', '2019-02-13 04:55:25'),
-(9, 'radio', 1, 'HHQ50', 9, 'Số \"Bốn mươi bảy đơn vị bốn phần mười và tám phần trăm\" viết như sau', 'so-bon-muoi-bay-don-vi-bon-phan-muoi-va-tam-phan-tram-viet-nhu-sau', NULL, 2, 1, 2, 13, '2019-02-14 14:58:58', '2019-02-13 05:00:48'),
-(10, 'radio', 1, 'HHQ50', 9, 'Lớp học có 25 học sinh, trong đó có 13 nữ. Số học sinh nữ chiếm bao nhiêu phần trăm của lớp học đó?', 'lop-hoc-co-25-hoc-sinh,-trong-do-co-13-nu-so-hoc-sinh-nu-chiem-bao-nhieu-phan-tram-cua-lop-hoc-do+', NULL, 4, 1, 3, 13, '2019-02-14 14:59:04', '2019-02-13 05:04:09'),
-(11, 'radio', 1, 'HHQ50', 9, 'Mua 2 quyển vở hết 24.000 đồng. Vậy mua 10 quyển vở như thế hết số tiền là:', 'mua-2-quyen-vo-het-24-000-dong-vay-mua-10-quyen-vo-nhu-the-het-so-tien-la:', NULL, 3, 1, 2, 13, '2019-02-14 14:59:07', '2019-02-13 05:05:22'),
-(12, 'radio', 1, 'HHQ50', 9, 'Kết quả rút gọn của phân số 12/24 là:', 'ket-qua-rut-gon-cua-phan-so-12-24-la:', NULL, 1, 1, 1, 13, '2019-02-14 14:59:10', '2019-02-13 05:39:22'),
-(13, 'radio', 1, 'HHQ50', 9, 'Kết quả rút gọn của phân số 7/14 là:', 'ket-qua-rut-gon-cua-phan-so-7-14-la:', NULL, 1, 1, 1, 13, '2019-02-14 14:59:14', '2019-02-13 05:40:51'),
-(20, 'radio', 0, 'HHQ51', 15, 'Chọn đáp án đúng 10 + 4', '', '', 1, 1, 1, 13, '2019-03-01 15:39:28', '2019-03-01 15:39:28'),
-(21, 'radio', 0, 'HHQ51', 15, 'Chọn đáp án đúng 10 x 4', '', '', 1, 1, 3, 13, '2019-03-01 15:39:28', '2019-03-01 15:39:28'),
-(22, 'radio', 0, 'HHQ51', 15, 'Chọn đáp án đúng 10 - 4', '', '', 1, 1, 2, 13, '2019-03-01 15:39:28', '2019-03-01 15:39:28'),
-(23, 'radio', 1, 'HHQ50', 10, 'Chọn đáp án đúng 10 + 4', '', '', 1, 1, 1, 13, '2019-03-01 15:52:57', '2019-03-01 15:52:57'),
-(24, 'radio', 0, 'HHQ51', 8, 'Chọn đáp án đúng 10 + 4', '', '', 1, 1, 1, 13, '2019-03-01 16:05:36', '2019-03-01 16:05:36'),
-(25, 'radio', 0, 'HHQ51', 8, 'Chọn đáp án đúng 10 - 4', '', '', 1, 1, 1, 13, '2019-03-01 16:05:36', '2019-03-01 16:05:36'),
-(26, 'radio', 0, 'HHQ51', 8, 'Chọn đáp án đúng 10 + 4 - 1', '', '', 1, 1, 3, 13, '2019-03-01 16:05:36', '2019-03-01 16:05:36'),
-(27, 'radio', 0, 'HHQ50', 10, 'Chọn đáp án đúng 10 + 4', '', '', 1, 1, 1, 13, '2019-03-01 16:08:03', '2019-03-01 16:08:03'),
-(28, 'radio', 0, 'HHQ50', 10, 'Chọn đáp án đúng 10 - 4', '', '', 1, 1, 1, 13, '2019-03-01 16:08:03', '2019-03-01 16:08:03'),
-(29, 'radio', 0, 'HHQ50', 10, 'Chọn đáp án đúng 10 + 4 - 1', '', '', 1, 1, 3, 13, '2019-03-01 16:08:03', '2019-03-01 16:08:03');
+INSERT INTO `m_cau_hoi` (`id`, `type`, `used`, `course`, `thematic`, `lesson`, `name`, `alias`, `image`, `level`, `status`, `answer`, `user_id`, `created_at`, `updated_at`) VALUES
+(6, 'radio', 1, 'HHQ40', 2, NULL, 'Tính tổng 5 + 5', 'tinh-tong-5-+-5', NULL, 1, 1, 3, 13, '2019-02-14 14:59:16', '2019-02-13 04:47:12'),
+(8, 'radio', 1, 'HHQ50', 9, NULL, 'Phân số thập phân 834/10 được viết dưới dạng số thập phân là:', 'phan-so-thap-phan-834-10-duoc-viet-duoi-dang-so-thap-phan-la:', NULL, 1, 1, 4, 13, '2019-02-14 14:58:46', '2019-02-13 04:55:25'),
+(9, 'radio', 1, 'HHQ50', 9, NULL, 'Số \"Bốn mươi bảy đơn vị bốn phần mười và tám phần trăm\" viết như sau', 'so-bon-muoi-bay-don-vi-bon-phan-muoi-va-tam-phan-tram-viet-nhu-sau', NULL, 2, 1, 2, 13, '2019-02-14 14:58:58', '2019-02-13 05:00:48'),
+(10, 'radio', 1, 'HHQ50', 9, NULL, 'Lớp học có 25 học sinh, trong đó có 13 nữ. Số học sinh nữ chiếm bao nhiêu phần trăm của lớp học đó?', 'lop-hoc-co-25-hoc-sinh,-trong-do-co-13-nu-so-hoc-sinh-nu-chiem-bao-nhieu-phan-tram-cua-lop-hoc-do+', NULL, 4, 1, 3, 13, '2019-02-14 14:59:04', '2019-02-13 05:04:09'),
+(11, 'radio', 1, 'HHQ50', 9, NULL, 'Mua 2 quyển vở hết 24.000 đồng. Vậy mua 10 quyển vở như thế hết số tiền là:', 'mua-2-quyen-vo-het-24-000-dong-vay-mua-10-quyen-vo-nhu-the-het-so-tien-la:', NULL, 3, 1, 2, 13, '2019-02-14 14:59:07', '2019-02-13 05:05:22'),
+(12, 'radio', 1, 'HHQ50', 9, NULL, 'Kết quả rút gọn của phân số 12/24 là:', 'ket-qua-rut-gon-cua-phan-so-12-24-la:', NULL, 1, 1, 1, 13, '2019-02-14 14:59:10', '2019-02-13 05:39:22'),
+(13, 'radio', 1, 'HHQ50', 9, NULL, 'Kết quả rút gọn của phân số 7/14 là:', 'ket-qua-rut-gon-cua-phan-so-7-14-la:', NULL, 1, 1, 1, 13, '2019-02-14 14:59:14', '2019-02-13 05:40:51'),
+(20, 'radio', 0, 'HHQ51', 15, NULL, 'Chọn đáp án đúng 10 + 4', '', '', 1, 1, 1, 13, '2019-03-01 15:39:28', '2019-03-01 15:39:28'),
+(21, 'radio', 0, 'HHQ51', 15, NULL, 'Chọn đáp án đúng 10 x 4', '', '', 1, 1, 3, 13, '2019-03-01 15:39:28', '2019-03-01 15:39:28'),
+(22, 'radio', 0, 'HHQ51', 15, NULL, 'Chọn đáp án đúng 10 - 4', '', '', 1, 1, 2, 13, '2019-03-01 15:39:28', '2019-03-01 15:39:28'),
+(23, 'radio', 1, 'HHQ50', 10, NULL, 'Chọn đáp án đúng 10 + 4', '', '', 1, 1, 1, 13, '2019-03-01 15:52:57', '2019-03-01 15:52:57'),
+(24, 'radio', 0, 'HHQ51', 8, NULL, 'Chọn đáp án đúng 10 + 4', '', '', 1, 1, 1, 13, '2019-03-01 16:05:36', '2019-03-01 16:05:36'),
+(25, 'radio', 0, 'HHQ51', 8, NULL, 'Chọn đáp án đúng 10 - 4', '', '', 1, 1, 1, 13, '2019-03-01 16:05:36', '2019-03-01 16:05:36'),
+(26, 'radio', 0, 'HHQ51', 8, NULL, 'Chọn đáp án đúng 10 + 4 - 1', '', '', 1, 1, 3, 13, '2019-03-01 16:05:36', '2019-03-01 16:05:36'),
+(27, 'radio', 0, 'HHQ50', 10, NULL, 'Chọn đáp án đúng 10 + 4', '', '', 1, 1, 1, 13, '2019-03-01 16:08:03', '2019-03-01 16:08:03'),
+(28, 'radio', 0, 'HHQ50', 10, NULL, 'Chọn đáp án đúng 10 - 4', '', '', 1, 1, 1, 13, '2019-03-01 16:08:03', '2019-03-01 16:08:03'),
+(29, 'radio', 0, 'HHQ50', 10, NULL, 'Chọn đáp án đúng 10 + 4 - 1', '', '', 1, 1, 3, 13, '2019-03-01 16:08:03', '2019-03-01 16:08:03');
 
 -- --------------------------------------------------------
 
@@ -296,7 +297,8 @@ INSERT INTO `m_exam` (`id`, `type`, `name`, `alias`, `description`, `image`, `wo
 (1, 'TUAN', 'Thi tuần', 'thi-tuan', NULL, NULL, 15, 10, 4, 3, 2, 1, 1, 13, '2019-02-13 05:46:33', '2019-02-13 05:46:33'),
 (2, 'CHUYENDE', 'Thi theo chuyên đề', 'thi-theo-chuyen-de', '<p>Luyện tập trả lời c&acirc;u hỏi nhanh sau khi học xong b&agrave;i giảng.</p>', NULL, 5, 5, 2, 1, 1, 1, 1, 13, '2019-02-13 05:43:35', '2019-02-13 05:43:35'),
 (3, 'HOCKY1', 'HOCKY1', 'hocky1', NULL, NULL, 30, 10, 4, 3, 2, 1, 1, 13, '2019-02-28 15:12:40', '2019-02-28 15:12:40'),
-(4, 'HOCKY2', 'HOCKY2', 'hocky2', NULL, NULL, 30, 10, 4, 3, 2, 1, 1, 13, '2019-02-28 15:13:03', '2019-02-28 15:13:03');
+(4, 'HOCKY2', 'HOCKY2', 'hocky2', NULL, NULL, 30, 10, 4, 3, 2, 1, 1, 13, '2019-02-28 15:13:03', '2019-02-28 15:13:03'),
+(5, 'QUIZ', 'Luyện tập quiz theo bài học', 'luyen-tap-quiz-theo-bai-hoc', NULL, NULL, 10, 5, 2, 1, 1, 1, 1, 13, '2019-03-05 07:45:40', '2019-03-05 07:45:40');
 
 -- --------------------------------------------------------
 
@@ -825,7 +827,7 @@ ALTER TABLE `m_chuyen_de`
 -- AUTO_INCREMENT cho bảng `m_exam`
 --
 ALTER TABLE `m_exam`
-  MODIFY `id` smallint(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` smallint(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `m_giao_vien`

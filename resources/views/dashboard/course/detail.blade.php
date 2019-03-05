@@ -18,11 +18,10 @@
                         </div>
                         <div class="card-body">
                            {!! $lesson_data[0]->description !!}
-                            <a href="{{ route('get.dashboard.quiz.take',['type'=>fencrypt('CHUYENDE'),'course'=>fencrypt($lesson_data[0]->course),'thematic'=>fencrypt($lesson_data[0]->thematic), 'id'=>fencrypt($lesson_data[0]->id)])}}" class="btn btn-sm btn-danger">Luyệt tập Quiz</a>
+                           <a href="{{ route('get.dashboard.quiz.take',['type'=>fencrypt('QUIZ'),'course'=>fencrypt($lesson_data[0]->course),'thematic'=>fencrypt($lesson_data[0]->thematic), 'id'=>fencrypt($lesson_data[0]->id)])}}" class="btn btn-sm btn-danger">Luyệt tập Quiz</a>
                            <a href="#" class="btn btn-sm btn-success">Hoàn thành bài học</a>
                         </div>
                     </div>
-                    <!-- Lessons -->
                     <ul class="card list-group list-group-fit">
                         @foreach($lesson_data as $key=>$item)
                             @if($key == 0)
