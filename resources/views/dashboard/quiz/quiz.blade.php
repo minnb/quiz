@@ -9,16 +9,17 @@
     <link href="{{ asset('public/dashboard/quiz/css/smart_wizard_theme_circles.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/dashboard/quiz/css/smart_wizard_theme_arrows.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/dashboard/quiz/css/smart_wizard_theme_dots.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('public/dashboard/quiz/css/quiz.css') }}" rel="stylesheet" type="text/css" />
 </head>
-<body>
+<body class="body-quiz">
     <br>
     <div class="container">
       <div class="row justify-content-md-center">
-        <div class="col-lg-9">
+        <div class="col-lg-9 questionsBox">
          <form action="{{ route('post.dashboard.quiz.take.detail',['quiz_id'=>fencrypt($quiz_id)])}}" method="POST">
            <input type="hidden" name="_token" value="{!! csrf_token() !!}">
-            <div id="smartwizard">
-                  <h4 class="border-bottom border-gray pb-2"><small>Chuyên đề: {{App\Models\Thematic::find($thematic_id)->name}} - {{$quiz_type}}</small></h4>
+            <div id="smartwizard" class="smartwizard">
+                  <h4 class="border-bottom border-gray pb-2"><small>{{ $quiz_type ='QUIZ' ? 'Làm bài test quiz' : 'Luyện tập' }}</small></h4>
                   <ul>
                     @foreach($question_data as $key=>$item)
                       <li><a href="#step-{{$key+1}}">Câu {{$key+1}}<br /></a></li>
@@ -29,17 +30,15 @@
                       <input type="hidden" name="questions[{{ $item['question_id'] }}]" value="{{ $item['question_id'] }}">
                       <div id="step-{{$key+1}}" class="">
                           <div class="card">
-                              <div class="card-header">
+                              <div class="card-header questions">
                                 <strong>Câu hỏi {{$key+1}}:</strong>
                                 <span>{{$item['name']}}</span>
                               </div>
-                              <div class="card-block p-0 form-check">
+                              <div class="card-block p-0 form-check funkyradio">
                                 @foreach($item['answer'] as $i=>$value)
-                                  <div class="checkbox line-answer">
-                                    <input class="" type="radio" name="answer[{{$value['question_id']}}]" value="{{$value['stt']}}">
-                                    <label class="form-check-label" for="exampleRadios1">
-                                      {{$value['name']}}
-                                    </label>  
+                                  <div class="checkbox funkyradio-success">
+                                    <input type="radio" name="answer[{{$value['question_id']}}]" value="{{$value['stt']}}" id="radio{{$i}}">
+                                    <label for="radio{{$i}}" class="lable-answer">{{$value['name']}}</label>
                                   </div>
                                 @endforeach
                               </div>
@@ -50,8 +49,13 @@
             </div>
           </form>
         </div>
+      </div>
+      <br>
+      <div class="row justify-content-md-center">
         <div class="col-lg-9">
+          <div class="smartwizard">
             <a class="btn btn-primary" href="{{route('dashboard')}}">Quay về trang bài giảng</a>
+          </div>
         </div>
       </div>
     </div>
