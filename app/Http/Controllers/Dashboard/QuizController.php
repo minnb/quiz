@@ -82,7 +82,7 @@ class QuizController extends Controller
             DB::beginTransaction();
 
             foreach ($request->input('questions', []) as $key => $question){
-                if($request->input('questions', [$key]) != null){
+                if($request->input('questions', [$key]) != null and $request->answer[$key] == true){
                     $result[$key] = $request->answer[$key];
                     DetailQuiz::where('quiz_id', $quiz_id)
                         ->where('question_id', $question)
