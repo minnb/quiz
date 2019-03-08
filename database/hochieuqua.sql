@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th3 05, 2019 lúc 04:21 PM
+-- Thời gian đã tạo: Th3 08, 2019 lúc 03:44 PM
 -- Phiên bản máy phục vụ: 10.1.36-MariaDB
 -- Phiên bản PHP: 7.2.11
 
@@ -407,7 +407,8 @@ CREATE TABLE `m_ket_qua_quiz` (
 INSERT INTO `m_ket_qua_quiz` (`id`, `type`, `user_id`, `result`, `description`, `comment`, `course`, `thematic`, `lesson`, `status`, `kq`, `total`, `success`, `created_at`, `updated_at`) VALUES
 (97, 'QUIZ', 17, 0, '', 'QUIZ', 'HHQ50', 9, 3, 1, 2, 2, 1, '2019-03-05 14:54:42', '2019-03-05 14:54:51'),
 (99, 'QUIZ', 17, 0, '', 'QUIZ', 'HHQ50', 9, 3, 1, 1, 2, 0, '2019-03-05 15:01:35', '2019-03-05 15:01:51'),
-(100, 'QUIZ', 17, 0, '', 'QUIZ', 'HHQ50', 9, 2, 1, 2, 5, 0, '2019-03-05 15:06:14', '2019-03-05 15:06:26');
+(100, 'QUIZ', 17, 0, '', 'QUIZ', 'HHQ50', 9, 2, 1, 2, 5, 0, '2019-03-05 15:06:14', '2019-03-05 15:06:26'),
+(105, 'CHUYENDE', 17, 0, '', 'CHUYENDE', 'HHQ50', 9, 0, 1, 1, 1, 1, '2019-03-08 14:22:14', '2019-03-08 14:22:20');
 
 -- --------------------------------------------------------
 
@@ -440,7 +441,8 @@ INSERT INTO `m_ket_qua_quiz_question` (`id`, `quiz_id`, `question_id`, `answer`,
 (404, 100, 35, 4, '', 3, 0, '2019-03-05 15:06:26', '2019-03-05 15:06:26'),
 (405, 100, 48, 3, '', 1, 0, '2019-03-05 15:06:26', '2019-03-05 15:06:26'),
 (406, 100, 49, 1, '', 1, 0, '2019-03-05 15:06:26', '2019-03-05 15:06:26'),
-(407, 100, 54, 2, '', 2, 0, '2019-03-05 15:06:26', '2019-03-05 15:06:26');
+(407, 100, 54, 2, '', 2, 0, '2019-03-05 15:06:26', '2019-03-05 15:06:26'),
+(410, 105, 51, 2, '', 2, 0, '2019-03-08 14:22:20', '2019-03-08 14:22:20');
 
 -- --------------------------------------------------------
 
@@ -873,13 +875,13 @@ ALTER TABLE `m_giao_vien`
 -- AUTO_INCREMENT cho bảng `m_ket_qua_quiz`
 --
 ALTER TABLE `m_ket_qua_quiz`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
 
 --
 -- AUTO_INCREMENT cho bảng `m_ket_qua_quiz_question`
 --
 ALTER TABLE `m_ket_qua_quiz_question`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=410;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=411;
 
 --
 -- AUTO_INCREMENT cho bảng `m_khoahoc_monhoc`
@@ -915,13 +917,13 @@ ALTER TABLE `role_user`
 -- AUTO_INCREMENT cho bảng `temp_answer`
 --
 ALTER TABLE `temp_answer`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=133;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `temp_questions`
 --
 ALTER TABLE `temp_questions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=133;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
