@@ -44,10 +44,7 @@
                                 </div>
                                 <ul class="list-group list-group-fit">
                                     <li class="list-group-item">
-                                        <a href=""><i class="material-icons float-right text-muted-light">trending_flat</i> Tháng 1</a>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <a href=""> <i class="material-icons float-right text-muted-light">trending_flat</i> Tháng 2</a>
+                                        <a href="#"><i class="material-icons float-right text-muted-light">trending_flat</i> Tháng 1</a>
                                     </li>
                                 </ul>
                             </div>

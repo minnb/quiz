@@ -94,4 +94,6 @@ class Exam extends Model
 		}
 		return 0;
     }
+
+    
 }

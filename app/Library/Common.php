@@ -69,13 +69,13 @@ function calcPoint($total, $kq){
 function xeploai($point){
   $xep = '';
   if($point < 5){
-    $xep = 'Điểm kém';
+    $xep = '<span style="color:red"> Điểm kém </span>';
   }elseif ($point >= 5 && $point < 7) {
-    $xep = 'Trung bình';
+    $xep = '<span style="color:#1c9ef5"> Trung bình </span>';
   }elseif ($point >= 7 && $point < 9) {
-    $xep = 'Điểm khá';
+    $xep = '<span style="color:green"> Điểm khá </span>';
   }else{
-    $xep = 'Xuất sắc';
+    $xep = '<span style="color:blue"> Điểm giỏi </span>';
   }
-  return $xep;
+  echo $xep;
 }

@@ -20,7 +20,7 @@
                                     <p class="card-subtitle">Bài giảng gần đây</p>
                                 </div>
                                 <div class="media-right">
-                                    <a class="btn btn-sm btn-primary" href="{{ route('get.dashboard.course.list') }}">Khoá học của tôi</a>
+                                    <a class="btn btn-sm btn-primary" href="{{ route('get.dashboard.course.mycourse') }}">Khoá học của tôi</a>
                                 </div>
                             </div>
                         </div>
@@ -60,7 +60,7 @@
                         <div class="card-header">
                             <div class="media align-items-center">
                                 <div class="media-body">
-                                    <h4 class="card-title">Luyện tập Quiz</h4>
+                                    <h4 class="card-title">Làm bài tập</h4>
                                     <p class="card-subtitle">Thống kê gần đây</p>
                                 </div>
                                 <div class="media-right">
@@ -68,56 +68,49 @@
                                 </div>
                             </div>
                         </div>
-
+                        <?php $lstQuiz = App\Models\HeaderQuiz::getListQuiz(5); ?>
                         <ul class="list-group list-group-fit mb-0">
-
-                            <li class="list-group-item">
-                                <div class="media align-items-center">
-                                    <div class="media-body">
-                                        <a class="text-body" href="student-quiz-results.html"><strong>Title of quiz goes here?</strong></a><br>
-                                        <div class="d-flex align-items-center">
-                                            <small class="text-black-50 text-uppercase mr-2">Course</small>
-                                            <a href="student-take-course.html">Basics of HTML</a>
+                            @if($lstQuiz->count()>0)
+                                @foreach($lstQuiz as $key=>$item)
+                                    <li class="list-group-item">
+                                        <div class="media align-items-center">
+                                            <div class="media-body">
+                                                <a class="text-body" href="{{ route('get.dashboard.quiz.take.result', ['quiz_id'=>fencrypt($item->id)])}}"><strong>
+                                                    @if($item->lesson != '')
+                                                        Quiz: {{ App\Models\Lesson::find($item->lesson)->name }}
+                                                    @else
+                                                        Luyện thi: {{ App\Models\Thematic::find($item->thematic)->name }}
+                                                    @endif
+                                                </strong></a><br>
+                                                <div class="d-flex align-items-center">
+                                                    <small class="text-black-50 text-uppercase mr-2">Khóa học</small>
+                                                    <a href="{{ route('get.dashboard.course.mycourse')}}">{{ App\Models\Course::getFullNameCourse($item->course) }}</a>
+                                                </div>
+                                            </div>
+                                            <div class="media-right text-center d-flex align-items-center">
+                                                <span class="text-black-50 mr-3">{{ xeploai(calcPoint($item->total, $item->kq)) }}</span>
+                                                <h4 class="mb-0">{{ calcPoint($item->total, $item->kq) }}</h4>
+                                            </div>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            @else
+                                <li class="list-group-item">
+                                    <div class="media align-items-center">
+                                        <div class="media-body">
+                                            <a class="text-body" href="student-quiz-results.html"><strong>Chưa có bài thi nào</strong></a><br>
+                                            <div class="d-flex align-items-center">
+                                                <small class="text-black-50 text-uppercase mr-2"></small>
+                                                <a href="student-take-course.html"></a>
+                                            </div>
+                                        </div>
+                                        <div class="media-right text-center d-flex align-items-center">
+                                            <span class="text-black-50 mr-3"></span>
+                                            <h4 class="mb-0"></h4>
                                         </div>
                                     </div>
-                                    <div class="media-right text-center d-flex align-items-center">
-                                        <span class="text-black-50 mr-3">Good</span>
-                                        <h4 class="mb-0">5.8</h4>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li class="list-group-item">
-                                <div class="media align-items-center">
-                                    <div class="media-body">
-                                        <a class="text-body" href="student-quiz-results.html"><strong>Directives &amp; Routing</strong></a><br>
-                                        <div class="d-flex align-items-center">
-                                            <small class="text-black-50 text-uppercase mr-2">Course</small>
-                                            <a href="student-take-course.html">Angular in Steps</a>
-                                        </div>
-                                    </div>
-                                    <div class="media-right text-center d-flex align-items-center">
-                                        <span class="text-black-50 mr-3">Great</span>
-                                        <h4 class="mb-0 text-success">9.8</h4>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li class="list-group-item">
-                                <div class="media align-items-center">
-                                    <div class="media-body">
-                                        <a class="text-body" href="student-quiz-results.html"><strong>Responsive &amp; Retina</strong></a><br>
-                                        <div class="d-flex align-items-center">
-                                            <small class="text-black-50 text-uppercase mr-2">Course</small>
-                                            <a href="student-take-course.html">Bootstrap Foundations</a>
-                                        </div>
-                                    </div>
-                                    <div class="media-right text-center d-flex align-items-center">
-                                        <span class="text-black-50 mr-3">Failed</span>
-                                        <h4 class="mb-0 text-danger">2.8</h4>
-                                    </div>
-                                </div>
-                            </li>
+                                </li>
+                            @endif
 
                         </ul>
                     </div>

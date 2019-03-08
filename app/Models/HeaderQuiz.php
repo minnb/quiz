@@ -27,4 +27,18 @@ class HeaderQuiz extends Model
     	HeaderQuiz::where('id',$quiz_id)->update(['kq'=>$kq, 'success'=>$success]);
     	return 0;
     }
+
+    public static function getListQuiz($limit = ''){
+        $data = '';
+        if($limit == ''){
+             $data = HeaderQuiz::where([
+                    ['user_id', User::getInfoUser()['id']]
+                ])->orderBy('id','DESC')->get();
+        }else{
+             $data = HeaderQuiz::where([
+                    ['user_id', User::getInfoUser()['id']]
+                ])->limit($limit)->orderBy('id','DESC')->get();
+        }
+        return $data;
+    }
 }
