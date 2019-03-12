@@ -95,7 +95,7 @@
           @foreach($data_course as $key=>$item)
           <div class="col-sm-6 col-md-3 col-xs-12 block">
             <div class="thumbnail thumbnailContent wow fadeInUp">
-              <a href="#"><img src="{{ asset($item->image) }}" alt="image" class="img-responsive"></a>
+              <a href="#"><img src="{{ asset(getImage($item->image)) }}" alt="{{$item->full_name}}" class="img-responsive"></a>
               <div class="caption border-color-1">
                 <h3><a href="#" class="color-1">{{$item->full_name}}</a></h3>
                 <ul class="list-unstyled">
@@ -108,7 +108,7 @@
                 </ul>
                 <p>{!! $item->description !!}</p>
                 <ul class="list-inline btn-yellow">
-                  <li><a href="{{ route('home.register.course.try', ['course'=>fencrypt($item->course)]) }}" class="btn btn-primary "><i class="fa fa-shopping-basket " aria-hidden="true"></i>Đăng ký học thử</a></li>
+                  <li><a href="{{ route('home.register.course.try', ['course'=>fencrypt($item->code)]) }}" class="btn btn-primary "><i class="fa fa-shopping-basket " aria-hidden="true"></i>Đăng ký học thử</a></li>
                   <li><a href="#" class="btn btn-link"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Chi tiết</a></li>
                 </ul>
               </div>

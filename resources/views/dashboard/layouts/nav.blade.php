@@ -9,14 +9,8 @@
                 <!-- Brand -->
                 <a href="{{ route('dashboard')}}" class="navbar-brand">
                     <img src="{{ asset('public/dashboard/images/logo/white.svg') }}" class="mr-2" alt="Học Hiệu Quả" />
-                    <span class="d-none d-xs-md-block">LearnE</span>
+                    <span class="d-none d-xs-md-block">HỌC HIỆU QUẢ</span>
                 </a>
-                <!-- Search -->
-                <form class="search-form d-none d-md-flex">
-                    <input type="text" class="form-control" placeholder="Tìm kiếm">
-                    <button class="btn" type="button"><i class="material-icons font-size-24pt">search</i></button>
-                </form>
-                 <!-- end -->
                 <div class="flex"></div>
                 <!-- Menu -->
                 <ul class="nav navbar-nav flex-nowrap d-none d-lg-flex">

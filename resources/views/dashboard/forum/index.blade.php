@@ -12,7 +12,6 @@
                 <div class="col-md-8">
                     <div class="d-flex align-items-center mb-4">
                         <h1 class="h2 flex mr-3 mb-0">Diễn đàn</h1>
-                        <a href="#" class="btn btn-success">Create New Post</a>
                     </div>
                     <!-- Search -->
                     <div class="flex search-form form-control-rounded search-form--light mb-2" style="min-width: 200px;">
@@ -20,7 +19,7 @@
                         <button class="btn pr-3" type="button" role="button"><i class="material-icons">search</i></button>
                     </div>
                     <div class="mb-4 d-flex align-items-center">
-                        <small class="text-black-70 text-uppercase mr-3">Hiển thị 10 của 5,234 chủ đề</small>
+                        <small class="text-black-70 text-uppercase mr-3"></small>
                     </div>
                     @foreach($courses as $course)
                     <div class="card">

@@ -146,9 +146,14 @@ class QuizController extends Controller
     public function getPractice(){
         try{
             $user_id = User::getInfoUser()['id'];
-            $course_code = User_Course::getCourseByUserId($user_id)[0]->course;
-            $lessonOfUser = User_Course::getLessonByUser(User::getInfoUser()['id']);
-            return view('dashboard.quiz.practice', compact('course_code', 'user_id', 'lessonOfUser'));
+            $course = User_Course::getCourseByUserId($user_id);
+            $lessonOfUser = User_Course::getLessonByUser($user_id);
+            if($course->count()>0){
+                $course_code = $course[0]->course;
+                return view('dashboard.quiz.practice', compact('course_code', 'user_id', 'lessonOfUser'));
+            }else{
+                return back();
+            }
         }catch(Exception $e){
             return back();
         }
