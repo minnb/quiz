@@ -7,7 +7,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html"><img src="{{ asset('public/home/img/logo-school.png') }}" alt="Kidz School"></a>
+        <a class="navbar-brand" href="{{ url('/')}}"><img src="{{ asset('public/home/img/logo-school.png') }}" alt="Học hiệu quả"></a>
       </div>
       <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav navbar-right">
