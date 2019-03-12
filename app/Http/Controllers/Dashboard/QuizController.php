@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Collection;
+use Illuminate\Support\Collection;use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\User_Course;
@@ -13,7 +13,7 @@ use App\Models\HeaderQuiz;
 use App\Models\DetailQuiz;
 use App\Models\Quesstion;
 use DB; use Session;
-use Auth;
+use Auth;use Mail;use App\Jobs\SendMailQuiz;
 class QuizController extends Controller
 {
     
@@ -106,7 +106,36 @@ class QuizController extends Controller
         try{
             $data_result = HeaderQuiz::find($quiz_id);
             $point = calcPoint($data_result->total, $data_result->kq);
-            $answer_result = DetailQuiz::where('quiz_id', $quiz_id)->get();
+            $answer_result = DetailQuiz::where('quiz_id', $quiz_id)->orderBy('id')->get();
+            $infoUser = User::find($data_result->user_id);
+            $data_email =[
+                'name'=> $infoUser->name,
+                'email'=> $infoUser->email,
+                'point' => $point,
+                'result_header' => $data_result,
+                'result_answer' => $answer_result 
+            ];
+
+           //$time = $request->time * 60 * 60;
+           //dispatch(new SendMailQuiz($data_email))->delay(Carbon::now()->addMinutes(2));
+           //SendMailQuiz::dispatch($data_email)->delay(now()->addMinutes(2));
+            Mail::send('dashboard.email.result_quiz',['data'=>$data_email], function($message) use ($data_email){
+                $message->to($data_email['email'], $data_email['name'])->subject('Kết quả bài thi - HỌC HIỆU QUẢ');
+            });
+            
+            return view('dashboard.quiz.quiz_result', compact('data_result','answer_result','quiz_id','point'));
+        }catch(Exception $e){
+            return back();
+        }
+        
+    }
+
+    public function getTakeQuizResultDetail($idd){
+        $quiz_id = fdecrypt($idd); 
+        try{
+            $data_result = HeaderQuiz::find($quiz_id);
+            $point = calcPoint($data_result->total, $data_result->kq);
+            $answer_result = DetailQuiz::where('quiz_id', $quiz_id)->orderBy('id')->get(); 
             return view('dashboard.quiz.quiz_result', compact('data_result','answer_result','quiz_id','point'));
         }catch(Exception $e){
             return back();

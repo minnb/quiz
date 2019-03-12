@@ -21,14 +21,13 @@
                                 <div class="card-body">
                                     <div class="d-flex flex-column flex-sm-row">
                                         <a href="{{ route('get.dashboard.course.detail',['id'=>fencrypt($item->code)])}}" class="avatar avatar-lg avatar-4by3 mb-3 w-xs-plus-down-100 mr-sm-3">
-                                            <img src="{{ asset('public/dashboard/images/vuejs.png') }}" alt="Card image cap" class="avatar-img rounded">
+                                            <img src="{{ asset($item->image) }}" alt="Card image cap" class="avatar-img rounded">
                                         </a>
                                         <div class="flex" style="min-width: 200px;">
                                             <!-- <h5 class="card-title text-base m-0"><a href="instructor-course-edit.html"><strong>Learn Vue.js</strong></a></h5> -->
                                             <h4 class="card-title mb-1"><a href="{{ route('get.dashboard.course.detail',['id'=>fencrypt($item->code)])}}">
                                                 {{ App\Models\Course::getFullNameCourse($item->code) }}
                                             </a></h4>
-                                            <p class="text-black-70">{!! $item->description !!}</p>
                                             <div class="d-flex align-items-end">
                                                 <div class="d-flex flex flex-column mr-3">
                                                     <div class="d-flex align-items-center py-1 border-bottom">
@@ -40,7 +39,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="text-center">
-                                                    <a href="#" class="btn btn-sm btn-white">Đăng ký ngay</a>
+                                                    <a href="{{ route('home.register.course.try', ['course'=>fencrypt($item->code)]) }}" class="btn btn-sm btn-white">Đăng ký học thử</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -54,7 +53,7 @@
                                     <div class="dropdown-menu dropdown-menu-right">
                                         <a class="dropdown-item" href="#">Chọn mua khóa học</a>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item text-danger" href="{{ route('get.dashboard.course.detail',['id'=>fencrypt($item->code)])}}">Học thử</a>
+                                        <a class="dropdown-item text-danger" href="{{ route('home.register.course.try', ['course'=>fencrypt($item->code)]) }}">Đăng ký học thử</a>
                                     </div>
                                 </div>
                             </div>

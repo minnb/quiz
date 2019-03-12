@@ -14,9 +14,18 @@ Route::group(['prefix'=> 'dashboard'], function(){
 		
 		Route::post('take-quiz/{quiz_id}', ['as'=>'post.dashboard.quiz.take.detail','uses'=>'Dashboard\QuizController@postTakeQuizDetail']);
 		Route::get('take-quiz/result/{quiz_id}', ['as'=>'get.dashboard.quiz.take.result','uses'=>'Dashboard\QuizController@getTakeQuizResult']);
+		Route::get('result/detail/{quiz_id}', ['as'=>'get.dashboard.quiz.take.result.detail','uses'=>'Dashboard\QuizController@getTakeQuizResultDetail']);
 
 		Route::get('practice', ['as'=>'get.dashboard.quiz.practice','uses'=>'Dashboard\QuizController@getPractice']);
 
 	});
 
+	Route::group(['prefix'=> 'result'], function(){
+		Route::get('point/{user_id}', ['as'=>'get.dashboard.result.table.point','uses'=>'Dashboard\ResultController@getTablePoint']);
+	});
+
+	Route::group(['prefix'=> 'forum'], function(){
+		Route::get('index', ['as'=>'get.forum.index','uses'=>'Dashboard\ForumController@getIndex']);
+		Route::post('send/comment/{course}/{lesson}', ['as'=>'post.forum.comment.by.lesson','uses'=>'Dashboard\ForumController@postCommnetByLesson']);
+	});
 });

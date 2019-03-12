@@ -100,7 +100,7 @@
                             </a>
                         </li>
                         <li class="sidebar-menu-item">
-                            <a class="sidebar-menu-button" href="#">
+                            <a class="sidebar-menu-button" href="{{ route('get.dashboard.result.table.point', ['user_id'=>fencrypt(App\Models\User::getInfoUser()['id'])])}}">
                                 <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">poll</i> Sổ điểm
                             </a>
                         </li>
@@ -112,28 +112,13 @@
                             </a>
                             <ul class="sidebar-submenu sm-indent collapse" id="forum_menu">
                                 <li class="sidebar-menu-item">
-                                    <a class="sidebar-menu-button" href="#">
-                                        <span class="sidebar-menu-text">Forum</span>
+                                    <a class="sidebar-menu-button" href="{{route('get.forum.index')}}">
+                                        <span class="sidebar-menu-text">Diễn đàn</span>
                                     </a>
                                 </li>
                                 <li class="sidebar-menu-item">
                                     <a class="sidebar-menu-button" href="#">
-                                        <span class="sidebar-menu-text">Discussion</span>
-                                    </a>
-                                </li>
-                                <li class="sidebar-menu-item">
-                                    <a class="sidebar-menu-button" href="#">
-                                        <span class="sidebar-menu-text">Student Profile - Courses</span>
-                                    </a>
-                                </li>
-                                <li class="sidebar-menu-item">
-                                    <a class="sidebar-menu-button" href="#">
-                                        <span class="sidebar-menu-text">Student Profile - Posts</span>
-                                    </a>
-                                </li>
-                                <li class="sidebar-menu-item">
-                                    <a class="sidebar-menu-button" href="#">
-                                        <span class="sidebar-menu-text">Instructor Profile</span>
+                                        <span class="sidebar-menu-text">Trợ giúp</span>
                                     </a>
                                 </li>
                             </ul>

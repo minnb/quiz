@@ -9,7 +9,7 @@
                 <li class="breadcrumb-item"><a href="{{ route('get.dashboard.course.mycourse') }}">Khóa học</a></li>
                 <li class="breadcrumb-item active">{{ App\Models\Course::getFullNameCourse($course_id) }}</li>
             </ol>
-            <h1 class="h2">{{ $lesson_detail['name'] }}</h1>
+            <h1 class="h2">111{{ $lesson_detail['name'] }}</h1>
             <div class="row">
                 <div class="col-md-8">
                     <div class="card">
@@ -42,7 +42,7 @@
                                         @endif
                                     </div>
                                     <div class="media-right">
-                                        <small class="text-muted-light">2:03</small>
+                                        <small class="text-muted-light"></small>
                                     </div>
                                 </div>
                             </li>

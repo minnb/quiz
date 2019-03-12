@@ -43,7 +43,7 @@
                                             @endif
                                         </div>
                                         <div class="media-right">
-                                            <small class="text-muted-light">2:03</small>
+                                            <small class="text-muted-light"></small>
                                         </div>
                                     </div>
                                 </li>
@@ -64,18 +64,30 @@
                             @endif
                         @endforeach
                     </ul>
+                    <div class="card card-body">
+                        <div class="row">
+                            <form action="{{ route('post.forum.comment.by.lesson',['course'=>fencrypt($course_id), 'lesson'=>fencrypt($lesson_id)])}}" method="POST" style="width: 100%">
+                                <div class="form-group">
+                                    <label class="form-label">Bình luận</label>
+                                    <textarea class="form-control" name="comment"></textarea>
+                                    <br>
+                                    <button type="submit" class="btn btn-danger" style="float:right"><i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">send</i>Gửi đi</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-body text-center">
                             <p>
                                 <a href="#" class="btn btn-success btn-block flex-column">
-                                    Đăng ký khóa học 
+                                    Đăng ký mua khóa học 
                                 </a>
                             </p>
-                            <a href="student-cart.html" class="btn btn-white btn-block flex-column">
+                            <a href="#" class="btn btn-white btn-block flex-column">
                                             Học phí
-                                <strong>{{ number_format($item->unit_price) }} <ins>đ</ins></strong>
+                                <strong>{{ number_format(App\Models\Course::getPriceCourse($course_id)) }} <ins>đ</ins></strong>
                             </a>
                         </div>
                     </div>
@@ -140,4 +152,7 @@
             </div>
         </div>
     </div>
+@endsection
+@section('javascript')
+    
 @endsection

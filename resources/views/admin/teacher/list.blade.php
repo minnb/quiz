@@ -15,7 +15,7 @@
 								<th>Email</th>
 								<th>Hình đại diện</th>
 								<th>
-									<a href="{{ route('get.admin.teacher.add') }}" style="color:red"> <i class="fa fa-fw fa-plus"></i> Thêm mới Giáo viên</a>
+									<a href="{{ route('get.admin.teacher.add') }}" style="color:red"> <i class="fa fa-fw fa-plus"></i> Thêm mới</a>
 								</th>
 							</tr>
 						</thead>										

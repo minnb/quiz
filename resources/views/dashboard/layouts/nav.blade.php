@@ -21,7 +21,7 @@
                 <!-- Menu -->
                 <ul class="nav navbar-nav flex-nowrap d-none d-lg-flex">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Diễn đàn</a>
+                        <a class="nav-link" href="{{route('get.forum.index')}}">Diễn đàn</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Trợ giúp</a>

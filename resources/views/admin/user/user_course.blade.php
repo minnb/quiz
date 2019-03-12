@@ -17,23 +17,23 @@
 								<th>Từ ngày</th>
 								<th>Trạng thái</th>
 								<th>
-									<a href="#" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fa fa-fw fa-plus"></i> Thêm mới học viên</a>
+									<a href="#" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fa fa-fw fa-plus"></i> Thêm mới</a>
 								</th>
 							</tr>
 						</thead>										
 						<tbody>
 							<?php foreach($data as $key=>$item) { ?>
 							<tr>
-								<td><?php echo $key + 1; ?></td>
+								<td><?php echo $key + 1; $userInfo = App\Models\User::find($item->id); ?></td>
 								<td>
-									<?php echo App\Models\User::find($item->user_id)->name; ?>
+									{{ $userInfo->name }}
 								</td>
-								<td>{{ App\Models\User::find($item->user_id)->email }}</td>
+								<td>{{ $userInfo->email }}</td>
 								<td>{{ App\Models\Course::getFullNameCourse($item->course) }}</td>
-								<td>{{ $item->begin_date }}</td>
+								<td>{{ substr($item->begin_date,0,10) }}</td>
 								<td>
-									@if($item->status == 0)
-										<span>Disable</span>
+									@if($item->blocked == 0)
+										<span>Trial</span>
 									@else
 										<span>Active</span>
 									@endif

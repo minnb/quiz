@@ -20,3 +20,7 @@ Route::get('/dashboard/logout', ['as'=>'dashboard.logout', 'uses'=>'Dashboard\Da
 Route::get('/dang-nhap', ['as'=>'home.login', 'uses'=>'Home\LoginController@getLogin']);
 Route::post('/dang-nhap', ['as'=>'home.login.post', 'uses'=>'Home\LoginController@postLogin']);
 
+Route::get('/auth/{provider}',['as'=>'redirect.auth.social','uses'=>'Home\LoginController@redirectToProvider']);
+Route::get('/auth/{provide}/callback',['as'=>'callback.auth.social','uses'=> 'Home\LoginController@handleProviderCallback']);
+
+Route::get('/dang-ky-hoc-thu/{course}', ['as'=>'home.register.course.try', 'uses'=>'Home\RegisterController@registerCourse']);

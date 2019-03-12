@@ -20,5 +20,15 @@ class Role_User extends Model
 		return $role[0]->role_id;
 	}
 
+	public static function insertRoleUser($user_id){
+		$check = Role_User::where('user_id',$user_id)->get();
+		if($check->count() == 0){
+			Role_User::create([
+                'user_id' => $user_id,
+                'role_id' => 3
+            ]);
+		}
+		return 0;
+	}
 
 }

@@ -27,7 +27,7 @@ class CourseController extends Controller
      */
     public function getList()
     {
-         $data = Course::orderBy('id','desc')->get();
+        $data = Course::orderBy('id','desc')->get();
         return view('admin.course.list', compact('data'));
     }
 
@@ -50,7 +50,7 @@ class CourseController extends Controller
             $course->user_id = Auth::user()->id;
             $course->onpost = 0;
             $course->status = $request->status;
-
+            $course->full_name = Course::getFullNameCourse($request->course);
             if($request->file('fileImage')){
                 foreach(Input::file('fileImage') as $file ){
                     $destinationPath = checkFolderImage();
@@ -86,11 +86,13 @@ class CourseController extends Controller
         try{
             DB::beginTransaction();
             $course = Course::find($course_id);
+            $code = $course->code;
             $img_old = $course->image;
             $course->description = $request->description;
             $course->user_id = Auth::user()->id;
             $course->status = $request->status;
-
+            $course->unit_price = $request->unit_price;
+            $course->full_name = Course::getFullNameCourse($code);
             if($request->file('fileImage')){
                 foreach(Input::file('fileImage') as $file ){
                     $destinationPath = checkFolderImage();

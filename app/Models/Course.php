@@ -60,4 +60,8 @@ class Course extends Model
         return $class.' - '.$data[0]->name;
     }
 
+    public static function getPriceCourse($code){
+        $data =  Course::where('code', $code)->get();
+        return $data[0]->unit_price;
+    }
 }

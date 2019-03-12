@@ -12,6 +12,12 @@
     <link href="{{ asset('public/dashboard/quiz/css/quiz.css') }}" rel="stylesheet" type="text/css" />
 </head>
 <body class="body-quiz">
+  <div class="preloader">
+    <div class="sk-double-bounce">
+        <div class="sk-child sk-double-bounce1"></div>
+        <div class="sk-child sk-double-bounce2"></div>
+    </div>
+  </div>
     <br>
     <div class="container">
       <div class="row justify-content-md-center">

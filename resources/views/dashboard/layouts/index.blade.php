@@ -9,7 +9,60 @@
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">HỌC HIỆU QUẢ</a></li>
                 <li class="breadcrumb-item active">Dashboard</li>
             </ol>
-            <h1 class="h2">Dashboard</h1>
+            <div class="media mb-headings align-items-center">
+                <div class="media-body">
+                    <h1 class="h2">Danh sách Khoá học</h1>
+                </div>
+            </div>
+            <div class="row">
+                @if(isset($course_data))
+                    @foreach($course_data as $key=>$item)
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex flex-column flex-sm-row">
+                                        <a href="{{ route('get.dashboard.course.detail',['id'=>fencrypt($item->code)])}}" class="avatar avatar-lg avatar-4by3 mb-3 w-xs-plus-down-100 mr-sm-3">
+                                            <img src="{{ asset('public/dashboard/images/vuejs.png') }}" alt="Card image cap" class="avatar-img rounded">
+                                        </a>
+                                        <div class="flex" style="min-width: 200px;">
+                                            <!-- <h5 class="card-title text-base m-0"><a href="instructor-course-edit.html"><strong>Learn Vue.js</strong></a></h5> -->
+                                            <h4 class="card-title mb-1"><a href="{{ route('get.dashboard.course.detail',['id'=>fencrypt($item->code)])}}">
+                                                {{ App\Models\Course::getFullNameCourse($item->code) }}
+                                            </a></h4>
+                                            <p class="text-black-70"></p>
+                                            <div class="d-flex align-items-end">
+                                                <div class="d-flex flex flex-column mr-3">
+                                                    <div class="d-flex align-items-center py-1 border-bottom">
+                                                        <small class="text-black-70 mr-2">Bài giảng: {{ App\Models\Lesson::countLessonByCourse($item->code) }}</small>
+                                                        <small class="text-black-50"> Học viên: 34 </small>
+                                                    </div>
+                                                    <div class="d-flex align-items-center py-1">
+                                                        <p class="text-muted">Học phí: {{ number_format($item->unit_price) }} <ins>đ</ins></p>
+                                                    </div>
+                                                </div>
+                                                <div class="text-center">
+                                                    <a href="{{ route('home.register.course.try', ['course'=>fencrypt($item->code)]) }}" class="btn btn-sm btn-white">Đăng ký học thử</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="card__options dropdown right-0 pr-2">
+                                    <a href="#" class="dropdown-toggle text-muted" data-caret="false" data-toggle="dropdown">
+                                        <i class="material-icons">more_vert</i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#">Chọn mua khóa học</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item text-danger" href="{{ route('home.register.course.try', ['course'=>fencrypt($item->course)]) }}">Học thử</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
+            </div>
             <div class="row">
                 <div class="col-lg-7">
                     <div class="card">
@@ -64,7 +117,7 @@
                                     <p class="card-subtitle">Thống kê gần đây</p>
                                 </div>
                                 <div class="media-right">
-                                    <a class="btn btn-sm btn-primary" href="#">Sổ điểm của tôi</a>
+                                    <a class="btn btn-sm btn-primary" href="{{ route('get.dashboard.result.table.point', ['user_id'=>fencrypt(App\Models\User::getInfoUser()['id'])])}}">Sổ điểm của tôi</a>
                                 </div>
                             </div>
                         </div>
@@ -75,7 +128,7 @@
                                     <li class="list-group-item">
                                         <div class="media align-items-center">
                                             <div class="media-body">
-                                                <a class="text-body" href="{{ route('get.dashboard.quiz.take.result', ['quiz_id'=>fencrypt($item->id)])}}"><strong>
+                                                <a class="text-body" href="{{ route('get.dashboard.quiz.take.result.detail', ['quiz_id'=>fencrypt($item->id)])}}"><strong>
                                                     @if($item->lesson != '')
                                                         Quiz: {{ App\Models\Lesson::find($item->lesson)->name }}
                                                     @else

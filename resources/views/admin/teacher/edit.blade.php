@@ -45,7 +45,7 @@
 				@endif
 			</div>
 			<div class="col-lg-2 col-md-2 col-xs-12 col-sm-12">
-				<
+				
 			</div>
 			<div class="col-lg-9 col-md-9 col-xs-12 col-sm-12">
 				<div class="form-group">

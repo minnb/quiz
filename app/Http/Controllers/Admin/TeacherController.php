@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use DB; use Auth;
 use App\Models\Subject;
+use App\Models\User;
 use App\Models\Course;
 use App\Models\Teacher;
 use App\Models\Thematic;use App\Models\Lesson;
@@ -82,6 +83,14 @@ class TeacherController extends Controller
                 }
             }
             $data->save();
+            $checkUser = User::where('email',$request->email)->get();
+            if($checkUser->count()>0){
+                User::where('email',$request->email)->update([
+                    'avata'=> $data->avata, 
+                    'teacher'=>1,
+                    'phone' => $data->phone
+                ]);
+            }
             DB::commit();
             return redirect()->route('get.admin.teacher.list')->with(['flash_message'=>'Chỉnh sửa thành công']);
         }catch (Exception $e) {

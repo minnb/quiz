@@ -7,7 +7,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
                 <li class="breadcrumb-item"><a href="{{ route('get.dashboard.course.mycourse') }}">Khóa học</a></li>
-                <li class="breadcrumb-item active">{{ App\Models\Course::getFullNameCourse($course) }}</li>
+                <li class="breadcrumb-item active">{{ App\Models\Course::getFullNameCourse($course_id) }}</li>
             </ol>
             <h1 class="h2">{{ $lesson_data[0]->name }}</h1>
             <div class="row">
@@ -75,7 +75,7 @@
                             </p>
                             <a href="student-cart.html" class="btn btn-white btn-block flex-column">
                                             Học phí
-                                <strong>{{ number_format($item->unit_price) }} <ins>đ</ins></strong>
+                                <strong>{{ number_format(App\Models\Course::getPriceCourse($course_id)) }} <ins>đ</ins></strong>
                             </a>
                         </div>
                     </div>

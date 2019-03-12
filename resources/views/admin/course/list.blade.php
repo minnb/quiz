@@ -40,7 +40,7 @@
 								<td>
 									<a href="{{ route('get.admin.course.add.subject',['id'=>fencrypt($item->code)])}} "><i class="fa fa-fw fa-edit"></i> Thêm môn học </a>
 								</td>
-								<td></td>
+								<td>{{ number_format($item->unit_price) }} <ins>đ</ins></td>
 								<td>
 									@if($item->status == 0)
 										<span>Disable</span>

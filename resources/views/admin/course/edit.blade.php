@@ -33,6 +33,10 @@
 			</div>
 			<div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
 				<div class="form-group">
+					<label>Học phí</label>
+					<input class="form-control" type="number" name="unit_price" value="{{ old('unit_price', isset($data) ? $data['unit_price'] : 0 )}}" >
+				</div>
+				<div class="form-group">
 					<label>Hình ảnh</label>
 					<input class="form-control" type="file" name="fileImage[]" id="filer_example2" multiple="multiple">
 					@if($data['image'] != '')
@@ -41,12 +45,12 @@
 				</div>
 			</div>
 			<div class="col-lg-2 col-md-2 col-xs-12 col-sm-12">
-				<
+				
 			</div>
 			<div class="col-lg-9 col-md-9 col-xs-12 col-sm-12">
 				<div class="form-group">
 					<label>Diễn giải</label>
-					<textarea  class="form-control" id="description" name="description">{{ old('description') }}</textarea>
+					<textarea  class="form-control" id="description" name="description">{{ old('description', isset($data) ? $data['description'] : 0) }}</textarea>
 				</div>
 			</div>
 		</div>

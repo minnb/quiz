@@ -124,7 +124,11 @@ class AdminController extends Controller
     }
 
     public function getListUserCourse(){
-        $data = DB::table('user_course')->where('status', 1)->get();
+        $data = DB::table('users')
+            ->join('user_course', 'users.id', '=', 'user_course.user_id')
+            ->select('users.*','user_course.status as blocked', 'user_course.course', 'user_course.begin_date')
+            ->orderBy('user_course.begin_date', 'DESC')
+            ->get();
         return view('admin.user.user_course', compact('data')); 
     }
 
