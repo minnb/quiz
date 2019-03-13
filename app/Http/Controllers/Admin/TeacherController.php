@@ -34,7 +34,7 @@ class TeacherController extends Controller
             $data->phone = $request->phone;
             $data->description = $request->description;
             $data->status = $request->status;
-
+            $data->user_id = Auth::user()->id;
             if($request->file('fileImage')){
                 foreach(Input::file('fileImage') as $file ){
                     $destinationPath = checkFolderImage();
@@ -46,6 +46,14 @@ class TeacherController extends Controller
                 }
             }
             $data->save();
+            $checkUser = User::where('email',$request->email)->get();
+            if($checkUser->count()>0){
+                User::where('email',$request->email)->update([
+                    'avata'=> $data->avata, 
+                    'teacher'=>1,
+                    'phone' => $data->phone
+                ]);
+            }
             DB::commit();
             return redirect()->route('get.admin.teacher.list')->with(['flash_message'=>'Tạo mới thành công']);
         }catch (Exception $e) {
@@ -70,7 +78,7 @@ class TeacherController extends Controller
             $data->phone = $request->phone;
             $data->description = $request->description;
             $data->status = $request->status;
-
+            $data->user_id = Auth::user()->id;
             if($request->file('fileImage')){
                 foreach(Input::file('fileImage') as $file ){
                     $destinationPath = checkFolderImage();
