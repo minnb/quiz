@@ -176,9 +176,9 @@ class QuesstionController  extends Controller
         if($quesstion->count() > 0){
             $quesstion->status = 0;
             $quesstion->save();
-            return redirect()->route('get.admin.quesstion.list')->with(['flash_message'=>'Block câu hỏi thành công']);
+            return redirect()->route('get.admin.quesstion.list.quiz')->with(['flash_message'=>'Block câu hỏi thành công']);
         }else{
-            return redirect()->route('get.admin.quesstion.list')->with(['flash_message'=>'Có lỗi dữ liệu, vui lòng thử lại']);
+            return redirect()->route('get.admin.quesstion.list.quiz')->with(['flash_message'=>'Có lỗi dữ liệu, vui lòng thử lại']);
         }
 
     }
