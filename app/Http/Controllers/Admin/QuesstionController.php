@@ -89,7 +89,7 @@ class QuesstionController  extends Controller
                     if($request->result == $stt){
                         $answer->result = $stt;
                         DB::table('m_cau_hoi')
-                            ->where('quesstion_id', $quesstion->id)
+                            ->where('id', $quesstion->id)
                             ->update(['answer' => $stt]);
                     }else{
                         $answer->result = 0;
@@ -98,7 +98,12 @@ class QuesstionController  extends Controller
     	   	}
 
             DB::commit();
-            return redirect()->route('get.admin.quesstion.list')->with(['flash_message'=>'Tạo mới thành công']);
+
+            if($quesstion->used == 0){
+                return redirect()->route('get.admin.quesstion.list.quiz')->with(['flash_message'=>'Thêm mới hỏi thành công']);
+            }else{
+                return redirect()->route('get.admin.quesstion.list.question')->with(['flash_message'=>'Thêm mới câu hỏi thành công']);
+            }
         }catch (Exception $e) {
             DB::rollBack();
             return back()->withError($e->getMessage())->withInput();
