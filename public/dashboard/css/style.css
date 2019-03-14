@@ -4,3 +4,8 @@ ul.message-errors{
 ul.message-errors li{
 	list-style: none;
 }
+.hidden 
+{ 
+  display: none !important ; 
+  visibility: hidden !important; 
+}

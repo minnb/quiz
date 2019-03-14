@@ -10,6 +10,7 @@
     <link href="{{ asset('public/dashboard/quiz/css/smart_wizard_theme_arrows.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/dashboard/quiz/css/smart_wizard_theme_dots.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/dashboard/quiz/css/quiz.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('public/dashboard/css/style.css') }}" rel="stylesheet" type="text/css">
 </head>
 <body class="body-quiz">
   <div class="preloader">
@@ -47,6 +48,7 @@
                                     </label>
                                   </li>
                                 @endforeach
+                                <input type="radio" name="answer[{{$value['question_id']}}]" value="99" id="radio{{$i}}" checked="true" class="hidden">
                               </ul>
                           </div>
                       </div>

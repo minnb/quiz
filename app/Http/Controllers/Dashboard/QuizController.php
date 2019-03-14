@@ -11,7 +11,7 @@ use App\Models\Course;
 use App\Models\Exam;
 use App\Models\HeaderQuiz;
 use App\Models\DetailQuiz;
-use App\Models\Quesstion;
+use App\Models\Quesstion;use App\Models\Thematic;
 use DB; use Session;
 use Auth;use Mail;use App\Jobs\SendMailQuiz;
 class QuizController extends Controller
@@ -112,6 +112,7 @@ class QuizController extends Controller
                 'name'=> $infoUser->name,
                 'email'=> $infoUser->email,
                 'point' => $point,
+                'subject'=> Thematic::find($data_result->thematic)->name,
                 'result_header' => $data_result,
                 'result_answer' => $answer_result 
             ];
@@ -120,7 +121,7 @@ class QuizController extends Controller
            //dispatch(new SendMailQuiz($data_email))->delay(Carbon::now()->addMinutes(2));
            //SendMailQuiz::dispatch($data_email)->delay(now()->addMinutes(2));
             Mail::send('dashboard.email.result_quiz',['data'=>$data_email], function($message) use ($data_email){
-                $message->to($data_email['email'], $data_email['name'])->subject('Kết quả bài thi - HỌC HIỆU QUẢ');
+                $message->to($data_email['email'], $data_email['name'])->subject('Kết quả bài thi - '.$data_email['subject']);
             });
             
             return view('dashboard.quiz.quiz_result', compact('data_result','answer_result','quiz_id','point'));

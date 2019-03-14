@@ -57,7 +57,8 @@ class Exam extends Model
 				['course', $course],
 				['thematic', $thematic],
 				['level', $number],
-				['used', $used]
+				['used', $used],
+				['status', 1]
 			])->inRandomOrder()->limit($level_question)->get();
 			if($question_data->count() > 0 ){
 	    		foreach ($question_data as $key => $value) {
@@ -77,7 +78,8 @@ class Exam extends Model
 				['thematic', $thematic],
 				['lesson', $lesson],
 				['level', $number],
-				['used', $used]
+				['used', $used],
+				['status', 1]
 			])->inRandomOrder()->limit($level_question)->get();
 			if($question_data->count() > 0 ){
 	    		foreach ($question_data as $key => $value) {
