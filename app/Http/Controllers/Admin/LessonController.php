@@ -43,6 +43,10 @@ class LessonController  extends Controller
     public function postAddByThematic(Request $request, $thematic){
     	$thematic_id = fdecrypt($thematic); 
     	$course = Thematic::where('id',$thematic_id)->get();
+        $request->validate([
+            'name' => 'required|max:191',
+            'link_video' => 'required|max:191',
+        ]);
     	try{
             DB::beginTransaction();
             $lesson = new Lesson();

@@ -131,4 +131,22 @@ Route::group(['prefix'=> 'admin'], function(){
 			Route::post('edit/{id}', ['as'=>'post.admin.teacher.edit','uses'=>'Admin\TeacherController@postEdit']);
 			Route::get('delete/{id}', ['as'=>'get.admin.teacher.delete','uses'=>'Admin\TeacherController@getDelete']);
 		});
+
+		Route::group(['prefix'=> 'pages'], function(){
+			Route::get('slide', ['as'=>'get.admin.pages.slide.list','uses'=>'Admin\PagesController@getSlide']);
+			Route::post('slide/add', ['as'=>'post.admin.pages.slide.add','uses'=>'Admin\PagesController@postSlide']);
+			Route::get('slide/edit/{id}', ['as'=>'get.admin.pages.slide.edit','uses'=>'Admin\PagesController@getEditSlide']);
+			Route::post('slide/edit/{id}', ['as'=>'post.admin.pages.slide.edit','uses'=>'Admin\PagesController@postEditSlide']);
+
+			Route::get('news/list', ['as'=>'get.admin.pages.news.list','uses'=>'Admin\PagesController@getNewList']);
+			Route::get('news/add', ['as'=>'get.admin.pages.news.add','uses'=>'Admin\PagesController@getNewAdd']);
+			Route::post('news/add', ['as'=>'post.admin.pages.news.add','uses'=>'Admin\PagesController@postNewAdd']);
+
+
+			Route::get('qa/list', ['as'=>'get.admin.pages.qa.list','uses'=>'Admin\PagesController@getQaList']);
+			Route::post('qa/add', ['as'=>'post.admin.pages.qa.add','uses'=>'Admin\PagesController@postQaAdd']);
+
+		});
 	});
+
+
