@@ -7,7 +7,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
                 <li class="breadcrumb-item"><a href="{{ route('get.dashboard.course.mycourse') }}">Khóa học</a></li>
-                <li class="breadcrumb-item active">{{ App\Models\Course::getFullNameCourse($course) }}</li>
+                <li class="breadcrumb-item active">{{ App\Models\Course::getFullNameCourse($course_id) }}</li>
             </ol>
             <h1 class="h2">{{ $lesson_data[0]->name }}</h1>
             <div class="row">
@@ -19,7 +19,7 @@
                         <div class="card-body">
                            {!! $lesson_data[0]->description !!}
                            <a href="{{ route('get.dashboard.quiz.take',['type'=>fencrypt('QUIZ'),'course'=>fencrypt($lesson_data[0]->course),'thematic'=>fencrypt($lesson_data[0]->thematic), 'id'=>fencrypt($lesson_data[0]->id)])}}" class="btn btn-sm btn-danger">Luyệt tập Quiz</a>
-                           <a href="#" class="btn btn-sm btn-success">Hoàn thành bài học</a>
+                           <a href="#" class="btn btn-sm btn-success">Hoàn thành bài học {{$user_status}}</a>
                         </div>
                     </div>
                     <ul class="card list-group list-group-fit">
@@ -34,14 +34,37 @@
                                         <div class="text-muted">{{ $key + 1}}.</div>
                                     </div>
                                     <div class="media-body">
-                                        @if($key == 0)
-                                            <a href="{{ route('get.dashboard.course.detail.lesson',['course'=>fencrypt($item->course), 'lesson'=>fencrypt($item->id)])}}" class="text-white">{{ $item->name }}</a>
+                                        @if($user_status == 0)
+                                            @if($item->trial == 1)
+                                                @if($key == 0)
+                                                    <a href="{{ route('get.dashboard.course.detail.lesson',['course'=>fencrypt($item->course), 'lesson'=>fencrypt($item->id)])}}" class="text-white">
+                                                @else
+                                                        <a href="{{ route('get.dashboard.course.detail.lesson',['course'=>fencrypt($item->course), 'lesson'=>fencrypt($item->id)])}}">
+                                                @endif
+                                                {{ $item->name }}</a>
+                                            @else
+                                                {{ $item->name }}
+                                            @endif
                                         @else
-                                            <a href="{{ route('get.dashboard.course.detail.lesson',['course'=>fencrypt($item->course), 'lesson'=>fencrypt($item->id) ])}}">{{ $item->name }}</a>
+                                            @if($key == 0)
+                                                <a href="{{ route('get.dashboard.course.detail.lesson',['course'=>fencrypt($item->course), 'lesson'=>fencrypt($item->id)])}}" class="text-white">
+                                            @else
+                                                <a href="{{ route('get.dashboard.course.detail.lesson',['course'=>fencrypt($item->course), 'lesson'=>fencrypt($item->id)])}}">
+                                            @endif
+                                            {{ $item->name }}</a>
                                         @endif
+
                                     </div>
                                     <div class="media-right">
-                                        <small class="text-muted-light">2:03</small>
+                                        <small class="text-muted-light">
+                                            @if($user_status == 0)
+                                                @if($item->trial == 0) 
+                                                    <span>PRO</span> 
+                                                @else
+                                                    <span>Free</span>
+                                                @endif
+                                            @endif    
+                                        </small>
                                     </div>
                                 </div>
                             </li>

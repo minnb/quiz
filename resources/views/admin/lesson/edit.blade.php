@@ -42,6 +42,12 @@
 					</select>
 				</div>
 				<div class="form-group">
+					<label>Hiển thị bài giảng</label>
+					<select class="form-control" name="trial">
+						{{ selectedOption(getVideStatus(),(old('trial', isset($data) ? $data['trial'] : 0))) }}
+					</select>
+				</div>
+				<div class="form-group">
 					<label>Sắp xếp thứ tự</label>
 					<input type="number" class="form-control" name="sort" value="{{ old('sort', isset($data) ? $data['sort'] : 0)}}" />
 				</div>

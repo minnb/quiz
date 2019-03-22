@@ -38,21 +38,30 @@ class CourseController extends Controller
     public function getDetail($idd){
         $course_id = fdecrypt($idd); 
         $user_id = User::getInfoUser()['id'];
+        
         $lesson_data = Lesson::where([
                 ['course', $course_id],
                 ['status', 1],
             ])->get();
+
         if($lesson_data->count() > 0){
             $user_course = User_Course::where([
                     ['user_id',$user_id],
-                    ['course',$course_id],['status', 1]
+                    ['course',$course_id],
+                    //['status', 1]
                 ])->get();    
+            $user_status = $user_course[0]->status;
             if($user_course->count() > 0){
-                return view('dashboard.course.detail', compact('lesson_data','course_id','user_course'));
+                return view('dashboard.course.detail', compact('lesson_data','course_id','user_course', 'user_status'));
             }else{
+                return back();
+            }
+
+            /*
+            else{
                 return view('dashboard.course.detail_no', compact('lesson_data','course_id','user_course'));
             }
-            
+            */
         }else{
             return back();
         }
@@ -72,15 +81,19 @@ class CourseController extends Controller
             $user_course = User_Course::where([
                     ['user_id',$user_id],
                     ['course', $course_id],
-                    ['status', 1]
+                    //['status', 1]
                 ])->get(); 
-
+            $user_status = $user_course[0]->status;
             if($user_course->count() > 0){
-                return view('dashboard.course.course_lesson', compact('lesson_data','course_id', 'lesson_id', 'lesson_detail','user_course'));
+                return view('dashboard.course.course_lesson', compact('lesson_data','course_id', 'lesson_id', 'lesson_detail','user_course', 'user_status'));
             }else{
+                return back();
+            }
+            /*
+            else{
                 return view('dashboard.course.course_lesson_no', compact('lesson_data','course_id', 'lesson_id', 'lesson_detail','user_course'));
             }
-            
+            */
         }else{
             return back();
         }

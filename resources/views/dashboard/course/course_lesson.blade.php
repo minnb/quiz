@@ -35,14 +35,37 @@
                                         <div class="text-muted">{{ $key + 1}}.</div>
                                     </div>
                                     <div class="media-body">
-                                         @if($item->id == $lesson_id)
-                                            <a href="{{ route('get.dashboard.course.detail.lesson',['course'=>fencrypt($item->course), 'lesson'=>fencrypt($item->id)])}}" class="text-white">{{ $item->name }}</a>
+                                        @if($user_status == 0)
+                                            @if($item->trial == 1)
+                                                @if($item->id == $lesson_id)
+                                                    <a href="{{ route('get.dashboard.course.detail.lesson',['course'=>fencrypt($item->course), 'lesson'=>fencrypt($item->id)])}}" class="text-white">
+                                                @else
+                                                        <a href="{{ route('get.dashboard.course.detail.lesson',['course'=>fencrypt($item->course), 'lesson'=>fencrypt($item->id)])}}">
+                                                @endif
+                                                {{ $item->name }}</a>
+                                            @else
+                                                {{ $item->name }}
+                                            @endif
                                         @else
-                                            <a href="{{ route('get.dashboard.course.detail.lesson',['course'=>fencrypt($item->course), 'lesson'=>fencrypt($item->id) ])}}">{{ $item->name }}</a>
+                                            @if($item->id == $lesson_id)
+                                                <a href="{{ route('get.dashboard.course.detail.lesson',['course'=>fencrypt($item->course), 'lesson'=>fencrypt($item->id)])}}" class="text-white">
+                                            @else
+                                                <a href="{{ route('get.dashboard.course.detail.lesson',['course'=>fencrypt($item->course), 'lesson'=>fencrypt($item->id)])}}">
+                                            @endif
+                                            {{ $item->name }}</a>
                                         @endif
+
                                     </div>
                                     <div class="media-right">
-                                        <small class="text-muted-light"></small>
+                                        <small class="text-muted-light">
+                                             @if($user_status == 0)
+                                                @if($item->trial == 0) 
+                                                    <span>PRO</span> 
+                                                @else
+                                                    <span>Free</span>
+                                                @endif
+                                            @endif    
+                                        </small>
                                     </div>
                                 </div>
                             </li>

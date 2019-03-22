@@ -14,6 +14,13 @@ function getStatusCourseUser(){
     ];
     return $arrStatus;
 }
+function getVideStatus(){
+    $arrStatus = [
+      '0' => 'Chỉ học viên xem',
+      '1' => 'Cho phép học thử'
+    ];
+    return $arrStatus;
+}
 function getKhoaHoc(){
   return [
     '0' => 'Cơ bản',

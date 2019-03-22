@@ -16,6 +16,7 @@
 								<th>Chuyên đề</th>
 								<th>Khoá học</th>
 								<th>Câu hỏi test Quiz</th>
+								<th>Học thử</th>
 								<th>Trạng thái</th>
 								<th>
 									<a href="#" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fa fa-fw fa-plus"></i> Thêm mới bài giảng</a>
@@ -32,6 +33,13 @@
 								<td>{{ $item->course }}</td>
 								<td>
 										<a href="{{ route('get.admin.import.quiz.lesson',['id'=>fencrypt($item->id)] )}} " style="color:blue"><i class="fa fa-fw fa-file-excel-o"></i> Import Excel </a>
+								</td>
+								<td>
+									@if($item->trial == 0)
+										<span>Không</span>
+									@else
+										<span style="color:red">Có</span>
+									@endif
 								</td>
 								<td>
 									@if($item->status == 0)
