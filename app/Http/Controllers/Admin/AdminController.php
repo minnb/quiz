@@ -42,7 +42,7 @@ class AdminController extends Controller
     }
 
     public function getListUser(){
-        $data = DB::table('users')->where('status', 1)->get();
+        $data = DB::table('users')->get();
         return view('admin.user.list', compact('data'));
     }
 
@@ -90,7 +90,7 @@ class AdminController extends Controller
             DB::beginTransaction();
             $user = User::findOrFail($id);
             $user->name = $request->name;
-            $user->email = $request->email;
+            $user->status= $request->status;
             if($user->password != ''){
                 $user->password = Hash::make($request->password);
             }
@@ -126,7 +126,7 @@ class AdminController extends Controller
     public function getListUserCourse(){
         $data = DB::table('users')
             ->join('user_course', 'users.id', '=', 'user_course.user_id')
-            ->select('users.*','user_course.status as blocked', 'user_course.course', 'user_course.begin_date')
+            ->select('users.*','user_course.status as blocked', 'user_course.course', 'user_course.begin_date', 'user_course.id as course_id')
             ->orderBy('user_course.begin_date', 'DESC')
             ->get();
         return view('admin.user.user_course', compact('data')); 
@@ -137,6 +137,7 @@ class AdminController extends Controller
         $data = User::findOrFail($user_id);
         return view('admin.user.add_course', compact('user_id', 'data'));
     }
+
     public function postUserAddCourse(Request $request, $idd){
         $user_id = fdecrypt($idd); 
         try{
@@ -144,9 +145,46 @@ class AdminController extends Controller
             $data = new User_Course;
             $data->user_id = $user_id;
             $data->course = $request->course;
-            $data->begin_date = '2019-01-01';
+            $data->begin_date = date("Y/m/d");
             $data->end_date = '9999-01-01';
             $data->user_create = Auth::user()->id;
+            $data->status = $request->status;
+            $data->save();
+
+            DB::commit();
+            return redirect()->route('get.admin.user.list.course')->with(['flash_message'=>'Chỉnh sửa thành công']);
+        }catch (Exception $e) {
+            DB::rollBack();
+            return back()->withError($e->getMessage())->withInput();
+        }   
+    }
+
+    public function getUserourseDelete($idd){
+        $id = fdecrypt($idd); 
+        try{
+            DB::beginTransaction();
+            $data = User_Course::findOrFail($id);
+            $data->status = 7;
+            $data->save();
+            DB::commit();
+            return redirect()->route('get.admin.user.list.course')->with(['flash_message'=>'Chỉnh sửa thành công']);
+        }catch (Exception $e) {
+            DB::rollBack();
+            return back()->withError($e->getMessage())->withInput();
+        }   
+    }
+
+    public function getUserCourseEdit($idd){
+        $id = fdecrypt($idd); 
+        $data = User_Course::findOrFail($id);
+        return  view('admin.user.edit_user_course', compact('id', 'data'));
+    }
+
+    public function postUserCourseEdit(Request $request, $idd){
+        $id = fdecrypt($idd); 
+         try{
+            DB::beginTransaction();
+            $data = User_Course::findOrFail($id);
             $data->status = $request->status;
             $data->save();
 

@@ -27,6 +27,10 @@ Route::group(['prefix'=> 'admin'], function(){
 			Route::get('add/subject/{course}', ['as'=>'get.admin.course.add.subject','uses'=>'Admin\CourseController@getAddSubject']);
 			Route::post('add/subject/{course}', ['as'=>'post.admin.course.add.subject','uses'=>'Admin\CourseController@postAddSubject']);
 
+			Route::get('user/register/{id}', ['as'=>'get.admin.course.register','uses'=>'Admin\AdminController@getUserCourseEdit']);
+			Route::post('user/register/{id}', ['as'=>'post.admin.course.register','uses'=>'Admin\AdminController@postUserCourseEdit']);
+			 Route::get('user/delete/{id}', ['as'=>'get.admin.course.delete','uses'=>'Admin\AdminController@getUserourseDelete']);
+
 		});
 	});
 
@@ -119,6 +123,7 @@ Route::group(['prefix'=> 'admin'], function(){
 			Route::get('course', ['as'=>'get.admin.user.list.course','uses'=>'Admin\AdminController@getListUserCourse']);
 			Route::get('add/course/{id}', ['as'=>'get.admin.user.add.course','uses'=>'Admin\AdminController@getUserAddCourse']);
 			Route::post('add/course/{id}', ['as'=>'post.admin.user.add.course','uses'=>'Admin\AdminController@postUserAddCourse']);
+
 		});
 	});
 

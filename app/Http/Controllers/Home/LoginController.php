@@ -35,6 +35,7 @@ class LoginController extends Controller
 	    $data = ['email'=>$user->email, 'password'=>'hochieuqua@2019'];
 
 		$client = new \GuzzleHttp\Client();
+		$client->setDefaultOption('verify', false);
 	    try {
 		 	$response = $client->request('POST', $url, ['form_params' => $data]);
 	        if($response->getReasonPhrase() == "OK"){

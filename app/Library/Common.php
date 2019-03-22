@@ -7,6 +7,13 @@ function getStatus(){
     ];
     return $arrStatus;
 }
+function getStatusCourseUser(){
+    $arrStatus = [
+      '0' => 'Học thử',
+      '1' => 'Học viên'
+    ];
+    return $arrStatus;
+}
 function getKhoaHoc(){
   return [
     '0' => 'Cơ bản',

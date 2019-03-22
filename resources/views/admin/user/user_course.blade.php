@@ -26,21 +26,21 @@
 							<tr>
 								<td><?php echo $key + 1; $userInfo = App\Models\User::find($item->id); ?></td>
 								<td>
-									{{ $userInfo->name }}
+									<a href="{{ route('get.admin.course.register', ['id'=>fencrypt($item->course_id)] )}}">{{ $userInfo->name }}</a>
 								</td>
 								<td>{{ $userInfo->email }}</td>
 								<td>{{ App\Models\Course::getFullNameCourse($item->course) }}</td>
 								<td>{{ substr($item->begin_date,0,10) }}</td>
 								<td>
 									@if($item->blocked == 0)
-										<span>Trial</span>
+										<span>Học thử</span>
 									@else
-										<span>Active</span>
+										<span style="color:blue">Học viên</span>
 									@endif
 								</td>
 								<td>
-									<a href="{{ route('get.admin.user.edit',['id'=>fencrypt($item->id)])}} "><i class="fa fa-fw fa-edit"></i> Edit </a>
-									<a href="{{ route('get.admin.user.delete',['id'=>fencrypt($item->id)])}}" style="color:red" onclick="return alertDelete();"><i class="fa fa-fw fa-trash"></i> Delete</a>
+									<a href="{{ route('get.admin.course.register', ['id'=>fencrypt($item->course_id)] )}}"><i class="fa fa-fw fa-edit"></i> Khóa học </a>
+									<a href="{{ route('get.admin.course.delete', ['id'=>fencrypt($item->course_id)])}}" style="color:red" onclick="return alertDelete();"><i class="fa fa-fw fa-trash"></i> Delete</a>
 								</td>
 							</tr>
 							<?php } ?>
