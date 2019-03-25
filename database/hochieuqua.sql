@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0.1
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th3 12, 2019 lúc 10:17 AM
--- Phiên bản máy phục vụ: 10.1.32-MariaDB
--- Phiên bản PHP: 7.2.5
+-- Thời gian đã tạo: Th3 25, 2019 lúc 11:22 PM
+-- Phiên bản máy phục vụ: 10.1.36-MariaDB
+-- Phiên bản PHP: 7.2.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -84,28 +84,30 @@ CREATE TABLE `m_bai_giang` (
   `user_id` smallint(5) NOT NULL,
   `status` tinyint(1) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `trial` tinyint(1) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `m_bai_giang`
 --
 
-INSERT INTO `m_bai_giang` (`id`, `teacher`, `course`, `thematic`, `name`, `alias`, `description`, `content`, `link_video`, `image`, `sort`, `keywords`, `user_id`, `status`, `created_at`, `updated_at`) VALUES
-(1, 1, 'HHQ40', 2, 'Dãy số tự nhiên', 'day-so-tu-nhien', '<p>B&agrave;i học nằm trong khối kiến thức to&aacute;n lớp 4, thuộc kh&oacute;a học to&aacute;n lớp 4 học kỳ 1</p>', '<p>B&agrave;i học nằm trong khối kiến thức to&aacute;n lớp 4, thuộc kh&oacute;a học to&aacute;n lớp 4 học kỳ 1</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 0, 'Bài học nằm trong khối kiến thức toán lớp 4, thuộc khóa học toán lớp 4 học kỳ 1', 13, 0, '2019-02-21 14:11:14', '2019-01-21 15:20:36'),
-(2, 2, 'HHQ50', 9, 'Khái niệm, tính chất cơ bản của phân số', 'khai-niem,-tinh-chat-co-ban-cua-phan-so', '<p>Kh&aacute;i niệm, t&iacute;nh chất cơ bản của ph&acirc;n số</p>', '<p>Kh&aacute;i niệm, t&iacute;nh chất cơ bản của ph&acirc;n số</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 11, 'Khái niệm, tính chất cơ bản của phân số', 13, 1, '2019-02-28 15:08:28', '2019-02-28 15:08:28'),
-(3, 1, 'HHQ50', 9, 'So sánh phân số', 'so-sanh-phan-so', '<p>So s&aacute;nh ph&acirc;n số</p>', '<p>So s&aacute;nh ph&acirc;n số</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 12, 'So sánh phân số', 13, 1, '2019-02-28 15:08:42', '2019-02-28 15:08:42'),
-(4, 1, 'HHQ50', 9, 'Tìm một số khi biết một số phần của nó', 'tim-mot-so-khi-biet-mot-so-phan-cua-no', '<p>T&igrave;m một số khi biết một số phần của n&oacute;</p>', '<p>T&igrave;m một số khi biết một số phần của n&oacute;</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 13, 'Tìm một số khi biết một số phần của nó', 13, 1, '2019-02-28 15:08:51', '2019-02-28 15:08:51'),
-(5, 1, 'HHQ50', 9, 'Tính thuận tiện với phân số', 'tinh-thuan-tien-voi-phan-so', '<p>T&iacute;nh thuận tiện với ph&acirc;n số</p>', '<p>T&iacute;nh thuận tiện với ph&acirc;n số</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 14, 'Tính thuận tiện với phân số', 13, 1, '2019-02-28 15:08:59', '2019-02-28 15:08:59'),
-(6, 1, 'HHQ50', 9, 'Tính thuận tiện với phân số', 'tinh-thuan-tien-voi-phan-so', '<p>T&iacute;nh thuận tiện với ph&acirc;n số</p>', '<p>T&iacute;nh thuận tiện với ph&acirc;n số</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 0, 'Tính thuận tiện với phân số', 13, 0, '2019-02-21 14:11:14', '2019-02-13 04:28:37'),
-(7, 1, 'HHQ51', 15, 'Tìm số trung bình cộng', 'tim-so-trung-binh-cong', '<p>T&igrave;m số trung b&igrave;nh cộng</p>', '<p>T&igrave;m số trung b&igrave;nh cộng</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 0, 'Tìm số trung bình cộng', 13, 1, '2019-02-21 14:11:14', '2019-01-21 15:42:54'),
-(8, 1, 'HHQ50', 10, 'Tỉ lệ thuận', 'ti-le-thuan', '<p>Tỉ lệ thuận</p>', '<p>Tỉ lệ thuận</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 0, 'Tỉ lệ thuận', 13, 1, '2019-02-21 14:11:14', '2019-01-21 15:51:58'),
-(9, 1, 'HHQ50', 10, 'Tỉ lệ nghịch', 'ti-le-nghich', '<p>Tỉ lệ nghịch</p>', '<p>Tỉ lệ nghịch</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 0, 'Tỉ lệ nghịch', 13, 1, '2019-02-21 14:11:14', '2019-01-21 15:52:13'),
-(10, 1, 'HHQ50', 11, 'Khái niệm, đọc, viết số thập phân', 'khai-niem,-doc,-viet-so-thap-phan', '<p>Kh&aacute;i niệm, đọc, viết số thập ph&acirc;n</p>', '<p>Kh&aacute;i niệm, đọc, viết số thập ph&acirc;n</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 0, 'Khái niệm, đọc, viết số thập phân', 13, 1, '2019-02-21 14:11:14', '2019-01-21 15:53:46'),
-(11, 1, 'HHQ50', 12, 'Tìm tỉ số phần trăm của 2 số', 'tim-ti-so-phan-tram-cua-2-so', '<p>T&igrave;m tỉ số phần trăm của 2 số</p>', '<p>T&igrave;m tỉ số phần trăm của 2 số</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 0, 'Tìm tỉ số phần trăm của 2 số', 13, 1, '2019-02-21 14:11:14', '2019-01-21 15:54:25'),
-(12, 1, 'HHQ50', 13, 'Hình tam giác', 'hinh-tam-giac', '<p>H&igrave;nh tam gi&aacute;c</p>', '<p>H&igrave;nh tam gi&aacute;c</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 0, 'Hình tam giác', 13, 1, '2019-02-21 14:11:14', '2019-01-21 15:54:51'),
-(13, 1, 'HHQ50', 14, 'Số đo thời gian', 'so-do-thoi-gian', '<p>Số đo thời gian</p>', '<p>Số đo thời gian</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 0, 'Số đo thời gian', 13, 1, '2019-02-21 14:11:14', '2019-01-21 15:55:18'),
-(14, 1, 'HHQ40', 1, 'VinFast Klara lội nước gần 1 mét và cái kết', 'vinfast-klara-loi-nuoc-gan-1-met-va-cai-ket', '<p>test</p>', NULL, 'https://www.youtube.com/embed/ZnOAK04tJhc', 'public/uploads/images/201902/oaSrGZLPWq.png', 0, 'testg', 13, 1, '2019-02-27 14:51:52', '2019-02-27 14:51:52');
+INSERT INTO `m_bai_giang` (`id`, `teacher`, `course`, `thematic`, `name`, `alias`, `description`, `content`, `link_video`, `image`, `sort`, `keywords`, `user_id`, `status`, `created_at`, `updated_at`, `trial`) VALUES
+(1, 1, 'HHQ40', 2, 'Dãy số tự nhiên', 'day-so-tu-nhien', '<p>B&agrave;i học nằm trong khối kiến thức to&aacute;n lớp 4, thuộc kh&oacute;a học to&aacute;n lớp 4 học kỳ 1</p>', '<p>B&agrave;i học nằm trong khối kiến thức to&aacute;n lớp 4, thuộc kh&oacute;a học to&aacute;n lớp 4 học kỳ 1</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 0, 'Bài học nằm trong khối kiến thức toán lớp 4, thuộc khóa học toán lớp 4 học kỳ 1', 13, 0, '2019-03-22 15:12:22', '2019-01-21 15:20:36', 1),
+(2, 2, 'HHQ50', 9, 'Khái niệm, tính chất cơ bản của phân số', 'khai-niem,-tinh-chat-co-ban-cua-phan-so', '<p>Kh&aacute;i niệm, t&iacute;nh chất cơ bản của ph&acirc;n số</p>', '<p>Kh&aacute;i niệm, t&iacute;nh chất cơ bản của ph&acirc;n số</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 11, 'Khái niệm, tính chất cơ bản của phân số', 13, 1, '2019-03-22 15:12:06', '2019-03-22 15:12:06', 1),
+(3, 1, 'HHQ50', 9, 'So sánh phân số', 'so-sanh-phan-so', '<p>So s&aacute;nh ph&acirc;n số</p>', '<p>So s&aacute;nh ph&acirc;n số</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 12, 'So sánh phân số', 13, 1, '2019-03-22 15:17:51', '2019-03-22 15:17:51', 1),
+(4, 1, 'HHQ50', 9, 'Tìm một số khi biết một số phần của nó', 'tim-mot-so-khi-biet-mot-so-phan-cua-no', '<p>T&igrave;m một số khi biết một số phần của n&oacute;</p>', '<p>T&igrave;m một số khi biết một số phần của n&oacute;</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 13, 'Tìm một số khi biết một số phần của nó', 13, 1, '2019-02-28 15:08:51', '2019-02-28 15:08:51', 0),
+(5, 1, 'HHQ50', 9, 'Tính thuận tiện với phân số', 'tinh-thuan-tien-voi-phan-so', '<p>T&iacute;nh thuận tiện với ph&acirc;n số</p>', '<p>T&iacute;nh thuận tiện với ph&acirc;n số</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 14, 'Tính thuận tiện với phân số', 13, 1, '2019-02-28 15:08:59', '2019-02-28 15:08:59', 0),
+(6, 1, 'HHQ50', 9, 'Tính thuận tiện với phân số', 'tinh-thuan-tien-voi-phan-so', '<p>T&iacute;nh thuận tiện với ph&acirc;n số</p>', '<p>T&iacute;nh thuận tiện với ph&acirc;n số</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 0, 'Tính thuận tiện với phân số', 13, 0, '2019-02-21 14:11:14', '2019-02-13 04:28:37', 0),
+(7, 1, 'HHQ51', 15, 'Tìm số trung bình cộng', 'tim-so-trung-binh-cong', '<p>T&igrave;m số trung b&igrave;nh cộng</p>', '<p>T&igrave;m số trung b&igrave;nh cộng</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 0, 'Tìm số trung bình cộng', 13, 1, '2019-02-21 14:11:14', '2019-01-21 15:42:54', 0),
+(8, 1, 'HHQ50', 10, 'Tỉ lệ thuận', 'ti-le-thuan', '<p>Tỉ lệ thuận</p>', '<p>Tỉ lệ thuận</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 0, 'Tỉ lệ thuận', 13, 1, '2019-02-21 14:11:14', '2019-01-21 15:51:58', 0),
+(9, 1, 'HHQ50', 10, 'Tỉ lệ nghịch', 'ti-le-nghich', '<p>Tỉ lệ nghịch</p>', '<p>Tỉ lệ nghịch</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 0, 'Tỉ lệ nghịch', 13, 1, '2019-02-21 14:11:14', '2019-01-21 15:52:13', 0),
+(10, 1, 'HHQ50', 11, 'Khái niệm, đọc, viết số thập phân', 'khai-niem,-doc,-viet-so-thap-phan', '<p>Kh&aacute;i niệm, đọc, viết số thập ph&acirc;n</p>', '<p>Kh&aacute;i niệm, đọc, viết số thập ph&acirc;n</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 0, 'Khái niệm, đọc, viết số thập phân', 13, 1, '2019-02-21 14:11:14', '2019-01-21 15:53:46', 0),
+(11, 1, 'HHQ50', 12, 'Tìm tỉ số phần trăm của 2 số', 'tim-ti-so-phan-tram-cua-2-so', '<p>T&igrave;m tỉ số phần trăm của 2 số</p>', '<p>T&igrave;m tỉ số phần trăm của 2 số</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 0, 'Tìm tỉ số phần trăm của 2 số', 13, 1, '2019-02-21 14:11:14', '2019-01-21 15:54:25', 0),
+(12, 1, 'HHQ50', 13, 'Hình tam giác', 'hinh-tam-giac', '<p>H&igrave;nh tam gi&aacute;c</p>', '<p>H&igrave;nh tam gi&aacute;c</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 0, 'Hình tam giác', 13, 1, '2019-02-21 14:11:14', '2019-01-21 15:54:51', 0),
+(13, 1, 'HHQ50', 14, 'Số đo thời gian', 'so-do-thoi-gian', '<p>Số đo thời gian</p>', '<p>Số đo thời gian</p>', 'https://www.youtube.com/embed/84c0rUgtBzA', NULL, 0, 'Số đo thời gian', 13, 1, '2019-02-21 14:11:14', '2019-01-21 15:55:18', 0),
+(14, 1, 'HHQ40', 1, 'VinFast Klara lội nước gần 1 mét và cái kết', 'vinfast-klara-loi-nuoc-gan-1-met-va-cai-ket', '<p>test</p>', NULL, 'https://www.youtube.com/embed/ZnOAK04tJhc', 'public/uploads/images/201902/oaSrGZLPWq.png', 0, 'testg', 13, 1, '2019-02-27 14:51:52', '2019-02-27 14:51:52', 0),
+(15, 1, 'HHQ51', 3, 'tesst', 'tesst', NULL, NULL, 'https://www.youtube.com/embed/ZnOAK04tJhc', NULL, 0, NULL, 13, 0, '2019-03-14 13:08:27', '2019-03-14 13:08:27', 0);
 
 -- --------------------------------------------------------
 
@@ -238,7 +240,15 @@ INSERT INTO `m_cau_dap_an` (`id`, `stt`, `quesstion_id`, `name`, `alias`, `value
 (209, 1, 59, '4', '', '', 0, '', '2019-03-05 14:34:15', '2019-03-05 14:34:15'),
 (210, 2, 59, '8', '', '', 2, '', '2019-03-05 14:34:15', '2019-03-05 14:34:15'),
 (211, 3, 59, '6', '', '', 0, '', '2019-03-05 14:34:15', '2019-03-05 14:34:15'),
-(212, 4, 59, '7', '', '', 0, '', '2019-03-05 14:34:15', '2019-03-05 14:34:15');
+(212, 4, 59, '7', '', '', 0, '', '2019-03-05 14:34:15', '2019-03-05 14:34:15'),
+(213, 1, 61, '1', '', '', 1, '', '2019-03-14 15:34:54', '2019-03-14 15:34:54'),
+(214, 2, 61, '2', '', '', 0, '', '2019-03-14 15:34:54', '2019-03-14 15:34:54'),
+(215, 3, 61, '3', '', '', 0, '', '2019-03-14 15:34:54', '2019-03-14 15:34:54'),
+(216, 4, 61, '4', '', '', 0, '', '2019-03-14 15:34:54', '2019-03-14 15:34:54'),
+(217, 1, 62, '7', '', '', 1, '', '2019-03-14 15:36:12', '2019-03-14 15:36:12'),
+(218, 2, 62, '6', '', '', 0, '', '2019-03-14 15:36:12', '2019-03-14 15:36:12'),
+(219, 3, 62, '5', '', '', 0, '', '2019-03-14 15:36:12', '2019-03-14 15:36:12'),
+(220, 4, 62, '9', '', '', 0, '', '2019-03-14 15:36:12', '2019-03-14 15:36:12');
 
 -- --------------------------------------------------------
 
@@ -269,33 +279,35 @@ CREATE TABLE `m_cau_hoi` (
 --
 
 INSERT INTO `m_cau_hoi` (`id`, `type`, `used`, `course`, `thematic`, `lesson`, `name`, `alias`, `image`, `level`, `status`, `answer`, `user_id`, `created_at`, `updated_at`) VALUES
-(33, 'radio', 0, 'HHQ50', 9, 2, 'Chọn đáp án đúng 10 + 4', '', '', 1, 1, 1, 13, '2019-03-05 13:32:31', '2019-03-05 13:32:31'),
-(34, 'radio', 0, 'HHQ50', 9, 2, 'Chọn đáp án đúng 10 - 4', '', '', 1, 1, 1, 13, '2019-03-05 13:32:31', '2019-03-05 13:32:31'),
-(35, 'radio', 0, 'HHQ50', 9, 2, 'Chọn đáp án đúng 10 + 4 - 1', '', '', 1, 1, 3, 13, '2019-03-05 13:32:31', '2019-03-05 13:32:31'),
-(36, 'radio', 1, 'HHQ50', 9, NULL, 'Chọn đáp án đúng 10 + 4', '', '', 1, 1, 1, 13, '2019-03-05 13:33:26', '2019-03-05 13:33:26'),
-(37, 'radio', 1, 'HHQ50', 9, NULL, 'Chọn đáp án đúng 10 - 4', '', '', 1, 1, 1, 13, '2019-03-05 13:33:26', '2019-03-05 13:33:26'),
-(38, 'radio', 1, 'HHQ50', 9, NULL, 'Chọn đáp án đúng 10 + 4 - 1', '', '', 1, 1, 3, 13, '2019-03-05 13:33:26', '2019-03-05 13:33:26'),
-(39, 'radio', 1, 'HHQ51', 3, NULL, 'Chọn đáp án đúng 10 + 4', '', '', 1, 1, 1, 13, '2019-03-05 13:33:41', '2019-03-05 13:33:41'),
-(40, 'radio', 1, 'HHQ51', 3, NULL, 'Chọn đáp án đúng 10 - 4', '', '', 1, 1, 1, 13, '2019-03-05 13:33:41', '2019-03-05 13:33:41'),
-(41, 'radio', 1, 'HHQ51', 3, NULL, 'Chọn đáp án đúng 10 + 4 - 1', '', '', 1, 1, 3, 13, '2019-03-05 13:33:41', '2019-03-05 13:33:41'),
-(42, 'radio', 1, 'HHQ50', 9, NULL, 'Chọn đáp án đúng 10 + 4 = ?', '', '', 2, 1, 1, 13, '2019-03-05 13:36:25', '2019-03-05 13:36:25'),
-(43, 'radio', 1, 'HHQ50', 9, NULL, 'Chọn đáp án đúng 10 - 4 = ?', '', '', 2, 1, 1, 13, '2019-03-05 13:36:25', '2019-03-05 13:36:25'),
-(44, 'radio', 1, 'HHQ50', 9, NULL, 'Chọn đáp án đúng 10 + 4 - 1 = ?', '', '', 2, 1, 3, 13, '2019-03-05 13:36:25', '2019-03-05 13:36:25'),
-(45, 'radio', 1, 'HHQ50', 9, NULL, '10 + 10 = ?', '', '', 3, 1, 1, 13, '2019-03-05 13:39:32', '2019-03-05 13:39:32'),
-(46, 'radio', 1, 'HHQ50', 9, NULL, 'An có 10 cái kẹo, chị An cho thêm 2 cái, hỏi An có tất cả bao nhiêu cái kẹo', '', '', 3, 1, 1, 13, '2019-03-05 13:39:32', '2019-03-05 13:39:32'),
-(47, 'radio', 1, 'HHQ50', 9, NULL, 'Mít có 10 cái kẹo. Mít chia cho em một nửa, hỏi Mít còn bao nhiêu cái kẹo', '', '', 3, 1, 3, 13, '2019-03-05 13:39:32', '2019-03-05 13:39:32'),
-(48, 'radio', 0, 'HHQ50', 9, 2, '10 + 10 = ?', '', '', 2, 1, 1, 13, '2019-03-05 13:40:03', '2019-03-05 13:40:03'),
-(49, 'radio', 0, 'HHQ50', 9, 2, 'An có 10 cái kẹo, chị An cho thêm 2 cái, hỏi An có tất cả bao nhiêu cái kẹo', '', '', 3, 1, 1, 13, '2019-03-05 13:40:03', '2019-03-05 13:40:03'),
-(50, 'radio', 0, 'HHQ50', 9, 2, 'Mít có 10 cái kẹo. Mít chia cho em một nửa, hỏi Mít còn bao nhiêu cái kẹo', '', '', 4, 1, 3, 13, '2019-03-05 13:40:03', '2019-03-05 13:40:03'),
-(51, 'radio', 1, 'HHQ50', 9, 0, 'Làm phép tính 9 x 4 = ?', '', '', 4, 1, 2, 13, '2019-03-05 13:45:56', '2019-03-05 13:45:56'),
-(52, 'radio', 1, 'HHQ50', 9, 0, 'Còn lại bao nhiêu cái kẹo khi chia 10 cái cho 4 bạn, mỗi bạn 2 cái kẹo', '', '', 4, 1, 4, 13, '2019-03-05 13:45:56', '2019-03-05 13:45:56'),
-(53, 'radio', 1, 'HHQ50', 9, 0, 'Bạn Mít được 4 bạn cùng bàn mỗi người cho 2 cái kẹo, hỏi bạn Mít có bao nhiêu cái', '', '', 4, 1, 2, 13, '2019-03-05 13:45:56', '2019-03-05 13:45:56'),
-(54, 'radio', 0, 'HHQ50', 9, 2, 'Làm phép tính 9 x 4 = ?', '', '', 4, 1, 2, 13, '2019-03-05 13:46:46', '2019-03-05 13:46:46'),
-(55, 'radio', 0, 'HHQ50', 9, 2, 'Còn lại bao nhiêu cái kẹo khi chia 10 cái cho 4 bạn, mỗi bạn 2 cái kẹo', '', '', 4, 1, 4, 13, '2019-03-05 13:46:46', '2019-03-05 13:46:46'),
-(56, 'radio', 0, 'HHQ50', 9, 2, 'Bạn Mít được 4 bạn cùng bàn mỗi người cho 2 cái kẹo, hỏi bạn Mít có bao nhiêu cái', '', '', 4, 1, 2, 13, '2019-03-05 13:46:46', '2019-03-05 13:46:46'),
-(57, 'radio', 0, 'HHQ50', 9, 3, 'Làm phép tính 9 x 4 = ?', '', '', 1, 1, 2, 13, '2019-03-05 14:34:15', '2019-03-05 14:34:15'),
-(58, 'radio', 0, 'HHQ50', 9, 3, 'Còn lại bao nhiêu cái kẹo khi chia 10 cái cho 4 bạn, mỗi bạn 2 cái kẹo', '', '', 1, 1, 4, 13, '2019-03-05 14:34:15', '2019-03-05 14:34:15'),
-(59, 'radio', 0, 'HHQ50', 9, 3, 'Bạn Mít được 4 bạn cùng bàn mỗi người cho 2 cái kẹo, hỏi bạn Mít có bao nhiêu cái', '', '', 1, 1, 2, 13, '2019-03-05 14:34:15', '2019-03-05 14:34:15');
+(33, 'radio', 0, 'HHQ50', 9, 2, 'Chọn đáp án đúng 10 + 4', '', '', 1, 1, 1, 13, '2019-03-14 15:50:08', '2019-03-05 13:32:31'),
+(34, 'radio', 0, 'HHQ50', 9, 2, 'Chọn đáp án đúng 10 - 4', '', '', 1, 1, 1, 13, '2019-03-14 15:50:08', '2019-03-05 13:32:31'),
+(35, 'radio', 0, 'HHQ50', 9, 2, 'Chọn đáp án đúng 10 + 4 - 1', '', '', 1, 1, 3, 13, '2019-03-14 15:50:08', '2019-03-05 13:32:31'),
+(36, 'radio', 1, 'HHQ50', 9, NULL, 'Chọn đáp án đúng 10 + 4', '', '', 1, 1, 1, 13, '2019-03-14 15:50:08', '2019-03-05 13:33:26'),
+(37, 'radio', 1, 'HHQ50', 9, NULL, 'Chọn đáp án đúng 10 - 4', '', '', 1, 1, 1, 13, '2019-03-14 15:50:08', '2019-03-05 13:33:26'),
+(38, 'radio', 1, 'HHQ50', 9, NULL, 'Chọn đáp án đúng 10 + 4 - 1', '', '', 1, 1, 3, 13, '2019-03-14 15:50:08', '2019-03-05 13:33:26'),
+(39, 'radio', 1, 'HHQ51', 3, NULL, 'Chọn đáp án đúng 10 + 4', '', '', 1, 1, 1, 13, '2019-03-14 15:50:08', '2019-03-05 13:33:41'),
+(40, 'radio', 1, 'HHQ51', 3, NULL, 'Chọn đáp án đúng 10 - 4', '', '', 1, 1, 1, 13, '2019-03-14 15:50:08', '2019-03-05 13:33:41'),
+(41, 'radio', 1, 'HHQ51', 3, NULL, 'Chọn đáp án đúng 10 + 4 - 1', '', '', 1, 1, 3, 13, '2019-03-14 15:50:08', '2019-03-05 13:33:41'),
+(42, 'radio', 1, 'HHQ50', 9, NULL, 'Chọn đáp án đúng 10 + 4 = ?', '', '', 2, 1, 1, 13, '2019-03-14 15:50:08', '2019-03-05 13:36:25'),
+(43, 'radio', 1, 'HHQ50', 9, NULL, 'Chọn đáp án đúng 10 - 4 = ?', '', '', 2, 1, 1, 13, '2019-03-14 15:50:08', '2019-03-05 13:36:25'),
+(44, 'radio', 1, 'HHQ50', 9, NULL, 'Chọn đáp án đúng 10 + 4 - 1 = ?', '', '', 2, 1, 3, 13, '2019-03-14 15:50:08', '2019-03-14 13:18:53'),
+(45, 'radio', 1, 'HHQ50', 9, NULL, '10 + 10 = ?', '', '', 3, 1, 1, 13, '2019-03-14 15:50:08', '2019-03-05 13:39:32'),
+(46, 'radio', 1, 'HHQ50', 9, NULL, 'An có 10 cái kẹo, chị An cho thêm 2 cái, hỏi An có tất cả bao nhiêu cái kẹo', '', '', 3, 1, 1, 13, '2019-03-14 15:50:08', '2019-03-05 13:39:32'),
+(47, 'radio', 1, 'HHQ50', 9, NULL, 'Mít có 10 cái kẹo. Mít chia cho em một nửa, hỏi Mít còn bao nhiêu cái kẹo', '', '', 3, 1, 3, 13, '2019-03-14 15:50:08', '2019-03-05 13:39:32'),
+(48, 'radio', 0, 'HHQ50', 9, 2, '10 + 10 = ?', '', '', 2, 1, 1, 13, '2019-03-14 15:50:08', '2019-03-05 13:40:03'),
+(49, 'radio', 0, 'HHQ50', 9, 2, 'An có 10 cái kẹo, chị An cho thêm 2 cái, hỏi An có tất cả bao nhiêu cái kẹo', '', '', 3, 1, 1, 13, '2019-03-14 15:50:08', '2019-03-05 13:40:03'),
+(50, 'radio', 0, 'HHQ50', 9, 2, 'Mít có 10 cái kẹo. Mít chia cho em một nửa, hỏi Mít còn bao nhiêu cái kẹo', '', '', 4, 1, 3, 13, '2019-03-14 15:50:08', '2019-03-05 13:40:03'),
+(51, 'radio', 1, 'HHQ50', 9, 0, 'Làm phép tính 9 x 4 = ?', '', '', 4, 1, 2, 13, '2019-03-14 15:50:08', '2019-03-05 13:45:56'),
+(52, 'radio', 1, 'HHQ50', 9, 0, 'Còn lại bao nhiêu cái kẹo khi chia 10 cái cho 4 bạn, mỗi bạn 2 cái kẹo', '', '', 4, 1, 4, 13, '2019-03-14 15:50:08', '2019-03-05 13:45:56'),
+(53, 'radio', 1, 'HHQ50', 9, 0, 'Bạn Mít được 4 bạn cùng bàn mỗi người cho 2 cái kẹo, hỏi bạn Mít có bao nhiêu cái', '', '', 4, 1, 2, 13, '2019-03-14 15:50:08', '2019-03-05 13:45:56'),
+(54, 'radio', 0, 'HHQ50', 9, 2, 'Làm phép tính 9 x 4 = ?', '', '', 4, 1, 2, 13, '2019-03-14 15:50:08', '2019-03-05 13:46:46'),
+(55, 'radio', 0, 'HHQ50', 9, 2, 'Còn lại bao nhiêu cái kẹo khi chia 10 cái cho 4 bạn, mỗi bạn 2 cái kẹo', '', '', 4, 1, 4, 13, '2019-03-14 15:50:08', '2019-03-05 13:46:46'),
+(56, 'radio', 0, 'HHQ50', 9, 2, 'Bạn Mít được 4 bạn cùng bàn mỗi người cho 2 cái kẹo, hỏi bạn Mít có bao nhiêu cái', '', '', 4, 1, 2, 13, '2019-03-14 15:50:08', '2019-03-05 13:46:46'),
+(57, 'radio', 0, 'HHQ50', 9, 3, 'Làm phép tính 9 x 4 = ?', '', '', 1, 1, 2, 13, '2019-03-14 15:50:08', '2019-03-14 13:06:16'),
+(58, 'radio', 0, 'HHQ50', 9, 3, 'Còn lại bao nhiêu cái kẹo khi chia 10 cái cho 4 bạn, mỗi bạn 2 cái kẹo', '', '', 1, 1, 4, 13, '2019-03-14 15:50:08', '2019-03-05 14:34:15'),
+(59, 'radio', 0, 'HHQ50', 9, 3, 'Bạn Mít được 4 bạn cùng bàn mỗi người cho 2 cái kẹo, hỏi bạn Mít có bao nhiêu cái', '', '', 1, 1, 2, 13, '2019-03-14 15:50:08', '2019-03-05 14:34:15'),
+(61, 'radio', 1, 'HHQ51', 15, NULL, 'tesst', 'tesst', NULL, 1, 1, 1, 13, '2019-03-14 15:50:08', '2019-03-14 15:34:54'),
+(62, 'radio', 0, 'HHQ40', 1, NULL, '10 - 3 = ?', '10-3-=-+', NULL, 1, 1, 1, 13, '2019-03-14 15:50:08', '2019-03-14 15:36:12');
 
 -- --------------------------------------------------------
 
@@ -403,7 +415,8 @@ CREATE TABLE `m_giao_vien` (
 
 INSERT INTO `m_giao_vien` (`id`, `user_id`, `name`, `email`, `phone`, `description`, `status`, `avata`, `created_at`, `updated_at`) VALUES
 (1, 0, 'Đặng Thế Hiếu', 'dangthehieu80@gmail.com', '097852148', '<p>Người truyền cảm hứng to&aacute;n học cho h&agrave;ng ngh&igrave;n học sinh tr&ecirc;n cả nước, gi&uacute;p tr&ecirc;n 2000 học sinh tr&ecirc;n cả nước luyện thi v&agrave; đỗ v&agrave;o c&aacute;c trường chuy&ecirc;n chất lượng cao trong c&aacute;c k&igrave; thi tuyển sinh Trung học cơ sở v&agrave; Trung học phổ th&ocirc;ng.</p>', 1, 'public/uploads/images/201903/2VVw4xFnh7.jpg', '2019-03-11 03:55:27', '2019-03-11 03:55:27'),
-(2, 0, 'Nguyễn Thị Hợi', 'congdantoancau2018@gmail.com', '097852149654', NULL, 1, 'public/uploads/images/201903/l2WHAArWHu.jpg', '2019-03-11 03:55:18', '2019-03-11 03:55:18');
+(2, 0, 'Nguyễn Thị Hợi', 'congdantoancau2018@gmail.com', '097852149654', NULL, 1, 'public/uploads/images/201903/l2WHAArWHu.jpg', '2019-03-11 03:55:18', '2019-03-11 03:55:18'),
+(3, 13, 'Binh Minh', 'chienhn@vitduct.com.vn', '097852149654', '<p>tét</p>', 1, 'public/uploads/images/201903/aSEjslMocD.gif', '2019-03-13 22:54:58', '2019-03-13 22:54:58');
 
 -- --------------------------------------------------------
 
@@ -441,7 +454,9 @@ INSERT INTO `m_ket_qua_quiz` (`id`, `type`, `user_id`, `result`, `description`, 
 (108, 'QUIZ', 18, 0, '', 'QUIZ', 'HHQ50', 9, 2, 1, 0, 5, 0, '2019-03-11 09:13:55', '2019-03-11 09:14:07'),
 (114, 'QUIZ', 19, 0, '', 'QUIZ', 'HHQ50', 9, 2, 1, 4, 5, 1, '2019-03-12 01:45:03', '2019-03-12 01:45:22'),
 (121, 'QUIZ', 19, 0, '', 'QUIZ', 'HHQ50', 9, 3, 0, 0, 2, 0, '2019-03-12 02:52:20', '2019-03-12 02:52:20'),
-(123, 'QUIZ', 19, 0, '', 'QUIZ', 'HHQ50', 9, 2, 0, 0, 5, 0, '2019-03-12 02:54:37', '2019-03-12 02:54:37');
+(123, 'QUIZ', 19, 0, '', 'QUIZ', 'HHQ50', 9, 2, 0, 0, 5, 0, '2019-03-12 02:54:37', '2019-03-12 02:54:37'),
+(127, 'QUIZ', 20, 0, '', 'QUIZ', 'HHQ50', 9, 2, 1, 4, 5, 1, '2019-03-14 15:50:13', '2019-03-14 15:50:33'),
+(135, 'QUIZ', 20, 0, '', 'QUIZ', 'HHQ50', 9, 2, 1, 4, 5, 1, '2019-03-14 15:59:04', '2019-03-14 15:59:14');
 
 -- --------------------------------------------------------
 
@@ -492,7 +507,17 @@ INSERT INTO `m_ket_qua_quiz_question` (`id`, `quiz_id`, `question_id`, `answer`,
 (472, 123, 33, 0, '', 1, 0, '2019-03-12 02:54:37', '2019-03-12 02:54:37'),
 (473, 123, 48, 0, '', 1, 0, '2019-03-12 02:54:37', '2019-03-12 02:54:37'),
 (474, 123, 49, 0, '', 1, 0, '2019-03-12 02:54:37', '2019-03-12 02:54:37'),
-(475, 123, 55, 0, '', 4, 0, '2019-03-12 02:54:37', '2019-03-12 02:54:37');
+(475, 123, 55, 0, '', 4, 0, '2019-03-12 02:54:37', '2019-03-12 02:54:37'),
+(481, 127, 35, 3, '', 3, 0, '2019-03-14 15:50:33', '2019-03-14 15:50:33'),
+(482, 127, 34, 1, '', 1, 0, '2019-03-14 15:50:33', '2019-03-14 15:50:33'),
+(483, 127, 48, 1, '', 1, 0, '2019-03-14 15:50:33', '2019-03-14 15:50:33'),
+(484, 127, 49, 4, '', 1, 0, '2019-03-14 15:50:33', '2019-03-14 15:50:33'),
+(485, 127, 54, 2, '', 2, 0, '2019-03-14 15:50:33', '2019-03-14 15:50:33'),
+(521, 135, 33, 1, '', 1, 0, '2019-03-14 15:59:14', '2019-03-14 15:59:14'),
+(522, 135, 34, 1, '', 1, 0, '2019-03-14 15:59:14', '2019-03-14 15:59:14'),
+(523, 135, 48, 2, '', 1, 0, '2019-03-14 15:59:14', '2019-03-14 15:59:14'),
+(524, 135, 49, 1, '', 1, 0, '2019-03-14 15:59:14', '2019-03-14 15:59:14'),
+(525, 135, 56, 2, '', 2, 0, '2019-03-14 15:59:14', '2019-03-14 15:59:14');
 
 -- --------------------------------------------------------
 
@@ -671,7 +696,10 @@ CREATE TABLE `role_user` (
 INSERT INTO `role_user` (`id`, `role_id`, `user_id`, `created_at`, `updated_at`) VALUES
 (1, 1, 13, '2019-01-21 15:13:26', '0000-00-00 00:00:00'),
 (4, 3, 18, '2019-03-11 08:32:50', '2019-03-11 08:32:50'),
-(5, 3, 19, '2019-03-12 00:31:09', '2019-03-12 00:31:09');
+(5, 3, 19, '2019-03-12 00:31:09', '2019-03-12 00:31:09'),
+(6, 3, 20, '2019-03-12 13:08:03', '2019-03-12 13:08:03'),
+(7, 3, 21, '2019-03-12 13:12:19', '2019-03-12 13:12:19'),
+(8, 3, 22, '2019-03-12 13:47:08', '2019-03-12 13:47:08');
 
 -- --------------------------------------------------------
 
@@ -740,8 +768,11 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `provider`, `provider_id`, `remember_token`, `status`, `nick_name`, `phone`, `avata`, `sologan`, `teacher`, `created_at`, `updated_at`) VALUES
 (13, 'minhnb', 'minhnb.it@gmail.com', '$2y$10$j.DBpGEVvmJnjVfz7WhC1eq81efPWM3gkpZQ4QFfMZq1e/m/SGsfq', NULL, NULL, '4IuoE7L7FcYY3Vktsm3uuYnDNb5qBUYVbYinyTDDuUryxODyQw9WQ5wIqT60', 1, NULL, NULL, NULL, NULL, 0, '2019-01-08 03:57:04', '2019-01-08 03:57:04'),
-(18, 'Vinmart Siêu thị', 'vinmartsupermarket@gmail.com', '$2y$10$/gyJhHsBkWhBIq6jGKd5POkXTNTIIotTmbaA8njN4pUAg8.5AUjL.', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, 0, '2019-03-11 08:32:49', '2019-03-11 08:32:49'),
-(19, 'Hiếu Đặng', 'congdantoancau2018@gmail.com', '$2y$10$nECOGOJZktuoLky1TnLk2uIoVv/RbxCB44Gy3bZNsPQbAOnz9VtXq', NULL, NULL, NULL, 1, NULL, NULL, 'public/uploads/images/201903/l2WHAArWHu.jpg', NULL, 1, '2019-03-12 00:31:08', '2019-03-12 08:20:25');
+(18, 'Vinmart Siêu thị', 'vinmartsupermarket@gmail.com', '$2y$10$asrD8IGz53W9jivAXozkfugQ.Ki1F6WeGhjG.6GIX/kNqZkEMwNaW', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, 0, '2019-03-11 08:32:49', '2019-03-21 15:16:51'),
+(19, 'Hiếu Đặng', 'congdantoancau2018@gmail.com', '$2y$10$nECOGOJZktuoLky1TnLk2uIoVv/RbxCB44Gy3bZNsPQbAOnz9VtXq', NULL, NULL, NULL, 1, NULL, NULL, 'public/uploads/images/201903/l2WHAArWHu.jpg', NULL, 1, '2019-03-12 00:31:08', '2019-03-12 08:20:25'),
+(20, 'Mit Xinh', 'lantrinh.mit@gmail.com', '$2y$10$G3ElB5WRjB8snY01n2/23.kV7muLdB5LGNgegVcRtxrmIpu3xE1mK', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, 0, '2019-03-12 13:08:03', '2019-03-12 13:08:03'),
+(21, 'Vietpeace Travel', 'cafe.vinguyenchat@gmail.com', '$2y$10$3b57UqXYpVxUCmGFwo/TL.H5BWs8Bo.EdLMpyJYbO5caN6HrEqpvu', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, 0, '2019-03-12 13:12:19', '2019-03-12 13:12:19'),
+(22, 'Medi Food', 'dev.20170918@gmail.com', '$2y$10$xf8GlMwPriUApmbfT1i0.ORV1jzNSMRhw5vgHGzXElmIEBZr.ZO3a', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, 0, '2019-03-12 13:47:08', '2019-03-12 13:47:08');
 
 -- --------------------------------------------------------
 
@@ -755,7 +786,7 @@ CREATE TABLE `user_course` (
   `course` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `begin_date` datetime NOT NULL,
   `end_date` datetime NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `status` smallint(2) NOT NULL DEFAULT '0',
   `user_create` int(5) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
@@ -768,7 +799,12 @@ CREATE TABLE `user_course` (
 INSERT INTO `user_course` (`id`, `user_id`, `course`, `begin_date`, `end_date`, `status`, `user_create`, `created_at`, `updated_at`) VALUES
 (4, 18, 'HHQ50', '2019-03-11 00:00:00', '9999-01-01 00:00:00', 0, 18, '2019-03-11 08:46:39', '2019-03-11 08:46:39'),
 (5, 18, 'HHQ51', '2019-03-11 00:00:00', '9999-01-01 00:00:00', 0, 18, '2019-03-11 08:52:21', '2019-03-11 08:52:21'),
-(6, 19, 'HHQ50', '2019-03-12 00:00:00', '9999-01-01 00:00:00', 0, 19, '2019-03-12 00:31:16', '2019-03-12 00:31:16');
+(6, 19, 'HHQ50', '2019-03-12 00:00:00', '9999-01-01 00:00:00', 0, 19, '2019-03-12 00:31:16', '2019-03-12 00:31:16'),
+(7, 21, 'HHQ50', '2019-03-12 00:00:00', '9999-01-01 00:00:00', 1, 21, '2019-03-22 15:23:32', '2019-03-22 15:23:32'),
+(9, 21, 'HHQ41', '2019-03-12 00:00:00', '9999-01-01 00:00:00', 0, 21, '2019-03-12 13:46:34', '2019-03-12 13:46:34'),
+(10, 21, 'HHQ40', '2019-03-12 00:00:00', '9999-01-01 00:00:00', 0, 21, '2019-03-12 13:47:11', '2019-03-12 13:47:11'),
+(11, 22, 'HHQ50', '2019-03-12 00:00:00', '9999-01-01 00:00:00', 0, 22, '2019-03-12 13:56:50', '2019-03-12 13:56:50'),
+(12, 20, 'HHQ50', '2019-03-14 00:00:00', '9999-01-01 00:00:00', 1, 20, '2019-03-21 15:48:13', '2019-03-21 15:48:13');
 
 -- --------------------------------------------------------
 
@@ -810,6 +846,34 @@ CREATE TABLE `z_post` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `z_slider`
+--
+
+CREATE TABLE `z_slider` (
+  `id` int(3) NOT NULL,
+  `sort` smallint(2) NOT NULL,
+  `name1` varchar(191) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `name2` varchar(191) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `alias` varchar(191) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `link` text COLLATE utf8_unicode_ci,
+  `image` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `user_id` int(6) NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `z_slider`
+--
+
+INSERT INTO `z_slider` (`id`, `sort`, `name1`, `name2`, `alias`, `link`, `image`, `status`, `user_id`, `updated_at`, `created_at`) VALUES
+(1, 1, 'test', 'test', 'test', 'https://youtu.be/xCfTGhmDsHg', 'public/uploads/slider/hbgJ6lTxJe.jpg', 1, 13, '2019-03-15 15:55:23', '2019-03-15 15:26:58'),
+(2, 2, 'test', 'tết', 'test', 'https://youtu.be/1mS1QM7igDg', 'public/uploads/slider/fcF5tgrL1j.jpg', 1, 13, '2019-03-15 15:57:03', '2019-03-15 15:57:03');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -950,6 +1014,12 @@ ALTER TABLE `z_post`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Chỉ mục cho bảng `z_slider`
+--
+ALTER TABLE `z_slider`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT cho các bảng đã đổ
 --
 
@@ -969,19 +1039,19 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT cho bảng `m_bai_giang`
 --
 ALTER TABLE `m_bai_giang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT cho bảng `m_cau_dap_an`
 --
 ALTER TABLE `m_cau_dap_an`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=213;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=221;
 
 --
 -- AUTO_INCREMENT cho bảng `m_cau_hoi`
 --
 ALTER TABLE `m_cau_hoi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT cho bảng `m_chuyen_de`
@@ -999,19 +1069,19 @@ ALTER TABLE `m_exam`
 -- AUTO_INCREMENT cho bảng `m_giao_vien`
 --
 ALTER TABLE `m_giao_vien`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `m_ket_qua_quiz`
 --
 ALTER TABLE `m_ket_qua_quiz`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=136;
 
 --
 -- AUTO_INCREMENT cho bảng `m_ket_qua_quiz_question`
 --
 ALTER TABLE `m_ket_qua_quiz_question`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=476;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=526;
 
 --
 -- AUTO_INCREMENT cho bảng `m_khoahoc_monhoc`
@@ -1047,7 +1117,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT cho bảng `role_user`
 --
 ALTER TABLE `role_user`
-  MODIFY `id` tinyint(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` tinyint(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT cho bảng `temp_answer`
@@ -1065,13 +1135,13 @@ ALTER TABLE `temp_questions`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT cho bảng `user_course`
 --
 ALTER TABLE `user_course`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT cho bảng `z_category`
@@ -1084,6 +1154,12 @@ ALTER TABLE `z_category`
 --
 ALTER TABLE `z_post`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `z_slider`
+--
+ALTER TABLE `z_slider`
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
