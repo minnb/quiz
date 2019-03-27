@@ -9,12 +9,12 @@
                 <li class="breadcrumb-item"><a href="{{ route('get.dashboard.course.mycourse') }}">Khóa học</a></li>
                 <li class="breadcrumb-item active">{{ App\Models\Course::getFullNameCourse($course_id) }}</li>
             </ol>
-            <h1 class="h2">111{{ $lesson_detail['name'] }}</h1>
+            <h1 class="h2">{{ $lesson_detail['name'] }}</h1>
             <div class="row">
                 <div class="col-md-8">
                     <div class="card">
                         <div class="embed-responsive embed-responsive-16by9">
-                            <iframe class="embed-responsive-item" src="{!! $lesson_data[0]->link_video !!}" allowfullscreen=""></iframe>
+                            <iframe class="embed-responsive-item" src="{!! $lesson_detail['link_video'] !!}" allowfullscreen=""></iframe>
                         </div>
                         <div class="card-body">
                            {!! $lesson_detail['description'] !!}
