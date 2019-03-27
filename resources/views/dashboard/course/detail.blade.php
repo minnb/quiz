@@ -14,8 +14,9 @@
                 <div class="col-md-8">
                     <div class="card">
                         <div class="embed-responsive embed-responsive-16by9">
-                            <iframe class="embed-responsive-item" src="{!! $lesson_data[0]->link_video !!}" allowfullscreen=""></iframe>
+                             <iframe class="embed-responsive-item" src="{!! $lesson_data[0]->link_video !!}" allowfullscreen=""></iframe>
                         </div>
+
                         <div class="card-body">
                            {!! $lesson_data[0]->description !!}
                            <a href="{{ route('get.dashboard.quiz.take',['type'=>fencrypt('QUIZ'),'course'=>fencrypt($lesson_data[0]->course),'thematic'=>fencrypt($lesson_data[0]->thematic), 'id'=>fencrypt($lesson_data[0]->id)])}}" class="btn btn-sm btn-danger">Luyệt tập Quiz</a>
