@@ -26,7 +26,7 @@
                                         </a>
                                         <div class="flex" style="min-width: 200px;">
                                             <!-- <h5 class="card-title text-base m-0"><a href="instructor-course-edit.html"><strong>Learn Vue.js</strong></a></h5> -->
-                                            <h4 class="card-title mb-1"><a href="{{ route('get.dashboard.course.detail',['id'=>fencrypt($item->code)])}}">
+                                            <h4 class="card-title mb-1"><a href="{{ route('home.register.course.try', ['course'=>fencrypt($item->code)]) }}">
                                                 {{ App\Models\Course::getFullNameCourse($item->code) }}
                                             </a></h4>
                                             <p class="text-black-70"></p>
@@ -34,7 +34,7 @@
                                                 <div class="d-flex flex flex-column mr-3">
                                                     <div class="d-flex align-items-center py-1 border-bottom">
                                                         <small class="text-black-70 mr-2">Bài giảng: {{ App\Models\Lesson::countLessonByCourse($item->code) }}</small>
-                                                        <small class="text-black-50"> Học viên: 34 </small>
+                                                        <small class="text-black-50"> Học viên: {{App\Models\User_Course::where('course', $item->code)->count() }} </small>
                                                     </div>
                                                     <div class="d-flex align-items-center py-1">
                                                         <p class="text-muted">Học phí: {{ number_format($item->unit_price) }} <ins>đ</ins></p>
@@ -178,7 +178,7 @@
                                     <p class="card-subtitle">Bài viết mới</p>
                                 </div>
                                 <div class="media-right">
-                                    <a class="btn btn-sm btn-primary" href="student-forum.html"> <i class="material-icons">keyboard_arrow_right</i></a>
+                                    <a class="btn btn-sm btn-primary" href="{{route('get.forum.index')}}"> <i class="material-icons">keyboard_arrow_right</i></a>
                                 </div>
                             </div>
                         </div>
@@ -190,14 +190,14 @@
                                             <a href="student-forum-thread.html" class="forum-thread-icon">
                                                 <i class="material-icons">description</i>
                                             </a>
-                                            <a href="student-profile.html" class="forum-thread-user">
+                                            <a href="#" class="forum-thread-user">
                                                 <img src="assets/images/people/50/guy-1.jpg" alt="" width="20" class="rounded-circle">
                                             </a>
                                         </div>
                                     </div>
                                     <div class="media-body">
                                         <div class="d-flex align-items-center">
-                                            <a href="student-profile.html" class="text-body"><strong>Luci Bryant</strong></a>
+                                            <a href="" class="text-body"><strong>Luci Bryant</strong></a>
                                             <small class="ml-auto text-muted">5 min ago</small>
                                         </div>
                                         <a class="text-black-70" href="student-forum-thread.html">Am I learning the right way?</a>
@@ -208,7 +208,7 @@
                                 <div class="media align-items-center">
                                     <div class="media-left">
                                         <div class="forum-icon-wrapper">
-                                            <a href="student-forum-thread.html" class="forum-thread-icon">
+                                            <a href="#" class="forum-thread-icon">
                                                 <i class="material-icons">description</i>
                                             </a>
                                             <a href="student-profile.html" class="forum-thread-user">
@@ -218,7 +218,7 @@
                                     </div>
                                     <div class="media-body">
                                         <div class="d-flex align-items-center">
-                                            <a href="student-profile.html" class="text-body"><strong>Magnus Goldsmith</strong></a>
+                                            <a href="#" class="text-body"><strong>Magnus Goldsmith</strong></a>
                                             <small class="ml-auto text-muted">7 min ago</small>
                                         </div>
                                         <a class="text-black-70" href="student-forum-thread.html">Can someone help me with the basic Setup?</a>
@@ -229,7 +229,7 @@
                                 <div class="media align-items-center">
                                     <div class="media-left">
                                         <div class="forum-icon-wrapper">
-                                            <a href="student-forum-thread.html" class="forum-thread-icon">
+                                            <a href="#" class="forum-thread-icon">
                                                 <i class="material-icons">description</i>
                                             </a>
                                             <a href="student-profile.html" class="forum-thread-user">
@@ -239,7 +239,7 @@
                                     </div>
                                     <div class="media-body">
                                         <div class="d-flex align-items-center">
-                                            <a href="student-profile.html" class="text-body"><strong>Katelyn Rankin</strong></a>
+                                            <a href="#" class="text-body"><strong>Katelyn Rankin</strong></a>
                                             <small class="ml-auto text-muted">12 min ago</small>
                                         </div>
                                         <a class="text-black-70" href="student-forum-thread.html">I think this is the right way?</a>
