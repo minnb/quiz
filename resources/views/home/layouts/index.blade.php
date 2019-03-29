@@ -1,5 +1,5 @@
 @extends('home.app')
-@section('title', 'Trang chủ')
+@section('title', 'Nơi ươm mầm ước mơ cho con bạn')
 @section('content')
 @include('home.layouts.banner')
     <section class="mainContent full-width clearfix featureSection">
@@ -7,7 +7,7 @@
         <div class="sectionTitle text-center " >
           <h2 class="wow fadeInUp">
             <span class="shape shape-left bg-color-4"></span>
-            <span>Our Features</span>
+            <span>Giới thiệu</span>
             <span class="shape shape-right bg-color-4"></span>
           </h2>
         </div>
@@ -18,8 +18,8 @@
                 <i class="fa fa-graduation-cap bg-color-1" aria-hidden="true"></i>
               </span>
               <div class="media-body">
-                <h3 class="media-heading color-1">Experience Teachers</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+                <h3 class="media-heading color-1">Giáo viên </h3>
+                <p>Danh sách giáo viên giỏi, nhiều năm kinh nghiệm giảng dạy và luyện thi được tuyển chọn từ các trường THCS</p>
               </div>
             </div>
           </div>
@@ -29,8 +29,8 @@
                 <i class="fa fa-leaf bg-color-2" aria-hidden="true"></i>
               </span>
               <div class="media-body">
-                <h3 class="media-heading color-2">Physical Activity</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+                <h3 class="media-heading color-2">Bài giảng</h3>
+                <p>Hệ thống bài giảng trực tuyến sinh động, luôn đổi mới để phù hợp xu hướng mới</p>
               </div>
             </div>
           </div>
@@ -40,8 +40,8 @@
                 <i class="fa fa-car bg-color-3" aria-hidden="true"></i>
               </span>
               <div class="media-body">
-                <h3 class="media-heading color-3">Physical Activity</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+                <h3 class="media-heading color-3">Luyện thi</h3>
+                <p>Tuyển tập các đề thi trực tuyến phong phú, từ cơ bản đến nâng cao và sát với thực tế</p>
               </div>
             </div>
           </div>
@@ -51,8 +51,8 @@
                 <i class="fa fa-cutlery bg-color-4" aria-hidden="true"></i>
               </span>
               <div class="media-body">
-                <h3 class="media-heading color-4">Delicious Food</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+                <h3 class="media-heading color-4">Trao đổi</h3>
+                <p>Trao đổi và được Giáo viên hướng dẫn thông quan diễn đàn, facebook, email</p>
               </div>
             </div>
           </div>
@@ -62,8 +62,8 @@
                 <i class="fa fa-heart bg-color-5" aria-hidden="true"></i>
               </span>
               <div class="media-body">
-                <h3 class="media-heading color-5">Love &amp; Care</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+                <h3 class="media-heading color-5">Học bạ</h3>
+                <p>Quá trình học tập được Giáo viên nhận xét và chấm điểm. Gửi kết quả tới từng học sinh</p>
               </div>
             </div>
           </div>
@@ -73,8 +73,8 @@
                 <i class="fa fa-shield bg-color-6" aria-hidden="true"></i>
               </span>
               <div class="media-body">
-                <h3 class="media-heading color-6">Meny Sports</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+                <h3 class="media-heading color-6">Định hướng</h3>
+                <p>Học Hiệu Quả hôm nay - Cho Thành công mai sau</p>
               </div>
             </div>
           </div>
@@ -82,7 +82,7 @@
       </div>
     </section>
     @if($data_course->count()>0)
-    <section class="whiteSection full-width clearfix coursesSection "  id="ourCourses" >
+    <section class="whiteSection full-width clearfix coursesSection"  id="ourCourses" >
       <div class="container">
         <div class="sectionTitle text-center">
           <h2 class="wow fadeInUp" >

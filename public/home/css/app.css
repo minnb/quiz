@@ -30,7 +30,7 @@ p {
 
 h1, h2, h3, h4, h5 {
   font-family: 'Open Sans', sans-serif;
-  text-transform: uppercase;
+  /*text-transform: uppercase;*/
   color: #202020;
   margin-top: 0;
   font-weight: 700;
@@ -45,7 +45,7 @@ h4 {
 h5 {
   font-weight: 400;
   font-size: 16px;
-  text-transform: capitalize;
+  /*/*text-transform: capitalize;*/*/
 }
 
 .form-control {
@@ -642,7 +642,7 @@ aside {
 
 #buttons .btn {
   margin: 5px 9px;
-  text-transform: capitalize;
+  /*text-transform: capitalize;*/
 }
 
 #buttons .btn-social {
@@ -926,10 +926,10 @@ aside {
 }
 
 .sectionTitle h2 {
-  font-family: 'Bookman', sans-serif;
+  font-family: 'Roboto+Condensed', sans-serif;
   font-size: 36px;
   color: #ea7066;
-  text-transform: capitalize;
+  /*text-transform: capitalize;*/
   float: left;
   width: 100%;
 }
@@ -976,8 +976,8 @@ aside {
 
 .sectionTitleSmall h2 {
   text-align: center;
-  font-family: 'Bookman', sans-serif;
-  text-transform: capitalize;
+  font-family: 'Roboto+Condensed', sans-serif;
+  /*text-transform: capitalize;*/
   margin: 0 0 12px 0;
   color: #ffffff;
 }
@@ -1007,8 +1007,8 @@ aside {
   color: #ffffff;
   margin-bottom: 40px;
   margin: 0 0 8px 0;
-  font-family: 'Bookman', sans-serif;
-  text-transform: capitalize;
+  font-family: 'Roboto+Condensed', sans-serif;
+  /*text-transform: capitalize;*/
   font-weight: 600;
 }
 
@@ -1111,10 +1111,10 @@ aside {
 }
 
 .resultInfo h3 {
-  font-family: 'Bookman', sans-serif;
+  font-family: 'Roboto+Condensed', sans-serif;
   color: #666666;
   font-size: 28px;
-  text-transform: capitalize;
+  /*text-transform: capitalize;*/
   margin-bottom: 40px;
 }
 
@@ -1131,9 +1131,9 @@ aside {
 .formPanel.panel .panel-heading .panel-title {
   font-size: 24px;
   color: #ffffff;
-  text-transform: capitalize;
+  /*text-transform: capitalize;*/
   font-weight: 700;
-  font-family: 'Bookman', sans-serif;
+  font-family: 'Roboto+Condensed', sans-serif;
 }
 
 .formPanel.panel .panel-body {
@@ -1162,7 +1162,7 @@ aside {
 }
 
 .formPanel.panel .panel-body .media-list li .media-body.iconContent .media-heading {
-  font-family: 'Bookman', sans-serif;
+  font-family: 'Roboto+Condensed', sans-serif;
   font-size: 20px;
   font-weight: 700;
 }
@@ -1175,7 +1175,7 @@ aside {
 .formPanel.panel .panel-body .media-list.blogListing li .media-heading a {
   font-weight: 600;
   font-size: 14px;
-  text-transform: capitalize;
+  /*text-transform: capitalize;*/
   color: #666666;
 }
 
@@ -1387,11 +1387,11 @@ aside {
 }
 
 .tabCommon .media-body .media-heading {
-  font-family: 'Bookman', sans-serif;
+  font-family: 'Roboto+Condensed', sans-serif;
   font-size: 28px;
   color: #ea7066;
   margin: 0 0 25px 0;
-  text-transform: capitalize;
+  /*text-transform: capitalize;*/
 }
 
 .tabCommon .media-body p {
@@ -1796,10 +1796,10 @@ aside {
 }
 
 .cart-dropdown .dropdown-menu li:first-child {
-  font-family: 'Bookman', sans-serif;
+  font-family: 'Roboto+Condensed', sans-serif;
   font-size: 24px;
   color: #222222;
-  text-transform: capitalize;
+  /*text-transform: capitalize;*/
   padding-top: 0;
   padding-bottom: 10px;
   font-weight: 700;
@@ -1841,7 +1841,7 @@ aside {
 }
 
 .cart-dropdown .dropdown-menu li:last-child span {
-  font-family: 'Bookman', sans-serif;
+  font-family: 'Roboto+Condensed', sans-serif;
   font-size: 24px;
   color: #222222;
   font-weight: 700;
@@ -1909,10 +1909,10 @@ aside {
 }
 
 .cart-dropdown .dropdown-menu .media-body h4 {
-  font-family: 'Bookman', sans-serif;
+  font-family: 'Roboto+Condensed', sans-serif;
   font-size: 20px;
   color: #222222;
-  text-transform: capitalize;
+  /*text-transform: capitalize;*/
   margin-bottom: 10px;
   font-weight: 700;
 }
@@ -2208,11 +2208,11 @@ aside {
 }
 
 .errorInfo h3 {
-  font-family: 'Bookman', sans-serif;
+  font-family: 'Roboto+Condensed', sans-serif;
   font-size: 48px;
   color: #222222;
   margin-bottom: 25px;
-  text-transform: capitalize;
+  /*text-transform: capitalize;*/
 }
 
 .errorInfo p {
@@ -2278,7 +2278,7 @@ aside {
 }
 
 .navbar-header .navbar-brand > img {
-  width: 100%;
+  width: 135%;
 }
 
 @media (min-width: 320px) {
@@ -2328,7 +2328,7 @@ aside {
 }
 
 .navbar-default .navbar-nav > li > a {
-  text-transform: capitalize;
+  /*text-transform: capitalize;*/
   font-weight: 600;
   font-size: 15px;
 }
@@ -2380,7 +2380,7 @@ aside {
   padding: 0;
   line-height: 16px;
   text-align: center;
-  text-transform: capitalize;
+  /*text-transform: capitalize;*/
 }
 
 @media (min-width: 320px) {
@@ -2602,7 +2602,7 @@ aside {
 
 @media (min-width: 768px) {
   .navbar-nav > li.dropdown.megaDropMenu .dropdown-menu .list-unstyled li.listHeading, .navbar-nav > li.dropdown.megaDropMenu .dropdown-menu .list-unstyled li:first-child {
-    font-family: 'Bookman', sans-serif;
+    font-family: 'Roboto+Condensed', sans-serif;
     font-weight: 700;
     padding: 10px 12px;
     font-size: 24px;
@@ -3342,16 +3342,16 @@ footer .color-bar {
 }
 
 .footerTitle a img {
-  width: 100%;
+  width: 130%;
 }
 
 .footerTitle h4 {
   color: #ffffff;
   font-size: 20px;
   margin: 0;
-  font-family: 'Bookman', sans-serif;
+  font-family: 'Roboto+Condensed', sans-serif;
   font-weight: 700;
-  text-transform: capitalize;
+  /*text-transform: capitalize;*/
 }
 
 .footerInfo p {
@@ -3422,7 +3422,7 @@ footer .color-bar {
   font-size: 14px;
   font-weight: 400;
   line-height: 16px;
-  text-transform: capitalize;
+  /*text-transform: capitalize;*/
   text-overflow: none;
   white-space: normal;
   overflow: hidden;
@@ -3628,16 +3628,16 @@ footer .color-bar {
 }
 
 .footerTitle a img {
-  width: 100%;
+  width: 130%;
 }
 
 .footerTitle h4 {
   color: #ffffff;
   font-size: 20px;
   margin: 0;
-  font-family: 'Bookman', sans-serif;
+  font-family: 'Roboto+Condensed', sans-serif;
   font-weight: 700;
-  text-transform: capitalize;
+  /*text-transform: capitalize;*/
 }
 
 .footerInfo p {
@@ -3708,7 +3708,7 @@ footer .color-bar {
   font-size: 14px;
   font-weight: 400;
   line-height: 16px;
-  text-transform: capitalize;
+  /*text-transform: capitalize;*/
   text-overflow: none;
   white-space: normal;
   overflow: hidden;
@@ -3935,7 +3935,7 @@ footer .color-bar {
 .tp-caption.rs-caption-3 {
   white-space: normal !important;
   width: inherit;
-  font-family: 'Bookman', sans-serif;
+  font-family: 'Roboto+Condensed', sans-serif;
 }
 
 @media (min-width: 320px) {
@@ -4011,7 +4011,7 @@ footer .color-bar {
 }
 
 .tp-caption.rs-caption-1 {
-  text-transform: capitalize;
+  /*text-transform: capitalize;*/
   font-weight: 700;
 }
 
@@ -4180,7 +4180,7 @@ footer .color-bar {
 .sectionLink .linkText {
   line-height: 190px;
   display: block;
-  font-family: 'Bookman', sans-serif;
+  font-family: 'Roboto+Condensed', sans-serif;
   font-size: 32px;
   font-weight: 400;
   color: #ffffff;
@@ -4239,9 +4239,9 @@ footer .color-bar {
   font-size: 24px;
   line-height: 30px;
   color: #ffffff;
-  font-family: 'Bookman', sans-serif;
+  font-family: 'Roboto+Condensed', sans-serif;
   font-weight: 700;
-  text-transform: capitalize;
+  /*text-transform: capitalize;*/
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -4298,8 +4298,8 @@ footer .color-bar {
   color: #ffffff;
   margin-bottom: 40px;
   margin: 0 0 23px 0;
-  font-family: 'Bookman', sans-serif;
-  text-transform: capitalize;
+  font-family: 'Roboto+Condensed', sans-serif;
+  /*text-transform: capitalize;*/
 }
 
 @media (min-width: 768px) {
@@ -4335,10 +4335,10 @@ footer .color-bar {
 
 /*======== 5.4 ABOUT SCHOOL ========*/
 .schoolInfo h2 {
-  font-family: 'Bookman', sans-serif;
+  font-family: 'Roboto+Condensed', sans-serif;
   font-size: 36px;
   line-height: 42px;
-  text-transform: capitalize;
+  /*text-transform: capitalize;*/
   color: #ea7066;
   font-weight: 700;
 }
@@ -4450,7 +4450,7 @@ footer .color-bar {
 }
 .block h3 {
   font-family: 'Helvetica', sans-serif;
-  text-transform: capitalize;
+  /*text-transform: capitalize;*/
   font-weight: 700;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -4512,7 +4512,7 @@ footer .color-bar {
 }
 
 .block .list-inline .btn-link {
-  text-transform: capitalize;
+  /*text-transform: capitalize;*/
   font-size: 14px;
   color: #666666;
   font-weight: 600;
@@ -4573,7 +4573,7 @@ footer .color-bar {
 }
 
 .coursesSection {
-  padding-bottom: 80px;
+  padding-bottom: 40px;
 }
 
 .sticker {
@@ -4621,7 +4621,7 @@ footer .color-bar {
 }
 
 .thumbnailContent.alt > .caption .table.table-curved thead tr th:first-child {
-  font-family: 'Bookman', sans-serif;
+  font-family: 'Roboto+Condensed', sans-serif;
   font-size: 20px;
 }
 
@@ -4645,7 +4645,7 @@ footer .color-bar {
 
 .thumbnailContent.alt > .caption .table.table-curved tbody tr td span {
   display: block;
-  font-family: 'Bookman', sans-serif;
+  font-family: 'Roboto+Condensed', sans-serif;
   font-size: 18px;
   font-weight: 700;
   margin-bottom: 15px;
@@ -4774,7 +4774,7 @@ footer .color-bar {
 .teamInfo h3 {
   font-size: 20px;
   color: #ffffff;
-  text-transform: capitalize;
+  /*text-transform: capitalize;*/
   margin: 15px 0 10px 0;
   text-align: center;
   font-weight: 600;
@@ -4874,7 +4874,7 @@ footer .color-bar {
 .teamStyle .media-body h4 {
   font-size: 20px;
   color: #222222;
-  text-transform: capitalize;
+  /*text-transform: capitalize;*/
   font-weight: 600;
   margin-bottom: 12px;
 }
@@ -4978,8 +4978,8 @@ footer .color-bar {
 
 .teachersInfo h3 {
   color: #ea7066;
-  text-transform: capitalize;
-  font-family: 'Bookman', sans-serif;
+  /*text-transform: capitalize;*/
+  font-family: 'Roboto+Condensed', sans-serif;
   font-weight: 700;
   font-size: 28px;
   margin: 0 0 25px 0;
@@ -5083,7 +5083,7 @@ footer .color-bar {
   background-color: #ffffff;
   margin-bottom: 15px;
   font-size: 20px;
-  text-transform: capitalize;
+  /*text-transform: capitalize;*/
 }
 
 /*======== 5.8 EVENT SECTION ========*/
@@ -5476,13 +5476,13 @@ footer .color-bar {
   line-height: 36px;
   color: #ffffff;
   margin: 0 0 40px 0;
-  text-transform: capitalize;
+  /*text-transform: capitalize;*/
 }
 
 .commentContent h3 {
   font-size: 16px;
   color: #ffffff;
-  text-transform: capitalize;
+  /*text-transform: capitalize;*/
   margin: 0 0 12px 0;
   font-weight: 600;
 }
@@ -5513,8 +5513,8 @@ footer .color-bar {
   font-size: 36px;
   line-height: 4px1;
   color: #ea7066;
-  text-transform: capitalize;
-  font-family: 'Bookman', sans-serif;
+  /*text-transform: capitalize;*/
+  font-family: 'Roboto+Condensed', sans-serif;
   margin: 0 0 20px 0;
 }
 
@@ -5656,7 +5656,7 @@ footer .color-bar {
 
 .addressContent .media-body .media-heading {
   font-weight: 700;
-  text-transform: capitalize;
+  /*text-transform: capitalize;*/
   margin-bottom: 16px;
   color: #202020;
 }
@@ -6127,10 +6127,10 @@ footer .color-bar {
 }
 
 .banner-bottom-inner .colContent-info h3 {
-  font-family: 'Bookman', sans-serif;
+  font-family: 'Roboto+Condensed', sans-serif;
   font-size: 20px;
   color: #ffffff;
-  text-transform: capitalize;
+  /*text-transform: capitalize;*/
   line-height: 34px;
   padding: 0 10px;
   display: inline-block;
@@ -6282,10 +6282,10 @@ footer .color-bar {
 }
 
 .box-info h4 {
-  font-family: 'Bookman', sans-serif;
+  font-family: 'Roboto+Condensed', sans-serif;
   font-size: 20px;
   color: #ffffff;
-  text-transform: capitalize;
+  /*text-transform: capitalize;*/
   margin-bottom: 15px;
   font-weight: 700;
 }
@@ -6308,7 +6308,7 @@ footer .color-bar {
 .price span {
   font-size: 27px;
   color: #ffffff;
-  text-transform: capitalize;
+  /*text-transform: capitalize;*/
   margin-bottom: 15px;
   font-weight: 600;
   display: inline-block;
@@ -7041,7 +7041,7 @@ footer .color-bar {
   padding: 17px;
   border-radius: 5px;
   background: #f0c24b;
-  text-transform: capitalize;
+  /*text-transform: capitalize;*/
   font-size: 24px;
 }
 
@@ -7134,7 +7134,7 @@ footer .color-bar {
   .single-category .category-Slider .single-item .slide-cat-info h2 {
     color: #ffffff !important;
     font-size: 14px !important;
-    text-transform: capitalize;
+    /*text-transform: capitalize;*/
     margin: 0 !important;
   }
 }
@@ -7308,8 +7308,8 @@ footer .color-bar {
 .courseSidebar .panel-heading .panel-title {
   font-size: 24px;
   color: #ffffff;
-  text-transform: capitalize;
-  font-family: 'Bookman', sans-serif;
+  /*/*text-transform: capitalize;*/*/
+  font-family: 'Roboto+Condensed', sans-serif;
 }
 
 .courseSidebar .panel-body {
@@ -7551,8 +7551,8 @@ footer .color-bar {
 }
 
 .courseList .media-body .media-heading a {
-  font-family: 'Bookman', sans-serif;
-  text-transform: capitalize;
+  font-family: 'Roboto+Condensed', sans-serif;
+  /*/*/*text-transform: capitalize;*/*/*/
   font-weight: 700;
   line-height: 20px;
   margin: 0 0 20px 0;
@@ -7605,7 +7605,7 @@ footer .color-bar {
 }
 
 .courseList .media-body .list-inline.btnPart > li a.btn-link {
-  text-transform: capitalize;
+  /*/*/*text-transform: capitalize;*/*/*/
   font-size: 14px;
   color: #666666;
   font-weight: 600;
@@ -7721,9 +7721,9 @@ footer .color-bar {
 .rightSidebar .panel .panel-heading .panel-title {
   font-size: 24px;
   color: #ffffff;
-  text-transform: capitalize;
+  /*/*/*text-transform: capitalize;*/*/*/
   font-weight: 700;
-  font-family: 'Bookman', sans-serif;
+  font-family: 'Roboto+Condensed', sans-serif;
 }
 
 .rightSidebar .panel .panel-body {
@@ -7758,7 +7758,7 @@ footer .color-bar {
 }
 
 .rightSidebar .panel .panel-body .media-list li .media-body.iconContent .media-heading {
-  font-family: 'Bookman', sans-serif;
+  font-family: 'Roboto+Condensed', sans-serif;
   font-size: 20px;
   font-weight: 700;
 }
@@ -7771,7 +7771,7 @@ footer .color-bar {
 .rightSidebar .panel .panel-body .media-list.blogListing li .media-heading a {
   font-weight: 600;
   font-size: 14px;
-  text-transform: capitalize;
+  /*/*/*text-transform: capitalize;*/*/*/
   color: #666666;
 }
 
@@ -7799,9 +7799,9 @@ footer .color-bar {
 .eventSidebar.panel .panel-heading .panel-title {
   font-size: 24px;
   color: #ffffff;
-  text-transform: capitalize;
+  /*/*/*text-transform: capitalize;*/*/*/
   font-weight: 700;
-  font-family: 'Bookman', sans-serif;
+  font-family: 'Roboto+Condensed', sans-serif;
 }
 
 .eventSidebar.panel .panel-body {
@@ -7830,7 +7830,7 @@ footer .color-bar {
 }
 
 .eventSidebar.panel .panel-body .media-list li .media-body.iconContent .media-heading {
-  font-family: 'Bookman', sans-serif;
+  font-family: 'Roboto+Condensed', sans-serif;
   font-size: 20px;
   font-weight: 700;
 }
@@ -7847,7 +7847,7 @@ footer .color-bar {
 .eventSidebar.panel .panel-body .media-list.blogListing li .media-heading a {
   font-weight: 600;
   font-size: 14px;
-  text-transform: capitalize;
+  /*/*/*text-transform: capitalize;*/*/*/
   color: #666666;
 }
 
@@ -7878,11 +7878,11 @@ footer .color-bar {
 }
 
 .coursesCounter .counterInner h3 {
-  font-family: 'Bookman', sans-serif;
+  font-family: 'Roboto+Condensed', sans-serif;
   font-size: 26px;
   font-weight: 700;
   color: #ffffff;
-  text-transform: capitalize;
+  /*/*/*text-transform: capitalize;*/*/*/
   text-align: center;
   margin: 40px 0;
 }
@@ -7926,7 +7926,7 @@ footer .color-bar {
   font-size: 12px;
   font-weight: 400;
   color: #ffffff;
-  text-transform: capitalize;
+  /*/*text-transform: capitalize;*/*/
   font-weight: 600;
 }
 
@@ -7939,8 +7939,8 @@ footer .color-bar {
 
 .thumbnailContent > .caption.singleBlog h3 {
   line-height: 34px;
-  font-family: 'Bookman', sans-serif;
-  text-transform: capitalize;
+  font-family: 'Roboto+Condensed', sans-serif;
+  /*/*/*text-transform: capitalize;*/*/*/
   font-weight: 700;
   margin: 0 0 20px 0;
   width: 100%;
@@ -8027,11 +8027,11 @@ footer .color-bar {
 }
 
 .blogComments h3 {
-  font-family: 'Bookman', sans-serif;
+  font-family: 'Roboto+Condensed', sans-serif;
   font-size: 24px;
   color: #ea7066;
   font-weight: 700;
-  text-transform: capitalize;
+  /*/*/*text-transform: capitalize;*/*/*/
   margin-bottom: 30px;
 }
 
@@ -8066,7 +8066,7 @@ footer .color-bar {
   font-size: 14px;
   color: #666666;
   margin-bottom: 15px;
-  text-transform: capitalize;
+  /*/*text-transform: capitalize;*/
 }
 
 .commentsList .media-body p {
@@ -8163,8 +8163,8 @@ footer .color-bar {
   font-weight: 700;
   color: #222222;
   font-size: 4px1;
-  font-family: 'Bookman', sans-serif;
-  text-transform: capitalize;
+  font-family: 'Roboto+Condensed', sans-serif;
+  /*/*text-transform: capitalize;*/*/
 }
 
 @media (min-width: 320px) {
@@ -8315,7 +8315,7 @@ footer .color-bar {
   margin: 0 auto;
   color: #f0c24b;
   text-align: center;
-  font-family: 'Bookman', sans-serif;
+  font-family: 'Roboto+Condensed', sans-serif;
 }
 
 .count-down #simple_timer .table-cell {
@@ -8420,8 +8420,8 @@ footer .color-bar {
 }
 
 .servicesStyle > .media-body > .media-heading {
-  text-transform: capitalize;
-  font-family: 'Bookman', sans-serif;
+  /*/*text-transform: capitalize;*/*/
+  font-family: 'Roboto+Condensed', sans-serif;
   font-size: 24px;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -8549,7 +8549,7 @@ footer .color-bar {
 .testimonialContent h3 small {
   margin: 0;
   font-size: 14px;
-  text-transform: capitalize;
+  /*/*text-transform: capitalize;*/*/
   color: rgba(255, 255, 255, 0.8);
 }
 
@@ -8719,10 +8719,10 @@ footer .color-bar {
 .priceTitle h3 {
   margin: 0;
   color: #ffffff;
-  font-family: 'Bookman', sans-serif;
+  font-family: 'Roboto+Condensed', sans-serif;
   font-size: 34px;
   font-weight: 600;
-  text-transform: capitalize;
+  /*/*text-transform: capitalize;*/*/
 }
 
 .priceTitle.alt {
@@ -8761,7 +8761,7 @@ footer .color-bar {
 
 .priceOffer li {
   margin-bottom: 25px;
-  font-family: 'Bookman', sans-serif;
+  font-family: 'Roboto+Condensed', sans-serif;
   color: #666666;
   font-size: 18px;
 }
@@ -8777,7 +8777,7 @@ footer .color-bar {
 .priceBtn h4 {
   display: inline-block;
   float: right;
-  font-family: 'Bookman', sans-serif;
+  font-family: 'Roboto+Condensed', sans-serif;
   font-size: 34px;
   font-weight: 600;
   text-align: center;
@@ -8786,12 +8786,12 @@ footer .color-bar {
 }
 
 .priceBtn h4 small {
-  text-transform: capitalize;
+  /*/*text-transform: capitalize;*/*/
   font-size: 14px;
 }
 
 .priceBtn h5 {
-  font-family: 'Bookman', sans-serif;
+  font-family: 'Roboto+Condensed', sans-serif;
   font-size: 28px;
   font-weight: 600;
   color: #222222;
@@ -9029,7 +9029,7 @@ footer .color-bar {
 
 .progress-wizard .progressInfo {
   text-align: center;
-  font-family: 'Bookman', sans-serif;
+  font-family: 'Roboto+Condensed', sans-serif;
   font-weight: 600;
   font-size: 16px;
   color: #222222;
@@ -9066,12 +9066,12 @@ footer .color-bar {
 }
 
 .checkoutInfo .panel-heading .panel-title {
-  font-family: 'Bookman', sans-serif;
+  font-family: 'Roboto+Condensed', sans-serif;
   font-weight: 700;
   font-size: 24px;
   color: #ffffff;
   line-height: 80px;
-  text-transform: capitalize;
+  /*/*text-transform: capitalize;*/*/
 }
 
 .checkoutInfo .panel-body {
@@ -9121,11 +9121,11 @@ footer .color-bar {
 }
 
 .lowerPartTitle h4 {
-  font-family: 'Bookman', sans-serif;
+  font-family: 'Roboto+Condensed', sans-serif;
   font-weight: 700;
   font-size: 24px;
   color: #ea7066;
-  text-transform: capitalize;
+  /*/*text-transform: capitalize;*/*/
   margin-top: 15px;
   margin-left: 15px;
 }
@@ -9287,10 +9287,10 @@ footer .color-bar {
 }
 
 .product-info .product-title {
-  font-family: 'Bookman', sans-serif;
+  font-family: 'Roboto+Condensed', sans-serif;
   font-size: 40px;
   color: #222222;
-  text-transform: capitalize;
+  /*/*text-transform: capitalize;*/*/
   margin-bottom: 50px;
   font-weight: 600;
 }
@@ -9360,7 +9360,7 @@ footer .color-bar {
 }
 
 .share span {
-  font-family: 'Bookman', sans-serif;
+  font-family: 'Roboto+Condensed', sans-serif;
   font-size: 24px;
   color: #222222;
   font-weight: 600;
@@ -9413,10 +9413,10 @@ footer .color-bar {
 }
 
 .product-review .tab-content h3 {
-  font-family: 'Bookman', sans-serif;
+  font-family: 'Roboto+Condensed', sans-serif;
   font-size: 24px;
   color: #ea7066;
-  text-transform: capitalize;
+  /*/*text-transform: capitalize;*/*/
   margin-bottom: 20px;
   font-weight: 600;
 }

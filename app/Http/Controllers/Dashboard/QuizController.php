@@ -59,7 +59,7 @@ class QuizController extends Controller
                 HeaderQuiz::where('total', 0)->delete();
                 return back();
             }
-        }catch(Exception $e){
+        }catch(\Exception $e){
             return back();
         }
     }
@@ -70,7 +70,7 @@ class QuizController extends Controller
     	try{
             $question_data = '';
             return view('dashboard.quiz.take_quiz', compact('question_data', 'id'));
-        }catch(Exception $e){
+        }catch(\Exception $e){
             return back();
         } 
     }
@@ -95,7 +95,7 @@ class QuizController extends Controller
             DB::commit();
             return redirect()->route('get.dashboard.quiz.take.result', ['quiz_id'=>fencrypt($quiz_id)]);
 
-        }catch(Exception $e){
+        }catch(\Exception $e){
             DB::rollBack();
             return back();
         }       
@@ -120,12 +120,15 @@ class QuizController extends Controller
            //$time = $request->time * 60 * 60;
            //dispatch(new SendMailQuiz($data_email))->delay(Carbon::now()->addMinutes(2));
            //SendMailQuiz::dispatch($data_email)->delay(now()->addMinutes(2));
-            Mail::send('dashboard.email.result_quiz',['data'=>$data_email], function($message) use ($data_email){
-                $message->to($data_email['email'], $data_email['name'])->subject('Kết quả bài thi - '.$data_email['subject']);
-            });
-            
+            try{
+                Mail::send('dashboard.email.result_quiz',['data'=>$data_email], function($message) use ($data_email){
+                    $message->to($data_email['email'], $data_email['name'])->subject('Kết quả bài thi - '.$data_email['subject']);
+                });
+            }catch(\Exception $e){
+                return view('dashboard.quiz.quiz_result', compact('data_result','answer_result','quiz_id','point'));
+            }
             return view('dashboard.quiz.quiz_result', compact('data_result','answer_result','quiz_id','point'));
-        }catch(Exception $e){
+        }catch(\Exception $e){
             return back();
         }
         
@@ -138,7 +141,7 @@ class QuizController extends Controller
             $point = calcPoint($data_result->total, $data_result->kq);
             $answer_result = DetailQuiz::where('quiz_id', $quiz_id)->orderBy('id')->get(); 
             return view('dashboard.quiz.quiz_result', compact('data_result','answer_result','quiz_id','point'));
-        }catch(Exception $e){
+        }catch(\Exception $e){
             return back();
         }
         
@@ -155,7 +158,7 @@ class QuizController extends Controller
             }else{
                 return back();
             }
-        }catch(Exception $e){
+        }catch(\Exception $e){
             return back();
         }
     }

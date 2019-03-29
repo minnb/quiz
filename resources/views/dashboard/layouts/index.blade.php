@@ -1,5 +1,5 @@
 @extends('dashboard.app')
-@section('title', 'Dashboard')
+@section('title', 'Thú vị, hữu ích và hiệu quả')
 @section('content')
 <div data-push data-responsive-width="992px" class="mdk-drawer-layout js-mdk-drawer-layout">
     <div class="mdk-drawer-layout__content page ">

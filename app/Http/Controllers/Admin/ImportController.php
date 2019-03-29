@@ -59,7 +59,7 @@ class ImportController extends Controller
                 DB::commit();
                 return back()->with(['flash_message'=>'Upload thành công']);
             }
-        }catch (Exception $e) {
+        }catch (\Exception $e) {
             DB::rollBack();
             return back()->withError($e->getMessage())->withInput();
         }
@@ -114,7 +114,7 @@ class ImportController extends Controller
             DB::commit();
            return redirect()->route('get.admin.quesstion.list.quiz')->with(['flash_message'=>'Tạo mới thành công']);
 
-        }catch (Exception $e) {
+        }catch (\Exception $e) {
             DB::rollBack();
             return back()->withError($e->getMessage())->withInput();
         }

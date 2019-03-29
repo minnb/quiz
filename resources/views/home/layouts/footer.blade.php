@@ -20,11 +20,11 @@
           <div class="row">
             <div class="col-sm-3 col-xs-12">
               <div class="footerTitle">
-                <a href="index.html"><img src="{{ asset('public/home/img/logo-footer.png') }}"></a>
+                <a href="{{url('/')}}"><img src="{{ asset('public/home/img/logo-footer.png') }}"></a>
               </div>
               <div class="footerInfo">
-                <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa officia.Lorem ipsum dolor sit amet.</p>
-                <p>consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <p><i>Để mỗi giờ con học là những phút giây vui vẻ. Học bất cứ đâu, hiểu bất cứ điều gì.</i></p>
+                <p><i>Học Hiệu Quả - Giáo viên tận tâm, nhiệt tình. Hệ thống học thi thông minh.</i></p>
               </div>
             </div>
             <div class="col-sm-3 col-xs-12">
