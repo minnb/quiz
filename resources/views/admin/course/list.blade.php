@@ -11,6 +11,7 @@
 						<thead>
 							<tr>
 								<th>#</th>
+								<th>Hình</th>
 								<th>Mã khóa học</th>
 								<th>Lớp</th>
 								<th>Tên khóa học</th>
@@ -24,6 +25,9 @@
 							<?php foreach($data as $key=>$item) { ?>
 							<tr>
 								<td><?php echo $key + 1; ?></td>
+								<td>
+									<img src="{{ asset($item->image)}}" style="max-height: 100px; width: auto;">
+								</td>
 								<td><?php echo $item->code; ?></td>
 								<td><?php echo App\Models\ClassRoom::find($item->class)->name; ?></td>
 								<td><?php echo $item->name; ?></td>

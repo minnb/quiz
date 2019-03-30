@@ -61,7 +61,7 @@ class ImportController extends Controller
             }
         }catch (\Exception $e) {
             DB::rollBack();
-            return back()->withError($e->getMessage())->withInput();
+            return back()->withErrors($e->getMessage())->withInput();
         }
     }
 
@@ -116,7 +116,7 @@ class ImportController extends Controller
 
         }catch (\Exception $e) {
             DB::rollBack();
-            return back()->withError($e->getMessage())->withInput();
+            return back()->withErrors($e->getMessage())->withInput();
         }
     }
 }

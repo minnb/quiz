@@ -52,9 +52,9 @@ class PagesController  extends Controller
             $data->save();
             DB::commit();
             return redirect()->route('get.admin.pages.slide.list')->with(['flash_message'=>'Tạo mới thành công']);
-        }catch (Exception $e) {
+        }catch (\Exception $e) {
             DB::rollBack();
-            return back()->withError($e->getMessage())->withInput();
+            return back()->withErrors($e->getMessage())->withInput();
         }
     }
 
@@ -99,31 +99,18 @@ class PagesController  extends Controller
             $data->save();
             DB::commit();
             return redirect()->route('get.admin.pages.slide.list')->with(['flash_message'=>'Chỉnh sửa thành công']);
-        }catch (Exception $e) {
+        }catch (\Exception $e) {
             DB::rollBack();
-            return back()->withError($e->getMessage())->withInput();
+            return back()->withErrors($e->getMessage())->withInput();
         }
     }
     
-    public function getNewList(){
-    	
-    }
-
-    public function getNewAdd(){
-    	
-    }
-
-
-    public function postNewAdd(){
-    	
-    }
-
     public function getQaList(){
-    	
+
+        return back();
     }
 
     public function postQaAdd(){
-    	
+        
     }
-
 }

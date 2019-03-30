@@ -104,9 +104,9 @@ class QuesstionController  extends Controller
             }else{
                 return redirect()->route('get.admin.quesstion.list.question')->with(['flash_message'=>'Thêm mới câu hỏi thành công']);
             }
-        }catch (Exception $e) {
+        }catch (\Exception $e) {
             DB::rollBack();
-            return back()->withError($e->getMessage())->withInput();
+            return back()->withErrors($e->getMessage())->withInput();
         }
     }
 
@@ -169,9 +169,9 @@ class QuesstionController  extends Controller
 
             DB::commit();
             return redirect()->route('get.admin.quesstion.list')->with(['flash_message'=>'Chỉnh sửa thành công']);
-        }catch (Exception $e) {
+        }catch (\Exception $e) {
             DB::rollBack();
-            return back()->withError($e->getMessage())->withInput();
+            return back()->withErrors($e->getMessage())->withInput();
         }
     }
 
@@ -229,9 +229,9 @@ class QuesstionController  extends Controller
                 DB::commit();
                 return back()->with(['flash_message'=>'Upload thành công']);
             }
-        }catch (Exception $e) {
+        }catch (\Exception $e) {
             DB::rollBack();
-            return back()->withError($e->getMessage())->withInput();
+            return back()->withErrors($e->getMessage())->withInput();
         }
     }
     public function postImportExcel(Request $request, $idd){
@@ -283,9 +283,9 @@ class QuesstionController  extends Controller
             DB::commit();
            return redirect()->route('get.admin.quesstion.list.question')->with(['flash_message'=>'Tạo mới thành công']);
 
-        }catch (Exception $e) {
+        }catch (\Exception $e) {
             DB::rollBack();
-            return back()->withError($e->getMessage())->withInput();
+            return back()->withErrors($e->getMessage())->withInput();
         }
         
         

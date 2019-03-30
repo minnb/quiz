@@ -58,11 +58,11 @@ class ExamController extends Controller
             if($total == $request->number_quesstion){
             	$exam->save();
             }else{
-            	return back()->withErrors('Số lượng câu hỏi không bằng nhau')->withInput();
+            	return back()->withErrorss('Số lượng câu hỏi không bằng nhau')->withInput();
             }
             DB::commit();
             return redirect()->route('get.admin.exam.list')->with(['flash_message'=>'Tạo mới thành công']);
-         }catch (Exception $e) {
+         }catch (\Exception $e) {
             DB::rollBack();
             return back()->withErrors($e->getMessage())->withInput();
         }
@@ -106,13 +106,13 @@ class ExamController extends Controller
             if($total == $request->number_quesstion){
             	$exam->save();
             }else{
-            	return back()->withErrors('Số lượng câu hỏi không bằng nhau')->withInput();
+            	return back()->withErrorss('Số lượng câu hỏi không bằng nhau')->withInput();
             }
             DB::commit();
             return redirect()->route('get.admin.exam.list')->with(['flash_message'=>'Chỉnh sửa thành công']);
-         }catch (Exception $e) {
+         }catch (\Exception $e) {
             DB::rollBack();
-            return back()->withError($e->getMessage())->withInput();
+            return back()->withErrors($e->getMessage())->withInput();
         }
     }
 
@@ -123,9 +123,9 @@ class ExamController extends Controller
             $exam->status = 0;
             $exam->save();
             return back()->with(['flash_message'=>'Xoá thành thành công']);
-        }catch (Exception $e) {
+        }catch (\Exception $e) {
             DB::rollBack();
-            return back()->withError($e->getMessage())->withInput();
+            return back()->withErrors($e->getMessage())->withInput();
         }
     }
 

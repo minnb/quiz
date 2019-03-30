@@ -69,9 +69,9 @@ class CourseController extends Controller
             
             DB::commit();
             return redirect()->route('get.admin.course.list')->with(['flash_message'=>'Tạo mới thành công']); 
-        }catch (Exception $e) {
+        }catch (\Exception $e) {
             DB::rollBack();
-            return back()->withError($e->getMessage())->withInput();
+            return back()->withErrors($e->getMessage())->withInput();
         }
     }
 
@@ -107,9 +107,9 @@ class CourseController extends Controller
             $course->save();
             DB::commit();
             return redirect()->route('get.admin.course.list')->with(['flash_message'=>'Chỉnh sửa thành công']); 
-        }catch (Exception $e) {
+        }catch (\Exception $e) {
             DB::rollBack();
-            return back()->withError($e->getMessage())->withInput();
+            return back()->withErrors($e->getMessage())->withInput();
         }
     }
 
@@ -143,14 +143,14 @@ class CourseController extends Controller
             if(Course::checkSubjectInCourse($course_id, $request->subject) == 0){
                 $course->save();
             }else{
-                return back()->withErrors('Môn học đã tồn tại trong khoá học')->withInput();
+                return back()->withErrorss('Môn học đã tồn tại trong khoá học')->withInput();
             }
             
             DB::commit();
             return redirect()->route('get.admin.course.list')->with(['flash_message'=>'Thêm mới thành công']); 
         }catch (ModelNotFoundException $exception ) {
             DB::rollBack();
-            return back()->withError($exception->getMessage())->withInput();
+            return back()->withErrors($exception->getMessage())->withInput();
         }
     }
 

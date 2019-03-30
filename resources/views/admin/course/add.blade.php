@@ -34,7 +34,7 @@
 			</div>
 			<div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
 				<div class="form-group">
-					<label>Hình ảnh</label>
+					<label>Hình ảnh (270x230px)</label>
 					<input class="form-control" type="file" name="fileImage[]" id="filer_example2" multiple="multiple">
 				</div>
 			</div>

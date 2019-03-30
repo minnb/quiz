@@ -67,39 +67,21 @@
               </div>
               <div class="footerInfo">
                 <ul class="list-unstyled postLink">
+                  <?php $lstNews = App\Models\News::getTopNews(3); ?>
+                  @if($lstNews->count() > 0)
+                  @foreach($lstNews as $item)
                   <li>
                     <div class="media">
                       <a class="media-left" href="single-blog.html">
-                        <img class="media-object img-rounded border-color-1" src="{{ asset('public/home/img/footer/footer-img-1.png') }}" alt="Image">
+                        <img class="media-object img-rounded border-color-1" src="{{ asset($item->image) }}" alt="Image">
                       </a>
                       <div class="media-body">
-                        <h5 class="media-heading"><a href="single-blog.html">A Clean Website Gives More Experience To The Visitors</a></h5>
-                        <p>July 7 - 2016</p>
+                        <h5 class="media-heading"><a href="single-blog.html">{!! $item->name !!} &nbsp;&nbsp;<small>{{ Carbon\Carbon::parse($item->updated_at) }}</small></a></h5>
                       </div>
                     </div>
                   </li>
-                  <li>
-                    <div class="media">
-                      <a class="media-left" href="single-blog-left-sidebar.html">
-                        <img class="media-object img-rounded border-color-2" src="{{ asset('public/home/img/footer/footer-img-2.png') }}" alt="Image">
-                      </a>
-                      <div class="media-body">
-                        <h5 class="media-heading"><a href="single-blog-left-sidebar.html">A Clean Website Gives More Experience To The Visitors</a></h5>
-                        <p>July 7 - 2016</p>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="media">
-                      <a class="media-left" href="single-blog-left-sidebar.html">
-                        <img class="media-object img-rounded border-color-4" src="{{ asset('public/home/img/footer/footer-img-3.png') }}" alt="Image">
-                      </a>
-                      <div class="media-body">
-                        <h5 class="media-heading"><a href="single-blog-left-sidebar.html">A Clean Website Gives More Experience To The Visitors</a></h5>
-                        <p>July 7 - 2016</p>
-                      </div>
-                    </div>
-                  </li>
+                  @endforeach
+                  @endif
                 </ul>
               </div>
             </div>
@@ -108,7 +90,7 @@
                 <h4>Đăng ký nhận email</h4>
               </div>
               <div class="footerInfo">
-                <p>Để không bỏ lỡ nhưng tư vấn về lĩnh vực giáo dục</p>
+                <p>Học hiệu quả - Cho thành công mai sau</p>
                 <div class="input-group">
                   <input type="text" class="form-control" placeholder="Email address" aria-describedby="basic-addon21">
                   <button type="submit" class="input-group-addon" id="basic-addon21"><i class="fa fa-check" aria-hidden="true"></i></button>

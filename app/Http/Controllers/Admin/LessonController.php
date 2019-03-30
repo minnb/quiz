@@ -76,9 +76,9 @@ class LessonController  extends Controller
             $lesson->save();
             DB::commit();
             return redirect()->route('get.admin.thematic.list.byid',['id'=>fencrypt($thematic_id)])->with(['flash_message'=>'Tạo mới thành công']);
-        }catch (Exception $e) {
+        }catch (\Exception $e) {
             DB::rollBack();
-            return back()->withError($e->getMessage())->withInput();
+            return back()->withErrors($e->getMessage())->withInput();
         }
     }
 
@@ -119,9 +119,9 @@ class LessonController  extends Controller
             $lesson->save();
             DB::commit();
             return redirect()->route('get.admin.lesson.list')->with(['flash_message'=>'Chỉnh sửa thành công']);
-        }catch (Exception $e) {
+        }catch (\Exception $e) {
             DB::rollBack();
-            return back()->withError($e->getMessage())->withInput();
+            return back()->withErrors($e->getMessage())->withInput();
         }
     }
 

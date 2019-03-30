@@ -45,7 +45,7 @@ class UserController extends Controller
             $token = JWTAuth::fromUser($user);
             return response()->json(compact('token'));
             
-        }catch (Exception $e) {
+        }catch (\Exception $e) {
             DB::rollBack();
             return response(['token'=>'@@@@@@500'])->header('Content-Type', 'text/plain');
         }

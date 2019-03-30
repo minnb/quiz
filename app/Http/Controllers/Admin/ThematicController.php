@@ -69,9 +69,9 @@ class ThematicController extends Controller
             $thematic->save();
             DB::commit();
             return redirect()->route('get.admin.thematic.list')->with(['flash_message'=>'Tạo mới thành công']);
-        }catch (Exception $e) {
+        }catch (\Exception $e) {
             DB::rollBack();
-            return back()->withError($e->getMessage())->withInput();
+            return back()->withErrors($e->getMessage())->withInput();
         }
     }
 
@@ -109,9 +109,9 @@ class ThematicController extends Controller
             $thematic->save();
             DB::commit();
             return redirect()->route('get.admin.thematic.list')->with(['flash_message'=>'Chỉnh sửa thành công']);
-        }catch (Exception $e) {
+        }catch (\Exception $e) {
             DB::rollBack();
-            return back()->withError($e->getMessage())->withInput();
+            return back()->withErrors($e->getMessage())->withInput();
         }
     }
 
@@ -122,9 +122,9 @@ class ThematicController extends Controller
             $thematic->status = 0;
             $thematic->save();
             return back()->with(['flash_message'=>'Xoá thành thành công']);
-        }catch (Exception $e) {
+        }catch (\Exception $e) {
             DB::rollBack();
-            return back()->withError($e->getMessage())->withInput();
+            return back()->withErrors($e->getMessage())->withInput();
         }
         
     }

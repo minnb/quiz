@@ -25,13 +25,13 @@
 <div id="main">
 	<div class="headerbar">
         <div class="headerbar-left">
-			<a href="{{ route('admin') }}" class="logo"><img alt="Logo" src="{{ asset('public/assets/images/logo.png') }}" /> <span>Admin</span></a>
+			<a href="{{ route('admin') }}" class="logo"><img style="height:120%; width: 120%;" alt="Học Hiệu Quả" src="{{ asset('public/home/img/logo-school.png') }}" /> <span></span></a>
         </div>
         <nav class="navbar-custom">
             <ul class="list-inline float-right mb-0">
                 <li class="list-inline-item dropdown notif">
                     <a class="nav-link dropdown-toggle nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                        <img src="{{ asset('public/assets/images/avatars/admin.png') }}" alt="Profile image" class="avatar-rounded">
+                        <img src="{{ asset('public/assets/images/avatars/admin.jpg') }}" alt="Học Hiệu Quả" class="avatar-rounded">
                     </a>
                     <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                         <div class="dropdown-item noti-title">

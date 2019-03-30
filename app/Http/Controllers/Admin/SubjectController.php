@@ -63,9 +63,9 @@ class SubjectController extends Controller
             DB::commit();
             return redirect()->route('get.admin.subject.list')->with(['flash_message'=>'Tạo mới thành công']);
 
-         }catch (Exception $e) {
+         }catch (\Exception $e) {
             DB::rollBack();
-            return back()->withError($e->getMessage())->withInput();
+            return back()->withErrors($e->getMessage())->withInput();
         }
     }
 
@@ -112,9 +112,9 @@ class SubjectController extends Controller
 
             DB::commit();
             return redirect()->route('get.admin.subject.list')->with(['flash_message'=>'Chỉnh sửa thành công']); 
-         }catch (Exception $e) {
+         }catch (\Exception $e) {
             DB::rollBack();
-            return back()->withError($e->getMessage())->withInput();
+            return back()->withErrors($e->getMessage())->withInput();
         }
     }
 

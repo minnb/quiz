@@ -31,7 +31,7 @@
                     <a href="#"><i class="fa fa-globe bigfonts"></i> <span> Quản trị nội dung </span> <span class="menu-arrow"></span></a>
 					<ul class="list-unstyled">
 						<li><a href="{{ route('get.admin.pages.slide.list') }}">Quản lý Slide</a></li>
-						<li><a href="{{ route('get.admin.pages.news.list') }}">Tin tức</a></li>
+						<li><a href="{{ route('get.admin.news.list') }}">Tin tức</a></li>
 						<li><a href="{{ route('get.admin.pages.qa.list') }}">Hỏi đáp</a></li>
 					</ul>
                 </li>

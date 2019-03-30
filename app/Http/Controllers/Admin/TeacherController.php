@@ -56,9 +56,9 @@ class TeacherController extends Controller
             }
             DB::commit();
             return redirect()->route('get.admin.teacher.list')->with(['flash_message'=>'Tạo mới thành công']);
-        }catch (Exception $e) {
+        }catch (\Exception $e) {
             DB::rollBack();
-            return back()->withError($e->getMessage())->withInput();
+            return back()->withErrors($e->getMessage())->withInput();
         }
     }
 
@@ -101,9 +101,9 @@ class TeacherController extends Controller
             }
             DB::commit();
             return redirect()->route('get.admin.teacher.list')->with(['flash_message'=>'Chỉnh sửa thành công']);
-        }catch (Exception $e) {
+        }catch (\Exception $e) {
             DB::rollBack();
-            return back()->withError($e->getMessage())->withInput();
+            return back()->withErrors($e->getMessage())->withInput();
         }
     }
 
@@ -114,11 +114,10 @@ class TeacherController extends Controller
             $teacher->status = 0;
             $teacher->save();
             return back()->with(['flash_message'=>'Xoá thành thành công']);
-        }catch (Exception $e) {
+        }catch (\Exception $e) {
             DB::rollBack();
-            return back()->withError($e->getMessage())->withInput();
+            return back()->withErrors($e->getMessage())->withInput();
         }
-        
     }
 
 }

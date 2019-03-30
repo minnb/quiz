@@ -50,7 +50,7 @@
 			</div>
 			<div class="col-md-3 offset-md-1 col-xs-12 col-sm-12">
 				<div class="form-group">
-					<label>Hình ảnh</label>
+					<label>Hình ảnh <span>(Size: 500x300px)</span></label>
 					<input class="form-control" type="file" name="fileImage[]" id="filer_example2" multiple="multiple">
 					@if($data['image'] != '')
 						<img src="{{ asset($data['image']) }}" class="thumbnail">

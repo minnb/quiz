@@ -72,7 +72,7 @@ class AdminController extends Controller
                 DB::commit();
             }catch (Exception $e) {
                 DB::rollBack();
-                return back()->withError($e->getMessage())->withInput();
+                return back()->withErrors($e->getMessage())->withInput();
             }   
         }
         return redirect()->route('get.admin.user.list')->with(['flash_message'=>'Tạo mới thành công']);
@@ -108,7 +108,7 @@ class AdminController extends Controller
             return redirect()->route('get.admin.user.list')->with(['flash_message'=>'Chỉnh sửa thành công']);
         }catch (Exception $e) {
             DB::rollBack();
-            return back()->withError($e->getMessage())->withInput();
+            return back()->withErrors($e->getMessage())->withInput();
         }   
     }
     public function getDeleteUser($idd){
@@ -155,7 +155,7 @@ class AdminController extends Controller
             return redirect()->route('get.admin.user.list.course')->with(['flash_message'=>'Chỉnh sửa thành công']);
         }catch (Exception $e) {
             DB::rollBack();
-            return back()->withError($e->getMessage())->withInput();
+            return back()->withErrors($e->getMessage())->withInput();
         }   
     }
 
@@ -170,7 +170,7 @@ class AdminController extends Controller
             return redirect()->route('get.admin.user.list.course')->with(['flash_message'=>'Chỉnh sửa thành công']);
         }catch (Exception $e) {
             DB::rollBack();
-            return back()->withError($e->getMessage())->withInput();
+            return back()->withErrors($e->getMessage())->withInput();
         }   
     }
 
@@ -192,7 +192,7 @@ class AdminController extends Controller
             return redirect()->route('get.admin.user.list.course')->with(['flash_message'=>'Chỉnh sửa thành công']);
         }catch (Exception $e) {
             DB::rollBack();
-            return back()->withError($e->getMessage())->withInput();
+            return back()->withErrors($e->getMessage())->withInput();
         }   
     }
 }
