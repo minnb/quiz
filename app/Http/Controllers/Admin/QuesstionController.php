@@ -28,12 +28,12 @@ class QuesstionController  extends Controller
     public function getListQuiz(){
     	$data = Quesstion::where([
             ['status', 1],['used', 0] ])->get();
-    	return view('admin.quesstion.list', compact('data'));
+    	return view('admin.quesstion.list_quiz', compact('data'));
     }
     public function getListQuest(){
         $data = Quesstion::where([
             ['status', 1],['used', 1] ])->get();
-        return view('admin.quesstion.list', compact('data'));
+        return view('admin.quesstion.list_question', compact('data'));
     }
     public function getAdd(){
 
@@ -168,7 +168,11 @@ class QuesstionController  extends Controller
             }
 
             DB::commit();
-            return redirect()->route('get.admin.quesstion.list.quiz')->with(['flash_message'=>'Chỉnh sửa thành công']);
+            if($request->used == 0){
+                return redirect()->route('get.admin.quesstion.list.quiz')->with(['flash_message'=>'Chỉnh sửa thành công']);
+            }else{
+                return redirect()->route('get.admin.quesstion.list.question')->with(['flash_message'=>'Chỉnh sửa thành công']);
+            }
         }catch (\Exception $e) {
             DB::rollBack();
             return back()->withErrors($e->getMessage())->withInput();
