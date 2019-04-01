@@ -22,7 +22,7 @@
                                 <div class="media">
                                     <div class="media-left">
                                         <a href="{{ route('get.dashboard.course.detail',['id'=>fencrypt($item->course)])}}">
-                                            <img src="{{ asset('public/dashboard/images/vuejs.png') }}" alt="{{ $course_name }}" width="100" class="rounded">
+                                            <img src="{{ asset(getImage($item->image)) }}" alt="{{ $course_name }}" width="100" class="rounded">
                                         </a>
                                     </div>
                                     <div class="media-body">

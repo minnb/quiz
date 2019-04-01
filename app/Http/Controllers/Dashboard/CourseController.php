@@ -27,7 +27,13 @@ class CourseController extends Controller
     public function getMyCourse(){
         try{
             $user_id = User::getInfoUser()['id'];
-            $user_course = User_Course::getCourseByUserId($user_id);
+            //$user_course = User_Course::getCourseByUserId($user_id);
+            $user_course = DB::table('m_khoa_hoc')
+                ->join('user_course', 'user_course.course','=','m_khoa_hoc.code')
+                ->select('user_course.*', 'm_khoa_hoc.image' )
+                ->where([
+                    ['user_course.user_id', $user_id]
+                ])->orderby('user_course.course')->get();
             return view('dashboard.course.my_course', compact('user_course', 'user_id'));
         }catch(Exception $e){
             return back();
