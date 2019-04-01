@@ -168,7 +168,7 @@ class QuesstionController  extends Controller
             }
 
             DB::commit();
-            return redirect()->route('get.admin.quesstion.list')->with(['flash_message'=>'Chỉnh sửa thành công']);
+            return redirect()->route('get.admin.quesstion.list.quiz')->with(['flash_message'=>'Chỉnh sửa thành công']);
         }catch (\Exception $e) {
             DB::rollBack();
             return back()->withErrors($e->getMessage())->withInput();

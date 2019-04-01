@@ -47,11 +47,11 @@ class QuizController extends Controller
             }else{
                 $quiz_id = Exam::insertTabkeQuiz($quiz_type,$course_id, $thematic_id, $id);
             }
-            /*
+            
             if( $quiz_id > 0){
                 $question_data = Quesstion::getQuestionData($thematic_id, $quiz_id)->toArray();
             }
-            */
+            
             $question_data = Quesstion::getQuestionData($thematic_id, $quiz_id)->toArray();
             if(count($question_data) > 0){
                 return view('dashboard.quiz.quiz', compact('question_data', 'id','course_id','thematic_id', 'quiz_type','quiz_id'));           

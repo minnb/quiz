@@ -47,9 +47,9 @@
 					</select>
 				</div>
 				<div class="form-group">
-					<label>Sử dụng</label>
+					<label>Sử dụng {{   $data['used'] }}</label>
 					<select class="form-control" name="used">
-						{{ selectedOption(getQuizUsed(), old('used', isset($data) ? $data['used'] : 1)) }}
+						{{ selectedOption(getQuizUsed(), old('used', isset($data) ? $data['used'] : '')) }}
 					</select>
 				</div>
 				<div class="form-group">

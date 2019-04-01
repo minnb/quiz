@@ -17,14 +17,19 @@
 						<li><a href="{{ route('get.admin.class.list') }}">Lớp học</a></li>
 					</ul>
                 </li>
+                 <li class="submenu">
+                    <a href="#"><i class="fa fa-leanpub bigfonts"></i> <span> Bài giảng & Quiz </span> <span class="menu-arrow"></span></a>
+					<ul class="list-unstyled">
+						<li><a href="{{ route('get.admin.lesson.list') }}">Danh sách bài giảng</a></li>
+						<li><a href="{{ route('get.admin.quesstion.list.quiz') }}">Câu hỏi luyện Quiz</a></li>					
+					</ul>
+                </li>
                 <li class="submenu">
-                    <a href="#"><i class="fa fa-leanpub bigfonts"></i> <span> Học & Thi </span> <span class="menu-arrow"></span></a>
+                    <a href="#"><i class="fa fa-delicious bigfonts"></i> <span> Luyện thi </span> <span class="menu-arrow"></span></a>
 					<ul class="list-unstyled">
 						<li><a href="{{ route('get.admin.thematic.list') }}">Danh sách Chuyên đề</a></li>
-						<li><a href="{{ route('get.admin.quesstion.list.quiz') }}">DS câu hỏi luyện Quiz</a></li>
-						<li><a href="{{ route('get.admin.quesstion.list.question') }}">DS câu hỏi luyện thi</a></li>
-						<li><a href="{{ route('get.admin.lesson.list') }}">Danh sách bài giảng</a></li>
-						<li><a href="{{ route('get.admin.exam.list') }}">Cấu hình Đề thi</a></li>
+						<li><a href="{{ route('get.admin.quesstion.list.question') }}">Câu hỏi luyện thi</a></li>
+						<li><a href="{{ route('get.admin.quesstion.list.question') }}">Danh mục luyện thi tuần</a></li>
 					</ul>
                 </li>
                 <li class="submenu">
@@ -40,6 +45,7 @@
 					<ul class="list-unstyled">
 						<li><a href="{{ route('get.admin.user.list') }}">Danh sách tài khoản</a></li>
 						<li><a href="{{ route('get.admin.user.list.course') }}">Học viên & khóa học</a></li>
+						<li><a href="{{ route('get.admin.exam.list') }}">Cấu hình Đề thi</a></li>
 					</ul>
                 </li>
 

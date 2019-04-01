@@ -59,8 +59,9 @@ Route::group(['prefix'=> 'admin'], function(){
 	});
 
 	Route::group(['prefix'=> 'quesstion'], function(){
-		Route::get('list/quiz', ['as'=>'get.admin.quesstion.list.quiz','uses'=>'Admin\QuesstionController@getListQuiz']);
+		Route::get('list/quiz', ['as'=>'get.admin.quesstion.list.quiz','uses'=>'Admin\QuesstionController@getListQuiz']); 
 		Route::get('list/question', ['as'=>'get.admin.quesstion.list.question','uses'=>'Admin\QuesstionController@getListQuest']);
+		
 		Route::get('add', ['as'=>'get.admin.quesstion.add','uses'=>'Admin\QuesstionController@getAdd']);
 		Route::post('add', ['as'=>'post.admin.quesstion.add','uses'=>'Admin\QuesstionController@postAdd']);
 		Route::get('add/thematic/{thematic}', ['as'=>'get.admin.quesstion.add.thematic','uses'=>'Admin\QuesstionController@getAddByThematic']);

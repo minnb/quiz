@@ -39,15 +39,14 @@ function getLoaiDeThi(){
 }
 function getQuizUsed(){
     $arrStatus = [
-      '1' => 'Sử dụng cho đề thi',
       '0' => 'Sử dụng cho Quiz Test',
-      //'value'  => 'Tự điền đáp án'
+      '1' => 'Sử dụng cho đề thi'
     ];
     return $arrStatus;
 }
 
 function getQuizType($id){
-  if($id == 0){ echo 'Đề thi'; }else {echo 'Quiz test';}
+  if($id == 0){ echo 'Quiz test'; }else {echo 'Luyện thi';}
 }
 
 function getAnswerNumber(){
