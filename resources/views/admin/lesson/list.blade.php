@@ -32,7 +32,7 @@
 								<td>{{ App\Models\Thematic::find($item->thematic)->name }}</td>
 								<td>{{ $item->course }}</td>
 								<td>
-									(<span style="color:red">{{ App\Models\Quesstion::where([['lesson', $item->id],['used', 0]])->count() }}</span>)
+									(<span style="color:red">{{ App\Models\Quesstion::where([['lesson', $item->id],['used', 0],['status', 1]])->count() }}</span>)
 									<a href="{{ route('get.admin.import.quiz.lesson',['id'=>fencrypt($item->id)] )}} " style="color:blue"><i class="fa fa-fw fa-file-excel-o"></i> Import Excel </a>
 								</td>
 								<td>

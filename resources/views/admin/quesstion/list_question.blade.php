@@ -13,9 +13,9 @@
 								<th>#</th>
 								<th>Loại</th>
 								<th>Câu hỏi</th>
+								<th>Cấp độ</th>
 								<th>Chuyên đề</th>
 								<th>Khóa học</th>
-								<th>Cấp độ</th>
 								<th>Trạng thái</th>
 								<th>
 									<a href="#" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fa fa-fw fa-plus"></i> Thêm mới câu hỏi</a>
@@ -34,9 +34,9 @@
 									@endif
 								</td>
 								<td><a href="{{ route('get.admin.exam.edit',['id'=>fencrypt($item->id)])}}">{{ $item->name }}</a></td>
+								<td>{{ $item->level }}</td>
 								<td>{{ App\Models\Thematic::find($item->thematic)->name }}</td>
 								<td>{{ $item->course }}</td>
-								<td>{{ $item->level }}</td>
 								<td>
 									@if($item->status == 0)
 										<span>Disable</span>
