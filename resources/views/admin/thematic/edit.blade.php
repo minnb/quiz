@@ -46,6 +46,12 @@
 					</select>
 				</div>
 				<div class="form-group">
+					<label>Tuần</label>
+					<select class="form-control" name="week">
+						{{ selectedOption(getWeek(), old('week', isset($data) ? $data['week'] : 1) )}}
+					</select>
+				</div>
+				<div class="form-group">
 					<label>Hình ảnh</label>
 					<input class="form-control" type="file" name="fileImage[]" id="filer_example2" multiple="multiple">
 					@if($data['image'] != '')

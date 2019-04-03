@@ -19,8 +19,8 @@
 
                         <div class="card-body">
                            {!! $lesson_data[0]->description !!}
-                           <a href="{{ route('get.dashboard.quiz.take',['type'=>fencrypt('QUIZ'),'course'=>fencrypt($lesson_data[0]->course),'thematic'=>fencrypt($lesson_data[0]->thematic), 'id'=>fencrypt($lesson_data[0]->id)])}}" class="btn btn-sm btn-danger">Luyệt tập Quiz</a>
-                           <a href="#" class="btn btn-sm btn-success">Hoàn thành bài học {{$user_status}}</a>
+                           <a href="{{ route('get.dashboard.quiz.take',['type'=>fencrypt('QUIZ'),'course'=>fencrypt($lesson_data[0]->course),'thematic'=>fencrypt($lesson_data[0]->thematic), 'lesson'=>fencrypt($lesson_data[0]->id), 'token'=>getToken(10)])}}" class="btn btn-sm btn-danger">Luyệt tập Quiz</a>
+                           
                         </div>
                     </div>
                     <ul class="card list-group list-group-fit">

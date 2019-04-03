@@ -54,7 +54,8 @@ class ThematicController extends Controller
             $thematic->keywords = $request->keywords;
             $thematic->status = $request->status;
             $thematic->onpost = 0;
-            $thematic->sort = $request->sort;;
+            $thematic->sort = $request->sort;
+            $thematic->week = $request->week;
             $thematic->user_id = Auth::user()->id;
             if($request->file('fileImage')){
                 foreach(Input::file('fileImage') as $file ){
@@ -94,7 +95,7 @@ class ThematicController extends Controller
             $thematic->status = $request->status;
             $thematic->sort = $request->sort;
             $thematic->user_id = Auth::user()->id;
-
+            $thematic->week = $request->week;
             if($request->file('fileImage')){
                 foreach(Input::file('fileImage') as $file ){
                     $destinationPath = checkFolderImage();

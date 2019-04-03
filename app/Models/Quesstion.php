@@ -15,14 +15,14 @@ class Quesstion extends Model
     	])->get()->count();
     }
 
-    public static function getQuestionData($thematic_id, $quiz_id){
+    public static function getQuestionData($quiz_id){
     	$question = new Collection();
     	$data_question = DB::table('m_cau_hoi')
 	            ->join('m_ket_qua_quiz_question', 'm_ket_qua_quiz_question.question_id','=','m_cau_hoi.id')
 	            ->select('m_ket_qua_quiz_question.quiz_id', "m_cau_hoi.id as question_id", 'm_cau_hoi.name','m_cau_hoi.type')
 	            ->where([
-	            		['m_cau_hoi.thematic', $thematic_id],
-	            		['m_ket_qua_quiz_question.quiz_id', $quiz_id],
+	            		//['m_cau_hoi.thematic', $thematic_id],
+	            		['m_ket_qua_quiz_question.quiz_id', $quiz_id]
 	            	])
 	            ->get();
 

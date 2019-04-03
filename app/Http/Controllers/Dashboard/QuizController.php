@@ -22,61 +22,78 @@ class QuizController extends Controller
     	$this->middleware('quiz');
     }
 
-    public function getTakeQuiz($type, $course, $thematic, $idd){
-    	$course_id = fdecrypt($course); 
-    	$thematic_id = fdecrypt($thematic); 
-    	$id = fdecrypt($idd); 
-    	$quiz_type = fdecrypt($type); 
+    public function getTakeQuizByWeek($type_id, $course_id,$subject_id, $week_id, $token){
+        $type = fdecrypt($type_id); 
+        $course = fdecrypt($course_id); 
+        $subject = fdecrypt($subject_id); 
+        $week = fdecrypt($week_id); 
         $quiz_id = 0;
-    	try{
-            $check = HeaderQuiz::where([
-                    ['lesson', $id],
-                    ['success', 0],
-                    ['user_id', User::getInfoUser()['id']]
-                ])->get();
+        try{
 
-            if($check->count() > 0){
-                DetailQuiz::where('quiz_id', $check[0]->id)->delete();
-                HeaderQuiz::where([
-                    ['lesson', $id],
-                    ['success', 0],
-                    ['user_id', User::getInfoUser()['id']]
-                ])->delete();
-                
-                $quiz_id = Exam::insertTabkeQuiz($quiz_type,$course_id, $thematic_id, $id);
-            }else{
-                $quiz_id = Exam::insertTabkeQuiz($quiz_type,$course_id, $thematic_id, $id);
-            }
-            
-            if( $quiz_id > 0){
-                $question_data = Quesstion::getQuestionData($thematic_id, $quiz_id)->toArray();
-            }
-            
-            $question_data = Quesstion::getQuestionData($thematic_id, $quiz_id)->toArray();
+            $quiz_id = Exam::insertTabkeQuizWeek($type,$course, $subject, $week, $token);
+            $question_data = Quesstion::getQuestionData($quiz_id)->toArray();
+
             if(count($question_data) > 0){
-                return view('dashboard.quiz.quiz', compact('question_data', 'id','course_id','thematic_id', 'quiz_type','quiz_id'));           
+                return view('dashboard.quiz.quiz_week', compact('question_data', 'week','course','subject', 'type','quiz_id'));           
             }else{
                 HeaderQuiz::where('total', 0)->delete();
                 return back();
             }
-        }catch(\Exception $e){
+        }catch(Exception $e){
             return back();
         }
     }
 
-    public function getTakeQuizDetail($idd, $question){
-    	$quiz_id = fdecrypt($idd); 
-    	$question_id = fdecrypt($question); 
+    public function getTakeQuiz($type, $course, $thematic, $lesson, $token){
+    	$course_id = fdecrypt($course); 
+    	$thematic_id = fdecrypt($thematic); 
+    	$lesson_id = fdecrypt($lesson); 
+    	$quiz_type = fdecrypt($type); 
+        $quiz_id = 0;
     	try{
-            $question_data = '';
-            return view('dashboard.quiz.take_quiz', compact('question_data', 'id'));
-        }catch(\Exception $e){
+           
+            $quiz_id = Exam::insertTabkeQuiz($quiz_type,$course_id, $thematic_id, $lesson_id, $token);
+            $question_data = Quesstion::getQuestionData($quiz_id)->toArray();
+            if(count($question_data) > 0){
+                return view('dashboard.quiz.quiz', compact('question_data', 'id','course_id','thematic_id', 'quiz_type','quiz_id','lesson_id'));           
+            }else{
+                HeaderQuiz::where('total', 0)->delete();
+                return back();
+            }
+        }catch(Exception $e){
             return back();
-        } 
+        }
     }
 
     public function postTakeQuizDetail(Request $request, $idd){
     	$quiz_id = fdecrypt($idd); 
+        $result = [];
+
+        try{
+            DB::beginTransaction();
+            foreach ($request->input('questions', []) as $key => $question){
+                if($request->input('questions', [$key]) != null and $request->answer[$key] == true){
+                    $result[$key] = $request->answer[$key];
+                    DetailQuiz::where([
+                        ['quiz_id', $quiz_id],
+                        ['question_id', $question]
+                    ])->update(['answer' => $request->answer[$key]]);
+                }               
+            }
+            HeaderQuiz::where('id', $quiz_id)->update(['status' => 1]);
+            HeaderQuiz::calcResultQuiz($quiz_id);
+            DB::commit();
+
+            return redirect()->route('get.dashboard.quiz.take.result', ['quiz_id'=>fencrypt($quiz_id)]);
+        }catch(Exception $e){
+            DB::rollBack();
+            return back();
+        } 
+       
+    }
+
+    public function postTakeQuizWeek(Request $request, $idd){
+        $quiz_id = fdecrypt($idd); 
         $result = [];
         try{
             DB::beginTransaction();
@@ -151,10 +168,8 @@ class QuizController extends Controller
         try{
             $user_id = User::getInfoUser()['id'];
             $course = User_Course::getCourseByUserId($user_id);
-            $lessonOfUser = User_Course::getLessonByUser($user_id);
             if($course->count()>0){
-                $course_code = $course[0]->course;
-                return view('dashboard.quiz.practice', compact('course_code', 'user_id', 'lessonOfUser'));
+                return view('dashboard.quiz.practice', compact('course', 'user_id'));
             }else{
                 return back();
             }

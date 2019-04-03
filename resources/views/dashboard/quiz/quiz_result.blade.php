@@ -21,7 +21,7 @@
                             <span class="text-muted-light">{{ xeploai($point) }}</span>
                         </div>
                         <div class="media-right">
-                            <a href="{{ route('get.dashboard.quiz.take',['type'=>fencrypt($data_result->type), 'course'=>fencrypt($data_result->course),'thematic'=>fencrypt($data_result->thematic), 'id'=>fencrypt($data_result->lesson) ])}}" class="btn btn-primary">Luyện tập lại <i class="material-icons btn__icon--right">refresh</i></a>
+                            <a href="#" class="btn btn-primary">Luyện tập lại <i class="material-icons btn__icon--right">refresh</i></a>
                         </div>
                     </div>
                 </div>

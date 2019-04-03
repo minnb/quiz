@@ -113,7 +113,7 @@
                         <div class="card-header">
                             <div class="media align-items-center">
                                 <div class="media-body">
-                                    <h4 class="card-title">Làm bài tập</h4>
+                                    <h4 class="card-title">Luyện thi</h4>
                                     <p class="card-subtitle">Thống kê gần đây</p>
                                 </div>
                                 <div class="media-right">
@@ -129,10 +129,10 @@
                                         <div class="media align-items-center">
                                             <div class="media-body">
                                                 <a class="text-body" href="{{ route('get.dashboard.quiz.take.result.detail', ['quiz_id'=>fencrypt($item->id)])}}"><strong>
-                                                    @if($item->lesson != '')
+                                                    @if($item->lesson != '' || $item->lesson != '0')
                                                         Quiz: {{ App\Models\Lesson::find($item->lesson)->name }}
                                                     @else
-                                                        Luyện thi: {{ App\Models\Thematic::find($item->thematic)->name }}
+                                                        Luyện thi: Môn {{ App\Models\Subject::find($item->subject)->name }} - <small>Tuần {{$item->week}}</small>
                                                     @endif
                                                 </strong></a><br>
                                                 <div class="d-flex align-items-center">

@@ -15,6 +15,7 @@
 								<th>Chuyên đề</th>
 								<th>Khoá học</th>
 								<th>Môn học</th>
+								<th>Tuần</th>
 								<th>Câu hỏi</th>
 								<th>Bài giảng</th>
 								<th>Status</th>
@@ -40,6 +41,7 @@
 								</td>
 								<td>{{ App\Models\Course::getFullNameCourse($item->course) }}</td>
 								<td>{{ App\Models\Subject::find($item->subject)->name }}</td>
+								<td>{{ $item->week }}</td>
 								<td>
 									<span>({{ App\Models\Quesstion::countQuesstionInThematic($item->id) }})</span>
 									<a href="{{ route('get.admin.quesstion.add.thematic',['thematic'=>fencrypt($item->id)]) }}"><i class="fa fa-fw fa-plus"></i> Thêm mới</a>

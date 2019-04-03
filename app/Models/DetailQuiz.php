@@ -6,5 +6,5 @@ use App\Models\Course;
 class DetailQuiz extends Model
 {
     protected $table ="m_ket_qua_quiz_question";
-
+    //public $timestamps = false;
 }

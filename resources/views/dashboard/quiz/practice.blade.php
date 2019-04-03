@@ -7,68 +7,32 @@
                     <div class="container-fluid page__container">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Luyện tập</li>
+                            <li class="breadcrumb-item active">Luyện thi</li>
                         </ol>
-                        <div class="media mb-headings align-items-center">
-                            <div class="media-body">
-                                <h1 class="h2">Luyện tập đề thi</h1>
-                            </div>
-                        </div>
+                        @foreach($course as $value)
+                        <?php $weeks = App\Models\Exam::getWeeks($value->course); ?>
                         <div class="card-columns">
+                            @if($weeks->count() > 0)
                             <div class="card">
                                 <div class="card-header d-flex align-items-center">
                                     <div class="flex">
-                                        <h4 class="card-title">Thi theo chuyên đề</h4>
-                                        <div class="card-subtitle">{{App\Models\Course::getFullNameCourse($course_code)}}</div>
+                                        <h4 class="card-title">{{App\Models\Course::getFullNameCourse($value->course)}}</h4>
+                                        <div class="card-subtitle">Luyện thi theo tuần</div>
                                     </div>
                                     <i class="material-icons text-muted-light">info_outline</i>
                                 </div>
-                                @if(isset($lessonOfUser))
                                 <ul class="list-group list-group-fit">
-                                    @foreach($lessonOfUser as $key=>$item)
+                                    @foreach($weeks as $key=>$item)
                                     <li class="list-group-item">
-                                        <a href="{{ route('get.dashboard.quiz.take',['type'=>fencrypt('CHUYENDE'),'course'=>fencrypt($course_code),'thematic'=>fencrypt($item->id), 'id'=>fencrypt(0)]) }}"><i class="material-icons float-right text-muted-light">trending_flat</i>{{ $key+1 }}. {{ $item->name }}</a>
+                                        <a href="{{ route('get.dashboard.quiz.take.week',['type'=>fencrypt('TUAN'), 'course'=>fencrypt($value->course),'subject'=>fencrypt($item->subject), 'week'=>fencrypt($item->week), 'token'=>getToken(15)])}}"><i class="material-icons float-right text-muted-light">trending_flat</i>{{ $key+1 }}. Tuần {{ $item->week }}</a>
                                     </li>
                                     @endforeach
                                 </ul>
-                                @endif
                             </div>
+                            @endif
 
-                            <div class="card">
-                                <div class="card-header d-flex align-items-center">
-                                    <div class="flex">
-                                        <h4 class="card-title">Thi tháng</h4>
-                                        <div class="card-subtitle">{{App\Models\Course::getFullNameCourse($course_code)}}</div>
-                                    </div>
-                                    <i class="material-icons text-muted-light">info_outline</i>
-                                </div>
-                                <ul class="list-group list-group-fit">
-                                    <li class="list-group-item">
-                                        <a href="#"><i class="material-icons float-right text-muted-light">trending_flat</i> Tháng 1</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="card">
-                                <div class="card-header d-flex align-items-center">
-                                    <div class="flex">
-                                        <h4 class="card-title">Thi học kỳ</h4>
-                                        <div class="card-subtitle">{{App\Models\Course::getFullNameCourse($course_code)}}</div>
-                                    </div>
-                                    <i class="material-icons text-muted-light">info_outline</i>
-                                </div>
-                                <ul class="list-group list-group-fit">
-                                    <li class="list-group-item">
-                                        <a href="">
-                                            <i class="material-icons float-right text-muted-light">trending_flat</i>
-                                            Học kỳ 1
-                                        </a>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <a href=""><i class="material-icons float-right text-muted-light">trending_flat</i> Học kỳ 2</a>
-                                    </li>
-                                </ul>
-                            </div>
                         </div>
+                        @endforeach
                     </div>
 
                 </div>

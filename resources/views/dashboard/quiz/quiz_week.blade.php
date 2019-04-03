@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Luyện thi Quiz</title>
+    <title>Luyện tập: {{App\Models\Subject::find($subject)->name}}</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href = "{{ asset('public/assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
@@ -26,7 +26,7 @@
          <form action="{{ route('post.dashboard.quiz.take.detail',['quiz_id'=>fencrypt($quiz_id)])}}" method="POST">
            <input type="hidden" name="_token" value="{!! csrf_token() !!}">
             <div id="smartwizard" class="smartwizard">
-                  <h1 class="questions">Luyện thi Quiz {{$quiz_id}}</h1>
+                  <h1 class="questions">Môn {{App\Models\Subject::find($subject)->name}} {{$quiz_id}}</h1>
                   <ul>
                     @foreach($question_data as $key=>$item)
                       <li><a href="#step-{{$key+1}}">Câu {{$key+1}}<br /></a></li>
@@ -87,7 +87,7 @@
                }
             });
             // Toolbar extra buttons
-            var btnFinish = $('<button  type="submit"></button>').text('Nộp bài')
+            var btnFinish = $('<button type="submit"></button>').text('Nộp bài')
                                              .addClass('btn btn-info');
                                              //.on('click', function(){ alert('Nộp bài luyện thi'); });
             var btnCancel = $('<button></button>').text('Làm lại')
