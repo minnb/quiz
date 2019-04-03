@@ -36,7 +36,7 @@ class Exam extends Model
 				$heder_quiz->success = 0;
 				$heder_quiz->kq = 0;
 				$heder_quiz->week = $week;
-				$heder_quiz->period = 0;
+				$heder_quiz->periods = 0;
 				$heder_quiz->subject = $subject;
 				$heder_quiz->token = $token;
 				$heder_quiz->save();
@@ -81,7 +81,7 @@ class Exam extends Model
 				$heder_quiz->success = 0;
 				$heder_quiz->kq = 0;
 				$heder_quiz->week = 0;
-				$heder_quiz->period = 0;
+				$heder_quiz->periods = 0;
 				$heder_quiz->subject = Subject::getSubjectIdByThematic($thematic);
 				$heder_quiz->token = $token;
 				$heder_quiz->save();
