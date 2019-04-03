@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0.1
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 03, 2019 lúc 10:41 AM
--- Phiên bản máy phục vụ: 10.1.32-MariaDB
--- Phiên bản PHP: 7.2.5
+-- Thời gian đã tạo: Th4 03, 2019 lúc 06:33 PM
+-- Phiên bản máy phục vụ: 10.1.36-MariaDB
+-- Phiên bản PHP: 7.2.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -430,7 +430,7 @@ CREATE TABLE `m_ket_qua_quiz` (
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `week` int(2) DEFAULT NULL,
-  `period` int(2) DEFAULT NULL,
+  `periods` int(2) DEFAULT NULL,
   `subject` int(2) DEFAULT NULL,
   `token` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -439,7 +439,7 @@ CREATE TABLE `m_ket_qua_quiz` (
 -- Đang đổ dữ liệu cho bảng `m_ket_qua_quiz`
 --
 
-INSERT INTO `m_ket_qua_quiz` (`id`, `type`, `user_id`, `result`, `description`, `comment`, `course`, `thematic`, `lesson`, `status`, `kq`, `total`, `success`, `created_at`, `updated_at`, `week`, `period`, `subject`, `token`) VALUES
+INSERT INTO `m_ket_qua_quiz` (`id`, `type`, `user_id`, `result`, `description`, `comment`, `course`, `thematic`, `lesson`, `status`, `kq`, `total`, `success`, `created_at`, `updated_at`, `week`, `periods`, `subject`, `token`) VALUES
 (97, 'QUIZ', 17, 0, '', 'QUIZ', 'HHQ50', 9, 3, 1, 2, 2, 1, '2019-03-05 14:54:42', '2019-03-05 14:54:51', 0, NULL, NULL, NULL),
 (99, 'QUIZ', 17, 0, '', 'QUIZ', 'HHQ50', 9, 3, 1, 1, 2, 0, '2019-03-05 15:01:35', '2019-03-05 15:01:51', 0, NULL, NULL, NULL),
 (100, 'QUIZ', 17, 0, '', 'QUIZ', 'HHQ50', 9, 2, 1, 2, 5, 0, '2019-03-05 15:06:14', '2019-03-05 15:06:26', 0, NULL, NULL, NULL),
@@ -986,6 +986,21 @@ INSERT INTO `w_job_send_email` (`id`, `type`, `quiz_id`, `status`, `created_at`,
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `w_logs`
+--
+
+CREATE TABLE `w_logs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `message` text COLLATE utf8_unicode_ci,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `z_category`
 --
 
@@ -1214,6 +1229,12 @@ ALTER TABLE `w_job_send_email`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Chỉ mục cho bảng `w_logs`
+--
+ALTER TABLE `w_logs`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `z_category`
 --
 ALTER TABLE `z_category`
@@ -1366,6 +1387,12 @@ ALTER TABLE `user_course`
 --
 ALTER TABLE `w_job_send_email`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT cho bảng `w_logs`
+--
+ALTER TABLE `w_logs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `z_category`

@@ -64,6 +64,7 @@ class SendEmailCommand extends Command
                 DB::commit();
             }catch(\Exception $e){
                 DB::rollBack();
+                DB::table('w_logs')->insert(['code' =>  'TUAN','message' => $e->getMessage()]);
             }
         }elseif ($data_quiz->type == 'QUIZ') {
             $data_email =[
@@ -83,6 +84,7 @@ class SendEmailCommand extends Command
                 DB::commit();
             }catch(\Exception $e){
                 DB::rollBack();
+                DB::table('w_logs')->insert(['code' =>  'TUAN','message' => $e->getMessage()]);
             }
         }
 
