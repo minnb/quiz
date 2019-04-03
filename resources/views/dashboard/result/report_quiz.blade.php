@@ -17,7 +17,7 @@
                                 <h4 class="card-title">{{App\Models\Course::getFullNameCourse($c->course) }}</h4>
                                 <p class="card-subtitle">Kết quả luyện thi</p>
                             </div>
-                            <a class="#" href="instructor-earnings.html">Điểm</a>
+                            <a class="#" href="#">Điểm</a>
                         </div>
                         <ul class="list-group list-group-fit mb-0">
                             @if($quiz_header->count() > 0)
@@ -27,9 +27,7 @@
                                         <li class="list-group-item">
                                             <div class="media align-items-center">
                                                 <div class="media-body">
-                                                    <a href="{{ route('get.dashboard.quiz.take.result.detail', ['id'=>fencrypt($item->id)])}}" class="text-body"><strong>{{ 
-                                                        $item->lesson > 0 ? App\Models\Lesson::find($item->lesson)->name : App\Models\Thematic::find($item->thematic)->name
-                                                    }}</strong></a>
+                                                    <a href="#" class="text-body"><strong>Cái gì dây</strong></a>
                                                 </div>
                                                 <div class="media-right">
                                                     <div class="text-center">

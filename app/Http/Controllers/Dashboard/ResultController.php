@@ -19,10 +19,10 @@ class ResultController extends Controller
     	$this->middleware('quiz');
     }
 
-    public function getTablePoint($idd){
+    public function getReportQuiz($idd){
     	 $user_id = fdecrypt($idd);
     	 $quiz_header = HeaderQuiz::where('user_id', $user_id)->orderBy('thematic')->get();
     	 $course = User_Course::where('user_id', $user_id)->orderBy('course')->get();
-    	 return view('dashboard.result.table_point', compact('quiz_header','course'));
+    	 return view('dashboard.result.report_quiz', compact('quiz_header','course'));
     }
 }

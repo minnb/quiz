@@ -9,8 +9,8 @@ use App\Models\User_Course;
 use App\Models\Lesson;
 use App\Models\Course;
 use App\Models\Exam;
-use App\Models\HeaderQuiz;
-use App\Models\DetailQuiz;
+use App\Models\HeaderQuiz;use App\Models\JobSendEmail;
+use App\Models\DetailQuiz;use App\Models\Subject;
 use App\Models\Quesstion;use App\Models\Thematic;
 use DB; use Session;
 use Auth;use Mail;use App\Jobs\SendMailQuiz;
@@ -44,18 +44,18 @@ class QuizController extends Controller
         }
     }
 
-    public function getTakeQuiz($type, $course, $thematic, $lesson, $token){
-    	$course_id = fdecrypt($course); 
-    	$thematic_id = fdecrypt($thematic); 
-    	$lesson_id = fdecrypt($lesson); 
-    	$quiz_type = fdecrypt($type); 
+    public function getTakeQuiz($type_, $course_, $thematic_, $lesson_, $token){
+    	$course = fdecrypt($course_); 
+    	$thematic = fdecrypt($thematic_); 
+    	$lesson = fdecrypt($lesson_); 
+    	$type = fdecrypt($type_); 
         $quiz_id = 0;
     	try{
            
-            $quiz_id = Exam::insertTabkeQuiz($quiz_type,$course_id, $thematic_id, $lesson_id, $token);
+            $quiz_id = Exam::insertTabkeQuiz($type,$course, $thematic, $lesson, $token);
             $question_data = Quesstion::getQuestionData($quiz_id)->toArray();
             if(count($question_data) > 0){
-                return view('dashboard.quiz.quiz', compact('question_data', 'id','course_id','thematic_id', 'quiz_type','quiz_id','lesson_id'));           
+                return view('dashboard.quiz.quiz', compact('question_data', 'course','thematic', 'type','quiz_id','lesson'));           
             }else{
                 HeaderQuiz::where('total', 0)->delete();
                 return back();
@@ -68,7 +68,6 @@ class QuizController extends Controller
     public function postTakeQuizDetail(Request $request, $idd){
     	$quiz_id = fdecrypt($idd); 
         $result = [];
-
         try{
             DB::beginTransaction();
             foreach ($request->input('questions', []) as $key => $question){
@@ -82,8 +81,8 @@ class QuizController extends Controller
             }
             HeaderQuiz::where('id', $quiz_id)->update(['status' => 1]);
             HeaderQuiz::calcResultQuiz($quiz_id);
+            DB::table('w_job_send_email')->insert(['type'=>'QUIZ','quiz_id'=>$quiz_id, 'status'=>0]);
             DB::commit();
-
             return redirect()->route('get.dashboard.quiz.take.result', ['quiz_id'=>fencrypt($quiz_id)]);
         }catch(Exception $e){
             DB::rollBack();
@@ -97,7 +96,6 @@ class QuizController extends Controller
         $result = [];
         try{
             DB::beginTransaction();
-
             foreach ($request->input('questions', []) as $key => $question){
                 if($request->input('questions', [$key]) != null and $request->answer[$key] == true){
                     $result[$key] = $request->answer[$key];
@@ -106,51 +104,43 @@ class QuizController extends Controller
                         ->update(['answer' => $request->answer[$key]]);
                 }               
             }
-
             HeaderQuiz::where('id', $quiz_id)->update(['status' => 1]);
             HeaderQuiz::calcResultQuiz($quiz_id);
+            DB::table('w_job_send_email')->insert(['type'=>'TUAN','quiz_id'=>$quiz_id, 'status'=>0]);
             DB::commit();
-            return redirect()->route('get.dashboard.quiz.take.result', ['quiz_id'=>fencrypt($quiz_id)]);
+            return redirect()->route('get.dashboard.week.take.result', ['quiz_id'=>fencrypt($quiz_id)]);
 
         }catch(\Exception $e){
             DB::rollBack();
             return back();
         }       
     }
-
+    public function getTakeWeekResult($idd){
+        $quiz_id = fdecrypt($idd); 
+        try{
+            $data_result = HeaderQuiz::find($quiz_id);
+            $point = calcPoint($data_result->total, $data_result->kq);
+            $answer_result = DetailQuiz::where('quiz_id', $quiz_id)->orderBy('id')->get();
+            
+            return view('dashboard.quiz.result_week', compact('data_result','answer_result','quiz_id','point'));
+        }catch(Exception $e){
+            return back();
+        }
+    }
     public function getTakeQuizResult($idd){
         $quiz_id = fdecrypt($idd); 
         try{
             $data_result = HeaderQuiz::find($quiz_id);
             $point = calcPoint($data_result->total, $data_result->kq);
             $answer_result = DetailQuiz::where('quiz_id', $quiz_id)->orderBy('id')->get();
-            $infoUser = User::find($data_result->user_id);
-            $data_email =[
-                'name'=> $infoUser->name,
-                'email'=> $infoUser->email,
-                'point' => $point,
-                'subject'=> Thematic::find($data_result->thematic)->name,
-                'result_header' => $data_result,
-                'result_answer' => $answer_result 
-            ];
-
-           //$time = $request->time * 60 * 60;
-           //dispatch(new SendMailQuiz($data_email))->delay(Carbon::now()->addMinutes(2));
-           //SendMailQuiz::dispatch($data_email)->delay(now()->addMinutes(2));
-            try{
-                Mail::send('dashboard.email.result_quiz',['data'=>$data_email], function($message) use ($data_email){
-                    $message->to($data_email['email'], $data_email['name'])->subject('Kết quả bài thi - '.$data_email['subject']);
-                });
-            }catch(\Exception $e){
-                return view('dashboard.quiz.quiz_result', compact('data_result','answer_result','quiz_id','point'));
-            }
-            return view('dashboard.quiz.quiz_result', compact('data_result','answer_result','quiz_id','point'));
+            
+            return view('dashboard.quiz.result_quiz', compact('data_result','answer_result','quiz_id','point'));
         }catch(\Exception $e){
             return back();
         }
-        
     }
 
+    /*
     public function getTakeQuizResultDetail($idd){
         $quiz_id = fdecrypt($idd); 
         try{
@@ -163,7 +153,7 @@ class QuizController extends Controller
         }
         
     }
-
+    */
     public function getPractice(){
         try{
             $user_id = User::getInfoUser()['id'];
@@ -178,7 +168,30 @@ class QuizController extends Controller
         }
     }
 
-    public function getQuizData(){
-        
+    public function getTakeQuizAgain($idd){
+        $quiz_id = fdecrypt($idd);
+        $question_data = Quesstion::getQuestionData($quiz_id)->toArray();
+        if(count($question_data) > 0){
+            $check = HeaderQuiz::find($quiz_id);
+            $lesson = $check->lesson;
+            $type = $check->type;
+            $course = $check->course;
+            $thematic = $check->thematic;
+            $subject = $check->subject;
+            $week = $check->week;
+            $period = $check->period;
+            switch ($check->type){
+                case 'QUIZ':
+                    return view('dashboard.quiz.quiz', compact('question_data', 'course','thematic', 'type','quiz_id','lesson'));
+                    break;
+                case 'TUAN':
+                    return view('dashboard.quiz.quiz_week', compact('question_data', 'week','course','subject', 'type','quiz_id'));           
+                    break;
+            }
+            
+        }else{
+            return back();
+        }
     }
+
 }

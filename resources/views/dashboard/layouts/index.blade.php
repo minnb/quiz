@@ -128,7 +128,12 @@
                                     <li class="list-group-item">
                                         <div class="media align-items-center">
                                             <div class="media-body">
-                                                <a class="text-body" href="{{ route('get.dashboard.quiz.take.result.detail', ['quiz_id'=>fencrypt($item->id)])}}"><strong>
+                                                @if($item->type == 'QUIZ')
+                                                    <a class="text-body" href="{{route('get.dashboard.quiz.take.result',['quiz_id'=>fencrypt($item->id)])}}">
+                                                @elseif($item->type == 'TUAN')
+                                                    <a class="text-body" href="{{route('get.dashboard.week.take.result',['quiz_id'=>fencrypt($item->id)])}}">
+                                                @endif
+                                                <strong>
                                                     @if($item->lesson != '' || $item->lesson != '0')
                                                         Quiz: {{ App\Models\Lesson::find($item->lesson)->name }}
                                                     @else

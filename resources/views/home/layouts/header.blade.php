@@ -43,6 +43,7 @@
   </script>
 </head>
 <body class="body-wrapper">
+<!--
   <div id="preloader" class="smooth-loader-wrapper">
     <div class="smooth-loader">
       <div class="loader">
@@ -53,6 +54,7 @@
       </div>
     </div>
   </div>
+-->
   <div class="main-wrapper">
     <header id="pageTop" class="header-wrapper">
       <div class="container-fluid color-bar top-fixed clearfix">

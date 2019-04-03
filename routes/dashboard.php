@@ -9,19 +9,20 @@ Route::group(['prefix'=> 'dashboard'], function(){
 	});
 
 	Route::group(['prefix'=> 'quiz'], function(){
-		
+		Route::get('practice', ['as'=>'get.dashboard.quiz.practice','uses'=>'Dashboard\QuizController@getPractice']);
+
 		Route::get('take-quiz/{type}/{course}/{thematic}/{lesson}/{token}', ['as'=>'get.dashboard.quiz.take','uses'=>'Dashboard\QuizController@getTakeQuiz']);
 		Route::get('take-week/{type}/{course}/{subject}/{week}/{token}', ['as'=>'get.dashboard.quiz.take.week','uses'=>'Dashboard\QuizController@getTakeQuizByWeek']);
 
 		Route::post('take-quiz/{quiz_id}', ['as'=>'post.dashboard.quiz.take.detail','uses'=>'Dashboard\QuizController@postTakeQuizDetail']);
+		Route::post('take-quiz-week/{quiz_id}', ['as'=>'post.dashboard.quiz.take.week','uses'=>'Dashboard\QuizController@postTakeQuizWeek']);
 
-		Route::post('take-quiz/week/{quiz_id}', ['as'=>'post.dashboard.quiz.take.week','uses'=>'Dashboard\QuizController@postTakeQuizWeek']);
+		Route::get('quiz-result/{quiz_id}', ['as'=>'get.dashboard.quiz.take.result','uses'=>'Dashboard\QuizController@getTakeQuizResult']);
+		Route::get('week-result/{quiz_id}', ['as'=>'get.dashboard.week.take.result','uses'=>'Dashboard\QuizController@getTakeWeekResult']);
 
-		Route::get('take-quiz/result/{quiz_id}', ['as'=>'get.dashboard.quiz.take.result','uses'=>'Dashboard\QuizController@getTakeQuizResult']);
-		Route::get('result/detail/{quiz_id}', ['as'=>'get.dashboard.quiz.take.result.detail','uses'=>'Dashboard\QuizController@getTakeQuizResultDetail']);
+		Route::get('take-again/{quiz_id}', ['as'=>'get.dashboard.take.again','uses'=>'Dashboard\QuizController@getTakeQuizAgain']);
 
-		Route::get('practice', ['as'=>'get.dashboard.quiz.practice','uses'=>'Dashboard\QuizController@getPractice']);
-
+		Route::get('report-quiz/{user_id}', ['as'=>'get.dashboard.report.quiz','uses'=>'Dashboard\ResultController@getReportQuiz']);
 	});
 
 	Route::group(['prefix'=> 'result'], function(){

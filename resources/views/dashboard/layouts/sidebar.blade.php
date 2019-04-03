@@ -100,7 +100,7 @@
                             </a>
                         </li>
                         <li class="sidebar-menu-item">
-                            <a class="sidebar-menu-button" href="{{ route('get.dashboard.result.table.point', ['user_id'=>fencrypt(App\Models\User::getInfoUser()['id'])])}}">
+                            <a class="sidebar-menu-button" href="{{ route('get.dashboard.report.quiz', ['user_id'=>fencrypt(App\Models\User::getInfoUser()['id'])])}}">
                                 <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">poll</i> Sổ điểm
                             </a>
                         </li>

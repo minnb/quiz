@@ -23,7 +23,7 @@
     <div class="container">
       <div class="row justify-content-md-center">
         <div class="col-lg-9 privew">
-         <form action="{{ route('post.dashboard.quiz.take.detail',['quiz_id'=>fencrypt($quiz_id)])}}" method="POST">
+         <form action="{{ route('post.dashboard.quiz.take.week',['quiz_id'=>fencrypt($quiz_id)])}}" method="POST">
            <input type="hidden" name="_token" value="{!! csrf_token() !!}">
             <div id="smartwizard" class="smartwizard">
                   <h1 class="questions">Môn {{App\Models\Subject::find($subject)->name}} {{$quiz_id}}</h1>

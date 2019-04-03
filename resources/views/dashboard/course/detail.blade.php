@@ -19,7 +19,7 @@
 
                         <div class="card-body">
                            {!! $lesson_data[0]->description !!}
-                           <a href="{{ route('get.dashboard.quiz.take',['type'=>fencrypt('QUIZ'),'course'=>fencrypt($lesson_data[0]->course),'thematic'=>fencrypt($lesson_data[0]->thematic), 'lesson'=>fencrypt($lesson_data[0]->id), 'token'=>getToken(10)])}}" class="btn btn-sm btn-danger">Luyệt tập Quiz</a>
+                           <a href="{{ route('get.dashboard.quiz.take',['type'=>fencrypt('QUIZ'),'course'=>fencrypt($lesson_data[0]->course),'thematic'=>fencrypt($lesson_data[0]->thematic), 'lesson'=>fencrypt($lesson_data[0]->id), 'token'=>getToken(20)])}}" class="btn btn-sm btn-danger">Luyệt tập Quiz</a>
                            
                         </div>
                     </div>
