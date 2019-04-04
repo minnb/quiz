@@ -42,9 +42,9 @@ class SendEmailCommand extends Command
     {
         DB::table('w_logs')->insert(['code' =>  'RUN','message' =>'Auto run send email']);
         
-        $queue =  SendMailQuiz::where('status', 0)->orderBy('id')->limit(1)->get();
-        $infoUser = User::find($data_quiz->user_id);
+        $queue =  DB::table('w_job_send_email')->where('status', 0)->orderBy('id')->limit(1)->get();
         $data_result = HeaderQuiz::find($queue[0]->quiz_id);
+        $infoUser = User::find($data_result->user_id);     
         $point = calcPoint($data_result->total, $data_result->kq);
         $answer_result = DetailQuiz::where('quiz_id', $queue[0]->quiz_id)->orderBy('id')->get();
 
@@ -62,7 +62,7 @@ class SendEmailCommand extends Command
                 Mail::send('dashboard.email.email',['data'=>$data_email], function($message) use ($data_email){
                     $message->to($data_email['email'], $data_email['name'])->subject('Kết quả bài thi - '.$data_email['subject']);
                 });
-                SendMailQuiz::where('id',$queue[0]->id)->update(['status'=>1]);
+                DB::table('w_job_send_email')->where('id',$queue[0]->id)->update(['status'=>1]);
                 DB::commit();
             }catch(\Exception $e){
                 DB::rollBack();
@@ -82,7 +82,7 @@ class SendEmailCommand extends Command
                 Mail::send('dashboard.email.email',['data'=>$data_email], function($message) use ($data_email){
                     $message->to($data_email['email'], $data_email['name'])->subject('Kết quả bài thi - '.$data_email['subject']);
                 });
-                SendMailQuiz::where('id',$queue[0]->id)->update(['status'=>1]);
+                DB::table('w_job_send_email')->where('id',$queue[0]->id)->update(['status'=>1]);
                 DB::commit();
             }catch(\Exception $e){
                 DB::rollBack();

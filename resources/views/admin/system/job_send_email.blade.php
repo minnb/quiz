@@ -13,9 +13,12 @@
 								<th>#</th>
 								<th>Type</th>
 								<th>Quiz_id</th>
-								<th>Status</th>
+								<th>UserName</th>
+								<th>Email</th>
 								<th>Created_at</th>
 								<th>Updated_at</th>
+								<th>Status</th>
+								<th>Action</th>
 							</tr>
 						</thead>										
 						<tbody>
@@ -24,9 +27,24 @@
 								<td><?php echo $key + 1; ?></td>
 								<td>{{ $item->type }}</td>
 								<td>{{ $item->quiz_id }}</td>
-								<td>{{ $item->status }}</td>
+								<td>{{ $item->name }}</td>
+								<td>{{ $item->email }}</td>
 								<td>{{ $item->created_at }}</td>
 								<td>{{ $item->updated_at }}</td>
+								<td>
+									@if($item->status == 0)
+										<span class="btn btn-danger btn-sm">Pending</span>
+									@else
+										<span class="btn btn-success btn-sm">Success</span>
+									@endif
+								</td>
+								<td>
+									@if($item->status == 0)
+									<a class="btn btn-primary" href="{{ route('get.admin.manual.send.email',['quiz_id'=>fencrypt($item->quiz_id)]) }}">Send email</a>
+									@else
+										<span>Success</span>
+									@endif
+								</td>
 							</tr>
 							<?php } ?>
 						</tbody>
