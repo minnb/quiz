@@ -48,7 +48,7 @@ class SendEmailCommand extends Command
         $point = calcPoint($data_result->total, $data_result->kq);
         $answer_result = DetailQuiz::where('quiz_id', $queue[0]->quiz_id)->orderBy('id')->get();
 
-        if($data_quiz->type == 'TUAN'){
+        if($data_result->type == 'TUAN'){
             $data_email =[
                 'name'=> $infoUser->name,
                 'email'=> $infoUser->email,
@@ -68,11 +68,11 @@ class SendEmailCommand extends Command
                 DB::rollBack();
                 DB::table('w_logs')->insert(['code' =>  'TUAN','message' => $e->getMessage()]);
             }
-        }elseif ($data_quiz->type == 'QUIZ') {
+        }elseif ($data_result->type == 'QUIZ') {
             $data_email =[
                 'name'=> $infoUser->name,
                 'email'=> $infoUser->email,
-                'point' => $data_quiz->point,
+                'point' => $point,
                 'subject'=> Lesson::findOrFail($data_result->lesson)->name,
                 'result_header' => $data_result,
                 'result_answer' => $answer_result 
