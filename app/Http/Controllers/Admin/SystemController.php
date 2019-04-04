@@ -28,4 +28,9 @@ class SystemController extends Controller
         $data = DB::table('w_logs')->orderBy('id')->limit(200)->get();
         return view('admin.system.logs', compact('data'));
     }
+
+    public function getJobSendEmail(){
+        $data = DB::table('w_job_send_email')->orderBy('id')->limit(500)->get();
+        return view('admin.system.job_send_email', compact('data'));   
+    }
 }

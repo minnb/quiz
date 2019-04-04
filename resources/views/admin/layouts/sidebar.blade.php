@@ -52,7 +52,7 @@
                     <a href="#"><i class="fa fa-cogs bigfonts"></i> <span> System</span> <span class="menu-arrow"></span></a>
 					<ul class="list-unstyled">
 						<li><a href="{{ route('get.admin.logs') }}">Logs</a></li>
-						
+						<li><a href="{{ route('get.admin.send.email') }}">Job send email</a></li>
 					</ul>
                 </li>
             </ul>

@@ -136,7 +136,7 @@ Route::group(['prefix'=> 'admin'], function(){
 
 	Route::group(['prefix'=> 'system'], function(){
 		Route::get('logs', ['as'=>'get.admin.logs','uses'=>'Admin\SystemController@getLogs']);
-
+		Route::get('auto-send-email', ['as'=>'get.admin.send.email','uses'=>'Admin\SystemController@getJobSendEmail']);
 	});
 });
 

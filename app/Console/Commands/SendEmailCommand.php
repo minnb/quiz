@@ -59,7 +59,7 @@ class SendEmailCommand extends Command
             ];
             try{
                 DB::beginTransaction();
-                Mail::send('dashboard.email.result_week',['data'=>$data_email], function($message) use ($data_email){
+                Mail::send('dashboard.email.email',['data'=>$data_email], function($message) use ($data_email){
                     $message->to($data_email['email'], $data_email['name'])->subject('Kết quả bài thi - '.$data_email['subject']);
                 });
                 SendMailQuiz::where('id',$queue[0]->id)->update(['status'=>1]);
@@ -79,7 +79,7 @@ class SendEmailCommand extends Command
             ];
             try{
                 DB::beginTransaction();
-                Mail::send('dashboard.email.result_quiz',['data'=>$data_email], function($message) use ($data_email){
+                Mail::send('dashboard.email.email',['data'=>$data_email], function($message) use ($data_email){
                     $message->to($data_email['email'], $data_email['name'])->subject('Kết quả bài thi - '.$data_email['subject']);
                 });
                 SendMailQuiz::where('id',$queue[0]->id)->update(['status'=>1]);
