@@ -29,12 +29,6 @@ class SystemController extends Controller
      */
     public function getLogs()
     {
-        $users = DB::table('users')
-            ->join('contacts', 'users.id', '=', 'contacts.user_id')
-            ->join('orders', 'users.id', '=', 'orders.user_id')
-            ->select('users.*', 'contacts.phone', 'orders.price')
-            ->get();
-
         $data = DB::table('w_logs')->orderBy('id')->limit(200)->get();
         return view('admin.system.logs', compact('data'));
     }
