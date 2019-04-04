@@ -10,7 +10,7 @@
 			<span class="text-white">{{ number_format(App\Models\Thematic::where('status', 1)->count())}} Chuyển đề</span>
 		</div>
 	</div>
-
+	
 	<div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
 		<div class="card-box noradius noborder bg-warning">
 			<i class="fa fa-bar-chart float-right text-white"></i>

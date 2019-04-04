@@ -48,7 +48,13 @@
 						<li><a href="{{ route('get.admin.exam.list') }}">Cấu hình Đề thi</a></li>
 					</ul>
                 </li>
-
+                <li class="submenu">
+                    <a href="#"><i class="fa fa-cogs bigfonts"></i> <span> System</span> <span class="menu-arrow"></span></a>
+					<ul class="list-unstyled">
+						<li><a href="{{ route('get.admin.logs') }}">Logs</a></li>
+						
+					</ul>
+                </li>
             </ul>
         <div class="clearfix"></div>
 		</div>

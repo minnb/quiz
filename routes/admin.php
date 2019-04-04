@@ -133,6 +133,11 @@ Route::group(['prefix'=> 'admin'], function(){
 		Route::post('edit/{id}', ['as'=>'post.admin.news.edit','uses'=>'Admin\NewController@postEdit']);
 		Route::get('delete/{id}', ['as'=>'get.admin.news.delete','uses'=>'Admin\NewController@getDelete']);
 	});
+
+	Route::group(['prefix'=> 'system'], function(){
+		Route::get('logs', ['as'=>'get.admin.logs','uses'=>'Admin\SystemController@getLogs']);
+
+	});
 });
 
 
