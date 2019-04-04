@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Luyện tập: {{App\Models\Subject::find($subject)->name}}</title>
+    <title>Luyện tập: {{App\Models\Subject::find($subject)->name}} </title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href = "{{ asset('public/assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
@@ -10,7 +10,6 @@
     <link href="{{ asset('public/dashboard/quiz/css/smart_wizard_theme_arrows.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/dashboard/quiz/css/smart_wizard_theme_dots.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/dashboard/quiz/css/quiz.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('public/dashboard/css/style.css') }}" rel="stylesheet" type="text/css">
 </head>
 <body class="body-quiz">
   <div class="preloader">
@@ -26,7 +25,7 @@
          <form action="{{ route('post.dashboard.quiz.take.week',['quiz_id'=>fencrypt($quiz_id)])}}" method="POST">
            <input type="hidden" name="_token" value="{!! csrf_token() !!}">
             <div id="smartwizard" class="smartwizard">
-                  <h1 class="questions">Môn {{App\Models\Subject::find($subject)->name}} {{$quiz_id}}</h1>
+                  <h1 class="questions">Môn {{App\Models\Subject::find($subject)->name}} </h1>
                   <ul>
                     @foreach($question_data as $key=>$item)
                       <li><a href="#step-{{$key+1}}">Câu {{$key+1}}<br /></a></li>
@@ -72,6 +71,7 @@
     <script type="text/javascript" src="{{ asset('public/assets/js/popper.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/assets/js/bootstrap.min.js') }}" ></script>
     <script type="text/javascript" src="{{ asset('public/dashboard/quiz/js/jquery.smartWizard.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/dashboard/js/quiz.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function(){
             // Step show event
@@ -130,6 +130,15 @@
 
             $("#theme_selector").change();
         });
+
+        $(".fraction").each(function(key, value) {
+            $this = $(this)
+            var split = $this.html().split("/")
+            if( split.length == 2 ){
+                $this.html('<span class="top">'+split[0]+'</span><span class="bottom">'+split[1]+'</span>')
+            }    
+        });
+
     </script>
 </body>
 </html>

@@ -1,3 +1,6 @@
+body{
+    font-family: Arial,sans-serif;
+}
 .body-quiz{
         background: url(images/pattern.jpg) #DFE0E2;
 }
@@ -53,8 +56,6 @@
 .answerList {
     margin-bottom: 15px;
 }
-
-
 ol, ul {
     list-style: none;
 }
@@ -112,5 +113,17 @@ input[type=checkbox], input[type=radio] {
     background: #FFF;
     color: #007fbe;
 }
+.hidden{display: none;}
+.fraction, .top, .bottom {
+    padding: 0 5px; vertical-align: middle;
+}
 
+.fraction {
+    display: inline-block;
+    text-align: center;    
+}
 
+.bottom{
+    border-top: 1px solid #000;
+    display: block;
+}
