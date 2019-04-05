@@ -29,7 +29,7 @@ class SystemController extends Controller
      */
     public function getLogs()
     {
-        $data = DB::table('w_logs')->orderBy('id')->limit(200)->get();
+        $data = DB::table('w_logs')->orderBy('id','DESC')->limit(500)->get();
         return view('admin.system.logs', compact('data'));
     }
 
