@@ -40,7 +40,7 @@ class SendEmailCommand extends Command
      */
     public function handle()
     {
-        DB::table('w_logs')->insert(['code' =>  'RUN','message' =>'Auto run send email']);
+        //DB::table('w_logs')->insert(['code' =>  'RUN','message' =>'Auto run send email']);
         
         $queue =  DB::table('w_job_send_email')->where('status', 0)->orderBy('id')->limit(1)->get();
         $data_result = HeaderQuiz::find($queue[0]->quiz_id);

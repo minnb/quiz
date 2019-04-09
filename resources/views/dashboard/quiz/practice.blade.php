@@ -24,7 +24,7 @@
                                 <ul class="list-group list-group-fit">
                                     @foreach($weeks as $key=>$item)
                                     <li class="list-group-item">
-                                        <a href="{{ route('get.dashboard.quiz.take.week',['type'=>fencrypt('TUAN'), 'course'=>fencrypt($value->course),'subject'=>fencrypt($item->subject), 'week'=>fencrypt($item->week), 'token'=>getToken(20)])}}"><i class="material-icons float-right text-muted-light">trending_flat</i>{{ $key+1 }}. Tuần {{ $item->week }}</a>
+                                        <a href="{{ route('get.dashboard.quiz.take.week',['type'=>fencrypt('TUAN'), 'course'=>fencrypt($value->course),'subject'=>fencrypt($item->subject), 'week'=>fencrypt($item->week), 'token'=>getToken(20)])}}"><i class="material-icons float-right text-muted-light">trending_flat</i><span class="text-muted">{{ $key+1 }}</span>. Tuần {{ $item->week }}</a>
                                     </li>
                                     @endforeach
                                 </ul>

@@ -11,7 +11,8 @@ class Quesstion extends Model
 
     public static function countQuesstionInThematic($thematic){
     	return Quesstion::where([
-    		['thematic', $thematic]
+    		['thematic', $thematic],
+    		['status', 1]
     	])->get()->count();
     }
 
