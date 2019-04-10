@@ -211,7 +211,7 @@ class Exam extends Model
 				['used', 1],
 				['status', 1]
 			])->inRandomOrder()->limit(1)->distinct()->get();
-
+/*
 			$detail_quiz = new DetailQuiz();
 			$detail_quiz->quiz_id = $quiz_id;
 			$detail_quiz->question_id = $value->id;
@@ -220,8 +220,8 @@ class Exam extends Model
 			$detail_quiz->result = $value->answer;
 			$detail_quiz->answer_time = 0;
 			$detail_quiz->save();
+			*/
 			
-			/*
 			if($question_data->count() > 0 ){
 	    		foreach ($question_data as $key => $value) {
 					$detail_quiz = new DetailQuiz();
@@ -234,7 +234,7 @@ class Exam extends Model
 					$detail_quiz->save();
 				}
     		}
-    		*/
+    		
     	}
 
     	return 0;
