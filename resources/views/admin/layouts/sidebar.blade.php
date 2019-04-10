@@ -29,7 +29,7 @@
 					<ul class="list-unstyled">
 						<li><a href="{{ route('get.admin.thematic.list') }}">Danh sách Chuyên đề</a></li>
 						<li><a href="{{ route('get.admin.quesstion.list.question') }}">Câu hỏi luyện thi</a></li>
-						<li><a href="{{ route('get.admin.quesstion.list.question') }}">Danh mục luyện thi tuần</a></li>
+						<li><a href="{{ route('get.admin.exam.weeks') }}">Danh mục luyện thi tuần</a></li>
 					</ul>
                 </li>
                 <li class="submenu">

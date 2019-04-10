@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Luyện tập: {{App\Models\Subject::find($subject)->name}} </title>
+    <title>Luyện thi - Học hiệu quả  </title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href = "{{ asset('public/assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
@@ -22,10 +22,10 @@
     <div class="container">
       <div class="row justify-content-md-center">
         <div class="col-lg-9 privew">
-         <form action="{{ route('post.dashboard.quiz.take.week',['quiz_id'=>fencrypt($quiz_id)])}}" method="POST">
+         <form action="{{ route('post.dashboard.quiz.take.period',['quiz_id'=>fencrypt($quiz_id), 'type'=>fencrypt($type)])}}" method="POST">
            <input type="hidden" name="_token" value="{!! csrf_token() !!}">
             <div id="smartwizard" class="smartwizard">
-                  <h1 class="questions">Môn {{App\Models\Subject::find($subject)->name}} </h1>
+                  <h1 class="questions">Luyện thi học kỳ  </h1>
                   <ul>
                     <?php $i = 0; ?>
                     @foreach($question_data as $key=>$item)
@@ -39,7 +39,7 @@
                       <div id="step-{{$key+1}}">
                           <div class="card no-border questionsBox">
                               <div class="card-header alert alert-primary">
-                                <strong>Câu hỏi {{$j+1}}:</strong> <span> {!! $item['name'] !!}</span><?php $j++; ?>
+                                <strong>{{ App\Models\Quesstion::find($item['question_id'])->level }} Câu hỏi {{$j+1}}:</strong> <span> {!! $item['name'] !!}</span><?php $j++; ?>
                               </div>
                                <ul class="answerList">
                                 @foreach($item['answer'] as $i=>$value)
@@ -62,7 +62,7 @@
       <br>
       <div class="row justify-content-md-center">
         <div class="col-lg-9 privew">
-            <div class="privew">
+            <div class="privew" style="vertical-align: center">
               <a class="btn btn-primary" href="{{route('get.dashboard.quiz.practice')}}">Quay lại</a>
             </div>
         </div>

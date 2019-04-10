@@ -18,12 +18,6 @@
 					<input type="text" class="form-control" name="name" value="{{ old('name', isset($data) ? $data['name'] : '' ) }}" placeholder="" required="">
 				</div>
 			</div>
-			<div class="col-md-2 offset-md-1 col-xs-12 col-sm-12">
-				<div class="form-group">
-					<label>Thời gian làm bài (phút)</label>
-					<input type="number" class="form-control css_number" name="work_time" value="{{ old('work_time', isset($data) ? $data['work_time'] : 0) }}" required="">
-				</div>
-			</div>
 			<div class="col-md-1 offset-md-1 col-xs-12 col-sm-12">
 				<div class="form-group">
 					<label>Số câu level 1</label>
@@ -36,7 +30,7 @@
 					<input type="number" class="form-control css_number" name="lv2" value="{{ old('lv2', isset($data) ? $data['lv2'] : 0) }}" required="">
 				</div>
 			</div>
-			<div class="col-md-1 offset-md-1 col-xs-12 col-sm-12">
+			<div class="col-md-1 offset-md-1">
 				<div class="form-group">
 					<label>Số câu level 3</label>
 					<input type="number" class="form-control css_number" name="lv3" value="{{ old('lv3', isset($data) ? $data['lv3'] : 0) }}" required="">
@@ -48,33 +42,25 @@
 					<input type="number" class="form-control css_number" name="lv4" value="{{ old('lv4', isset($data) ? $data['lv4'] : 0) }}" required="">
 				</div>
 			</div>
-			<div class="col-md-3 offset-md-1 col-xs-12 col-sm-12">
+			<div class="col-md-1 offset-md-1 col-xs-12 col-sm-12">
 				<div class="form-group">
-					<label>Hình ảnh <span>(Size: 500x300px)</span></label>
-					<input class="form-control" type="file" name="fileImage[]" id="filer_example2" multiple="multiple">
-					@if($data['image'] != '')
-						<img src="{{ asset($data['image']) }}" class="thumbnail">
-					@endif
+					<label style="color: red">Thời gian làm bài</label>
+					<input type="number" class="form-control css_number" name="work_time" value="{{ old('work_time', isset($data) ? $data['work_time'] : 0) }}" required="">
 				</div>
 			</div>
-			<div class="col-md-3 offset-md-1 col-xs-12 col-sm-12">
+		</div>
+		<hr>
+		<div class="row backgroud_white">
+			<div class="col-md-1 offset-md-1 col-xs-12 col-sm-12">
 				<div class="form-group">
-					<label>Loại đề thi</label>
-					<select class="form-control" name="type">
-						{{ selectedOption(getLoaiDeThi(), isset($data) ? $data['type'] : 'TUAN') }}
-					</select>
+					<label style="color:blue">Từ tuần</label>
+					<input type="number" class="form-control css_number" name="from_week" value="{{ old('from_week', isset($data) ? $data['from_week'] : 0) }}" required="">
 				</div>
 			</div>
-			<div class="col-md-2 offset-md-1 col-xs-12 col-sm-12">
+			<div class="col-md-1 offset-md-1 col-xs-12 col-sm-12">
 				<div class="form-group">
-					<label>Số lượng câu hỏi</label>
-					<input type="number" class="form-control css_number" name="number_quesstion" value="{{ old('number_quesstion', isset($data) ? $data['number_quesstion'] : 0) }}" required="">
-				</div>
-			</div>
-			<div class="col-md-10 offset-md-1 col-xs-12 col-sm-12">
-				<div class="form-group">
-					<label>Diễn giải</label>
-					<textarea  class="form-control" id="description" name="description">{{ old('description') }}</textarea>
+					<label style="color:red">Đến tuần</label>
+					<input type="number" class="form-control css_number" name="to_week" value="{{ old('to_week', isset($data) ? $data['to_week'] : 0) }}" required="">
 				</div>
 			</div>
 		</div>

@@ -132,12 +132,16 @@
                                                     <a class="text-body" href="{{route('get.dashboard.quiz.take.result',['quiz_id'=>fencrypt($item->id)])}}">
                                                 @elseif($item->type == 'TUAN')
                                                     <a class="text-body" href="{{route('get.dashboard.week.take.result',['quiz_id'=>fencrypt($item->id)])}}">
+                                                @elseif(substr($item->type,0,2) == 'HK')
+                                                    <a class="text-body" href="{{route('get.dashboard.period.take.result',['quiz_id'=>fencrypt($item->id)])}}">
                                                 @endif
                                                 <strong>
                                                     @if($item->lesson != '' || $item->lesson != '0')
                                                         Quiz: {{ App\Models\Lesson::find($item->lesson)->name }}
-                                                    @else
+                                                    @elseif($item->week != '' || $item->week > 0)
                                                         Luyện thi: Môn {{ App\Models\Subject::find($item->subject)->name }} - <small>Tuần {{$item->week}}</small>
+                                                    @elseif($item->periods != '' || $item->periods > 0)
+                                                        {{ App\Models\Exam::where('type', 'HK'.$item->periods)->get()[0]->name }} 
                                                     @endif
                                                 </strong></a><br>
                                                 <div class="d-flex align-items-center">

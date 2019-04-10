@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use Auth;
 use App\Models\Subject;
-use App\Models\Exam;
+use App\Models\Exam;use App\Models\Week;
 class ExamController extends Controller
 {
     /**
@@ -80,17 +80,21 @@ class ExamController extends Controller
             DB::beginTransaction();
             $exam = Exam::findOrFail($id);
             $img_old = $exam->image;
-            $exam->type = $request->type;
+            //$exam->type = $request->type;
 			$exam->name = $request->name;
-			$exam->alias = makeUnicode($request->name);
+			$exam->alias = ""; // makeUnicode($request->name);
 			$exam->description = $request->description;
 			$exam->work_time = $request->work_time;
 			$exam->lv1 = $request->lv1;
 			$exam->lv2 = $request->lv2;
 			$exam->lv3 = $request->lv3;
 			$exam->lv4 = $request->lv4;
-			$exam->number_quesstion = $request->number_quesstion;
+			$exam->number_quesstion = $request->lv1 + $request->lv2 + $request->lv3 + $request->lv4;
             $exam->user_id = Auth::user()->id;
+            $exam->image = "";
+            $exam->from_week = $request->from_week;
+            $exam->to_week = $request->to_week;
+            /*
             if($request->file('fileImage')){
                 foreach(Input::file('fileImage') as $file ){
                     $destinationPath = checkFolderImage();
@@ -102,12 +106,15 @@ class ExamController extends Controller
                     }
                 }
             }
+            
             $total = $request->lv1 + $request->lv2 + $request->lv3 + $request->lv4;
             if($total == $request->number_quesstion){
             	$exam->save();
             }else{
             	return back()->withErrorss('Số lượng câu hỏi không bằng nhau')->withInput();
             }
+            */
+            $exam->save();
             DB::commit();
             return redirect()->route('get.admin.exam.list')->with(['flash_message'=>'Chỉnh sửa thành công']);
          }catch (\Exception $e) {
@@ -129,4 +136,19 @@ class ExamController extends Controller
         }
     }
 
+    public function getWeeks(){
+        $data = Week::orderby('id')->get();
+        return view('admin.exam.week', compact('data'));
+    }
+
+    public function createWeek(){
+        for($i=1; $i<=35; $i++){
+            $a = new Week();
+            $a->name = 'Tuần '.$i;
+            $a->code = '';
+            $a->lesson = '';
+            $a->save();
+        }
+        return 0;
+    }
 }

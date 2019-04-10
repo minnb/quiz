@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 03, 2019 lúc 06:33 PM
+-- Thời gian đã tạo: Th4 10, 2019 lúc 06:08 PM
 -- Phiên bản máy phục vụ: 10.1.36-MariaDB
 -- Phiên bản PHP: 7.2.11
 
@@ -365,19 +365,22 @@ CREATE TABLE `m_exam` (
   `status` tinyint(1) NOT NULL DEFAULT '1',
   `user_id` int(5) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `from_week` int(2) DEFAULT NULL,
+  `to_week` int(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `m_exam`
 --
 
-INSERT INTO `m_exam` (`id`, `type`, `name`, `alias`, `description`, `image`, `work_time`, `number_quesstion`, `lv1`, `lv2`, `lv3`, `lv4`, `status`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 'TUAN', 'Thi tuần', 'thi-tuan', NULL, NULL, 15, 10, 4, 3, 2, 1, 1, 13, '2019-02-13 05:46:33', '2019-02-13 05:46:33'),
-(2, 'CHUYENDE', 'Thi theo chuyên đề', 'thi-theo-chuyen-de', '<p>Luyện tập trả lời c&acirc;u hỏi nhanh sau khi học xong b&agrave;i giảng.</p>', NULL, 5, 5, 2, 1, 1, 1, 1, 13, '2019-02-13 05:43:35', '2019-02-13 05:43:35'),
-(3, 'HOCKY1', 'HOCKY1', 'hocky1', NULL, NULL, 30, 10, 4, 3, 2, 1, 1, 13, '2019-02-28 15:12:40', '2019-02-28 15:12:40'),
-(4, 'HOCKY2', 'HOCKY2', 'hocky2', NULL, NULL, 30, 10, 4, 3, 2, 1, 1, 13, '2019-02-28 15:13:03', '2019-02-28 15:13:03'),
-(5, 'QUIZ', 'Luyện tập quiz theo bài học', 'luyen-tap-quiz-theo-bai-hoc', NULL, NULL, 10, 5, 2, 1, 1, 1, 1, 13, '2019-03-05 07:45:40', '2019-03-05 07:45:40');
+INSERT INTO `m_exam` (`id`, `type`, `name`, `alias`, `description`, `image`, `work_time`, `number_quesstion`, `lv1`, `lv2`, `lv3`, `lv4`, `status`, `user_id`, `created_at`, `updated_at`, `from_week`, `to_week`) VALUES
+(1, 'TUAN', 'Thi tuần', 'thi-tuan', NULL, NULL, 15, 10, 4, 3, 2, 1, 1, 13, '2019-02-13 05:46:33', '2019-02-13 05:46:33', NULL, NULL),
+(2, 'HK10', 'Thi giữa học kỳ 1', '', NULL, '', 10, 6, 2, 2, 1, 1, 1, 13, '2019-04-10 14:44:48', '2019-04-10 14:44:48', 1, 10),
+(3, 'HK11', 'Thi học kỳ 1', '', NULL, '', 30, 10, 4, 3, 2, 1, 1, 13, '2019-04-10 14:45:02', '2019-04-10 14:45:02', 1, 18),
+(4, 'HK20', 'Thi giữa học kỳ 2', '', NULL, '', 30, 10, 4, 3, 2, 1, 1, 13, '2019-04-10 14:45:14', '2019-04-10 14:45:14', 19, 28),
+(5, 'QUIZ', 'Luyện tập quiz theo bài học', 'luyen-tap-quiz-theo-bai-hoc', NULL, NULL, 10, 5, 2, 1, 1, 1, 1, 13, '2019-03-05 07:45:40', '2019-03-05 07:45:40', NULL, NULL),
+(6, 'HK21', 'Thi học kỳ 2', '', NULL, '', 30, 10, 4, 3, 2, 1, 1, 13, '2019-04-10 14:45:29', '2019-04-10 14:45:29', 19, 35);
 
 -- --------------------------------------------------------
 
@@ -465,7 +468,9 @@ INSERT INTO `m_ket_qua_quiz` (`id`, `type`, `user_id`, `result`, `description`, 
 (211, 'TUAN', 13, 0, '', 'TUAN', 'HHQ50', 0, 0, 1, 9, 9, 1, '2019-04-03 03:38:16', '2019-04-03 05:37:18', 1, 0, 2, 'PypGers8O4jFXBaoEAJQ'),
 (212, 'QUIZ', 13, 0, '', 'QUIZ', 'HHQ50', 9, 2, 1, 1, 5, 0, '2019-04-03 07:10:20', '2019-04-03 07:10:30', 0, 0, 2, 'fu5IWUPpOveDtFZkmNnx'),
 (213, 'QUIZ', 13, 0, '', 'QUIZ', 'HHQ50', 9, 2, 1, 5, 5, 1, '2019-04-03 08:19:39', '2019-04-03 08:22:49', 0, 0, 2, 'qvNF52AlUyg1YPZoSpVO'),
-(214, 'TUAN', 13, 0, '', 'TUAN', 'HHQ50', 0, 0, 1, 2, 9, 0, '2019-04-03 08:23:06', '2019-04-03 08:23:18', 1, 0, 2, 'zn2qYpohmbUBN9ePawGA');
+(214, 'TUAN', 13, 0, '', 'TUAN', 'HHQ50', 0, 0, 1, 2, 9, 0, '2019-04-03 08:23:06', '2019-04-03 08:23:18', 1, 0, 2, 'zn2qYpohmbUBN9ePawGA'),
+(216, 'HK10', 20, 0, '', 'HK10', 'HHQ50', 0, 0, 1, 4, 4, 1, '2019-04-10 15:29:10', '2019-04-10 15:47:01', 0, 10, 0, 'hzutLkqWPJi24HRTbCVO'),
+(218, 'HK11', 20, 0, '', 'HK11', 'HHQ50', 0, 0, 1, 3, 3, 1, '2019-04-10 16:05:50', '2019-04-10 16:06:05', 0, 11, 0, '6n1Jyo3CL2DYRirztXlI');
 
 -- --------------------------------------------------------
 
@@ -667,7 +672,14 @@ INSERT INTO `m_ket_qua_quiz_question` (`id`, `quiz_id`, `question_id`, `answer`,
 (1039, 214, 42, 3, '', 1, 0, '2019-04-03 08:23:18', '2019-04-03 08:23:18'),
 (1040, 214, 45, 2, '', 1, 0, '2019-04-03 08:23:18', '2019-04-03 08:23:18'),
 (1041, 214, 47, 2, '', 3, 0, '2019-04-03 08:23:18', '2019-04-03 08:23:18'),
-(1042, 214, 52, 1, '', 4, 0, '2019-04-03 08:23:18', '2019-04-03 08:23:18');
+(1042, 214, 52, 1, '', 4, 0, '2019-04-03 08:23:18', '2019-04-03 08:23:18'),
+(1043, 216, 37, 1, '', 1, 0, '2019-04-10 15:47:01', '2019-04-10 15:47:01'),
+(1044, 216, 38, 3, '', 3, 0, '2019-04-10 15:47:01', '2019-04-10 15:47:01'),
+(1045, 216, 43, 1, '', 1, 0, '2019-04-10 15:47:01', '2019-04-10 15:47:01'),
+(1046, 216, 42, 1, '', 1, 0, '2019-04-10 15:47:01', '2019-04-10 15:47:01'),
+(1053, 218, 36, 1, '', 1, 0, '2019-04-10 16:06:05', '2019-04-10 16:06:05'),
+(1054, 218, 37, 1, '', 1, 0, '2019-04-10 16:06:05', '2019-04-10 16:06:05'),
+(1055, 218, 38, 3, '', 3, 0, '2019-04-10 16:06:05', '2019-04-10 16:06:05');
 
 -- --------------------------------------------------------
 
@@ -801,6 +813,64 @@ CREATE TABLE `m_template_quiz` (
   `name` text COLLATE utf8_unicode_ci NOT NULL,
   `answer` varchar(191) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `m_week`
+--
+
+CREATE TABLE `m_week` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `HK10` int(2) DEFAULT NULL,
+  `HK11` int(2) DEFAULT NULL,
+  `HK20` int(2) DEFAULT NULL,
+  `HK21` int(2) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `m_week`
+--
+
+INSERT INTO `m_week` (`id`, `name`, `HK10`, `HK11`, `HK20`, `HK21`, `created_at`, `updated_at`) VALUES
+(1, 'Tuần 1', 1, 0, NULL, NULL, '2019-04-10 13:09:29', '2019-04-10 13:09:29'),
+(2, 'Tuần 2', 0, 0, NULL, NULL, '2019-04-10 13:09:29', '2019-04-10 13:09:29'),
+(3, 'Tuần 3', 0, 0, NULL, NULL, '2019-04-10 13:09:29', '2019-04-10 13:09:29'),
+(4, 'Tuần 4', 0, 0, NULL, NULL, '2019-04-10 13:09:29', '2019-04-10 13:09:29'),
+(5, 'Tuần 5', 0, 0, NULL, NULL, '2019-04-10 13:09:29', '2019-04-10 13:09:29'),
+(6, 'Tuần 6', 0, 0, NULL, NULL, '2019-04-10 13:09:29', '2019-04-10 13:09:29'),
+(7, 'Tuần 7', 0, 0, NULL, NULL, '2019-04-10 13:09:29', '2019-04-10 13:09:29'),
+(8, 'Tuần 8', 0, 0, NULL, NULL, '2019-04-10 13:09:29', '2019-04-10 13:09:29'),
+(9, 'Tuần 9', 0, 0, NULL, NULL, '2019-04-10 13:09:29', '2019-04-10 13:09:29'),
+(10, 'Tuần 10', 0, 0, NULL, NULL, '2019-04-10 13:09:29', '2019-04-10 13:09:29'),
+(11, 'Tuần 11', 0, 0, NULL, NULL, '2019-04-10 13:09:29', '2019-04-10 13:09:29'),
+(12, 'Tuần 12', 0, 0, NULL, NULL, '2019-04-10 13:09:29', '2019-04-10 13:09:29'),
+(13, 'Tuần 13', 0, 0, NULL, NULL, '2019-04-10 13:09:29', '2019-04-10 13:09:29'),
+(14, 'Tuần 14', 0, 0, NULL, NULL, '2019-04-10 13:09:29', '2019-04-10 13:09:29'),
+(15, 'Tuần 15', 0, 0, NULL, NULL, '2019-04-10 13:09:29', '2019-04-10 13:09:29'),
+(16, 'Tuần 16', 0, 0, NULL, NULL, '2019-04-10 13:09:29', '2019-04-10 13:09:29'),
+(17, 'Tuần 17', 0, 1, NULL, NULL, '2019-04-10 13:09:29', '2019-04-10 13:09:29'),
+(18, 'Tuần 18', 0, 0, NULL, NULL, '2019-04-10 13:09:29', '2019-04-10 13:09:29'),
+(19, 'Tuần 19', 0, 0, NULL, NULL, '2019-04-10 13:09:29', '2019-04-10 13:09:29'),
+(20, 'Tuần 20', 0, 0, NULL, NULL, '2019-04-10 13:09:29', '2019-04-10 13:09:29'),
+(21, 'Tuần 21', 0, 0, NULL, NULL, '2019-04-10 13:09:29', '2019-04-10 13:09:29'),
+(22, 'Tuần 22', 0, 0, NULL, NULL, '2019-04-10 13:09:29', '2019-04-10 13:09:29'),
+(23, 'Tuần 23', 0, 0, NULL, NULL, '2019-04-10 13:09:29', '2019-04-10 13:09:29'),
+(24, 'Tuần 24', 0, 0, NULL, NULL, '2019-04-10 13:09:29', '2019-04-10 13:09:29'),
+(25, 'Tuần 25', 0, 0, NULL, NULL, '2019-04-10 13:09:29', '2019-04-10 13:09:29'),
+(26, 'Tuần 26', 0, 0, NULL, NULL, '2019-04-10 13:09:29', '2019-04-10 13:09:29'),
+(27, 'Tuần 27', 0, 0, NULL, NULL, '2019-04-10 13:09:29', '2019-04-10 13:09:29'),
+(28, 'Tuần 28', 0, 0, NULL, NULL, '2019-04-10 13:09:29', '2019-04-10 13:09:29'),
+(29, 'Tuần 29', 0, 0, NULL, NULL, '2019-04-10 13:09:29', '2019-04-10 13:09:29'),
+(30, 'Tuần 30', 0, 0, NULL, NULL, '2019-04-10 13:09:29', '2019-04-10 13:09:29'),
+(31, 'Tuần 31', 0, 0, NULL, NULL, '2019-04-10 13:09:29', '2019-04-10 13:09:29'),
+(32, 'Tuần 32', 0, 0, NULL, NULL, '2019-04-10 13:09:29', '2019-04-10 13:09:29'),
+(33, 'Tuần 33', 0, 0, NULL, NULL, '2019-04-10 13:09:29', '2019-04-10 13:09:29'),
+(34, 'Tuần 34', 0, 0, NULL, NULL, '2019-04-10 13:09:29', '2019-04-10 13:09:29'),
+(35, 'Tuần 35', 0, 0, NULL, NULL, '2019-04-10 13:09:29', '2019-04-10 13:09:29');
 
 -- --------------------------------------------------------
 
@@ -981,7 +1051,12 @@ CREATE TABLE `w_job_send_email` (
 
 INSERT INTO `w_job_send_email` (`id`, `type`, `quiz_id`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'QUIZ', 213, 0, '2019-04-03 08:22:49', '2019-04-03 08:22:49'),
-(2, 'TUAN', 214, 0, '2019-04-03 08:23:18', '2019-04-03 08:23:18');
+(2, 'TUAN', 214, 0, '2019-04-03 08:23:18', '2019-04-03 08:23:18'),
+(3, 'HK10', 216, 0, '2019-04-10 15:36:52', '2019-04-10 15:36:52'),
+(4, 'HK10', 216, 0, '2019-04-10 15:39:06', '2019-04-10 15:39:06'),
+(5, 'HK10', 216, 0, '2019-04-10 15:40:58', '2019-04-10 15:40:58'),
+(6, 'HK10', 216, 0, '2019-04-10 15:47:01', '2019-04-10 15:47:01'),
+(7, 'HK11', 218, 0, '2019-04-10 16:06:05', '2019-04-10 16:06:05');
 
 -- --------------------------------------------------------
 
@@ -990,13 +1065,22 @@ INSERT INTO `w_job_send_email` (`id`, `type`, `quiz_id`, `status`, `created_at`,
 --
 
 CREATE TABLE `w_logs` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `code` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   `message` text COLLATE utf8_unicode_ci,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `w_logs`
+--
+
+INSERT INTO `w_logs` (`id`, `code`, `message`, `created_at`, `updated_at`) VALUES
+(1, 'RUN', 'Auto run send email', '2019-04-04 00:08:45', '2019-04-04 00:08:45'),
+(2, 'RUN', 'Auto run send email', '2019-04-04 00:08:51', '2019-04-04 00:08:51'),
+(3, 'RUN', 'Auto run send email', '2019-04-04 00:09:19', '2019-04-04 00:09:19'),
+(4, 'RUN', 'Auto run send email', '2019-04-04 00:09:33', '2019-04-04 00:09:33');
 
 -- --------------------------------------------------------
 
@@ -1186,6 +1270,12 @@ ALTER TABLE `m_mon_hoc`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Chỉ mục cho bảng `m_week`
+--
+ALTER TABLE `m_week`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `roles`
 --
 ALTER TABLE `roles`
@@ -1266,7 +1356,7 @@ ALTER TABLE `z_slider`
 -- AUTO_INCREMENT cho bảng `jobs`
 --
 ALTER TABLE `jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=261;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `migrations`
@@ -1302,7 +1392,7 @@ ALTER TABLE `m_chuyen_de`
 -- AUTO_INCREMENT cho bảng `m_exam`
 --
 ALTER TABLE `m_exam`
-  MODIFY `id` smallint(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` smallint(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT cho bảng `m_giao_vien`
@@ -1314,13 +1404,13 @@ ALTER TABLE `m_giao_vien`
 -- AUTO_INCREMENT cho bảng `m_ket_qua_quiz`
 --
 ALTER TABLE `m_ket_qua_quiz`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=215;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=219;
 
 --
 -- AUTO_INCREMENT cho bảng `m_ket_qua_quiz_question`
 --
 ALTER TABLE `m_ket_qua_quiz_question`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1043;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1056;
 
 --
 -- AUTO_INCREMENT cho bảng `m_khoahoc_monhoc`
@@ -1345,6 +1435,12 @@ ALTER TABLE `m_lop_hoc`
 --
 ALTER TABLE `m_mon_hoc`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT cho bảng `m_week`
+--
+ALTER TABLE `m_week`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT cho bảng `roles`
@@ -1386,13 +1482,13 @@ ALTER TABLE `user_course`
 -- AUTO_INCREMENT cho bảng `w_job_send_email`
 --
 ALTER TABLE `w_job_send_email`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `w_logs`
 --
 ALTER TABLE `w_logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `z_category`

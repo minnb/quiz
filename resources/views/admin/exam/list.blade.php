@@ -11,7 +11,6 @@
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>Hình ảnh</th>
 								<th>Mã đề thi</th>
 								<th>Tên đề thi</th>
 								<th>SL câu hỏi</th>
@@ -20,9 +19,11 @@
 								<th>Level 2</th>
 								<th>Level 3</th>
 								<th>Level 4</th>
+								<th>Từ tuần</th>
+								<th>Đến tuần</th>
 								<th>Trạng thái</th>
 								<th>
-									<a href="{{ route('get.admin.exam.add') }}" ><i class="fa fa-fw fa-plus"></i> Thêm mới đề thi</a>
+									<a href="#" ><i class="fa fa-fw fa-plus"></i> Thêm mới đề thi</a>
 								</th>
 							</tr>
 						</thead>										
@@ -30,13 +31,6 @@
 							<?php foreach($data as $key=>$item) { ?>
 							<tr>
 								<td><?php echo $key + 1; ?></td>
-								<td>
-									@if($item->image != '')
-									<img src="{{ asset($item->image) }}" class="thumbnail">
-									@ELSE
-										<span></span>
-									@endif
-								</td>
 								<td>{{ $item->type }}</td>
 								<td><a href="{{ route('get.admin.exam.edit',['id'=>fencrypt($item->id)])}}"><?php echo $item->name; ?></a></td>
 								<td>{{ $item->number_quesstion }}</td>
@@ -45,6 +39,8 @@
 								<td>{{ $item->lv2 }}</td>
 								<td>{{ $item->lv3 }}</td>
 								<td>{{ $item->lv4 }}</td>
+								<td>{{ $item->from_week }}</td>
+								<td>{{ $item->to_week }}</td>
 								<td>
 									@if($item->status == 0)
 										<span>Disable</span>
@@ -54,7 +50,7 @@
 								</td>
 								<td>
 									<a href="{{ route('get.admin.exam.edit',['id'=>fencrypt($item->id)])}} "><i class="fa fa-fw fa-edit"></i> Edit </a>
-									<a href="{{ route('get.admin.exam.delete',['id'=>fencrypt($item->id)])}}" style="color:red" onclick="return alertDelete();"><i class="fa fa-fw fa-trash"></i> Delete</a>
+									<a href="#" style="color:red" onclick="return alertDelete();"><i class="fa fa-fw fa-trash"></i> Delete</a>
 								</td>
 							</tr>
 							<?php } ?>

@@ -10,7 +10,27 @@
                             <li class="breadcrumb-item active">Luyện thi</li>
                         </ol>
                         @foreach($course as $value)
-                        <?php $weeks = App\Models\Exam::getWeeks($value->course); ?>
+                        <?php   $weeks = App\Models\Exam::getWeeks($value->course); 
+                                $hk = App\Models\Exam::where('type','like','HK%')->orderBy('type')->get(); 
+                        ?>
+                        <div class="card-columns">
+                            <div class="card">
+                                <div class="card-header d-flex align-items-center">
+                                    <div class="flex">
+                                        <h4 class="card-title">{{App\Models\Course::getFullNameCourse($value->course)}}</h4>
+                                        <div class="card-subtitle">Luyện thi học kỳ</div>
+                                    </div>
+                                    <i class="material-icons text-muted-light">info_outline</i>
+                                </div>
+                                <ul class="list-group list-group-fit">
+                                    @foreach($hk as $key=>$item)
+                                    <li class="list-group-item">
+                                        <a href="{{ route('get.dashboard.period.take', ['type'=>fencrypt($item->type), 'course'=>fencrypt($value->course), 'token'=>getToken(20)])}}"><i class="material-icons float-right text-muted-light">trending_flat</i><span class="text-muted">{{ $key+1 }}</span>. {{ $item->name }}</a>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
                         <div class="card-columns">
                             @if($weeks->count() > 0)
                             <div class="card">
@@ -30,7 +50,6 @@
                                 </ul>
                             </div>
                             @endif
-
                         </div>
                         @endforeach
                     </div>

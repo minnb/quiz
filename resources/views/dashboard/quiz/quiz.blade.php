@@ -28,17 +28,19 @@
             <div id="smartwizard" class="smartwizard">
                   <h1 class="questions"><strong>Luyện thi Quiz</strong></h1>
                   <ul>
+                    <?php $i = 0; ?>
                     @foreach($question_data as $key=>$item)
-                      <li><a href="#step-{{$key+1}}">Câu {{$key+1}}<br /></a></li>
+                      <li><a href="#step-{{$key+1}}">Câu {{$i+1}}<br /></a></li><?php $i++; ?>
                     @endforeach
                   </ul>
                   <div class="privew">
+                    <?php $j = 0; ?>
                     @foreach($question_data as $key=>$item)
                       <input type="hidden" name="questions[{{ $item['question_id'] }}]" value="{{ $item['question_id'] }}">
                       <div id="step-{{$key+1}}">
                           <div class="card no-border questionsBox">
                               <div class="card-header alert alert-primary">
-                                <strong>Câu hỏi {{$key+1}}:</strong> <span> {!! $item['name'] !!}</span>
+                                <strong>Câu hỏi {{$j+1}}:</strong> <span> {!! $item['name'] !!}</span><?php $j++; ?>
                               </div>
                                <ul class="answerList">
                                 @foreach($item['answer'] as $i=>$value)

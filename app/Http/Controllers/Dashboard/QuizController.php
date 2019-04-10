@@ -65,6 +65,25 @@ class QuizController extends Controller
         }
     }
 
+    public function getExamPeriod($type_, $course_, $token){
+        $course = fdecrypt($course_); 
+        $type = fdecrypt($type_); 
+        $quiz_id = 0;
+        try{
+           
+            $quiz_id = Exam::insertTabkeQuizPeriod($type, $course, $token);
+            $question_data = Quesstion::getQuestionData($quiz_id)->toArray();
+            if(count($question_data) > 0){
+                return view('dashboard.quiz.quiz_period', compact('question_data', 'course', 'type','quiz_id'));           
+            }else{
+                HeaderQuiz::where('total', 0)->delete();
+                return back();
+            }
+        }catch(Exception $e){
+            return back();
+        }
+    }
+
     public function postTakeQuizDetail(Request $request, $idd){
     	$quiz_id = fdecrypt($idd); 
         $result = [];
@@ -112,9 +131,36 @@ class QuizController extends Controller
 
         }catch(\Exception $e){
             DB::rollBack();
-            return back();
+            return back()->withInput();;
         }       
     }
+
+    public function postExamPeriod(Request $request, $idd, $type_){
+        $quiz_id = fdecrypt($idd); 
+        $type = fdecrypt($type_); 
+        $result = [];
+        try{
+            DB::beginTransaction();
+            foreach ($request->input('questions', []) as $key => $question){
+                if($request->input('questions', [$key]) != null and $request->answer[$key] == true){
+                    $result[$key] = $request->answer[$key];
+                    DetailQuiz::where('quiz_id', $quiz_id)
+                        ->where('question_id', $question)
+                        ->update(['answer' => $request->answer[$key]]);
+                }               
+            }
+            HeaderQuiz::where('id', $quiz_id)->update(['status' => 1]);
+            HeaderQuiz::calcResultQuiz($quiz_id);
+            DB::table('w_job_send_email')->insert(['type'=>$type,'quiz_id'=>$quiz_id, 'status'=>0]);
+            DB::commit();
+            return redirect()->route('get.dashboard.period.take.result', ['quiz_id'=>fencrypt($quiz_id)]);
+
+        }catch(\Exception $e){
+            DB::rollBack();
+            return back()->withInput();;
+        }       
+    }
+
     public function getTakeWeekResult($idd){
         $quiz_id = fdecrypt($idd); 
         try{
@@ -123,8 +169,8 @@ class QuizController extends Controller
             $answer_result = DetailQuiz::where('quiz_id', $quiz_id)->orderBy('id')->get();
             
             return view('dashboard.quiz.result_week', compact('data_result','answer_result','quiz_id','point'));
-        }catch(Exception $e){
-            return back();
+        }catch(\Exception $e){
+            return back()->withInput();
         }
     }
     public function getTakeQuizResult($idd){
@@ -136,10 +182,22 @@ class QuizController extends Controller
             
             return view('dashboard.quiz.result_quiz', compact('data_result','answer_result','quiz_id','point'));
         }catch(\Exception $e){
-            return back();
+            return back()->withInput();;
         }
     }
 
+     public function getTakePeriodResult($idd){
+        $quiz_id = fdecrypt($idd); 
+        try{
+            $data_result = HeaderQuiz::find($quiz_id);
+            $point = calcPoint($data_result->total, $data_result->kq);
+            $answer_result = DetailQuiz::where('quiz_id', $quiz_id)->orderBy('id')->get();
+            $period_name = Exam::where('type', $data_result->type)->get()[0]->name;
+            return view('dashboard.quiz.result_period', compact('data_result','answer_result','quiz_id','point','period_name'));
+        }catch(\Exception $e){
+            return back()->withInput();;
+        }
+    }
     /*
     public function getTakeQuizResultDetail($idd){
         $quiz_id = fdecrypt($idd); 
@@ -187,6 +245,9 @@ class QuizController extends Controller
                 case 'TUAN':
                     return view('dashboard.quiz.quiz_week', compact('question_data', 'week','course','subject', 'type','quiz_id'));           
                     break;
+            }
+            if(substr($check->type, 0, 2) == 'HK'){
+                return view('dashboard.quiz.quiz_period', compact('question_data', 'course', 'type','quiz_id'));           
             }
             
         }else{
