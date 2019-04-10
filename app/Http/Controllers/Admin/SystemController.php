@@ -9,7 +9,7 @@ use App\Models\DetailQuiz;use App\Models\Subject;
 use App\Models\Quesstion;use App\Models\Thematic;use App\Models\Lesson;
 use DB; use Session;
 use Auth;use Mail;
-use App\Jobs\SendMailQuiz;
+use App\Jobs\SendMailQuiz;use App\Models\Exam;
 class SystemController extends Controller
 {
     /**
@@ -93,6 +93,26 @@ class SystemController extends Controller
                 DB::rollBack();
                 DB::table('w_logs')->insert(['code' =>  'TUAN','message' => $e->getMessage()]);
                 return back()->withErrors('Có lỗi xảy ra, gửi mail không thành công');
+            }
+        }elseif(substr($data_result->type,0,2) == 'HK') {
+            $data_email =[
+                'name'=> $infoUser->name,
+                'email'=> $infoUser->email,
+                'point' => $point,
+                'subject'=> Exam::where('type', $data_result->type)->get()[0]->name,
+                'result_header' => $data_result,
+                'result_answer' => $answer_result 
+            ];
+            try{
+                DB::beginTransaction();
+                Mail::send('dashboard.email.result_period',['data'=>$data_email], function($message) use ($data_email){
+                    $message->to($data_email['email'], $data_email['name'])->subject('Kết quả bài thi - '.$data_email['subject']);
+                });
+                DB::table('w_job_send_email')->where('id',$queue[0]->id)->update(['status'=>1]);
+                DB::commit();
+            }catch(Exception $e){
+                DB::rollBack();
+                DB::table('w_logs')->insert(['code' => $data_result->type,'message' => $e->getMessage()]);
             }
         }
         return back()->withErrors('Gửi mail thành công');        

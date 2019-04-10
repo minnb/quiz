@@ -88,12 +88,12 @@ class SendEmailCommand extends Command
                 DB::rollBack();
                 DB::table('w_logs')->insert(['code' =>  'TUAN','message' => $e->getMessage()]);
             }
-        }elseif (substr($data_result->type,0,2) == 'HK') {
+        }elseif(substr($data_result->type,0,2) == 'HK') {
             $data_email =[
                 'name'=> $infoUser->name,
                 'email'=> $infoUser->email,
                 'point' => $point,
-                'subject'=> Exam::where('type',$data_result->type)->get()[0]->name,
+                'subject'=> Exam::where('type', $data_result->type)->get()[0]->name,
                 'result_header' => $data_result,
                 'result_answer' => $answer_result 
             ];
@@ -104,9 +104,9 @@ class SendEmailCommand extends Command
                 });
                 DB::table('w_job_send_email')->where('id',$queue[0]->id)->update(['status'=>1]);
                 DB::commit();
-            }catch(\Exception $e){
+            }catch(Exception $e){
                 DB::rollBack();
-                DB::table('w_logs')->insert(['code' =>  $data_result->type,'message' => $e->getMessage()]);
+                DB::table('w_logs')->insert(['code' => $data_result->type,'message' => $e->getMessage()]);
             }
         }
 
