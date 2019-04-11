@@ -3,7 +3,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Models\User;
 use App\Models\HeaderQuiz;use App\Models\JobSendEmail;
-use App\Models\DetailQuiz;use App\Models\Subject;
+use App\Models\DetailQuiz;use App\Models\Subject;use App\Models\Exam;
 use App\Models\Quesstion;use App\Models\Thematic;use App\Models\Lesson;
 use DB; use Session;
 use Auth;use Mail;use App\Jobs\SendMailQuiz;
