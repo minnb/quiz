@@ -47,7 +47,7 @@
 				</div>
 				<div class="form-group">
 					<label>Tuần</label>
-					<select class="form-control" name="status">
+					<select class="form-control" name="week">
 						{{ getSelectForm(App\Models\Week::getSelectWeek(), 1) }}
 					</select>
 				</div>
