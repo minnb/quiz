@@ -1,5 +1,8 @@
 @extends('dashboard.app')
 @section('title', 'Kết quả luyện thi')
+@section('stylesheet')
+    <link href="{{ asset('public/dashboard/quiz/css/quiz.css') }}" rel="stylesheet" type="text/css" />
+@endsection
 @section('content')
 	<div data-push data-responsive-width="992px" class="mdk-drawer-layout js-mdk-drawer-layout">
         <div class="mdk-drawer-layout__content page ">
@@ -50,4 +53,17 @@
                 </div>
             </div>
         </div>
+@endsection
+@section('javascript')
+<script type="text/javascript">
+    $(document).ready(function(){
+         $(".fraction").each(function(key, value) {
+                $this = $(this)
+                var split = $this.html().split("/")
+                if( split.length == 2 ){
+                    $this.html('<span class="top">'+split[0]+'</span><span class="bottom">'+split[1]+'</span>')
+                }    
+            });
+     });
+</script>
 @endsection

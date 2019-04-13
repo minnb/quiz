@@ -60,7 +60,27 @@ class QuizController extends Controller
                 HeaderQuiz::where('total', 0)->delete();
                 return back();
             }
-        }catch(Exception $e){
+        }catch(\Exception $e){
+            return back();
+        }
+    }
+
+     public function getTakeQuizByThematic($type_, $course_, $thematic_, $token){
+        $course = fdecrypt($course_); 
+        $thematic = fdecrypt($thematic_); 
+        $type = fdecrypt($type_); 
+        $quiz_id = 0;
+        try{
+           
+            $quiz_id = Exam::insertTabkeQuizByThematic($type,$course, $thematic, $token);
+            $question_data = Quesstion::getQuestionData($quiz_id)->toArray();
+            if(count($question_data) > 0){
+                return view('dashboard.quiz.quiz_thematic', compact('question_data', 'course','thematic', 'type','quiz_id'));           
+            }else{
+                HeaderQuiz::where('total', 0)->delete();
+                return back();
+            }
+        }catch(\Exception $e){
             return back();
         }
     }
@@ -198,6 +218,17 @@ class QuizController extends Controller
             return back()->withInput();;
         }
     }
+    public function getTakeThematicResult($idd){
+        $quiz_id = fdecrypt($idd); 
+        try{
+            $data_result = HeaderQuiz::find($quiz_id);
+            $point = calcPoint($data_result->total, $data_result->kq);
+            $answer_result = DetailQuiz::where('quiz_id', $quiz_id)->orderBy('id')->get();
+            return view('dashboard.quiz.result_thematic', compact('data_result','answer_result','quiz_id','point'));
+        }catch(\Exception $e){
+            return back()->withInput();;
+        }
+    }
     /*
     public function getTakeQuizResultDetail($idd){
         $quiz_id = fdecrypt($idd); 
@@ -217,7 +248,7 @@ class QuizController extends Controller
             $user_id = User::getInfoUser()['id'];
             $course = User_Course::getCourseByUserId($user_id);
             if($course->count()>0){
-                return view('dashboard.quiz.practice', compact('course', 'user_id'));
+                return view('dashboard.quiz.practice_new', compact('course', 'user_id'));
             }else{
                 return back();
             }
@@ -244,6 +275,12 @@ class QuizController extends Controller
                     break;
                 case 'TUAN':
                     return view('dashboard.quiz.quiz_week', compact('question_data', 'week','course','subject', 'type','quiz_id'));           
+                    break;
+                case 'CHUYENDE':
+                    return view('dashboard.quiz.quiz_thematic', compact('question_data', 'course','thematic', 'type','quiz_id'));           
+                    break;
+                default:
+                    return view('dashboard.quiz.quiz_period', compact('question_data', 'course', 'type','quiz_id'));           
                     break;
             }
             if(substr($check->type, 0, 2) == 'HK'){

@@ -106,6 +106,53 @@ class Exam extends Model
         }
     }
 
+    public static function insertTabkeQuizByThematic($type, $course, $thematic, $token){
+    	$heder_quiz_id = 0;
+    	$lesson = 0;
+    	$info_exam = Exam::where([['type',$type],['status', 1]])->get();
+    	$check = DB::table('m_ket_qua_quiz')->where('token', $token)->get();
+    	if($check->count() == 0){
+	    	try{
+	            DB::beginTransaction();
+	            $heder_quiz = new HeaderQuiz();
+	            $heder_quiz->type = $type;
+	            $heder_quiz->user_id = User::getInfoUser()['id'];
+	            $heder_quiz->result = 0;
+	            $heder_quiz->description = '';
+	            $heder_quiz->comment = $type;
+	            $heder_quiz->course = $course;
+	            $heder_quiz->thematic = $thematic;
+	            $heder_quiz->lesson = 0;
+				$heder_quiz->status = 0;
+				$heder_quiz->success = 0;
+				$heder_quiz->kq = 0;
+				$heder_quiz->week = 0;
+				$heder_quiz->periods = 0;
+				$heder_quiz->subject = Subject::getSubjectIdByThematic($thematic);
+				$heder_quiz->token = $token;
+				$heder_quiz->save();
+				$heder_quiz_id = $heder_quiz->id;
+
+				Exam::insertDetailQuiz($type, $heder_quiz_id, $course, $thematic, $lesson, $info_exam[0]->lv1, 1);
+				Exam::insertDetailQuiz($type, $heder_quiz_id, $course, $thematic, $lesson, $info_exam[0]->lv2, 2);
+				Exam::insertDetailQuiz($type, $heder_quiz_id, $course, $thematic, $lesson, $info_exam[0]->lv3, 3);
+				Exam::insertDetailQuiz($type, $heder_quiz_id, $course, $thematic, $lesson, $info_exam[0]->lv4, 4);
+
+				$total = DetailQuiz::where('quiz_id', $heder_quiz_id)->get();
+				HeaderQuiz::where('id', $heder_quiz_id)->update(['total'=>$total->count()]);
+
+	            DB::commit();
+	            return $heder_quiz_id;
+	        }catch (\Exception $e) {
+	            DB::rollBack();
+	            return 0;
+	        }
+	    }else{
+        	return $check[0]->id;
+        }
+    }
+
+
     public static function insertTabkeQuizPeriod($type, $course, $token){
     	$heder_quiz_id = 0;
     	$info_exam = Exam::where([['type',$type],['status', 1]])->get();

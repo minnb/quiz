@@ -1,3 +1,4 @@
+<link href="{{ asset('public/dashboard/quiz/css/quiz.css') }}" rel="stylesheet" type="text/css" />
 <?php $result_header = $data['result_header']; $result_answer = $data['result_answer']; ?>
 <div>
 	<h4>Xin chào quý phụ huynh,</h4>
@@ -21,3 +22,14 @@
 	<h3><a href="https://hochieuqua.vn" target="_blank" title="Học Hiệu Quả - Nơi ươm mầm ước mơ cho con bạn"></a>Học Hiệu Quả</h3>
 	<h3>Điện thoại hỗ trợ: 0914 718 806</h3>
 </div>
+<script type="text/javascript">
+    $(document).ready(function(){
+         $(".fraction").each(function(key, value) {
+                $this = $(this)
+                var split = $this.html().split("/")
+                if( split.length == 2 ){
+                    $this.html('<span class="top">'+split[0]+'</span><span class="bottom">'+split[1]+'</span>')
+                }    
+            });
+     });
+</script>
