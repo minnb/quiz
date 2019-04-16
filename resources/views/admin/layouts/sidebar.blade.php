@@ -41,11 +41,17 @@
 					</ul>
                 </li>
                 <li class="submenu">
-                    <a href="#"><i class="fa fa-cogs bigfonts"></i> <span> Quản trị</span> <span class="menu-arrow"></span></a>
+                    <a href="#"><i class="fa fa-shield bigfonts"></i> <span> Cài đặt</span> <span class="menu-arrow"></span></a>
+					<ul class="list-unstyled">
+						<li><a href="{{ route('get.admin.exam.list') }}">Cấu hình Đề thi</a></li>
+						<li><a href="{{ route('get.admin.config.xeploai') }}">Kết quả - Xếp loại</a></li>
+					</ul>
+                </li>
+                <li class="submenu">
+                    <a href="#"><i class="fa fa-users bigfonts"></i> <span> Quản lý Tài khoản</span> <span class="menu-arrow"></span></a>
 					<ul class="list-unstyled">
 						<li><a href="{{ route('get.admin.user.list') }}">Danh sách tài khoản</a></li>
 						<li><a href="{{ route('get.admin.user.list.course') }}">Học viên & khóa học</a></li>
-						<li><a href="{{ route('get.admin.exam.list') }}">Cấu hình Đề thi</a></li>
 					</ul>
                 </li>
                 <li class="submenu">

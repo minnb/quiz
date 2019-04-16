@@ -21,7 +21,7 @@
                     <div class="card-body media align-items-center">
                         <div class="media-body">
                             <h4 class="mb-0"><span style="color:blue; font-size:180%;">{{ number_format($point, 1, '.', '') }}</span> điểm</h4>
-                            <span class="text-muted-light">{{ xeploai($point) }}</span>
+                            <span class="text-muted-light">{{ App\Models\XepLoai::getXepLoai($point) }}</span>
                         </div>
                         <div class="media-right">
                             <a href="{{ route('get.dashboard.take.again', ['quiz_id'=>fencrypt($quiz_id)])}}" class="btn btn-primary">Luyện tập lại <i class="material-icons btn__icon--right">refresh</i></a>
@@ -56,15 +56,5 @@
         </div>
 @endsection
 @section('javascript')
-<script type="text/javascript">
-    $(document).ready(function(){
-         $(".fraction").each(function(key, value) {
-                $this = $(this)
-                var split = $this.html().split("/")
-                if( split.length == 2 ){
-                    $this.html('<span class="top">'+split[0]+'</span><span class="bottom">'+split[1]+'</span>')
-                }    
-            });
-     });
-</script>
+<script type="text/javascript" src="{{ asset('public/dashboard/quiz/js/math.js')}}"></script>
 @endsection

@@ -73,6 +73,7 @@
     <script type="text/javascript" src="{{ asset('public/assets/js/bootstrap.min.js') }}" ></script>
     <script type="text/javascript" src="{{ asset('public/dashboard/quiz/js/jquery.smartWizard.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/dashboard/js/quiz.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/dashboard/quiz/js/math.js')}}"></script>
     <script type="text/javascript">
         $(document).ready(function(){
             // Step show event

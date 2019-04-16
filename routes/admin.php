@@ -141,6 +141,11 @@ Route::group(['prefix'=> 'admin'], function(){
 		Route::get('auto-send-email', ['as'=>'get.admin.send.email','uses'=>'Admin\SystemController@getJobSendEmail']);
 		Route::get('manual-send-email/{quiz_id}', ['as'=>'get.admin.manual.send.email','uses'=>'Admin\SystemController@getManualSendEmail']);
 	});
+	Route::group(['prefix'=> 'config'], function(){
+		Route::get('xep-loai', ['as'=>'get.admin.config.xeploai','uses'=>'Admin\ConfigController@getXepLoai']);
+		Route::get('xep-loai/{id}', ['as'=>'get.admin.config.xeploai.edit','uses'=>'Admin\ConfigController@getXepLoaiEdit']);
+		Route::post('xep-loai/{id}', ['as'=>'post.admin.config.xeploai.edit','uses'=>'Admin\ConfigController@postXepLoaiEdit']);
+	});
 });
 
 

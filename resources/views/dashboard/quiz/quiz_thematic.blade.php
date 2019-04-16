@@ -74,6 +74,7 @@
     <script type="text/javascript" src="{{ asset('public/assets/js/popper.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/assets/js/bootstrap.min.js') }}" ></script>
     <script type="text/javascript" src="{{ asset('public/dashboard/quiz/js/jquery.smartWizard.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/dashboard/quiz/js/math.js')}}"></script>
     <script type="text/javascript">
         $(document).ready(function(){
             $("#smartwizard").on("showStep", function(e, anchorObject, stepNumber, stepDirection, stepPosition) {

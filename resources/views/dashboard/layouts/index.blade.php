@@ -130,29 +130,23 @@
                                             <div class="media-body">
                                                 @if($item->type == 'QUIZ')
                                                     <a class="text-body" href="{{route('get.dashboard.quiz.take.result',['quiz_id'=>fencrypt($item->id)])}}">
+                                                        <strong>Quiz: {{ App\Models\Lesson::find($item->lesson)->name }}</strong></a>
                                                 @elseif($item->type == 'CHUYENDE')
-                                                    <a class="text-body" href="{{route('get.dashboard.week.take.result',['quiz_id'=>fencrypt($item->id)])}}">
+                                                    <a class="text-body" href="{{route('get.dashboard.thematic.take.result',['quiz_id'=>fencrypt($item->id)])}}">
+                                                        <strong>Chuyên đề: {{ App\Models\Thematic::find($item->thematic)->name }} </strong></a>
                                                 @elseif(substr($item->type,0,2) == 'HK')
                                                     <a class="text-body" href="{{route('get.dashboard.period.take.result',['quiz_id'=>fencrypt($item->id)])}}">
+                                                        <strong>{{ App\Models\Exam::where('type', 'HK'.$item->periods)->get()[0]->name }} </strong>
+                                                    </a><br>
                                                 @endif
-                                                <strong>
-                                                    @if($item->lesson != '' || $item->lesson != '0')
-                                                        Quiz: {{ App\Models\Lesson::find($item->lesson)->name }}
-                                                    @elseif($item->type == 'CHUYENDE')
-                                                        Chuyên đề: {{ App\Models\Thematic::find($item->thematic)->name }} 
-                                                    @elseif($item->week != '' || $item->week > 0)
-                                                        Luyện thi: Môn {{ App\Models\Subject::find($item->subject)->name }} - <small>Tuần {{$item->week}}</small>
-                                                    @elseif($item->periods != '' || $item->periods > 0)
-                                                        {{ App\Models\Exam::where('type', 'HK'.$item->periods)->get()[0]->name }} 
-                                                    @endif
-                                                </strong></a><br>
                                                 <div class="d-flex align-items-center">
                                                     <small class="text-black-50 text-uppercase mr-2">Khóa học</small>
                                                     <a href="{{ route('get.dashboard.course.mycourse')}}">{{ App\Models\Course::getFullNameCourse($item->course) }}</a>
                                                 </div>
                                             </div>
                                             <div class="media-right text-center d-flex align-items-center">
-                                                <span class="text-black-50 mr-3">{{ xeploai(calcPoint($item->total, $item->kq)) }}</span>
+                                                <span class="text-black-50 mr-3">{{ App\Models\XepLoai::getXepLoai(calcPoint($item->total, $item->kq)) }} </span>
+
                                                 <h4 class="mb-0">{{ calcPoint($item->total, $item->kq) }}</h4>
                                             </div>
                                         </div>

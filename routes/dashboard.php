@@ -26,7 +26,7 @@ Route::group(['prefix'=> 'dashboard'], function(){
 		Route::get('quiz-result/{quiz_id}', ['as'=>'get.dashboard.quiz.take.result','uses'=>'Dashboard\QuizController@getTakeQuizResult']);
 		Route::get('week-result/{quiz_id}', ['as'=>'get.dashboard.week.take.result','uses'=>'Dashboard\QuizController@getTakeWeekResult']);
 		Route::get('period-result/{quiz_id}', ['as'=>'get.dashboard.period.take.result','uses'=>'Dashboard\QuizController@getTakePeriodResult']);
-		Route::get('thematic-result/{quiz_id}', ['as'=>'get.dashboard.period.take.result','uses'=>'Dashboard\QuizController@getTakeThematicResult']);
+		Route::get('thematic-result/{quiz_id}', ['as'=>'get.dashboard.thematic.take.result','uses'=>'Dashboard\QuizController@getTakeThematicResult']);
 
 		Route::get('take-again/{quiz_id}', ['as'=>'get.dashboard.take.again','uses'=>'Dashboard\QuizController@getTakeQuizAgain']);
 

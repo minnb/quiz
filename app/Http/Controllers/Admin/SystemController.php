@@ -114,6 +114,26 @@ class SystemController extends Controller
                 DB::rollBack();
                 DB::table('w_logs')->insert(['code' => $data_result->type,'message' => $e->getMessage()]);
             }
+        }elseif($data_result->type == 'CHUYENDE') {
+            $data_email =[
+                'name'=> $infoUser->name,
+                'email'=> $infoUser->email,
+                'point' => $point,
+                'subject'=> Thematic::find($data_result->thematic)->name,
+                'result_header' => $data_result,
+                'result_answer' => $answer_result 
+            ];
+            try{
+                DB::beginTransaction();
+                Mail::send('dashboard.email.result_thematic',['data'=>$data_email], function($message) use ($data_email){
+                    $message->to($data_email['email'], $data_email['name'])->subject('Kết quả bài thi chuyên đề - '.$data_email['subject']);
+                });
+                DB::table('w_job_send_email')->where('id',$queue[0]->id)->update(['status'=>1]);
+                DB::commit();
+            }catch(Exception $e){
+                DB::rollBack();
+                DB::table('w_logs')->insert(['code' => $data_result->type,'message' => $e->getMessage()]);
+            }
         }
         return back()->withErrors('Gửi mail thành công');        
     }

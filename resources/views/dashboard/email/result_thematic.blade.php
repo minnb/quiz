@@ -3,7 +3,7 @@
 <div>
 	<h4>Xin chào quý phụ huynh,</h4>
 	<p>Website học trực tuyến hochieuqua.vn xin thông báo đến quý phụ huynh việc học tập của em: <span>{{ $data['name'] }}</span></p>
-	<p>Em đã bài {{$data['subject']}}
+	<p>Em đã làm bài thi chuyên đề {{$data['subject']}}
 	<h3>Kết quả bài thi</h3>
 	<div>
 		<h3>Đạt kết quả: <span style="font-size: 20px">{{ $data['point']}}</span> điểm, <span>{{ App\Models\XepLoai::getXepLoai($data['point']) }}</span></h3>
