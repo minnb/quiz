@@ -15,7 +15,7 @@ class XepLoai extends Model
     	if($data->count() > 0){
     		return $data[0]->name;
     	}else{
-    		return '';
+    		return 'Chưa thi';
     	}
     }
     public static function getNhanXet($point){
@@ -26,7 +26,7 @@ class XepLoai extends Model
         if($data->count() > 0){
             return $data[0]->description;
         }else{
-            return '';
+            return 'Chưa xếp loại';
         }
     }
 }

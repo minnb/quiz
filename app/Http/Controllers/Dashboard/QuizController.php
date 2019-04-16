@@ -120,7 +120,8 @@ class QuizController extends Controller
             }
             HeaderQuiz::where('id', $quiz_id)->update(['status' => 1]);
             HeaderQuiz::calcResultQuiz($quiz_id);
-            DB::table('w_job_send_email')->insert(['type'=>'QUIZ','quiz_id'=>$quiz_id, 'status'=>0]);
+            HeaderQuiz::insertQueeEmail('QUIZ',$quiz_id);
+            //DB::table('w_job_send_email')->insert(['type'=>'QUIZ','quiz_id'=>$quiz_id, 'status'=>0]);
             DB::commit();
             return redirect()->route('get.dashboard.quiz.take.result', ['quiz_id'=>fencrypt($quiz_id)]);
         }catch(Exception $e){
@@ -145,7 +146,8 @@ class QuizController extends Controller
             }
             HeaderQuiz::where('id', $quiz_id)->update(['status' => 1]);
             HeaderQuiz::calcResultQuiz($quiz_id);
-            DB::table('w_job_send_email')->insert(['type'=>'TUAN','quiz_id'=>$quiz_id, 'status'=>0]);
+            HeaderQuiz::insertQueeEmail('TUAN',$quiz_id);
+            //DB::table('w_job_send_email')->insert(['type'=>'TUAN','quiz_id'=>$quiz_id, 'status'=>0]);
             DB::commit();
             return redirect()->route('get.dashboard.week.take.result', ['quiz_id'=>fencrypt($quiz_id)]);
 
@@ -171,7 +173,8 @@ class QuizController extends Controller
             }
             HeaderQuiz::where('id', $quiz_id)->update(['status' => 1]);
             HeaderQuiz::calcResultQuiz($quiz_id);
-            DB::table('w_job_send_email')->insert(['type'=>$type,'quiz_id'=>$quiz_id, 'status'=>0]);
+            HeaderQuiz::insertQueeEmail($type,$quiz_id);
+            //DB::table('w_job_send_email')->insert(['type'=>$type,'quiz_id'=>$quiz_id, 'status'=>0]);
             DB::commit();
             return redirect()->route('get.dashboard.period.take.result', ['quiz_id'=>fencrypt($quiz_id)]);
 

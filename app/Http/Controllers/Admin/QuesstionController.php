@@ -57,7 +57,7 @@ class QuesstionController  extends Controller
             $quesstion->course = $course[0]->course;
             $quesstion->thematic = $thematic_id;
             $quesstion->name = $request->name;
-			$quesstion->alias = makeUnicode($request->name);
+			$quesstion->alias = '';
 			$quesstion->level = $request->level;
 			$quesstion->type = $request->type;
 			$quesstion->status = 1;
@@ -125,7 +125,7 @@ class QuesstionController  extends Controller
             $old_img = $quesstion->image;
 
             $quesstion->name = $request->name;
-            $quesstion->alias = makeUnicode($request->name);
+            $quesstion->alias = '';
             $quesstion->level = $request->level;
             $quesstion->type = $request->type;
             $quesstion->status = 1;

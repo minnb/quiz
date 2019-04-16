@@ -41,4 +41,12 @@ class HeaderQuiz extends Model
         }
         return $data;
     }
+
+    public static function insertQueeEmail($type, $quiz_id){
+        $check = DB::table('w_job_send_email')->where('quiz_id', $quiz_id)->where('type',$type)->get();
+        if($check->count() == 0){
+            DB::table('w_job_send_email')->insert(['type'=>$type,'quiz_id'=>$quiz_id, 'status'=>0]);
+        }
+        return 0;
+    }
 }
