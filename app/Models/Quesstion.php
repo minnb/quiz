@@ -20,7 +20,7 @@ class Quesstion extends Model
     	$question = new Collection();
     	$data_question = DB::table('m_cau_hoi')
 	            ->join('m_ket_qua_quiz_question', 'm_ket_qua_quiz_question.question_id','=','m_cau_hoi.id')
-	            ->select('m_ket_qua_quiz_question.quiz_id', "m_cau_hoi.id as question_id", 'm_cau_hoi.name','m_cau_hoi.type', 'm_cau_hoi.level')
+	            ->select('m_ket_qua_quiz_question.quiz_id', "m_cau_hoi.id as question_id", 'm_cau_hoi.name','m_cau_hoi.type', 'm_cau_hoi.level', 'm_cau_hoi.image')
 	            ->where([
 	            		//['m_cau_hoi.thematic', $thematic_id],
 	            		['m_ket_qua_quiz_question.quiz_id', $quiz_id]
@@ -34,6 +34,7 @@ class Quesstion extends Model
 	    	$quiz_line->type = $value->type;
 	    	$quiz_line->name = $value->name;
 	    	$quiz_line->level = $value->level;
+	    	$quiz_line->image = $value->image;
 	    	$answer_data = DB::table('m_cau_dap_an')
 			            ->join('m_ket_qua_quiz_question', 'm_ket_qua_quiz_question.question_id','=','m_cau_dap_an.quesstion_id')
 			            ->select('m_ket_qua_quiz_question.id',"m_ket_qua_quiz_question.question_id", 'm_cau_dap_an.name','m_cau_dap_an.stt','m_cau_dap_an.value','m_cau_dap_an.result','m_cau_dap_an.image')

@@ -33,7 +33,7 @@
 										<span>Practice</span>
 									@endif
 								</td>
-								<td><a href="{{ route('get.admin.exam.edit',['id'=>fencrypt($item->id)])}}">{{ $item->name }}</a></td>
+								<td><a href="{{ route('get.admin.exam.edit',['id'=>fencrypt($item->id)])}}">{!! $item->name !!}</a></td>
 								<td>{{ $item->level }}</td>
 								<td>{{ App\Models\Thematic::find($item->thematic)->name }}</td>
 								<td>{{ $item->course }}</td>

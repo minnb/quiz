@@ -139,7 +139,7 @@ class QuesstionController  extends Controller
                         $file_name = randomString().'.'.$file->getClientOriginalExtension();
                         $quesstion->image = $destinationPath.'/'.$file_name;
                         $file->move($destinationPath, $file_name);
-                        delete_image_no_path($img_old);
+                        delete_image_no_path($old_img);
                     }
                 }
             }

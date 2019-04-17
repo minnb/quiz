@@ -19,6 +19,7 @@
 		<p>{!! App\Models\XepLoai::getNhanXet($data['point']) !!}</p>
 	</div>
 	<hr>
+	<p><i>Đây là email được gửi tự động từ hochieuqua.vn, Quý phụ huynh/học viên vui lòng không trả lời email này</i></p>
 	<h3><a href="https://hochieuqua.vn" target="_blank" title="Học Hiệu Quả - Nơi ươm mầm ước mơ cho con bạn"></a>Học Hiệu Quả</h3>
 	<h3>Điện thoại hỗ trợ: 0914 718 806</h3>
 </div>

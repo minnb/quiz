@@ -41,6 +41,9 @@
                           <div class="card no-border questionsBox">
                               <div class="card-header alert alert-primary">
                                 <strong>Câu hỏi {{$j+1}}:</strong> <span> {!! $item['name'] !!}</span><?php $j++; ?>
+                                @if($item['image'] != '')
+                                  <img src="{{ asset($item['image']) }}" class="img-thumb-question">
+                                @endif
                               </div>
                                <ul class="answerList">
                                 @foreach($item['answer'] as $i=>$value)

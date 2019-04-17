@@ -26,36 +26,39 @@
          <form action="{{ route('post.dashboard.quiz.take.detail',['quiz_id'=>fencrypt($quiz_id)])}}" method="POST">
            <input type="hidden" name="_token" value="{!! csrf_token() !!}">
             <div id="smartwizard" class="smartwizard">
-                  <h1 class="questions"><strong>Chuyên đề: {{ App\Models\Thematic::find($thematic)->name }}</strong></h1>
-                  <ul>
-                    <?php $i = 0; ?>
-                    @foreach($question_data as $key=>$item)
-                      <li><a href="#step-{{$key+1}}">Câu {{$i+1}}<br /></a></li><?php $i++; ?>
-                    @endforeach
-                  </ul>
-                  <div class="privew">
-                    <?php $j = 0; ?>
-                    @foreach($question_data as $key=>$item)
-                      <input type="hidden" name="questions[{{ $item['question_id'] }}]" value="{{ $item['question_id'] }}">
-                      <div id="step-{{$key+1}}">
-                          <div class="card no-border questionsBox">
-                              <div class="card-header alert alert-primary">
-                                <strong>Câu hỏi {{$j+1}}:</strong> <span> {!! $item['name'] !!}</span><?php $j++; ?>
-                              </div>
-                               <ul class="answerList">
-                                @foreach($item['answer'] as $i=>$value)
-                                  <li>
-                                    <label>
-                                      <input type="radio" name="answer[{{$value['question_id']}}]" value="{{$value['stt']}}" id="radio{{$i}}">{!! $value['name'] !!}
-                                    </label>
-                                  </li>
-                                @endforeach
-                                <input type="radio" name="answer[{{$value['question_id']}}]" value="99" id="radio{{$i}}" checked="true" class="hidden">
-                              </ul>
+              <h1 class="questions"><strong>Chuyên đề: {{ App\Models\Thematic::find($thematic)->name }}</strong></h1>
+              <ul>
+                <?php $i = 0; ?>
+                @foreach($question_data as $key=>$item)
+                  <li><a href="#step-{{$key+1}}">Câu {{$i+1}}<br /></a></li><?php $i++; ?>
+                @endforeach
+              </ul>
+              <div class="privew">
+                <?php $j = 0; ?>
+                @foreach($question_data as $key=>$item)
+                  <input type="hidden" name="questions[{{ $item['question_id'] }}]" value="{{ $item['question_id'] }}">
+                  <div id="step-{{$key+1}}">
+                      <div class="card no-border questionsBox">
+                          <div class="card-header alert alert-primary">
+                            <strong>Câu hỏi {{$j+1}}:</strong> <span> {!! $item['name'] !!}</span><?php $j++; ?>
+                            @if($item['image'] != '')
+                              <img src="{{ asset($item['image']) }}" class="img-thumb-question">
+                            @endif
                           </div>
+                           <ul class="answerList">
+                            @foreach($item['answer'] as $i=>$value)
+                              <li>
+                                <label>
+                                  <input type="radio" name="answer[{{$value['question_id']}}]" value="{{$value['stt']}}" id="radio{{$i}}">{!! $value['name'] !!}
+                                </label>
+                              </li>
+                            @endforeach
+                            <input type="radio" name="answer[{{$value['question_id']}}]" value="99" id="radio{{$i}}" checked="true" class="hidden">
+                          </ul>
                       </div>
-                    @endforeach
                   </div>
+                @endforeach
+              </div>
             </div>
           </form>
         </div>

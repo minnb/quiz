@@ -127,3 +127,6 @@ input[type=checkbox], input[type=radio] {
     border-top: 1px solid #000;
     display: block;
 }
+.img-thumb-question{
+    max-height: 100px;
+}
