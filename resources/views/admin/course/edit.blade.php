@@ -25,6 +25,10 @@
 					</select>
 				</div>
 				<div class="form-group">
+					<label>Link video</label>
+					<input type="text" name="link_video" class="form-control" value="{{ old('link_video', isset($data) ? $data['link_video'] : '')}}" placeholder="">  
+				</div>
+				<div class="form-group">
 					<label>Trạng thái</label>
 					<select class="form-control" name="status">
 						{{ selectedOption(getStatus(), old('status', isset($data) ? $data['status'] : 1 )) }}
@@ -59,7 +63,7 @@
 			<div class="col-md-12 col-lg-12">
 				<button type="submit" class="btn btn-danger"><i class="fa fa-save bigfonts" aria-hidden="true"></i> Cập nhật</button>
 				<a  class="btn btn-info"><i class="fa fa-refresh bigfonts" aria-hidden="true"></i> Thực hiện lại</a>
-				<a  class="btn btn-primary"><i class="fa fa-list bigfonts" aria-hidden="true"></i> Danh sách khóa học</a>
+				<a  class="btn btn-primary" href="{{ route('get.admin.course.list') }}"><i class="fa fa-list bigfonts" aria-hidden="true"></i> Danh sách khóa học</a>
 			</div>
 		</div>
 	</form>

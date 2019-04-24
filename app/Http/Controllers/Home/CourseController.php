@@ -13,22 +13,20 @@ use JWTAuth; use Session;
 use Validator;
 use JWTFactory;
 use DB; 
-class HomeController extends Controller
+class CourseController extends Controller
 {
-    public function __construct()
+    public function getCourseDetail($idd, $name)
     {
-    }
-
-    public function index()
-    {
+    	$id = fdecrypt($idd);
+    	$data = Course::find($id);
     	$data_course = Course::where('status',1)->orderBy('code')->get();
-    	$data_teacher = Teacher::where('status', 1)->orderBy('id')->get();
-        return view('home.layouts.index', compact('data_teacher', 'data_course'));
+    	if($data->count() > 0){
+    		return view('home.pages.course_detail', compact('data','data_course'));
+    	}else{
+    		return back();
+    	}
+        
     }
 
-    public function getFAQ(){
-    	$data = DB::table('z_qa')->where('status',1)->orderBy('id', 'DESC')->get();
-    	return view('home.pages.faq', compact('data'));
-    }
 
 }

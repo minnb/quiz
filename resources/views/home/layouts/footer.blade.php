@@ -50,12 +50,12 @@
                   </li>
                   <li>
                     <a href="#">
-                      <i class="fa fa-angle-double-right" aria-hidden="true"></i>Hợp tác cùng Hochieuqua.vn
+                      <i class="fa fa-angle-double-right" aria-hidden="true"></i>Hợp tác cùng hochieuqua.vn
                     </a>
                   </li>
                   <li>
-                    <a href="#">
-                      <i class="fa fa-angle-double-right" aria-hidden="true"></i>Cẩu hỏi thường gặp
+                    <a href="{{ route('home.faq') }}">
+                      <i class="fa fa-angle-double-right" aria-hidden="true"></i>Câu hỏi thường gặp
                     </a>
                   </li>
                 </ul>

@@ -24,3 +24,14 @@ Route::get('/auth/{provider}',['as'=>'redirect.auth.social','uses'=>'Home\LoginC
 Route::get('/auth/{provide}/callback',['as'=>'callback.auth.social','uses'=> 'Home\LoginController@handleProviderCallback']);
 
 Route::get('/dang-ky-hoc-thu/{course}', ['as'=>'home.register.course.try', 'uses'=>'Home\RegisterController@registerCourse']);
+Route::get('/cau-hoi-thuong-gap', ['as'=>'home.faq', 'uses'=>'Home\HomeController@getFAQ']);
+
+Route::group(['prefix'=> 'giao-vien'], function(){
+	Route::get('/{id}/{name}',['as'=>'home.teacher.detail','uses'=>'Home\TeacherController@getTeacherDetail']);
+
+});
+
+Route::group(['prefix'=> 'khoa-hoc'], function(){
+	Route::get('/{id}/{name}',['as'=>'home.course.detail','uses'=>'Home\CourseController@getCourseDetail']);
+
+});

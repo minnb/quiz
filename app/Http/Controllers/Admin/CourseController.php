@@ -51,6 +51,7 @@ class CourseController extends Controller
             $course->onpost = 0;
             $course->status = $request->status;
             $course->full_name = Course::getFullNameCourse($request->course);
+            $course->link_video = trim($request->link_video);
             if($request->file('fileImage')){
                 foreach(Input::file('fileImage') as $file ){
                     $destinationPath = checkFolderImage();
@@ -93,6 +94,7 @@ class CourseController extends Controller
             $course->status = $request->status;
             $course->unit_price = $request->unit_price;
             $course->full_name = Course::getFullNameCourse($code);
+            $course->link_video = trim($request->link_video);
             if($request->file('fileImage')){
                 foreach(Input::file('fileImage') as $file ){
                     $destinationPath = checkFolderImage();

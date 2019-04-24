@@ -95,9 +95,9 @@
           @foreach($data_course as $key=>$item)
           <div class="col-sm-6 col-md-3 col-xs-12 block">
             <div class="thumbnail thumbnailContent wow fadeInUp">
-              <a href="#"><img src="{{ asset(getImage($item->image)) }}" alt="{{$item->full_name}}" class="img-responsive"></a>
+              <a href="{{ route('home.course.detail',['id'=>$item->id, 'name'=>makeUnicode($item->name)])}}"><img src="{{ asset(getImage($item->image)) }}" alt="{{$item->full_name}}" class="img-responsive"></a>
               <div class="caption border-color-1">
-                <h3><a href="#" class="color-1">{{$item->full_name}}</a></h3>
+                <h3><a href="{{ route('home.course.detail',['id'=>$item->id, 'name'=>makeUnicode($item->name)])}}" class="color-1">{{$item->full_name}}</a></h3>
                 <ul class="list-unstyled">
                   <li><i class="fa fa-calendar-o" aria-hidden="true"></i>Học sinh lớp {{ $item->class }}</li>
                   <li><i class="fa fa-clock-o" aria-hidden="true"></i> Học phí: 
@@ -109,7 +109,7 @@
                 <p>{!! $item->description !!}</p>
                 <ul class="list-inline btn-yellow">
                   <li><a href="{{ route('home.register.course.try', ['course'=>fencrypt($item->code)]) }}" class="btn btn-primary "><i class="fa fa-shopping-basket " aria-hidden="true"></i>Đăng ký học thử</a></li>
-                  <li><a href="#" class="btn btn-link"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Chi tiết</a></li>
+                  <li><a href="{{ route('home.course.detail',['id'=>$item->id, 'name'=>makeUnicode($item->name)])}}" class="btn btn-link"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Chi tiết</a></li>
                 </ul>
               </div>
             </div>
@@ -137,15 +137,15 @@
               <div class="slide wow fadeInUp">
                 <div class="teamContent">
                   <div class="teamImage">
-                    <img src="{{ asset($item->avata) }}" alt="img" class="img-circle">
+                    <img src="{{ asset($item->avata) }}" alt="{{$item->name}}" class="img-circle">
                     <div class="maskingContent">
                       <ul class="list-inline">
-                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                        <li><a href="{{ route('home.teacher.detail',['id'=>fencrypt($item->id), 'name'=>Illuminate\Support\Str::slug($item->name)])}}"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                       </ul>
                     </div>
                   </div>
                   <div class="teamInfo">
-                    <h3><a href="#">{{ $item->name }}</a></h3>
+                    <h3><a href="{{ route('home.teacher.detail',['id'=>fencrypt($item->id), 'name'=>Illuminate\Support\Str::slug($item->name)])}}">{{ $item->name }}</a></h3>
                     <p>Môn Toán</p>
                   </div>
                 </div>

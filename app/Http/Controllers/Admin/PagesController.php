@@ -106,11 +106,58 @@ class PagesController  extends Controller
     }
     
     public function getQaList(){
-
-        return back();
+        $data =DB::table('z_qa')->orderBy('id', 'DESC')->get();
+        return view('admin.pages.list_qa',compact('data'));
     }
 
-    public function postQaAdd(){
-        
+    public function postQaAdd(Request $request){
+        try{
+            DB::beginTransaction();
+            DB::table('z_qa')->insert([
+                'name'=>trim($request->name),
+                'content'=>$request->content,
+                'status'=>1,
+                'alias'=>'',
+                'user_id'=>Auth::user()->id
+            ]);
+            DB::commit();
+            return back()->with(['flash_message'=>'Thêm mới thành công']);
+        }catch (\Exception $e) {
+            DB::rollBack();
+            return back()->withErrors($e->getMessage())->withInput();
+        }
+    }
+    public function getQaEdit($idd){
+        $id = fdecrypt($idd);
+        $data = DB::table('z_qa')->where('id', $id)->get();
+        return view('admin.pages.edit_qa', compact('data', 'id'));
+    }
+    public function postQaEdit(Request $request, $idd){
+        $id = fdecrypt($idd);
+        try{
+            DB::beginTransaction();
+            DB::table('z_qa')->where('id', $id)->update([
+                'name'=>trim($request->name),
+                'content'=>$request->content,
+                'user_id'=>Auth::user()->id
+            ]);
+            DB::commit();
+            return redirect()->route('get.admin.pages.qa.list')->with(['flash_message'=>'Chỉnh sửa thành công']);
+        }catch (\Exception $e) {
+            DB::rollBack();
+            return back()->withErrors($e->getMessage())->withInput();
+        }
+    }
+    public function getQaDelete($idd){
+        $id = fdecrypt($idd);
+        try{
+            DB::beginTransaction();
+            DB::table('z_qa')->where('id', $id)->update(['status'=>0]);
+            DB::commit();
+            return redirect()->route('get.admin.pages.qa.list')->with(['flash_message'=>'Xóa dữ liệu thành công']);
+        }catch (\Exception $e) {
+            DB::rollBack();
+            return back()->withErrors($e->getMessage())->withInput();
+        }
     }
 }

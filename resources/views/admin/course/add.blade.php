@@ -26,6 +26,10 @@
 					</select>
 				</div>
 				<div class="form-group">
+					<label>Link video</label>
+					<input type="text" name="link_video" class="form-control" value="{{ old('link_video', isset($data) ? $data['link_video'] : '')}}" placeholder="">  
+				</div>
+				<div class="form-group">
 					<label>Trạng thái</label>
 					<select class="form-control" name="status">
 						{{ selectedOption(getStatus(),1) }}

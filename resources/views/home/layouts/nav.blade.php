@@ -24,7 +24,7 @@
             <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-file-text-o bg-color-2" aria-hidden="true"></i> <span>Khoá học</span></a>
             <ul class="dropdown-menu dropdown-menu-left">
               @foreach($menu_course as $item)
-                <li class=" "><a href="#">{{ $item->full_name }}</a></li>
+                <li class=" "><a href="{{route('home.course.detail', ['id'=>fencrypt($item->id), 'name'=>Illuminate\Support\Str::slug($item->full_name)])}}">{{ $item->full_name }}</a></li>
               @endforeach
             </ul>
           </li>
@@ -32,7 +32,7 @@
             <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-list-ul bg-color-3" aria-hidden="true"></i> <span>Giáo viên</span></a>
             <ul class="dropdown-menu dropdown-menu-left">
               @foreach($menu_teacher as $item)
-                <li class=" "><a href="#">{{ $item->name }}</a></li>
+                <li class=" "><a href="{{ route('home.teacher.detail',['id'=>fencrypt($item->id), 'name'=>Illuminate\Support\Str::slug($item->name)]) }}">{{ $item->name }}</a></li>
               @endforeach
             </ul>
           </li>

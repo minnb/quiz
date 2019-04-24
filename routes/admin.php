@@ -124,7 +124,10 @@ Route::group(['prefix'=> 'admin'], function(){
 		Route::post('slide/edit/{id}', ['as'=>'post.admin.pages.slide.edit','uses'=>'Admin\PagesController@postEditSlide']);
 
 		Route::get('qa/list', ['as'=>'get.admin.pages.qa.list','uses'=>'Admin\PagesController@getQaList']);
-		Route::post('qa/add', ['as'=>'post.admin.pages.qa.add','uses'=>'Admin\PagesController@postQaAdd']);
+		Route::post('qa/add', ['as'=>'post.admin.pages.qa.add','uses'=>'Admin\PagesController@postQaAdd']); 
+		Route::get('qa/edit/{id}', ['as'=>'get.admin.pages.qa.edit','uses'=>'Admin\PagesController@getQaEdit']); 
+		Route::post('qa/edit/{id}', ['as'=>'post.admin.pages.qa.edit','uses'=>'Admin\PagesController@postQaEdit']); 
+		Route::get('qa/delete/{id}', ['as'=>'get.admin.pages.qa.delete','uses'=>'Admin\PagesController@getQaDelete']); 
 	});
 
 	Route::group(['prefix'=> 'news'], function(){

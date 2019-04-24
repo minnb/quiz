@@ -18,7 +18,9 @@
 								<th colspan="2">Môn học</th>
 								<th>Học phí</th>
 								<th>Trạng thái</th>
-								<th>Thao tác</th>
+								<th>
+									
+								</th>
 							</tr>
 						</thead>										
 						<tbody>

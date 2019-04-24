@@ -97,3 +97,12 @@ function xeploai($point){
   }
   echo $xep;
 }
+function getStatusName($status){
+  switch ($status) {
+    case 1:
+        echo "<span> Active </span>";
+        break;
+    default:
+        echo "<span style='color:red'> Disable </span>";
+  }
+}
