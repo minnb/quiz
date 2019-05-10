@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\RegisterFormRequest;
 use Illuminate\Http\Response;
 use App\Models\User;
+use App\Models\JwtUser;
 use App\Models\Role_User;
 use JWTAuth; use Session;
 use Validator;
@@ -55,7 +56,7 @@ class LoginController extends Controller
 	        	return redirect()->route('home.login')->with(['errors'=>'Lỗi đăng nhập, vui lòng thử lại'])->withInput();
 	        }
 		 }catch (Exception $e) {
-            return back()->withError($e->getMessage())->withInput();
+            return back()->withErrors($e->getMessage())->withInput();
         }
     }
 
@@ -65,13 +66,25 @@ class LoginController extends Controller
         if($authUser->count() > 0){
             return $authUser;
         }
-	    return User::create([
-	            'name'     => $user->name,
+        return User::create([
+                'name' => $user->name,
+                'email' => $user->email,
+                'password' => bcrypt('hochieuqua@2019'),
+            ]);
+        /*
+	    return JwtUser::create([
+	    		'first_name'  => '',
+	    		'last_name' => '',
+	            'full_name' => $user->name,
 	            'email'    => $user->email,
-	            'provider' => $provider,
-	            'provider_id' => $user->id,
-	            'password' => Hash::make('hochieuqua@2019')
+	            'password' => Hash::make('hochieuqua@2019'),
+	            'username'=>'',
+	            'avata'=>'',
+	            'slogan'=>'',
+	            'phone'=>'',
+	            '_token'=>''
 	        ]);
+	       */
     }
 
     public function getLogin(){
@@ -111,7 +124,7 @@ class LoginController extends Controller
 	        	return redirect()->route('home.login')->with(['errors'=>'Lỗi đăng nhập, vui lòng thử lại'])->withInput();
 	        }
 		 }catch (Exception $e) {
-            return back()->withError($e->getMessage())->withInput();
+            return back()->withErrors($e->getMessage())->withInput();
         }
        
 	}    
