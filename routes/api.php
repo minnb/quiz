@@ -26,6 +26,13 @@ Route::get('api/get','Admin\UserController@get');
 
 Route::get('auth/jwt/{token}', 'Admin\UserController@getUserInfo');
 
+Route::group(['prefix' => 'v1'], function () {
+	Route::get('quiz-take/{id}/{token}', 'Api\QuizController@getDataQuiz');
+
+});
+
+
+
 /*
 Route::group(['middleware' => 'quiz'], function () {
     Route::get('auth/jwt/user', 'Admin\UserController@getUserInfo');

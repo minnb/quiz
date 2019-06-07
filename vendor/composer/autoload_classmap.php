@@ -33,6 +33,7 @@ return array(
     'App\\Http\\Controllers\\Dashboard\\CourseController' => $baseDir . '/app/Http/Controllers/Dashboard/CourseController.php',
     'App\\Http\\Controllers\\Dashboard\\DashboardController' => $baseDir . '/app/Http/Controllers/Dashboard/DashboardController.php',
     'App\\Http\\Controllers\\Dashboard\\ForumController' => $baseDir . '/app/Http/Controllers/Dashboard/ForumController.php',
+    'App\\Http\\Controllers\\Dashboard\\ProfileController' => $baseDir . '/app/Http/Controllers/Dashboard/ProfileController.php',
     'App\\Http\\Controllers\\Dashboard\\QuizController' => $baseDir . '/app/Http/Controllers/Dashboard/QuizController.php',
     'App\\Http\\Controllers\\Dashboard\\ResultController' => $baseDir . '/app/Http/Controllers/Dashboard/ResultController.php',
     'App\\Http\\Controllers\\Home\\CourseController' => $baseDir . '/app/Http/Controllers/Home/CourseController.php',

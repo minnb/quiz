@@ -77,6 +77,12 @@
 				</table>
 			</div>
 		</div>
+		<div>
+			<?php $quiz_id = App\Models\HeaderQuiz::get(); ?>
+			@foreach($quiz_id as $item)
+				<span>{{$item->id }}</span><span>|</span>
+			@endforeach
+		</div>
 	</div>
 </div>
 @endsection

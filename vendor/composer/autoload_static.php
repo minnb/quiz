@@ -574,6 +574,7 @@ class ComposerStaticInit636e71109b514742d9ce64192fb53ad7
         'App\\Http\\Controllers\\Dashboard\\CourseController' => __DIR__ . '/../..' . '/app/Http/Controllers/Dashboard/CourseController.php',
         'App\\Http\\Controllers\\Dashboard\\DashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/Dashboard/DashboardController.php',
         'App\\Http\\Controllers\\Dashboard\\ForumController' => __DIR__ . '/../..' . '/app/Http/Controllers/Dashboard/ForumController.php',
+        'App\\Http\\Controllers\\Dashboard\\ProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/Dashboard/ProfileController.php',
         'App\\Http\\Controllers\\Dashboard\\QuizController' => __DIR__ . '/../..' . '/app/Http/Controllers/Dashboard/QuizController.php',
         'App\\Http\\Controllers\\Dashboard\\ResultController' => __DIR__ . '/../..' . '/app/Http/Controllers/Dashboard/ResultController.php',
         'App\\Http\\Controllers\\Home\\CourseController' => __DIR__ . '/../..' . '/app/Http/Controllers/Home/CourseController.php',
