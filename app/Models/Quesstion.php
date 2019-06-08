@@ -48,7 +48,7 @@ class Quesstion extends Model
 	    		foreach($answer_data as $item){
 		    		$arr = array(
 		    			'answer_id'=>$item->id,
-						'question_id'=>$item->question_id,
+						//'question_id'=>$item->question_id,
 						'stt'=>$item->stt,
 						'name'=>$item->name,
 						'value'=>$item->value,

@@ -8,9 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use DB;
 use Auth;
-use App\Models\User;
-use App\Models\Role_User;
-use App\Models\User_Course;
+use App\Models\QuizCollection;
 use App\Models\Quesstion;
 class QuizController extends Controller
 {
@@ -18,9 +16,14 @@ class QuizController extends Controller
 		$response = [
             'status' => false,
         ];
-
 		if($token == "0795879133"){
-			return response()->json(Quesstion::getQuestionData($id), 200);
+			$dataQuestion = new QuizCollection();
+			$dataQuestion->id=1;
+			$dataQuestion->quiz='';
+			$dataQuestion->thematic='';
+			$dataQuestion->lesson ='';
+			$dataQuestion->data = (object)Quesstion::getQuestionData($id);
+			return response()->json($dataQuestion, 200);
 		}else{
 			return response()->json($response, 404);
 		}

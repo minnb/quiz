@@ -104,10 +104,12 @@ class QuizController extends Controller
         }
     }
 
+    //Nop bai thi quiz
     public function postTakeQuizDetail(Request $request, $idd){
     	$quiz_id = fdecrypt($idd); 
         $result = [];
         try{
+            /*
             DB::beginTransaction();
             foreach ($request->input('questions', []) as $key => $question){
                 if($request->input('questions', [$key]) != null and $request->answer[$key] == true){
@@ -124,6 +126,8 @@ class QuizController extends Controller
             //DB::table('w_job_send_email')->insert(['type'=>'QUIZ','quiz_id'=>$quiz_id, 'status'=>0]);
             DB::commit();
             return redirect()->route('get.dashboard.quiz.take.result', ['quiz_id'=>fencrypt($quiz_id)]);
+            */
+            return $request->all();
         }catch(Exception $e){
             DB::rollBack();
             return back();
