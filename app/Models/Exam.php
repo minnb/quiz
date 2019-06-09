@@ -215,6 +215,7 @@ class Exam extends Model
 					$detail_quiz = new DetailQuiz();
 					$detail_quiz->quiz_id = $quiz_id;
 					$detail_quiz->question_id = $value->id;
+					$detail_quiz->stt = 0;
 					$detail_quiz->answer = 0;
 					$detail_quiz->comment = '';
 					$detail_quiz->result = $value->answer;
@@ -236,6 +237,7 @@ class Exam extends Model
 					$detail_quiz = new DetailQuiz();
 					$detail_quiz->quiz_id = $quiz_id;
 					$detail_quiz->question_id = $value->id;
+					//$detail_quiz->stt = $value->answer;
 					$detail_quiz->answer = 0;
 					$detail_quiz->comment = '';
 					$detail_quiz->result = $value->answer;

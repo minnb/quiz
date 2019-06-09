@@ -27,8 +27,8 @@ Route::get('api/get','Admin\UserController@get');
 Route::get('auth/jwt/{token}', 'Admin\UserController@getUserInfo');
 
 Route::group(['prefix' => 'v1'], function () {
-	Route::get('quiz-take/{id}/{token}', 'Api\QuizController@getDataQuiz');
-
+	Route::get('quiz-take/{id}/{token}', 'Api\QuizApiController@getDataQuiz');
+	Route::put('quiz-take', 'Api\QuizApiController@postDataQuiz');
 });
 
 

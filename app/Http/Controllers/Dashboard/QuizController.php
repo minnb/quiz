@@ -60,7 +60,7 @@ class QuizController extends Controller
                 HeaderQuiz::where('total', 0)->delete();
                 return back();
             }
-        }catch(\Exception $e){
+        }catch(Exception $e){
             return back();
         }
     }
