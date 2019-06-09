@@ -30,7 +30,8 @@ class QuizApiController extends Controller
 			$dataQuestion->thematic=$data_quiz->thematic == '' ? '' : Thematic::find($data_quiz->thematic)->name;
 			$dataQuestion->lesson =$data_quiz->lesson == '' ? '' : Lesson::find($data_quiz->lesson)->name;
 			$dataQuestion->data = Quesstion::getQuestionDataApi($id);
-			return response()->json($dataQuestion, 200);
+			//return response()->json($dataQuestion, 200);
+			return $dataQuestion;
 		}else{
 			return response()->json($response, 404);
 		}
