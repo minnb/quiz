@@ -303,4 +303,16 @@ class Exam extends Model
     	])->get();
     	return $data;
     }
+    public static function getName($type){
+    	$data = Exam::where([
+    		['type', $type],
+    		['status', 1]
+    	])->get();
+    	if($data->count() > 0){
+    		return $data[0]->name;
+    	}else{
+    		return "";
+    	}
+    	
+    }
 }

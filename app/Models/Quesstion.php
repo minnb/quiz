@@ -17,7 +17,7 @@ class Quesstion extends Model
     }
 
     public static function getQuestionData($quiz_id){
-    	$question = new Collection();
+    	$question = [];
     	$data_question = DB::table('m_cau_hoi')
 	            ->join('m_ket_qua_quiz_question', 'm_ket_qua_quiz_question.question_id','=','m_cau_hoi.id')
 	            ->select('m_ket_qua_quiz_question.quiz_id', "m_cau_hoi.id as question_id", 'm_cau_hoi.name','m_cau_hoi.type', 'm_cau_hoi.level', 'm_cau_hoi.image')
@@ -29,7 +29,7 @@ class Quesstion extends Model
 
 	    foreach($data_question as $key=>$value){
 	    	$quiz_line = new DataQuiz();
-	    	$quiz_line->quiz_id = $value->quiz_id;
+	    	//$quiz_line->quiz_id = $value->quiz_id;
 	    	$quiz_line->question_id = $value->question_id;
 	    	$quiz_line->type = $value->type;
 	    	$quiz_line->name = $value->name;
@@ -59,9 +59,11 @@ class Quesstion extends Model
 	    		}
 	    		$quiz_line->answer = $arrAnswer;
 	    	}
-	    	$question->prepend($quiz_line);
+	    	//$question->prepend($quiz_line);
+	    	array_push($question,$quiz_line);
 	    }
-		return $question->sortBy('level');
+		//return $question->sortBy('level');
+		return $question;
     }
 
     public static function getQuizData($thematic_id){
