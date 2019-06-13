@@ -10,17 +10,15 @@ class QuestionImport implements ToModel, WithHeadingRow
 
     public function model(array $row)
     {       
-        
         return new TempQuestion([
            'question_id'=> $row['id'],
            'user_id'    => Auth::user()->id,
            'thematic'   => 0,
            'question'   => $row['question'],
-           'stt'        => $row['stt'],
-           'answer'     => $row['answer'],
-           'result'     => $row['result'],
+           'style'      => $row['style'],
            'used'       => $row['used'],
            'level'      => $row['level'],
+           'stt'        => $row['stt']
         ]);
     }
 }

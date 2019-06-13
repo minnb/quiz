@@ -14,8 +14,8 @@ class AnswerImport implements ToModel, WithHeadingRow
         return new TempAnswer([
            'question_id'=> $row['id'],
            'stt'        => $row['stt'],
-           'answer'     => $row['answer'],
-           'result'     => $row['result']
+           'answer'     => trim($row['answer']),
+           'result'     => trim($row['result'])
         ]);
     }
 

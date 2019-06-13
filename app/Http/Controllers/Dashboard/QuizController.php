@@ -19,7 +19,7 @@ class QuizController extends Controller
     
 	public function __construct()
     {
-    	$this->middleware('quiz');
+    	$this->middleware('auth');
     }
 
     public function getTakeQuizByWeek($type_id, $course_id,$subject_id, $week_id, $token){
@@ -65,7 +65,8 @@ class QuizController extends Controller
         }
     }
 
-     public function getTakeQuizByThematic($type_, $course_, $thematic_, $token){
+    //Get question luyen thi theo chuyen de
+    public function getTakeQuizByThematic($type_, $course_, $thematic_, $token){
         $course = fdecrypt($course_); 
         $thematic = fdecrypt($thematic_); 
         $type = fdecrypt($type_); 
@@ -75,12 +76,13 @@ class QuizController extends Controller
             $quiz_id = Exam::insertTabkeQuizByThematic($type,$course, $thematic, $token);
             $question_data = Quesstion::getQuestionData($quiz_id)->toArray();
             if(count($question_data) > 0){
-                return view('dashboard.quiz.quiz_thematic', compact('question_data', 'course','thematic', 'type','quiz_id'));           
+                return $question_data;
+                //return view('dashboard.quiz.quiz_thematic', compact('question_data', 'course','thematic', 'type','quiz_id'));           
             }else{
                 HeaderQuiz::where('total', 0)->delete();
-                return back();
+                //return back();
             }
-        }catch(\Exception $e){
+        }catch(Exception $e){
             return back();
         }
     }
@@ -94,7 +96,8 @@ class QuizController extends Controller
             $quiz_id = Exam::insertTabkeQuizPeriod($type, $course, $token);
             $question_data = Quesstion::getQuestionData($quiz_id)->toArray();
             if(count($question_data) > 0){
-                return view('dashboard.quiz.quiz_period', compact('question_data', 'course', 'type','quiz_id'));           
+                return $question_data;
+                //return  view('dashboard.quiz.quiz_period', compact('question_data', 'course', 'type','quiz_id'));           
             }else{
                 HeaderQuiz::where('total', 0)->delete();
                 return back();
@@ -109,7 +112,7 @@ class QuizController extends Controller
     	$quiz_id = fdecrypt($idd); 
         $result = [];
         try{
-            /*
+
             DB::beginTransaction();
             foreach ($request->input('questions', []) as $key => $question){
                 if($request->input('questions', [$key]) != null and $request->answer[$key] == true){
@@ -126,8 +129,8 @@ class QuizController extends Controller
             //DB::table('w_job_send_email')->insert(['type'=>'QUIZ','quiz_id'=>$quiz_id, 'status'=>0]);
             DB::commit();
             return redirect()->route('get.dashboard.quiz.take.result', ['quiz_id'=>fencrypt($quiz_id)]);
-            */
-            return $request->all();
+          
+            //return $request->all();
         }catch(Exception $e){
             DB::rollBack();
             return back();

@@ -69,12 +69,15 @@
 						<td>{{ $item->question_id }}</td>
 						<td>{{$item->question}}</td>
 						<td>{{$item->stt}}</td>
-						<td>{{$item->answer}}</td>
-						@if($item->result > 0)
+						<td>
+							<?php $ans = App\Models\TempAnswer::where('question_id',$item->question_id)->where('stt',$item->stt)->get(); ?>
+							{{$ans[0]->answer}}
+						</td>
+						@if($ans[0]->result > 0)
 							<td style="color:red">
 						@else
 							<td>
-						@endif {{$item->result}}</td>
+						@endif {{$ans[0]->result}}</td>
 					</tr>
 				@endforeach
 			@endif
