@@ -106,3 +106,12 @@ function getStatusName($status){
         echo "<span style='color:red'> Disable </span>";
   }
 }
+function getTypeQuestion($type){
+  if($type == 0){
+    return 'radio';
+  }elseif ($type==1) {
+    return 'checkbox';
+  }else{
+    return 'value';
+  }
+}

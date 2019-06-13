@@ -14,7 +14,7 @@ class CourseController extends Controller
     
 	public function __construct()
     {
-    	$this->middleware('quiz');
+    	$this->middleware('auth');
     }
   
     public function getList(){

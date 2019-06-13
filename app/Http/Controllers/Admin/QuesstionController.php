@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use DB; use Auth;
 use App\Models\Subject;
 use App\Models\Answer;
@@ -242,24 +243,24 @@ class QuesstionController  extends Controller
         $thematic_id = fdecrypt($idd); 
         try{
 
-            $data_question = TempQuestion::where('result','>',0)->orderBy('question_id')->get();
+            $data_question = TempQuestion::orderBy('question_id')->get();
             $thematic = Thematic::find($thematic_id);
             DB::beginTransaction();
 
             if($data_question->count() > 0){
                 foreach($data_question as $key=>$item){
                     $dtaq = new Quesstion;
-                    $dtaq->type = 'radio';
+                    $dtaq->type = getTypeQuestion($item->style);
                     $dtaq->used = $item->used;
                     $dtaq->course = $thematic->course;
                     $dtaq->thematic = $thematic_id;
                     $dtaq->lesson = 0;
                     $dtaq->name = $item->question;
-                    $dtaq->alias = '';
+                    $dtaq->alias = Str::slug($item->question);
                     $dtaq->image = '';
                     $dtaq->level = $item->level;
                     $dtaq->status = 1;
-                    $dtaq->answer = $item->result;
+                    $dtaq->answer = 0;
                     $dtaq->user_id = Auth::user()->id;
                     $dtaq->save();
                     $q_id = $dtaq->id;
@@ -271,7 +272,7 @@ class QuesstionController  extends Controller
                             $dtAnswer->stt = $value->stt;
                             $dtAnswer->quesstion_id = $q_id ;
                             $dtAnswer->name = $value->answer;
-                            $dtAnswer->alias ='';
+                            $dtAnswer->alias =Str::slug($value->answer);
                             $dtAnswer->value ='';
                             $dtAnswer->result = $value->result;
                             $dtAnswer->image ='';
@@ -290,10 +291,6 @@ class QuesstionController  extends Controller
         }catch (\Exception $e) {
             DB::rollBack();
             return back()->withErrors($e->getMessage())->withInput();
-        }
-        
-        
-    }
-
-    
+        }       
+    }    
 }

@@ -1,12 +1,13 @@
 <?php
 namespace App\Models;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Tymon\JWTAuth\Contracts\JWTSubject;
 use App\Models\Role;
-use App\Models\Role_User;use Session;
-class User extends Authenticatable implements JWTSubject
+use App\Models\Role_User;
+use Session;
+class User extends Authenticatable
 {
     use Notifiable;
     protected $table ="users";
@@ -74,16 +75,6 @@ class User extends Authenticatable implements JWTSubject
         $roleName = Role::find($role[0]->role_id)->name;
       }
       return $roleName;
-    }
-
-    public function getJWTIdentifier()
-    {
-        return $this->getKey();
-    }
-
-    public function getJWTCustomClaims()
-    {
-        return [];
     }
 
     public static function checkRole($email){

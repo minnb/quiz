@@ -1,8 +1,6 @@
 <?php
 namespace App\Http\Middleware;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
-use Session;
-use Closure;
 class AuthenticationMember //extends Middleware
 {
     /**

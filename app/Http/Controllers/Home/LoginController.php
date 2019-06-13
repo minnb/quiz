@@ -10,7 +10,8 @@ use Illuminate\Http\Response;
 use App\Models\User;
 use App\Models\JwtUser;
 use App\Models\Role_User;
-use JWTAuth; use Session;
+use JWTAuth; 
+use Session;
 use Validator;
 use JWTFactory;
 use DB; 
@@ -20,7 +21,7 @@ class LoginController extends Controller
 	protected $redirectTo = '/dashboard';
 	public function __construct()
     {
-        $this->middleware('checkLogin')->except('logout');
+        $this->middleware('guest')->except('logout');
     }
 
     public function redirectToProvider($provider)
@@ -30,64 +31,42 @@ class LoginController extends Controller
 
 	public function handleProviderCallback($provider)
     {
-    	$url = env('APP_API').'auth/jwt/login';
-    	$user = Socialite::driver($provider)->user();
-	    $authUser = $this->findOrCreateUser($user, $provider);
-	    $data = ['email'=>$user->email, 'password'=>'hochieuqua@2019'];
-
-		//$client = new \GuzzleHttp\Client(['defaults' => ['verify' => false]]);
-		$client = new \GuzzleHttp\Client(['verify' => false]);
-		
-	    try {
-		 	$response = $client->request('POST', $url, ['form_params' => $data]);
-	        if($response->getReasonPhrase() == "OK"){
-	        	$result = collect(json_decode($response->getBody()->getContents(),true));
-	        	if(substr($result['token'],0,5) == '@@@@@'){
-	        		return back()->withErrors(['errors'=>'Địa chỉ email hoặc mật khẩu không đúng'])->withInput();
-	        	}else{
-	        		$u_id = User::where('email',$user->email)->get()[0]->id;
-	        		Role_User::insertRoleUser($u_id);
-			        Session::put('hochieuqua_vn', $result['token']);
-					Session::put('infoUser', fencrypt(json_encode($result['user'])));
-	        		return redirect()->route('dashboard')->with(['flash_message'=>'Đăng nhập thành công']);
-	        	}
-	        	
-	        }else{
-	        	return redirect()->route('home.login')->with(['errors'=>'Lỗi đăng nhập, vui lòng thử lại'])->withInput();
-	        }
-		 }catch (Exception $e) {
+	   
+	    try{
+	    	$user = Socialite::driver($provider)->user();
+	    	$authUser = $this->findOrCreateUser($user);
+	    	if($authUser){
+	    		Auth::login($authUser);
+		    	$u_id = User::where('email',$authUser->email)->get()[0]->id;
+		    	Role_User::insertRoleUser($u_id);
+		    	Session::put('hochieuqua_vn', $authUser->email);
+				Session::put('infoUser', fencrypt(json_encode($authUser)));
+				Session::save();
+		        return redirect()->route('dashboard')->with(['flash_message'=>'Đăng nhập thành công']);
+	    	}else{
+	    		return back()->withErrors(['errors'=>'Lỗi đăng nhập'])->withInput();
+	    	}
+	    }catch (Exception $e) {
             return back()->withErrors($e->getMessage())->withInput();
         }
+	   
     }
 
-    public function findOrCreateUser($user, $provider)
+    public function findOrCreateUser($user)
     {
-        $authUser = User::where('email', $user->email)->get();
-        if($authUser->count() > 0){
+        $authUser = User::where('email', $user->email)->first();
+        if($authUser){
             return $authUser;
-        }
-        return User::create([
+        }else{
+        	return User::create([
                 'name' => $user->name,
                 'email' => $user->email,
                 'password' => bcrypt('hochieuqua@2019'),
             ]);
-        /*
-	    return JwtUser::create([
-	    		'first_name'  => '',
-	    		'last_name' => '',
-	            'full_name' => $user->name,
-	            'email'    => $user->email,
-	            'password' => Hash::make('hochieuqua@2019'),
-	            'username'=>'',
-	            'avata'=>'',
-	            'slogan'=>'',
-	            'phone'=>'',
-	            '_token'=>''
-	        ]);
-	       */
+        }
     }
 
-    public function getLogin(){
+    public function getLogin(){  	
     	$value='';
     	if (Session::has('hochieuqua_vn')) {
             $value =Session::get('hochieuqua_vn') ;
@@ -97,35 +76,20 @@ class LoginController extends Controller
 
 	public function postLogin(Request $request)
 	{
-		$url = env('APP_API').'auth/jwt/login';
-
 		$request->validate([
-    		'email' => 'required|string|email|max:191',
+            'email' => 'required|string|email|max:191',
             'password'=> 'required'
-		]);
-		
-		$data = ['email'=>$request->email, 'password'=>$request->password];
-
-		$client = new \GuzzleHttp\Client();
-		 try {
-		 	$response = $client->request('POST', $url, ['form_params' => $data]);
-
-	        if($response->getReasonPhrase() == "OK"){
-	        	$result = collect(json_decode($response->getBody()->getContents(),true));
-	        	if(substr($result['token'],0,5) == '@@@@@'){
-	        		return back()->withErrors(['errors'=>'Địa chỉ email hoặc mật khẩu không đúng'])->withInput();
-	        	}else{
-			        Session::put('hochieuqua_vn', $result['token']);
-					Session::put('infoUser', fencrypt(json_encode($result['user'])));
-	        		return redirect()->route('dashboard')->with(['flash_message'=>'Đăng nhập thành công']);
-	        	}
-	        	
-	        }else{
-	        	return redirect()->route('home.login')->with(['errors'=>'Lỗi đăng nhập, vui lòng thử lại'])->withInput();
-	        }
-		 }catch (Exception $e) {
-            return back()->withErrors($e->getMessage())->withInput();
+        ]);
+        $credentials = $request->only('email', 'password');
+        if(User::checkRole(trim($request->email)) == 'guest' || User::checkRole(trim($request->email)) == ''){
+            return redirect()->route('home.login')->withErrors(['errors'=>'Vui lòng đăng nhập lại']);
+        }else{
+            if (Auth::attempt($credentials)) {
+                // Authentication passed...
+                return redirect()->intended('admin');
+            }else{
+                return back()->withErrors(['errors'=>'Địa chỉ email hoặc mật khẩu không đúng'])->withInput();
+            }
         }
-       
 	}    
 }
