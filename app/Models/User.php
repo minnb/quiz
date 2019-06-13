@@ -87,6 +87,7 @@ class User extends Authenticatable
       return $roleName;
     }
 
+	
     public static function getInfoUser(){
       $infoUser = '';
       if (Session::has('infoUser')) {
