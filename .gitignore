@@ -4,6 +4,7 @@
 /public/storage
 /storage/*.key
 /storage/
+/storage
 .htaccess
 .env
 .phpunit.result.cache
