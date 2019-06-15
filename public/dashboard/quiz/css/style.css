@@ -1,0 +1,66 @@
+
+.form-inline .form-group{
+    display: block;
+    margin-bottom: 10px;
+}
+.modal-footer button:first-child{
+    float: left;
+}
+.modal-footer button{
+    width: 100px;
+}
+/* .modal-body .form-group input {
+    width: 44px;
+    border: 0px;
+    border-bottom: 1px dotted;
+    box-shadow: none;
+    padding: 0px;
+    height: 19px;
+    border-radius: 0px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+} */
+/* css cho plugin templateQuestion */
+
+#templateQuestion > form {
+    display: none;
+}
+.form-inline .form-group input[type=text] {
+    width: 44px;
+    border: 0px;
+    border-bottom: 1px dotted;
+    box-shadow: none;
+    padding: 0px;
+    height: 19px;
+    border-radius: 0px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+.active {
+    display: block !important;
+}
+body .disappear {
+    display: none;
+}
+.buttons .finish {
+    width: 150px;
+    background: #f4511e;
+}
+.form-groups{
+    margin-left: 30px;
+    margin-bottom: 15px
+}
+.form-inline  label {
+    font-size: 16px;
+}
+.modal-content .modal-header{
+    border-bottom: 1px solid lightgray ;
+}
+.modal-content .modal-footer{
+    border-top: 1px solid lightgray ;
+}
+body .form-inline .form-group {
+    display: block;
+}

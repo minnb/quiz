@@ -1,0 +1,1 @@
+let templateQuestion = new TemplateQuestion();

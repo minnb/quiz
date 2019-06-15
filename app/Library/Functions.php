@@ -143,4 +143,3 @@ function delete_image_no_path($img){
   }
 }
 
-include('Jwt.php');

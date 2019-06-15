@@ -1,7 +1,16 @@
 @extends('dashboard.app')
 @section('title', 'Khóa học')
+@section('stylesheet')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="{{ asset('public/dashboard/quiz/js/TemplateQuestion.js') }}"></script>
+    <script src="{{ asset('public/dashboard/quiz/js/ServiceQuestion.js') }}"></script>
+    <script src="{{ asset('public/dashboard/quiz/js/ServiceCommon.js') }}"></script>
+    <script src="{{ asset('public/dashboard/quiz/js/Http.js') }}"></script>
+    <script src="{{ asset('public/dashboard/quiz/js/test_question.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('public/dashboard/quiz/css/style.css') }}">
+@endsection
 @section('content')
-<div data-push data-responsive-width="992px" class="mdk-drawer-layout js-mdk-drawer-layout">
+<div data-push data-responsive-width="992px" class="mdk-drawer-layout js-mdk-drawer-layout" id="test_question">
     <div class="mdk-drawer-layout__content page ">
         <div class="container-fluid page__container">
             <ol class="breadcrumb">
@@ -19,8 +28,10 @@
 
                         <div class="card-body">
                            {!! $lesson_data[0]->description !!}
-                           <a href="{{ route('get.dashboard.quiz.take',['type'=>fencrypt('QUIZ'),'course'=>fencrypt($lesson_data[0]->course),'thematic'=>fencrypt($lesson_data[0]->thematic), 'lesson'=>fencrypt($lesson_data[0]->id), 'token'=>getToken(20)])}}" class="btn btn-sm btn-danger">Luyệt tập Quiz</a>
-                           
+                           <!--
+                           <a href="{{ route('get.dashboard.quiz.take',['type'=>fencrypt('QUIZ'),'course'=>fencrypt($lesson_data[0]->course),'thematic'=>fencrypt($lesson_data[0]->thematic), 'lesson'=>fencrypt($lesson_data[0]->id), 'token'=>getToken(20)])}}" class="btn btn-sm btn-danger" onclick='start_test()'>Luyệt tập Quiz</a>
+                       -->
+                            <a class="btn btn-sm btn-danger" onclick='start_test()'>Luyệt tập Quiz</a>
                         </div>
                     </div>
                     <ul class="card list-group list-group-fit">
@@ -142,4 +153,40 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="unit_test">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-white">Bài tập trắc nghiệm</h4>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="templateQuestion"></div>
+                </div>
+                <div class="modal-footer buttons">
+                    <button type="button " onclick="previewAnswer()" class="btn btn-success preview">
+                        <i class="fa fa-angle-double-left" aria-hidden="true"></i> Preview 
+                    </button>
+                    <button type="button " onclick="markTest()" class="btn btn-success finish">
+                        Gửi câu trả lời
+                    </button>
+                    <button type="button " onclick="nextAnswer()" class="btn btn-success next">
+                        Next <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container disappear" id="answer_question">
+        <div class="title">Đáp án câu trả lời</div>
+        <div class="content">
+        </div>
+    </div>
 @endsection
+@section('javascript')
+@endsection
+

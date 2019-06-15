@@ -1,4 +1,4 @@
-     <script src="{{ asset('public/dashboard/vendor/jquery.min.js') }}"></script>
+    <script src="{{ asset('public/dashboard/vendor/jquery.min.js') }}"></script>
     <script src="{{ asset('public/dashboard/vendor/popper.min.js') }}"></script>
     <script src="{{ asset('public/dashboard/vendor/bootstrap.min.js') }}"></script>
     <script src="{{ asset('public/dashboard/vendor/perfect-scrollbar.min.js') }}"></script>
