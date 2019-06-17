@@ -42,12 +42,12 @@ TemplateQuestion.prototype.renderQuestion1 = function (data, index, showAnswer =
     let subQuestion = '';
     data.listAnswers.forEach((answer, index) => {
         let value = "";
-        if(showAnswer){
+        if (showAnswer) {
             value = answer.T_value;
         }
         subQuestion += ' <div class="form-group"><label for="title"><span class="phuong_an">'
             + answer.method + '</span>. <span class="content">' + answer.content
-            + '</span></label><input type="text" class="form-control" onclick="update()" value="'+value+'"></div>';
+            + '</span></label><input type="text" class="form-control" onclick="update()" value="' + value + '"></div>';
     });
     return ('<form class="form-inline ' + data.identifyClass + ' ' + ((data.active) ? 'active' : '') + '">'
         + title + subQuestion + '</form>');
@@ -67,7 +67,7 @@ TemplateQuestion.prototype.renderQuestion2 = function (data, index, showAnswer =
             isChecked = "checked";
         }
         subQuestion += ' <div class="form-groups"><div class="checkbox"><label><input type="radio" name="optradio" value="'
-            + answer.content + '"' + isChecked  + ((showAnswer)?' disabled' : '')  +' >  ' + answer.content
+            + answer.content + '"' + isChecked + ((showAnswer) ? ' disabled' : '') + ' >  ' + answer.content
             + '</label></div></div>';
     });
     return ('<form class="form-inline ' + data.identifyClass + ' ' + ((data.active) ? 'active' : '') + '">'
@@ -76,18 +76,18 @@ TemplateQuestion.prototype.renderQuestion2 = function (data, index, showAnswer =
 // render ra câu hỏi dạng chọn nhiều đáp án checkbox
 //data:object dữ liệu câu hỏi 
 //index: int vị trí của câu hỏi trong danh sách câu hỏi
-TemplateQuestion.prototype.renderQuestion3 = function (data, index,showAnswer = false) {
+TemplateQuestion.prototype.renderQuestion3 = function (data, index, showAnswer = false) {
     let title = '<div class="form-group"><label for="title">' + (index + 1) + ' '
         + data.title + '</label></div>';
     let subQuestion = '';
     data.listAnswers.forEach((answer, index) => {
         let isChecked = "";
-         //xem option có nên checked ko
-         if (showAnswer && answer.T_value) {
+        //xem option có nên checked ko
+        if (showAnswer && answer.T_value) {
             isChecked = "checked";
         }
         subQuestion += ' <div class="form-groups"><label><input type="checkbox" value="'
-            + answer.content + '"' + isChecked  + ((showAnswer)?' disabled' : '')  +' >  ' + answer.content
+            + answer.content + '"' + isChecked + ((showAnswer) ? ' disabled' : '') + ' >  ' + answer.content
             + '</label></div>';
     });
     return ('<form class="form-inline ' + data.identifyClass + ' ' + ((data.active) ? 'active' : '') + '">'
@@ -152,7 +152,7 @@ TemplateQuestion.prototype.updateData = function () {
                     break;
                 }
             case "checkbox":
-                {   
+                {
                     console.log(item.listAnswers);
                     item.listAnswers.forEach((answer, index1) => {
                         answer.T_value = $("." + item.identifyClass + " .form-groups:nth-child(" + (index1 + 2) + ") input").is(":checked");
@@ -164,27 +164,35 @@ TemplateQuestion.prototype.updateData = function () {
     });
 }
 // xem đáp án câu hỏi có đúng ko 
-TemplateQuestion.prototype.isRightAnswer3 = function(indexAnswer){
-    let {listAnswers} =  this.data[indexAnswer];
-    let isWrong = listAnswers.filter(e=>{
+TemplateQuestion.prototype.isRightAnswer3 = function (indexAnswer) {
+    let { listAnswers } = this.data[indexAnswer];
+    let isWrong = listAnswers.filter(e => {
         return (e.result == e.stt) && !e.T_value;
     });
-    if(isWrong.length){
+    if (isWrong.length) {
         return false;
     }
     return true;
 
 }
 // xem đáp án câu hỏi có đúng ko 
-TemplateQuestion.prototype.isRightAnswer1 = function(indexAnswer){
-    let {listAnswers} =  this.data[indexAnswer];
-    
-    let isWrong = listAnswers.filter(e=>{
-        let kqStudent = (e.T_value == "Đ") ? true : false;
-        let kqQuestion = (e.result == e.stt) ? true :false;
-        return kqQuestion && kqStudent;
+TemplateQuestion.prototype.isRightAnswer1 = function (indexAnswer) {
+    let { listAnswers } = this.data[indexAnswer];
+
+    let isWrong = listAnswers.filter(e => {
+        let kqStudent = "";
+        if (e.T_value == "Đ" || e.T_value == "S") {
+            kqStudent = (e.T_value == "Đ") ? true : false;
+        }
+        let kqQuestion = (e.result == e.stt) ? true : false;
+        console.log(kqQuestion, kqStudent);
+        if (kqQuestion !== kqStudent) {
+            return true
+        }
+
     });
-    if(isWrong.length){
+    console.log(isWrong);
+    if (isWrong.length) {
         return false;
     }
     return true;

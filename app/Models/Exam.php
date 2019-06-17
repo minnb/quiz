@@ -70,7 +70,7 @@ class Exam extends Model
 	            DB::beginTransaction();
 	            $heder_quiz = new HeaderQuiz();
 	            $heder_quiz->type = $type;
-	            $heder_quiz->user_id = User::getInfoUser()['id'];
+	            $heder_quiz->user_id = 0; // User::getInfoUser()['id'];
 	            $heder_quiz->result = 0;
 	            $heder_quiz->description = '';
 	            $heder_quiz->comment = $type;
@@ -97,7 +97,7 @@ class Exam extends Model
 
 	            DB::commit();
 	            return $heder_quiz_id;
-	        }catch (\Exception $e) {
+	        }catch (Exception $e) {
 	            DB::rollBack();
 	            return 0;
 	        }
@@ -116,7 +116,7 @@ class Exam extends Model
 	            DB::beginTransaction();
 	            $heder_quiz = new HeaderQuiz();
 	            $heder_quiz->type = $type;
-	            $heder_quiz->user_id = User::getInfoUser()['id'];
+	            $heder_quiz->user_id = 0; //User::getInfoUser()['id'];
 	            $heder_quiz->result = 0;
 	            $heder_quiz->description = '';
 	            $heder_quiz->comment = $type;

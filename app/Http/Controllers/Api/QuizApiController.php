@@ -18,6 +18,27 @@ use App\Models\DetailQuiz;
 use App\Models\Exam;
 class QuizApiController extends Controller
 {
+    public function getQuizTest($id, $token){
+        return $token;
+    }
+    public function getQuizId($type, $course, $thematic, $lesson, $strToken, $token){
+        try{
+            $id = Exam::insertTabkeQuiz($type,$course,$thematic, $lesson, $strToken);
+            $response = [
+                'type' => $type,
+                'course'=> $course,
+                'thematic' => $thematic,
+                'lesson' => $lesson,
+                'token' => $token,
+                'quiz_id' => $id
+            ];
+            return response()->json($response, 200);
+        }catch(\Exception $e){
+             return response()->json($e->getMessage(), 200);
+        }
+       
+    }
+
 	public function getDataQuiz($id, $token){
 		$response = [
             'status' => false,
@@ -30,8 +51,8 @@ class QuizApiController extends Controller
 			$dataQuestion->thematic=$data_quiz->thematic == '' ? '' : Thematic::find($data_quiz->thematic)->name;
 			$dataQuestion->lesson =$data_quiz->lesson == '' ? '' : Lesson::find($data_quiz->lesson)->name;
 			$dataQuestion->data = Quesstion::getQuestionDataApi($id);
-			//return response()->json($dataQuestion, 200);
-			return $dataQuestion;
+			return response()->json($dataQuestion, 200);
+			//return $dataQuestion;
 		}else{
 			return response()->json($response, 404);
 		}
@@ -73,8 +94,8 @@ class QuizApiController extends Controller
 				array_push($arrAnswer,$arr);
             }
             DB::commit();
-            //return response()->json($dataQuestion, 200);
-            return $arrAnswer;
+            return response()->json($arrAnswer, 200);
+            //return $arrAnswer;
         }catch(Exception $e){
             DB::rollBack();
             return response()->json($e, 404);
