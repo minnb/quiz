@@ -36,7 +36,6 @@
                            <!--
                            <a href="{{ route('get.dashboard.quiz.take',['type'=>fencrypt('QUIZ'),'course'=>fencrypt($lesson_data[0]->course),'thematic'=>fencrypt($lesson_data[0]->thematic), 'lesson'=>fencrypt($lesson_data[0]->id), 'token'=>getToken(20)])}}" class="btn btn-sm btn-danger" onclick='start_test()'>Luyệt tập Quiz</a>
                        -->
-                       
 <?php 
         $type = 'QUIZ';
         $course = $lesson_data[0]->course;

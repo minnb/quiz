@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
-use DB;
+use DB; use Auth;
 use App\Models\User;
 use App\Models\Course;
 use App\Models\Quesstion;
@@ -25,7 +25,7 @@ class Exam extends Model
 	            DB::beginTransaction();
 	            $heder_quiz = new HeaderQuiz();
 	            $heder_quiz->type = $type;
-	            $heder_quiz->user_id = User::getInfoUser()['id'];
+	            $heder_quiz->user_id = Auth::user()->id;
 	            $heder_quiz->result = 0;
 	            $heder_quiz->description = '';
 	            $heder_quiz->comment = $type;
@@ -116,7 +116,7 @@ class Exam extends Model
 	            DB::beginTransaction();
 	            $heder_quiz = new HeaderQuiz();
 	            $heder_quiz->type = $type;
-	            $heder_quiz->user_id = 0; //User::getInfoUser()['id'];
+	            $heder_quiz->user_id = Auth::user()->id; 
 	            $heder_quiz->result = 0;
 	            $heder_quiz->description = '';
 	            $heder_quiz->comment = $type;
@@ -162,7 +162,7 @@ class Exam extends Model
 	            DB::beginTransaction();
 	            $heder_quiz = new HeaderQuiz();
 	            $heder_quiz->type = $type;
-	            $heder_quiz->user_id = User::getInfoUser()['id'];
+	            $heder_quiz->user_id = Auth::user()->id;
 	            $heder_quiz->result = 0;
 	            $heder_quiz->description = '';
 	            $heder_quiz->comment = $type;
@@ -218,7 +218,8 @@ class Exam extends Model
 					//$detail_quiz->stt = 0;
 					$detail_quiz->answer = 0;
 					$detail_quiz->comment = '';
-					$detail_quiz->result = $value->answer;
+					//$detail_quiz->result = $value->answer;
+					$detail_quiz->result = 0;
 					$detail_quiz->answer_time = 0;
 					$detail_quiz->save();
 				}
@@ -240,7 +241,7 @@ class Exam extends Model
 					//$detail_quiz->stt = $value->answer;
 					$detail_quiz->answer = 0;
 					$detail_quiz->comment = '';
-					$detail_quiz->result = $value->answer;
+					$detail_quiz->result = 0;
 					$detail_quiz->answer_time = 0;
 					$detail_quiz->save();
 				}

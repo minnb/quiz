@@ -70,13 +70,13 @@ class ImportController extends Controller
         $lesson = Lesson::find($lesson_id);
         try{
 
-            $data_question = TempQuestion::where('result','>',0)->orderBy('question_id')->get();
+            $data_question = TempQuestion::orderBy('question_id')->get();
             DB::beginTransaction();
 
             if($data_question->count() > 0){
                 foreach($data_question as $key=>$item){
                     $dtaq = new Quesstion;
-                    $dtaq->type = 'radio';
+                    $dtaq->type = getTypeQuestion($item->style);
                     $dtaq->used = $item->used;
                     $dtaq->course = $lesson->course;
                     $dtaq->thematic = $lesson->thematic;

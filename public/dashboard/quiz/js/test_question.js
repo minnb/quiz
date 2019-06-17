@@ -15,7 +15,6 @@ var serviceCommon = new ServiceCommon();
 var totalQuestion = 0;
 var currentQuestion = 0;
 function start_test(type, course, thematic, lesson, str_token) {
-
     serviceQuestion.getQuizId(type, course, thematic, lesson, str_token).then(quiz_idz=>{
         console.log(quiz_idz);
         let { error, datas } = quiz_idz;
