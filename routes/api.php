@@ -32,7 +32,7 @@ Route::group(['prefix' => 'v1'], function () {
 	Route::get('quiz-test/{id}/{token}', 'Api\QuizApiController@getQuizTest');
 	Route::get('quiz/{type}/{course}/{thematic}/{lesson}/{strToken}/{token}', 'Api\QuizApiController@getQuizId');
 	Route::get('quiz-take/{id}/{token}', 'Api\QuizApiController@getDataQuiz');
-	Route::put('quiz-take', 'Api\QuizApiController@postDataQuiz');
+	Route::post('quiz-take', 'Api\QuizApiController@postDataQuiz');
 });
 
 

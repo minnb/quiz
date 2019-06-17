@@ -10,7 +10,7 @@ Http.prototype.post = function (uri, body) {
         try {
             $.ajax({
                 url: url,
-                type: 'PUT',
+                type: 'POST',
                 data: body,
                 success: function (result) {
                     resolve({ error: 0, datas: data });
