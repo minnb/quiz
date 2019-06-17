@@ -1,5 +1,8 @@
 @extends('dashboard.app')
 @section('title', 'Khóa học')
+<?php
+    $_url_api = env('APP_API');
+?>
 @section('stylesheet')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="{{ asset('public/dashboard/quiz/js/TemplateQuestion.js') }}"></script>
@@ -15,6 +18,7 @@
     </style>
 @endsection
 @section('content')
+aaaaaa{{$_url_api}}
 <div data-push data-responsive-width="992px" class="mdk-drawer-layout js-mdk-drawer-layout" id="test_question">
     <div class="mdk-drawer-layout__content page ">
         <div class="container-fluid page__container">
@@ -36,7 +40,6 @@
                            <!--
                            <a href="{{ route('get.dashboard.quiz.take',['type'=>fencrypt('QUIZ'),'course'=>fencrypt($lesson_data[0]->course),'thematic'=>fencrypt($lesson_data[0]->thematic), 'lesson'=>fencrypt($lesson_data[0]->id), 'token'=>getToken(20)])}}" class="btn btn-sm btn-danger" onclick='start_test()'>Luyệt tập Quiz</a>
                        -->
-                       
 <?php 
         $type = 'QUIZ';
         $course = $lesson_data[0]->course;

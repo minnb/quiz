@@ -61,8 +61,8 @@ class QuizApiController extends Controller
 	public function postDataQuiz(Request $request){
 		try{
 				$data = collect(json_decode($request->getContent(),true));
-				$quiz_id = $data['id'];
-				$quizHeader = $request->isMethod('put') ? HeaderQuiz::findOrFail($data['id']) : new HeaderQuiz;
+				$quiz_id = $data['quiz'];
+				//$quizHeader = $request->isMethod('post') ? HeaderQuiz::findOrFail($data['id']) : new HeaderQuiz;
 				$lstAnswer = $data['data'];
 
             DB::beginTransaction();
