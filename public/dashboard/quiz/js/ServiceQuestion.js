@@ -17,7 +17,7 @@ ServiceQuestion.prototype.getQuizId = async function (type, course, thematic, le
 }
 //edit các câu hỏi
 ServiceQuestion.prototype.sendTest = async function (body) {
-    console.log(body.data)
+    console.log(JSON.stringify(body))
     let uri = '/api/v1/quiz-take';
     let result = await this.http.post(uri, body);
     console.log(result);
