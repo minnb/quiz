@@ -1,6 +1,6 @@
 // -----------------------------đối tượng Http dùng truy vấn hai phương thức post , get-------------------------------------------
 function Http() {
-    this.host = "https://hochieuqua.vn/api";
+    this.host = "https://hochieuqua.vn";
     this.token = "0795879133";
 }
 // truy vấn phương thức post 
