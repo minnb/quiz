@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
-use DB;
+use DB; use Auth;
 use App\Models\Course;
 use App\Models\DetailQuiz;
 class HeaderQuiz extends Model
@@ -30,13 +30,14 @@ class HeaderQuiz extends Model
 
     public static function getListQuiz($limit = ''){
         $data = '';
+        $user_id =  0;
         if($limit == ''){
              $data = HeaderQuiz::where([
-                    ['user_id', User::getInfoUser()['id']]
+                    ['user_id', $user_id]
                 ])->orderBy('id','DESC')->get();
         }else{
              $data = HeaderQuiz::where([
-                    ['user_id', User::getInfoUser()['id']]
+                    ['user_id', $user_id]
                 ])->limit($limit)->orderBy('id','DESC')->get();
         }
         return $data;

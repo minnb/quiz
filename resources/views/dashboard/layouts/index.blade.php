@@ -14,8 +14,8 @@
                     <h1 class="h2">Danh sách Khoá học</h1>
                 </div>
             </div>
-
-           <div class="row">
+            {{ fdecrypt($value) }}
+            <div class="row">
                 @if(isset($course_data))
                     @foreach($course_data as $key=>$item)
                         <div class="col-md-6">

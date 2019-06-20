@@ -1,20 +1,40 @@
 // -----------------------------đối tượng Http dùng truy vấn hai phương thức post , get-------------------------------------------
 function Http() {
-    this.host = "https://hochieuqua.vn";
+    this.host = "http://localhost:8000/quiz";
     this.token = "0795879133";
 }
 // truy vấn phương thức post 
 Http.prototype.post = function (uri, body) {
     let url = this.host + uri;// + "/" + this.token;
+    $.ajaxSetup({
+           headers: {'X-CSRF-Token': $('meta[name=csrf_token]').attr('content')}
+        });
+    $.ajax({
+        url: url,
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify( body ), 
+        success: function(){
+           alert('hello');
+        },
+        error: function(){
+            alert('error');
+        }
+    });
+
+    /*
     return new Promise(function (resolve, reject) {
         try {
             $.ajax({
+                contentType: 'application/json; charset=utf-8',
                 url: url,
                 type: 'POST',
                 data: body,
-                success: function (result) {
+                dataType: 'json',
+                success: function (data) {
                     resolve({ error: 0, datas: data });
                 }
+
             }).fail(function (error) {
                 reject({ error: 1, datas: error });
             });
@@ -23,7 +43,9 @@ Http.prototype.post = function (uri, body) {
         catch (error) {
             reject({ error: 1, datas: error }); // always close the resource
         }
+
     });
+   */
 }
 // truy vấn phương thức get
 Http.prototype.get = function (uri) { //đúng rùi nó gọi đền đây hiểu ko chạy thử đi

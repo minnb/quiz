@@ -4,6 +4,7 @@
     $_url_api = env('APP_API');
 ?>
 @section('stylesheet')
+    <meta name="csrf-token" content="<?= csrf_token() ?>">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="{{ asset('public/dashboard/quiz/js/TemplateQuestion.js') }}"></script>
     <script src="{{ asset('public/dashboard/quiz/js/ServiceQuestion.js') }}"></script>
@@ -40,15 +41,15 @@ aaaaaa{{$_url_api}}
                            <!--
                            <a href="{{ route('get.dashboard.quiz.take',['type'=>fencrypt('QUIZ'),'course'=>fencrypt($lesson_data[0]->course),'thematic'=>fencrypt($lesson_data[0]->thematic), 'lesson'=>fencrypt($lesson_data[0]->id), 'token'=>getToken(20)])}}" class="btn btn-sm btn-danger" onclick='start_test()'>Luyệt tập Quiz</a>
                        -->
-<?php 
-        $type = 'QUIZ';
-        $course = $lesson_data[0]->course;
-        $thematic = $lesson_data[0]->thematic;
-        $lesson = $lesson_data[0]->id;
-        $token = getToken(20);
-?>
-    <button class="btn btn-sm btn-danger" onclick='start_test(<?php echo json_encode($type); ?>, <?php echo json_encode($course); ?>, <?php echo json_encode($thematic); ?>, <?php echo json_encode($lesson); ?>, <?php echo json_encode($token); ?>)'>
-    Luyệt tập Quiz</button>
+                        <?php 
+                                $type = 'QUIZ';
+                                $course = $lesson_data[0]->course;
+                                $thematic = $lesson_data[0]->thematic;
+                                $lesson = $lesson_data[0]->id;
+                                $token = getToken(20);
+                        ?>
+                            <button class="btn btn-sm btn-danger" onclick='start_test(<?php echo json_encode($type); ?>, <?php echo json_encode($course); ?>, <?php echo json_encode($thematic); ?>, <?php echo json_encode($lesson); ?>, <?php echo json_encode($token); ?>)'>
+                            Luyệt tập Quiz</button>
                         </div>
                     </div>
                     <ul class="card list-group list-group-fit">

@@ -66,7 +66,12 @@ class QuizApiController extends Controller
 				$lstAnswer = $data['data'];
 
             DB::beginTransaction();
-            foreach ($lstAnswer as $key=>$dataAnswer){    
+            foreach ($lstAnswer as $key=>$dataAnswer){ 
+
+                    DetailQuiz::where('quiz_id', $quiz_id)
+                    ->where('question_id', $dataAnswer['question_id'])
+                    ->update(['comment' => json_encode($dataAnswer['answer'])]);
+                /*
             	if($dataAnswer['type'] == 'radio'){
             		foreach($dataAnswer['answer'] as $item){
             			DetailQuiz::where('quiz_id', $quiz_id)
@@ -78,6 +83,7 @@ class QuizApiController extends Controller
                     ->where('question_id', $dataAnswer['question_id'])
                     ->update(['comment' => json_encode($dataAnswer['answer'])]);
             	}
+                */
             }
             HeaderQuiz::where('id', $quiz_id)->update(['status' => 1]);
             HeaderQuiz::calcResultQuiz($quiz_id);
@@ -94,9 +100,10 @@ class QuizApiController extends Controller
 				array_push($arrAnswer,$arr);
             }
             DB::commit();
-            return response()->json($arrAnswer, 200);
+            //return response()->json($arrAnswer, 200);
             //return $arrAnswer;
-        }catch(Exception $e){
+            return "OK";
+        }catch(\Exception $e){
             DB::rollBack();
             return response()->json($e, 404);
         } 
