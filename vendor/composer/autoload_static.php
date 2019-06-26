@@ -594,6 +594,7 @@ class ComposerStaticInit636e71109b514742d9ce64192fb53ad7
         'App\\Http\\Middleware\\AuthenticationMember' => __DIR__ . '/../..' . '/app/Http/Middleware/AuthenticationMember.php',
         'App\\Http\\Middleware\\CheckForMaintenanceMode' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckForMaintenanceMode.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
+        'App\\Http\\Middleware\\RedirectAuthAdmin' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectAuthAdmin.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
         'App\\Http\\Middleware\\RedirectIfMemberNotLogin' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfMemberNotLogin.php',
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',

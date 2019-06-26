@@ -86,8 +86,8 @@
             <div class="col-sm-5">
               <ul class="list-inline functionList">
                 <li style="float:right">                 
-                @if(Session::has('hochieuqua_vn'))
-                  <i class="fa fa-user bg-color-5" aria-hidden="true"></i> <a href="{{ route('dashboard')}}">{{ $checkUser['name'] }}</a><span>
+                @if(Auth::check())
+                  <i class="fa fa-user bg-color-5" aria-hidden="true"></i> <a href="{{ route('dashboard')}}">{{ Auth::user()->name }}</a><span>
                     <i class="fa fa-sign-in bg-color-3" aria-hidden="true"></i>
                   </span><a href="{{ route('dashboard.logout') }}" >Thoát</a>
                 @else

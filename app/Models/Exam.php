@@ -11,7 +11,7 @@ class Exam extends Model
 {
     protected $table ="m_exam";
 
-    public static function insertTabkeQuizWeek($type, $course, $subject, $week, $token){
+    public static function insertTabkeQuizWeek($user_id, $type, $course, $subject, $week, $token){
     	$heder_quiz_id = 0;
     	$info_exam = Exam::where([['type',$type],['status', 1]])->get();
     	$check = DB::table('m_ket_qua_quiz')->where('token', $token)->get();
@@ -25,7 +25,7 @@ class Exam extends Model
 	            DB::beginTransaction();
 	            $heder_quiz = new HeaderQuiz();
 	            $heder_quiz->type = $type;
-	            $heder_quiz->user_id = Auth::user()->id;
+	            $heder_quiz->user_id = $user_id;
 	            $heder_quiz->result = 0;
 	            $heder_quiz->description = '';
 	            $heder_quiz->comment = $type;
@@ -61,7 +61,7 @@ class Exam extends Model
         }
     }
 
-    public static function insertTabkeQuiz($type, $course, $thematic, $lesson, $token){
+    public static function insertTabkeQuiz($user_id, $type, $course, $thematic, $lesson, $token){
     	$heder_quiz_id = 0;
     	$info_exam = Exam::where([['type',$type],['status', 1]])->get();
     	$check = DB::table('m_ket_qua_quiz')->where('token', $token)->get();
@@ -70,7 +70,7 @@ class Exam extends Model
 	            DB::beginTransaction();
 	            $heder_quiz = new HeaderQuiz();
 	            $heder_quiz->type = $type;
-	            $heder_quiz->user_id = 0; // User::getInfoUser()['id'];
+	            $heder_quiz->user_id = $user_id; 
 	            $heder_quiz->result = 0;
 	            $heder_quiz->description = '';
 	            $heder_quiz->comment = $type;

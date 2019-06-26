@@ -23,7 +23,7 @@ class ImportController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('admin');
     }
 
     public function getImportQuizByLesson($lesson){
@@ -44,7 +44,7 @@ class ImportController extends Controller
          try{
             if($request->hasFile('fileExcel')){
                 $file = Input::file('fileExcel');
-                $destinationPath = env('APP_DIR_DATA_FILE');
+                $destinationPath = public_path().env('APP_DIR_DATA_FILE');
                 $file_name =  'tmp_import_quiz'.'.'.$file->getClientOriginalExtension();
                 $file->move($destinationPath, $file_name);
 
@@ -57,7 +57,7 @@ class ImportController extends Controller
                 Excel::import(new AnswerImport(), $destinationPath.'/'.$file_name);
 
                 DB::commit();
-                return back()->with(['flash_message'=>'Upload thành công']);
+                return back()->with(['flash_message'=>'Upload thành công '.$destinationPath]);
             }
         }catch (\Exception $e) {
             DB::rollBack();
@@ -70,39 +70,42 @@ class ImportController extends Controller
         $lesson = Lesson::find($lesson_id);
         try{
 
-            $data_question = TempQuestion::orderBy('question_id')->get();
+            $data_question = TempQuestion::select('question_id')->groupby('question_id')->get();
             DB::beginTransaction();
 
             if($data_question->count() > 0){
                 foreach($data_question as $key=>$item){
-                    $dtaq = new Quesstion;
-                    $dtaq->type = getTypeQuestion($item->style);
-                    $dtaq->used = $item->used;
-                    $dtaq->course = $lesson->course;
-                    $dtaq->thematic = $lesson->thematic;
-                    $dtaq->lesson = $lesson->id;
-                    $dtaq->name = $item->question;
-                    $dtaq->alias = '';
-                    $dtaq->image = '';
-                    $dtaq->level = $item->level;
-                    $dtaq->status = 1;
-                    $dtaq->answer = $item->result;
-                    $dtaq->user_id = Auth::user()->id;
-                    $dtaq->save();
-                    $q_id = $dtaq->id;
+                    $data_ins = TempQuestion::where('question_id', $item->question_id)->get();
+                    if($data_ins->count() > 0){
+                        $dtaq = new Quesstion;
+                        $dtaq->type = getTypeQuestion($data_ins[0]->style);;
+                        $dtaq->used = $data_ins[0]->used;
+                        $dtaq->course = $lesson->course;
+                        $dtaq->thematic = $lesson->thematic;
+                        $dtaq->lesson = $lesson->id;
+                        $dtaq->name = $data_ins[0]->question;
+                        $dtaq->alias = '';
+                        $dtaq->image = '';
+                        $dtaq->level = $data_ins[0]->level;
+                        $dtaq->status = 1;
+                        $dtaq->answer = $data_ins[0]->result;
+                        $dtaq->user_id = Auth::user()->id;
+                        $dtaq->save();
+                        $q_id = $dtaq->id;
 
-                    $data_answer = TempAnswer::where('question_id', $item->question_id)->orderBy('stt')->get();
-                    if($data_answer->count() > 0){
-                        foreach($data_answer as $key=>$value){
-                            $dtAnswer = new Answer;
-                            $dtAnswer->stt = $value->stt;
-                            $dtAnswer->quesstion_id = $q_id ;
-                            $dtAnswer->name = $value->answer;
-                            $dtAnswer->alias ='';
-                            $dtAnswer->value ='';
-                            $dtAnswer->result = $value->result;
-                            $dtAnswer->image ='';
-                            $dtAnswer->save();
+                        $data_answer = TempAnswer::where('question_id', $item->question_id)->orderBy('stt')->get();
+                        if($data_answer->count() > 0){
+                            foreach($data_answer as $key=>$value){
+                                $dtAnswer = new Answer;
+                                $dtAnswer->stt = $value->stt;
+                                $dtAnswer->quesstion_id = $q_id ;
+                                $dtAnswer->name = $value->answer;
+                                $dtAnswer->alias ='';
+                                $dtAnswer->value ='';
+                                $dtAnswer->result = $value->result;
+                                $dtAnswer->image ='';
+                                $dtAnswer->save();
+                            }
                         }
                     }
                 }

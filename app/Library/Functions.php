@@ -128,7 +128,7 @@ function randomString($length = 10){
     return $randomString;
 }
 function getImage($link){
-  $path = 'public/image/no_image.svg';
+  $path = '/public/image/no-image.png';
   return File::exists($link) ? $link : $path;
 }
 function delete_image_by_path($image,$path){

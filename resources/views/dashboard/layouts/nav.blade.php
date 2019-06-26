@@ -28,7 +28,7 @@
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="#" style="color:blue">
                                 <i class="material-icons">person</i>
-                                {{ App\Models\User::getInfoUser()['name'] }}
+                                {{ Auth::user()->name  }}
                             </a>
                             <a class="dropdown-item" href="#">
                                 <i class="material-icons">edit</i> Thay đổi thông tin

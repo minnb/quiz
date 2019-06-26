@@ -14,8 +14,7 @@
                     <h1 class="h2">Danh sách Khoá học</h1>
                 </div>
             </div>
-
-           <div class="row">
+            <div class="row">
                 @if(isset($course_data))
                     @foreach($course_data as $key=>$item)
                         <div class="col-md-6">
@@ -127,7 +126,7 @@
                             @if($lstQuiz->count()>0)
                                 @foreach($lstQuiz as $key=>$item)
                                     <li class="list-group-item">
-                                        <div class="media align-items-center">
+                                        <div class="media align-items-center"> 
                                             <div class="media-body">
                                                 @if($item->type == 'QUIZ')
                                                     <a class="text-body" href="{{route('get.dashboard.quiz.take.result',['quiz_id'=>fencrypt($item->id)])}}">
@@ -170,7 +169,6 @@
                                     </div>
                                 </li>
                             @endif
-
                         </ul>
                     </div>
                 </div>

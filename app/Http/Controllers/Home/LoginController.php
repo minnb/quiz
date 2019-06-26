@@ -42,11 +42,15 @@ class LoginController extends Controller
 		    	Session::put('hochieuqua_vn', $authUser->email);
 				Session::put('infoUser', fencrypt(json_encode($authUser)));
 				Session::save();
-		        return redirect()->route('dashboard')->with(['flash_message'=>'Đăng nhập thành công']);
+                if(User::checkRole(trim($authUser->email)) == 'guest'){
+                    return redirect()->route('dashboard')->with(['flash_message'=>'Đăng nhập thành công']);
+                }elseif(User::checkRole(trim($authUser->email)) == 'employee' || User::checkRole(trim($authUser->email)) == 'manager'){
+                    return redirect()->route('admin')->with(['flash_message'=>'Đăng nhập thành công']);
+                }
 	    	}else{
 	    		return back()->withErrors(['errors'=>'Lỗi đăng nhập'])->withInput();
 	    	}
-	    }catch (Exception $e) {
+	    }catch (\Exception $e) {
             return back()->withErrors($e->getMessage())->withInput();
         }
 	   
@@ -82,9 +86,14 @@ class LoginController extends Controller
         ]);
         $credentials = $request->only('email', 'password');
         if(User::checkRole(trim($request->email)) == 'guest' || User::checkRole(trim($request->email)) == ''){
-            return redirect()->route('home.login')->withErrors(['errors'=>'Vui lòng đăng nhập lại']);
+             if (Auth::attempt($credentials)){
+                return redirect()->route('dashboard')->with(['flash_message'=>'Đăng nhập thành công']);
+             }else{
+                return back()->withErrors(['errors'=>'Địa chỉ email hoặc mật khẩu không đúng'])->withInput();
+             }
+            //return redirect()->route('home.login')->withErrors(['errors'=>'Vui lòng đăng nhập lại']);
         }else{
-            if (Auth::attempt($credentials)) {
+            if (Auth::attempt($credentials) && User::checkRole(trim($request->email)) == 'manager') {
                 // Authentication passed...
                 return redirect()->intended('admin');
             }else{
