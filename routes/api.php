@@ -30,7 +30,7 @@ Route::get('auth/jwt/{token}', 'Admin\UserController@getUserInfo');
 
 Route::group(['prefix' => 'v1'], function () {
 	Route::get('quiz-test/{id}/{token}', 'Api\QuizApiController@getQuizTest');
-	Route::get('quiz/{type}/{course}/{thematic}/{lesson}/{strToken}/{token}', 'Api\QuizApiController@getQuizId');
+	Route::get('quiz/{user_id}/{type}/{course}/{thematic}/{lesson}/{strToken}/{token}', 'Api\QuizApiController@getQuizId');
 	Route::get('quiz-take/{id}/{token}', 'Api\QuizApiController@getDataQuiz');
 	Route::post('quiz-take', 'Api\QuizApiController@postDataQuiz');
 });

@@ -15,8 +15,8 @@ var serviceCommon = new ServiceCommon();
 var totalQuestion = 0;
 var currentQuestion = 0;
 //bắt đầu mở bài test
-function start_test(type, course, thematic, lesson, str_token) {
-    serviceQuestion.getQuizId(type, course, thematic, lesson, str_token).then(quiz_idz=>{
+function start_test(user_id, type, course, thematic, lesson, str_token) {
+    serviceQuestion.getQuizId(user_id, type, course, thematic, lesson, str_token).then(quiz_idz=>{
     //console.log(quiz_idz);
     let { error, datas } = quiz_idz;
     if (!error){
@@ -132,6 +132,117 @@ function start_test(type, course, thematic, lesson, str_token) {
             }
         })
     });
+}
+
+function test_again(test_id) {
+    console.log(test_id);
+        serviceQuestion.getListQuestions(test_id).then(tempResult => {
+            let { error, datas } = tempResult;
+            $("#titleUnitTest").html(datas.quiz + " " + datas.thematic);
+            if (!error) {
+                infoTest = {
+                    id: datas.id || 0,
+                    lesson: datas.lesson || "",
+                    quiz: datas.quiz || "Không có câu hỏi ?",
+                    thematic: datas.thematic || ""
+                }
+                let { data } = datas;
+                let questions = [];
+                if (serviceCommon.isArray(data)) {
+                    data.forEach(item => {
+                        let infoQuestion = {
+                            type: item.type || "radio",
+                            title: item.name || "Không có câu hỏi",
+                            question_id: item.question_id || 0,
+                            name: item.name || "",
+                            image: item.image || "",
+                            level: item.level || 0,
+                            listAnswers: []
+                        };
+                        if (serviceCommon.isArray(item.answer)) {
+                            switch (item.type) {
+                                case "radio":
+                                    {
+                                        item.answer.forEach((e1, i1) => {
+                                            let item1 = {
+                                                method: "A",
+                                                content: e1.name || "Không có đáp án",
+                                                answer_id: e1.answer_id || 0,
+                                                stt: e1.stt,
+                                                name: e1.name || "",
+                                                value: e1.value || "",
+                                                result: e1.result || "",
+                                                image: e1.image || ""
+                                            };
+
+
+                                            infoQuestion.listAnswers.push(item1);
+                                        });
+                                        break;
+                                    }
+                                case "checkbox":
+                                    {
+                                        item.answer.forEach(e1 => {
+                                            let item1 = {
+                                                method: "A",
+                                                content: e1.name || "Không có đáp án",
+                                                answer_id: e1.answer_id || 0,
+                                                stt: e1.stt,
+                                                name: e1.name || "",
+                                                value: e1.value || "",
+                                                result: e1.result || "",
+                                                image: e1.image || ""
+                                            };
+                                            infoQuestion.listAnswers.push(item1);
+                                        })
+
+                                        break;
+                                    }
+                                case "value":
+                                    {
+                                        item.answer.forEach((e1, i1) => {
+                                            let item1 = {
+                                                method: "A",
+                                                content: e1.name || "Không có đáp án",
+                                                answer_id: e1.answer_id || 0,
+                                                stt: e1.stt,
+                                                name: e1.name || "",
+                                                value: e1.value || "",
+                                                result: e1.result || "",
+                                                image: e1.image || ""
+                                            };
+                                            if (i1 == 0) {
+                                                item1.method = "A";
+                                            } else if (i1 == 1) {
+                                                item1.method = "B";
+                                            } else if (i1 == 2) {
+                                                item1.method = "C";
+                                            } else {
+                                                item1.method = "D";
+                                            }
+                                            infoQuestion.listAnswers.push(item1);
+                                        })
+
+                                        break;
+                                    }
+                                default:
+                                    break;
+                            }
+
+                        }
+                        questions.push(infoQuestion);
+                    })
+                }
+                // render template questions
+                temQuestion = new TemplateQuestion(questions);
+                temQuestion.render();
+                totalQuestion = temQuestion.data.length;
+                currentQuestion = 1;
+                this.controlButton(1);
+                // mở phần kiểm tra câu hỏi 
+                $("#unit_test").modal('show');
+            }
+        })
 }
 //thao tác điều khiển hiện nút next , prevew, nộp bài 
 function controlButton(currentQ) {

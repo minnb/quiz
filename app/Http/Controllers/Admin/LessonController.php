@@ -19,7 +19,7 @@ class LessonController  extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('admin');
     }
 
     public function getList(){

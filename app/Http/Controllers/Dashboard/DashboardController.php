@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Models\User;use App\Models\Course;
 use App\Models\User_Course;
+use App\Models\HeaderQuiz;
 use DB; use Session;
 class DashboardController extends Controller
 {
@@ -17,15 +18,13 @@ class DashboardController extends Controller
     public function index()
     {
         try{
-            $value = '';
-            if (Session::has('infoUser')) {
-               $value =Session::get('infoUser') ;
-            }
-
             $course_data = Course::where([
                 ['status', 1]
             ])->get();
-            $lesson_recent = User_Course::getLessonRecentByUser(User::getInfoUser()['id']);
+            $lesson_recent = User_Course::getLessonRecentByUser(Auth::user()->id);
+
+            HeaderQuiz::calcResultQuiz(334);
+
             return view('dashboard.layouts.index', compact('lesson_recent','course_data','data_user','value'));
         }catch(\Exception $e){
             Session::forget('hochieuqua_vn');

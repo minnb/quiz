@@ -13,7 +13,7 @@ use App\Models\QuizCollection;
 use App\Models\Thematic;
 use App\Models\Lesson;
 use App\Models\Quesstion;
-use App\Models\HeaderQuiz;
+use App\Models\HeaderQuiz; 
 use App\Models\DetailQuiz;
 use App\Models\Exam;
 class QuizApiController extends Controller
@@ -21,9 +21,9 @@ class QuizApiController extends Controller
     public function getQuizTest($id, $token){
         return $token;
     }
-    public function getQuizId($type, $course, $thematic, $lesson, $strToken, $token){
+    public function getQuizId($user_id, $type, $course, $thematic, $lesson, $strToken, $token){
         try{
-            $id = Exam::insertTabkeQuiz($type,$course,$thematic, $lesson, $strToken);
+            $id = Exam::insertTabkeQuiz($user_id, $type,$course,$thematic, $lesson, $strToken);
             $response = [
                 'type' => $type,
                 'course'=> $course,
@@ -33,7 +33,7 @@ class QuizApiController extends Controller
                 'quiz_id' => $id
             ];
             return response()->json($response, 200);
-        }catch(\Exception $e){
+        }catch(Exception $e){
              return response()->json($e->getMessage(), 200);
         }
        
