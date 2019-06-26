@@ -8,8 +8,10 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use DB;
 use Auth;
+use Session;
 use App\Models\User;
-use App\Models\Role_User;use App\Models\User_Course;
+use App\Models\Role_User;
+use App\Models\User_Course;
 class AdminController extends Controller
 {
     /**
@@ -29,16 +31,13 @@ class AdminController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->user()->authorizeRoles(['manager'])){
-            return view('admin.layouts.index');
-        }else{
-            return redirect('/');
-        }
+        return view('admin.layouts.index');
     }
 
     public function getLogout(){
         Auth::logout();
-        return redirect()->route('index');
+        Session::forget('hochieuqua_vn');
+        return view('auth.login');
     }
 
     public function getListUser(){

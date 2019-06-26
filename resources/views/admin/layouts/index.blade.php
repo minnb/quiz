@@ -39,6 +39,7 @@
 	</div>
 </div>
 <div class="row">
+	{{ App\Models\User::checkRole(App\Models\User::find(Auth::id())->email)  }}
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">						
 		<div class="card mb-3">
 			<div class="card-header">
