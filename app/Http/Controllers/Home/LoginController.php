@@ -39,17 +39,15 @@ class LoginController extends Controller
 	    		Auth::login($authUser);
 		    	$u_id = User::where('email',$authUser->email)->get()[0]->id;
 		    	Role_User::insertRoleUser($u_id);
-		    	//Session::put('hochieuqua_vn', $authUser->email);
-				//Session::put('infoUser', fencrypt(json_encode($authUser)));
-				//Session::save();
-                return redirect()->route('dashboard')->with(['flash_message'=>'Đăng nhập thành công']);
-                /*
+		    	Session::put('hochieuqua_vn', $authUser->email);
+				Session::put('infoUser', fencrypt(json_encode($authUser)));
+				Session::save();
+                //return redirect()->route('dashboard')->with(['flash_message'=>'Đăng nhập thành công']);
                 if(User::checkRole(trim($authUser->email)) == 'guest'){
                     return redirect()->route('dashboard')->with(['flash_message'=>'Đăng nhập thành công']);
                 }elseif(User::checkRole(trim($authUser->email)) == 'employee' || User::checkRole(trim($authUser->email)) == 'manager'){
                     return redirect()->route('admin')->with(['flash_message'=>'Đăng nhập thành công']);
                 }
-                */
 	    	}else{
 	    		return back()->withErrors(['errors'=>'Lỗi đăng nhập'])->withInput()->with(['flash_message'=>'Vui lòng đăng nhập lại']);
 	    	}

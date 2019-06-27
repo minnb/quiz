@@ -16,7 +16,13 @@ Http.prototype.post = function (uri, body) {
         contentType: 'application/json',
         data: JSON.stringify( body ), 
         success: function(){
-           alert('hello');
+           swal({
+              title: "Good job!",
+              text: "You clicked the button!",
+              icon: "success",
+              button: "Aww yiss!",
+            });
+           location.reload();
         },
         error: function(){
             alert('error');

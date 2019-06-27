@@ -18,24 +18,29 @@ class HeaderQuiz extends Model
     	foreach($answer as $item){
             $q_type = Quesstion::find($item->question_id)->type;
             $arr_anser = json_decode($item->comment);
-            if ($q_type == "value" || $q_type == "checkbox"){
-                $v = 0;
-                foreach($arr_anser as $k){
-                    if($k->result == $k->value){
-                        $v ++;
+            if (count($arr_anser) > 0) {
+                if ($q_type == "value" || $q_type == "checkbox"){
+                    $v = 0;
+                    foreach($arr_anser as $k){
+                        if($k->result == $k->value){
+                            $v ++;
+                        }
                     }
-                }
-                if($v == count($arr_anser)){
-                    DetailQuiz::where('id', $item->id)->update(['result'=>1]);
-                }
-            }
-            if ($q_type == "radio"){
-                foreach($arr_anser as $k){
-                    if($k->stt == $k->value){
+                    if($v == count($arr_anser)){
                         DetailQuiz::where('id', $item->id)->update(['result'=>1]);
                     }
                 }
+                if ($q_type == "radio"){
+                    foreach($arr_anser as $k){
+                        if($k->stt == $k->value){
+                            DetailQuiz::where('id', $item->id)->update(['result'=>1]);
+                        }
+                    }
+                }
+            }else{
+                DetailQuiz::where('id', $item->id)->update(['result'=>0]);
             }
+            
     	}
 
         foreach($answer as $item){
@@ -50,8 +55,12 @@ class HeaderQuiz extends Model
     		$success = 1;
     	}
 
-    	HeaderQuiz::where('id',$quiz_id)->update(['kq'=>$kq, 'success'=>$success]);
-    	return 0;
+        $data_result = HeaderQuiz::find($quiz_id);
+        $data_result->kq = $kq;
+        $data_result->success = $success;
+        $data_result->save();
+    	//HeaderQuiz::where('id',$quiz_id)->update(['kq'=>$kq, 'success'=>$success]);
+    	return $data_result;
     }
 
     public static function getListQuiz($limit = ''){

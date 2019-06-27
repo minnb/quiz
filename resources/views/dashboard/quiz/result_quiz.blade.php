@@ -10,6 +10,7 @@
     <script src="{{ asset('public/dashboard/quiz/js/Http.js') }}"></script>
     <script src="{{ asset('public/dashboard/quiz/js/test_question.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('public/dashboard/quiz/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/dashboard/css/sweetalert.css') }}">
     <style type="text/css">
         [dir=ltr] .modal-backdrop{
             display: none;
@@ -80,4 +81,6 @@
 @endsection
 @section('javascript')
 <script type="text/javascript" src="{{ asset('public/dashboard/quiz/js/math.js')}}"></script>
+<script type="text/javascript" src="{{ asset('public/dashboard/vendor/sweetalert.min.js')}}"></script>
+<script type="text/javascript" src="{{ asset('public/dashboard/js/sweetalert.js')}}"></script>
 @endsection
