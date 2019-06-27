@@ -39,9 +39,9 @@ class LoginController extends Controller
 	    		Auth::login($authUser);
 		    	$u_id = User::where('email',$authUser->email)->get()[0]->id;
 		    	Role_User::insertRoleUser($u_id);
-		    	Session::put('hochieuqua_vn', $authUser->email);
-				Session::put('infoUser', fencrypt(json_encode($authUser)));
-				Session::save();
+		    	//Session::put('hochieuqua_vn', $authUser->email);
+				//Session::put('infoUser', fencrypt(json_encode($authUser)));
+				//Session::save();
                 //return redirect()->route('dashboard')->with(['flash_message'=>'Đăng nhập thành công']);
                 if(User::checkRole(trim($authUser->email)) == 'guest'){
                     return redirect()->route('dashboard')->with(['flash_message'=>'Đăng nhập thành công']);
