@@ -22,9 +22,6 @@ class DashboardController extends Controller
                 ['status', 1]
             ])->get();
             $lesson_recent = User_Course::getLessonRecentByUser(Auth::user()->id);
-
-            HeaderQuiz::calcResultQuiz(334);
-
             return view('dashboard.layouts.index', compact('lesson_recent','course_data','data_user','value'));
         }catch(\Exception $e){
             Session::forget('hochieuqua_vn');
