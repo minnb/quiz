@@ -1,7 +1,8 @@
 <?php
 namespace App\Http\Middleware;
 use Closure;
-use Session;
+use Auth;
+use App\Models\User; 
 class RedirectIfMemberNotLogin
 {
     /**
@@ -13,7 +14,7 @@ class RedirectIfMemberNotLogin
      */
     public function handle($request, Closure $next)
     {
-        if (Session::has('hochieuqua_vn')) {
+        if (Auth::check()) {
             return redirect('/dashboard');
         }
         return $next($request);
