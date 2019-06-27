@@ -19,27 +19,27 @@ class RegisterController extends Controller
 	
     public function registerCourse($idd){
     	$course = fdecrypt($idd); 
-    	if(Session::has('hochieuqua_vn')){
-    		$user = User::getInfoUser();
+    	if(Auth::check()){
+    		$user = User::find(Auth::user()->id);
     		$check = User_Course::where([
     				['course', $course],
-    				['user_id', $user['id']]
+    				['user_id', Auth::user()->id]
     			])->get()->count();
     		if($check == 0){
     			try{
 		            DB::beginTransaction();
 		            $data = new User_Course;
-		            $data->user_id = $user['id'];
+		            $data->user_id = Auth::user()->id;
 		            $data->course = $course;
 		            $data->begin_date = date("Y/m/d");
 		            $data->end_date = '9999-01-01';
-		            $data->user_create = $user['id'];
+		            $data->user_create = Auth::user()->id;
 		            $data->status = 0;
 		            $data->save();
 		            DB::commit();
-		        }catch (Exception $e) {
+		        }catch (\Exception $e) {
 		            DB::rollBack();
-		            return back()->withError($e->getMessage())->withInput();
+		            return back()->withErrors($e->getMessage())->withInput();
 		        }   
     		}
     		return redirect()->route('get.dashboard.course.detail',['id'=>fencrypt($course)]);
