@@ -184,43 +184,32 @@ function markTest() {
         switch (element.type) {
             case "radio":
                 {
-                    let findAnswer = listAnswers.filter(e => {
-                        return e.T_value;
-                    });
-                    if (findAnswer.length > 0) {
+                   listAnswers.forEach(e => {
                         let answer = {
-                            stt: findAnswer[0].stt,
-                            result: findAnswer[0].result,
-                            value: findAnswer[0].stt
+                            stt: e.stt,
+                            result: e.result,
+                            value: (e.T_value) ? e.stt : 0
                         }
-
                         element.answer.push(answer);
-                    }
+                    });
                     break;
 
                 }
             case "checkbox":
                 {
-                    let findAnswer = listAnswers.filter(e => {
-                        return e.T_value;
-                    });
-                    findAnswer.forEach(e => {
+                    listAnswers.forEach(e => {
                         let answer = {
                             stt: e.stt,
                             result: e.result,
-                            value: (e.T_value)?1:0
+                            value: (e.T_value) ? e.stt : 0
                         };
                         element.answer.push(answer);
                     });
-
                     break;
                 }
             case "value":
                 {
-                    let findAnswer = listAnswers.filter(e => {
-                        return e.T_value;
-                    });
-                    findAnswer.forEach(e => {
+                    listAnswers.forEach(e => {
                         let answer = {
                             stt: e.stt,
                             result: e.result,

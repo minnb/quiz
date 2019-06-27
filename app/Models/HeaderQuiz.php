@@ -19,21 +19,44 @@ class HeaderQuiz extends Model
             $q_type = Quesstion::find($item->question_id)->type;
             $arr_anser = json_decode($item->comment);
             if (count($arr_anser) > 0) {
-                if ($q_type == "value" || $q_type == "checkbox"){
+                if ($q_type == "value"){
                     $v = 0;
                     foreach($arr_anser as $k){
-                        if($k->result == $k->value){
+                        if(trim($k->result) == trim($k->value)){
                             $v ++;
                         }
                     }
                     if($v == count($arr_anser)){
                         DetailQuiz::where('id', $item->id)->update(['result'=>1]);
+                    }else{
+                        DetailQuiz::where('id', $item->id)->update(['result'=>0]);
                     }
                 }
+
+                if ($q_type == "checkbox"){
+                    $cb = 0;
+                    $cr = 0;
+                    foreach($arr_anser as $kc){
+                        if(trim($kc->result) == trim($kc->stt) && trim($kc->stt) == trim($kc->value)){
+                            $cr ++;
+                        }
+                        if(trim($kc->result) == trim($kc->stt)){
+                            $cb ++;
+                        }
+                    }
+                    if($cr == $cb){
+                        DetailQuiz::where('id', $item->id)->update(['result'=>1]);
+                    }else{
+                        DetailQuiz::where('id', $item->id)->update(['result'=>0]);
+                    }
+                }
+
                 if ($q_type == "radio"){
-                    foreach($arr_anser as $k){
-                        if($k->stt == $k->value){
+                    foreach($arr_anser as $kk){
+                        if(trim($kk->result) == trim($kk->value)){
                             DetailQuiz::where('id', $item->id)->update(['result'=>1]);
+                        }else{
+                            DetailQuiz::where('id', $item->id)->update(['result'=>0]);
                         }
                     }
                 }
