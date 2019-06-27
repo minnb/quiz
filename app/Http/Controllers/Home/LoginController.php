@@ -56,7 +56,6 @@ class LoginController extends Controller
 	    }catch (\Exception $e) {
             return back()->withErrors($e->getMessage())->withInput();
         }
-	   
     }
 
     public function findOrCreateUser($user)

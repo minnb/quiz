@@ -15,8 +15,10 @@ class AuthenticationMember
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check() && (User::checkRole(Auth::user()->email) == 'manager' || User::checkRole(Auth::user()->email) == 'employee')) {
-            return $next($request);
+        if (Auth::check()) {
+            if(User::checkRole(Auth::user()->email) == 'manager' || User::checkRole(Auth::user()->email) == 'employee'){
+                return $next($request);
+            }
         }
         return redirect('/');
     }
