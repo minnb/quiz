@@ -596,6 +596,7 @@ class ComposerStaticInit45fd57c4e77af68e2849d629a77815ea
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
         'App\\Http\\Middleware\\RedirectIfMemberNotLogin' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfMemberNotLogin.php',
+        'App\\Http\\Middleware\\RedirectIfMemberNotMember' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfMemberNotMember.php',
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',

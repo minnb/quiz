@@ -9,11 +9,13 @@
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">HỌC HIỆU QUẢ</a></li>
                 <li class="breadcrumb-item active">Dashboard</li>
             </ol>
+            <!--
             <div class="media mb-headings align-items-center">
                 <div class="media-body">
                     <h1 class="h2">Danh sách Khoá học</h1>
                 </div>
             </div>
+            
             <div class="row">
                 @if(isset($course_data))
                     @foreach($course_data as $key=>$item)
@@ -25,7 +27,6 @@
                                             <img src="{{ asset(getImage($item->image)) }}" alt="{{ App\Models\Course::getFullNameCourse($item->code) }}" class="avatar-img rounded">
                                         </a>
                                         <div class="flex" style="min-width: 200px;">
-                                            <!-- <h5 class="card-title text-base m-0"><a href="instructor-course-edit.html"><strong>Learn Vue.js</strong></a></h5> -->
                                             <h4 class="card-title mb-1"><a href="{{ route('home.register.course.try', ['course'=>fencrypt($item->code)]) }}">
                                                 {{ App\Models\Course::getFullNameCourse($item->code) }}
                                             </a></h4>
@@ -63,6 +64,7 @@
                     @endforeach
                 @endif
             </div>
+        -->
             <div class="row">
                 <div class="col-lg-7">
                     <div class="card">
@@ -77,7 +79,7 @@
                                 </div>
                             </div>
                         </div>
-                        @if(isset($lesson_recent))
+                        @if(isset($lesson_recent) && $lesson_recent->count() > 0)
                         <ul class="list-group list-group-fit mb-0" style="z-index: initial;">
                             @foreach($lesson_recent as $key=>$item)
                                 <li class="list-group-item" style="z-index: initial;">
@@ -104,9 +106,25 @@
                                         </div>
                                     </div>
                                 </li>
-                            @endforeach
+                                @endforeach
+                            @else
+                                <li class="list-group-item">
+                                    <div class="media align-items-center">
+                                        <div class="media-body">
+                                            <a class="text-body" href="student-quiz-results.html"><strong>Bạn chưa học bài học nào</strong></a><br>
+                                            <div class="d-flex align-items-center">
+                                                <small class="text-black-50 text-uppercase mr-2"></small>
+                                                <a href="student-take-course.html"></a>
+                                            </div>
+                                        </div>
+                                        <div class="media-right text-center d-flex align-items-center">
+                                            <span class="text-black-50 mr-3"></span>
+                                            <h4 class="mb-0"></h4>
+                                        </div>
+                                    </div>
+                                </li>
+                            @endif
                         </ul>
-                        @endif
                     </div>
 
                     <div class="card">

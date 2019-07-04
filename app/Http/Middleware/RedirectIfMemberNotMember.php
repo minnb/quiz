@@ -4,7 +4,7 @@ use Closure;
 use Auth;
 use App\Models\User; 
 use App\Models\Course; 
-class RedirectIfMemberNotLogin
+class RedirectIfMemberNotMember
 {
     /**
      * Handle an incoming request.

@@ -4,6 +4,7 @@ use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use Closure;
 use Auth;
 use App\Models\User; 
+use App\Models\Course; 
 class Authenticate extends Middleware
 {
     /**
@@ -14,15 +15,11 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
-        /*
-        if (Auth::check()) {
-            return $next($request);
-        }
-        return route('home.login');
-        */
+        
         if (!$request->expectsJson()) {
             return route('home.login');
         }
+        
         
     }
 }

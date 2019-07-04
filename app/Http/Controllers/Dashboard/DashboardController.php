@@ -18,20 +18,16 @@ class DashboardController extends Controller
     public function index()
     {
         try{
-            $course_data = Course::where([
-                ['status', 1]
-            ])->get();
+            $course_data = Course::getMyCourse();
             $lesson_recent = User_Course::getLessonRecentByUser(Auth::user()->id);
-            return view('dashboard.layouts.index', compact('lesson_recent','course_data','data_user','value'));
+            return view('dashboard.layouts.index', compact('lesson_recent','course_data'));
         }catch(\Exception $e){
-            //Session::forget('hochieuqua_vn');
             return redirect()->route('home.login');
         }
     }
 
     public function getLogout(){
     	Auth::logout();
-        //Session::forget('hochieuqua_vn');
     	return redirect()->route('index');
     }
 }

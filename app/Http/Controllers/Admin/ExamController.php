@@ -141,6 +141,26 @@ class ExamController extends Controller
         return view('admin.exam.week', compact('data'));
     }
 
+    public function getEditWeeks($idd){
+        $id = fdecrypt($idd); 
+        $data = Week::findOrFail($id);
+        return view('admin.exam.edit_week', compact('id', 'data'));
+    }
+
+    public function postEditWeeks(Request $request, $idd){
+        $id = fdecrypt($idd); 
+        try{
+            $data = Week::findOrFail($id);
+            $data->to_date = convertDateTo2Char($request->singledatepicker2,'-');
+            $data->from_date = convertDateTo2Char($request->singledatepicker1,'-');
+            $data->save();
+            return redirect()->route('get.admin.exam.weeks')->with(['flash_message'=>'Chỉnh sửa thành công']);
+        }catch (\Exception $e) {
+            DB::rollBack();
+            return back()->withErrors($e->getMessage())->withInput();
+        }
+    }
+
     public function createWeek(){
         for($i=1; $i<=35; $i++){
             $a = new Week();

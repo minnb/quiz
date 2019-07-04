@@ -42,6 +42,12 @@
 					</select>
 				</div>
 				<div class="form-group">
+					<label>Tuần</label>
+					<select class="form-control" name="week">
+						{{ getSelectForm(App\Models\Week::getSelectWeek(),old('week')) }}
+					</select>
+				</div>
+				<div class="form-group">
 					<label style="color:red">Hiển thị bài giảng</label>
 					<select class="form-control" name="trial">
 						{{ selectedOption(getVideStatus(),old('trial')) }}

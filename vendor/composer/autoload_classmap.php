@@ -48,6 +48,7 @@ return array(
     'App\\Http\\Middleware\\EncryptCookies' => $baseDir . '/app/Http/Middleware/EncryptCookies.php',
     'App\\Http\\Middleware\\RedirectIfAuthenticated' => $baseDir . '/app/Http/Middleware/RedirectIfAuthenticated.php',
     'App\\Http\\Middleware\\RedirectIfMemberNotLogin' => $baseDir . '/app/Http/Middleware/RedirectIfMemberNotLogin.php',
+    'App\\Http\\Middleware\\RedirectIfMemberNotMember' => $baseDir . '/app/Http/Middleware/RedirectIfMemberNotMember.php',
     'App\\Http\\Middleware\\TrimStrings' => $baseDir . '/app/Http/Middleware/TrimStrings.php',
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',

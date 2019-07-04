@@ -85,20 +85,15 @@ class LoginController extends Controller
             'password'=> 'required'
         ]);
         $credentials = $request->only('email', 'password');
-        if(User::checkRole(trim($request->email)) == 'guest' || User::checkRole(trim($request->email)) == ''){
-             if (Auth::attempt($credentials)){
+        if(Auth::attempt($credentials)){
+            if (User::checkRole(trim($request->email)) == 'guest' || User::checkRole(trim($request->email)) == ''){
                 return redirect()->route('dashboard')->with(['flash_message'=>'Đăng nhập thành công']);
-             }else{
-                return back()->withErrors(['errors'=>'Địa chỉ email hoặc mật khẩu không đúng'])->withInput();
-             }
-            //return redirect()->route('home.login')->withErrors(['errors'=>'Vui lòng đăng nhập lại']);
-        }else{
-            if (Auth::attempt($credentials) && User::checkRole(trim($request->email)) == 'manager') {
-                // Authentication passed...
-                return redirect()->intended('admin');
-            }else{
-                return back()->withErrors(['errors'=>'Địa chỉ email hoặc mật khẩu không đúng'])->withInput();
             }
+            elseif(Auth::attempt($credentials) && User::checkRole(trim($request->email)) == 'manager') {
+                return redirect()->intended('admin');
+            }
+        }else{
+            return redirect()->route('home.login')->withErrors(['errors'=>'Địa chỉ email hoặc mật khẩu không đúng'])->withInput();
         }
 	}    
 }

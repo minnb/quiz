@@ -58,6 +58,9 @@ Route::group(['prefix'=> 'admin'], function(){
 		Route::get('delete/{id}', ['as'=>'get.admin.exam.delete','uses'=>'Admin\ExamController@getDelete']);
 		Route::get('weeks', ['as'=>'get.admin.exam.weeks','uses'=>'Admin\ExamController@getWeeks']);
 		Route::get('weeks/create', ['as'=>'get.admin.exam.weeks.create','uses'=>'Admin\ExamController@createWeek']);
+
+		Route::get('weeks/edit/{id}', ['as'=>'get.admin.exam.weeks.edit','uses'=>'Admin\ExamController@getEditWeeks']);
+		Route::post('weeks/edit/{id}', ['as'=>'post.admin.exam.weeks.edit','uses'=>'Admin\ExamController@postEditWeeks']);
 	});
 
 	Route::group(['prefix'=> 'quesstion'], function(){
