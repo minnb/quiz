@@ -26,10 +26,11 @@
 					</ul>
                 </li>
                 <li class="submenu">
-                    <a href="#"><i class="fa fa-delicious bigfonts"></i> <span> Luyện thi </span> <span class="menu-arrow"></span></a>
+                    <a href="#"><i class="fa fa-delicious bigfonts"></i> <span> Luyện thi học kỳ </span> <span class="menu-arrow"></span></a>
 					<ul class="list-unstyled">
-						<li><a href="{{ route('get.admin.thematic.list') }}">Danh sách Chuyên đề</a></li>
+						<li><a href="{{ route('get.admin.exam.import.list') }}">Danh sách kỳ thi</a></li>
 						<li><a href="{{ route('get.admin.quesstion.list.question') }}">Câu hỏi luyện thi</a></li>
+
 					</ul>
                 </li>
                 <li class="submenu">

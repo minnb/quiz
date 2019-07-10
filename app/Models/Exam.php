@@ -316,6 +316,13 @@ class Exam extends Model
     	}else{
     		return "";
     	}
-    	
+    }
+    public static function countQuestionByHK($hk){
+    	$data = DB::table('m_cau_hoi')->where('quiz', $hk)->get();
+    	if(isset($data)){
+    		return $data->count();
+    	}else{
+    		return 0;
+    	}
     }
 }

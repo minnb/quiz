@@ -72,7 +72,7 @@ class QuizApiController extends Controller
                     ->where('question_id', $dataAnswer['question_id'])
                     ->update(['comment' => json_encode($dataAnswer['answer'])]);
             }
-            //HeaderQuiz::insertQueeEmail('QUIZ',$quiz_id);
+           
             /*
             $quizResult = DetailQuiz::where('quiz_id', $quiz_id)->get();           
             $arrAnswer = [];
@@ -88,6 +88,7 @@ class QuizApiController extends Controller
             */
             HeaderQuiz::where('id', $quiz_id)->update(['status' => 1]);
             HeaderQuiz::calcResultQuiz($quiz_id);
+            HeaderQuiz::insertQueeEmail('QUIZ',$quiz_id);
             DB::commit();
             //return response()->json($arrAnswer, 200);
             //return $arrAnswer;

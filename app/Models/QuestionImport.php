@@ -9,7 +9,8 @@ class QuestionImport implements ToModel, WithHeadingRow
 {
 
     public function model(array $row)
-    {       
+    { 
+      
         return new TempQuestion([
            'question_id'=> $row['id'],
            'user_id'    => Auth::user()->id,
@@ -20,5 +21,6 @@ class QuestionImport implements ToModel, WithHeadingRow
            'level'      => $row['level'],
            'stt'        => $row['stt']
         ]);
+        
     }
 }

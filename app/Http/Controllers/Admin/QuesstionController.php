@@ -34,7 +34,7 @@ class QuesstionController  extends Controller
     }
     public function getListQuest(){
         $data = Quesstion::where([
-            ['status', 1],['used', 1] ])->get();
+            ['status', 1],['quiz', 'like', 'HK%'] ])->get();
         return view('admin.quesstion.list_question', compact('data'));
     }
     public function getAdd(){
@@ -79,7 +79,8 @@ class QuesstionController  extends Controller
             }
             $quesstion->save();
             $quesstion_id = $quesstion->id;
-            foreach(Input::get('answer') as $i=>$answer_value ){
+            $i=0;
+            foreach(Input::get('answer') as $answer_value ){
         			$answer = new Answer();
         			$answer->quesstion_id = $quesstion_id;
     	    		$answer->name = $answer_value;
@@ -125,15 +126,12 @@ class QuesstionController  extends Controller
             DB::beginTransaction();
             $quesstion = Quesstion::findOrFail($id);
             $old_img = $quesstion->image;
-
             $quesstion->name = $request->name;
             $quesstion->alias = '';
             $quesstion->level = $request->level;
-            $quesstion->type = $request->type;
             $quesstion->status = 1;
-            $quesstion->used = $request->used;
-            $quesstion->name = $request->name;
             $quesstion->user_id = Auth::user()->id;
+
             if($request->file('fileImage')){
                 foreach(Input::file('fileImage') as $file ){
                     $destinationPath = checkFolderImage();
@@ -147,26 +145,62 @@ class QuesstionController  extends Controller
             }
             $quesstion->save();
             $quesstion_id = $quesstion->id;
-            foreach(Input::get('answer') as $i=>$answer_value ){
-                $stt = $i+1;
-                $result = 0;
-                if($request->result == $stt){
-                        $result = $stt;
-                        DB::table('m_cau_hoi')
-                            ->where('id', $quesstion->id)
-                            ->update(['answer' => $result]);
-                    }
 
+            $result = 0;
+            $i = 0;
+
+            foreach(Input::get('answer') as $answer_value ){
+                $i++;
                 $update = [
                         'name' =>$answer_value,
                         'value'=>'',
-                        'result' => $result
                     ];
-                
                 DB::table('m_cau_dap_an')->where([
                         ['quesstion_id', $quesstion_id],
                         ['stt', $i+1 ]
                     ])->update($update);
+            }
+
+            if($quesstion->type == 'radio'){
+                DB::table('m_cau_dap_an')->where([
+                        ['quesstion_id', $quesstion_id],
+                        ['stt', $request->result ]
+                    ])->update(['result'=> $request->result]);
+                
+            }elseif($quesstion->type == 'checkbox'){
+                $k = 0;
+                foreach(Input::get('anserChoose') as $anserChoose){
+                    if($anserChoose == true){
+                        $result = $k+1;
+                    }else{
+                        $result = 0;
+                    }
+                    $update = [
+                        'result' => $result
+                    ];
+                
+                    DB::table('m_cau_dap_an')->where([
+                        ['quesstion_id', $quesstion_id],
+                        ['stt', $k+1]
+                    ])->update($update);
+                }               
+            }
+
+            if($request->file('fileImage2')){
+                $f = 0;
+                foreach(Input::file('fileImage2') as $file ){
+                    $destinationPath = checkFolderImage();
+                    if(isset($file)){
+                        $file_name = randomString().'.'.$file->getClientOriginalExtension();
+                        $image_ans = $destinationPath.'/'.$file_name;
+                        $file->move($destinationPath, $file_name);
+                        DB::table('m_cau_dap_an')->where([
+                            ['quesstion_id', $quesstion_id],
+                            ['stt', $f+1]
+                        ])->update(['image'=>$image_ans]);
+                        //delete_image_no_path($old_img);
+                    }
+                }
             }
 
             DB::commit();
@@ -201,9 +235,13 @@ class QuesstionController  extends Controller
 
     public function getImportExcel($idd){
         $thematic_id = fdecrypt($idd);
-        $thematic = Thematic::find($thematic_id);
-        $data = TempQuestion::where('user_id', Auth::user()->id)->get();
-        return view('admin.quesstion.import', compact('thematic','thematic_id', 'data'));
+        try {
+            $thematic = Thematic::find($thematic_id);
+            $data = TempQuestion::where('user_id', Auth::user()->id)->get();
+            return view('admin.quesstion.import', compact('thematic','thematic_id', 'data'));
+        } catch (\Exception $e) {
+            
+        }
     }
 
     public function getImportUndo($idd){
@@ -239,7 +277,7 @@ class QuesstionController  extends Controller
         }catch (\Exception $e) {
             DB::rollBack();
             return back()->withErrors($e->getMessage())->withInput();
-        }
+        } 
     }
     public function postImportExcel(Request $request, $idd){
         $thematic_id = fdecrypt($idd); 

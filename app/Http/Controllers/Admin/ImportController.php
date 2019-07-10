@@ -51,7 +51,7 @@ class ImportController extends Controller
                 DB::beginTransaction();
                 
                 DB::table('temp_questions')->where('user_id', Auth::user()->id)->delete();
-                DB::table('temp_answer')->delete();
+                DB::table('temp_answer')->where('user_id', Auth::user()->id)->delete();
 
                 Excel::import(new QuestionImport(), $destinationPath.'/'.$file_name);
                 Excel::import(new AnswerImport(), $destinationPath.'/'.$file_name);
@@ -90,6 +90,7 @@ class ImportController extends Controller
                         $dtaq->status = 1;
                         $dtaq->answer = $data_ins[0]->result;
                         $dtaq->user_id = Auth::user()->id;
+                        $dtaq->quiz = 'QUIZ';
                         $dtaq->save();
                         $q_id = $dtaq->id;
 

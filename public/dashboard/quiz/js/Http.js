@@ -1,7 +1,7 @@
 // -----------------------------đối tượng Http dùng truy vấn hai phương thức post , get-------------------------------------------
 function Http() {
-    //this.host = "http://localhost:8000/quiz";
-    this.host = "https://hochieuqua.vn";
+    this.host = "http://localhost:8000/quiz";
+    //this.host = "https://hochieuqua.vn";
     this.token = "0795879133";
 }
 // truy vấn phương thức post 

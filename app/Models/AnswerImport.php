@@ -10,12 +10,12 @@ class AnswerImport implements ToModel, WithHeadingRow
 
     public function model(array $row)
     {
-       
         return new TempAnswer([
            'question_id'=> $row['id'],
            'stt'        => $row['stt'],
            'answer'     => trim($row['answer']),
-           'result'     => trim($row['result'])
+           'result'     => trim($row['result']),
+           'user_id'    => Auth::user()->id
         ]);
     }
 

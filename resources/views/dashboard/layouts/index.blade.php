@@ -65,7 +65,22 @@
                 @endif
             </div>
         -->
-            <div class="row">
+                <div class="card border-left-3 border-left-primary card-2by1">
+                    <div class="card-body">
+                            <div class="media flex-wrap align-items-center">
+                                <div class="media-left">
+                                    <i class="material-icons text-muted-light">school</i>
+                                </div>
+                                <div class="media-body" style="min-width: 180px">
+                                    Chào mừng trở lại, <strong>{{ Auth::user()->name }}</strong>
+                                </div>
+                                <div class="media-right mt-2 mt-xs-plus-0">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <div class="row">
                 <div class="col-lg-7">
                     <div class="card">
                         <div class="card-header">

@@ -61,6 +61,12 @@ Route::group(['prefix'=> 'admin'], function(){
 
 		Route::get('weeks/edit/{id}', ['as'=>'get.admin.exam.weeks.edit','uses'=>'Admin\ExamController@getEditWeeks']);
 		Route::post('weeks/edit/{id}', ['as'=>'post.admin.exam.weeks.edit','uses'=>'Admin\ExamController@postEditWeeks']);
+
+		Route::get('/list/import-excel', ['as'=>'get.admin.exam.import.list','uses'=>'Admin\ExamController@getExamImportExcel']);
+		Route::get('/list/import-excel/{course}/{type}', ['as'=>'get.admin.exam.import.excel','uses'=>'Admin\ExamController@getPageExamImportExcel']);
+		Route::post('/list/import-excel/{course}/{type}', ['as'=>'post.admin.exam.import.excel','uses'=>'Admin\ExamController@postPageExamImportExcel']);
+		Route::post('/list/import-excel/data/{course}/{type}', ['as'=>'post.admin.exam.import.data','uses'=>'Admin\ExamController@postDataExamImportExcel']);
+		Route::get('/list/import-excel/undo/{type}', ['as'=>'get.admin.exam.import.undo','uses'=>'Admin\ExamController@getUndoExamImportExcel']);
 	});
 
 	Route::group(['prefix'=> 'quesstion'], function(){
