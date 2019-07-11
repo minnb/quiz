@@ -11,11 +11,10 @@
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>Loại</th>
+								<th>Khóa học</th>
+								<th>Kỳ thi</th>
 								<th>Câu hỏi</th>
 								<th>Cấp độ</th>
-								<th>Chuyên đề</th>
-								<th>Khóa học</th>
 								<th>Trạng thái</th>
 								<th>
 									<a href="#" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fa fa-fw fa-plus"></i> Thêm mới câu hỏi</a>
@@ -26,17 +25,13 @@
 							<?php foreach($data as $key=>$item) { ?>
 							<tr>
 								<td><?php echo $key + 1; ?></td>
-								<td>
-									@if($item->used == 0)
-										<span>Quiz</span>
-									@else
-										<span>Practice</span>
-									@endif
+								<td>{{ App\Models\Course::getFullNameCourse($item->course)}}</td>
+								<td>{{ App\Models\Exam::getName($item->quiz) }}</td>
+								<td><a href="{{ route('get.admin.quesstion.edit',['id'=>fencrypt($item->id)])}}">{!! $item->name !!}
+									- #{{$item->id}}
+									</a>
 								</td>
-								<td><a href="{{ route('get.admin.exam.edit',['id'=>fencrypt($item->id)])}}">{!! $item->name !!}</a></td>
 								<td>{{ $item->level }}</td>
-								<td>{{ App\Models\Thematic::find($item->thematic)->name }}</td>
-								<td>{{ $item->course }}</td>
 								<td>
 									@if($item->status == 0)
 										<span>Disable</span>

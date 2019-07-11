@@ -19,7 +19,7 @@ class LessonController  extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('admin');
     }
 
     public function getList(){
@@ -63,6 +63,7 @@ class LessonController  extends Controller
 			$lesson->sort = $request->sort;
             $lesson->user_id = Auth::user()->id;
             $lesson->trial = $request->trial;
+            $lesson->week = $request->week;
             if($request->file('fileImage')){
                 foreach(Input::file('fileImage') as $file ){
                     $destinationPath = checkFolderImage();
@@ -105,6 +106,7 @@ class LessonController  extends Controller
             $lesson->sort = $request->sort;
             $lesson->user_id = Auth::user()->id;
             $lesson->trial = $request->trial;
+            $lesson->week = $request->week;
             if($request->file('fileImage')){
                 foreach(Input::file('fileImage') as $file ){
                     $destinationPath = checkFolderImage();

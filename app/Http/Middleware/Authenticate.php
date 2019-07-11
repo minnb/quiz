@@ -2,7 +2,9 @@
 namespace App\Http\Middleware;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use Closure;
-use Illuminate\Support\Facades\Auth;
+use Auth;
+use App\Models\User; 
+use App\Models\Course; 
 class Authenticate extends Middleware
 {
     /**
@@ -13,9 +15,11 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
-        if (! $request->expectsJson()) {
+        
+        if (!$request->expectsJson()) {
             return route('home.login');
         }
-
+        
+        
     }
 }

@@ -1,5 +1,5 @@
 @extends('admin.app')
-@section('title', 'Tạo câu hỏi')
+@section('title', 'Chỉnh sửa nội dung câu hỏi')
 @section('stylesheet')
 	<link href="{{ asset('public/assets/plugins/jquery.filer/css/jquery.filer.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{  asset('public/assets/plugins/jquery.filer/css/themes/jquery.filer-dragdropbox-theme.css') }}" rel="stylesheet" type="text/css" />
@@ -14,30 +14,17 @@
 		<div class="row backgroud_white">
 			<div class="col-md-6 offset-md-1 col-xs-12 col-sm-12">
 				<div class="form-group">
-					<label><b>Chỉnh sửa câu hỏi: <strong>{{ App\Models\Thematic::getCourseByThematic($data['thematic']) }}</strong></b></label>
-					<input type="text" class="form-control" name="name" value="Chuyên đề: {{ App\Models\Thematic::find($data['thematic'])->name }}" placeholder="" readonly="true">
-				</div>
-				<div class="form-group">
-					<label>Nội dung Câu hỏi</label>
+					<label>Nội dung câu hỏi </label> 
 					<textarea class="form-control" name="name" placeholder="Nội dung câu hỏi" rows="3">{{ old('name', isset($data) ? $data['name'] : '') }}</textarea> 
 				</div>
 
 				<div class="form-group">
-					<label>Hình ảnh</label>
-					<input class="form-control" type="file" name="fileImage[]" id="filer_example2" multiple="multiple">
+					<label>Hình ảnh minh họa</label>
+					<input class="form-control" type="file" name="fileImage[]" id="filer_example0" multiple="multiple">
 					@if($data['image'] != '')
 						<img src="{{ asset($data['image']) }}" class="thumbnail">
 					@endif
 				</div>
-				<hr>
-				@if(isset($answer))
-					@foreach($answer as $key=>$value)
-						<div class="form-group">
-							<label>Đáp án {{$key+1}}</label>
-							<input class="form-control" type="text" name="answer[]" value="{{ $value->name }}">
-						</div>
-					@endforeach
-				@endif
 			</div>
 			<div class="col-md-3 offset-md-1 col-xs-12 col-sm-12">
 				<div class="form-group">
@@ -47,32 +34,51 @@
 					</select>
 				</div>
 				<div class="form-group">
-					<label>Sử dụng {{   $data['used'] }}</label>
-					<select class="form-control" name="used">
-						{{ selectedOption(getQuizUsed(), old('used', isset($data) ? $data['used'] : '')) }}
-					</select>
-				</div>
-				<div class="form-group">
 					<label>Cấp độ</label>
 					<select class="form-control" name="level">
 						{{ selectedOption(getLevelQuestion(), old('level', isset($data) ? $data['level'] : 1) )}}
 					</select>
 				</div>
 				<div class="form-group">
-					<label>Loại câu trả lời</label>
-					<select class="form-control" name="type">
-						{{ selectedOption(getTypeAnswer(),'radio') }}
-					</select>
-				</div>
-				<div class="form-group">
+					@if($data['type']!='value')
 					<label style="color:red">Đáp án đúng</label>
-					<select class="form-control" name="result">
-						{{ selectedOption(getAnswerNumber(), App\Models\Answer::getAswerTrue($id) )}}
-					</select>
+					@endif
+					@if($data['type']=='radio')
+						<select class="form-control" name="result">
+							{{ selectedOption(getAnswerNumber(), App\Models\Answer::getAswerTrue($id) )}}
+						</select>
+					@elseif($data['type']=='checkbox')
+						@foreach($answer as $k=>$value)
+							<div>
+								Đáp án {{$k+1}}	<input type="checkbox" name="anserChoose[]" @if($value->result > 0) checked="true" @endif > 				
+							</div>
+						@endforeach
+					@endif
 				</div>
 			</div>
+			<hr>
+			<div class="col-md-10 offset-md-1 col-xs-12 col-sm-12">
+				@if(isset($answer))
+					@foreach($answer as $key=>$value)
+					<input type="hidden" name="{{$value->id}}" value="{{$value->id}}">
+					<div class="col-md-6 col-xs-12 col-sm-12">
+						<div class="form-group">
+							<label style="color:blue">Đáp án {{$key+1}}</label>
+							<input class="form-control" type="text" name="answer[]" value="{{ $value->name }}">
+						</div>
+						<div class="form-group">
+							<label>Hình ảnh</label>
+							<input class="form-control" type="file" name="fileImage2[]" id="filer_example{{$key+1}}" multiple="multiple">
+							@if($value['image'] != '')
+								<img src="{{ asset($value['image']) }}" class="thumbnail">
+							@endif
+						</div>
+					</div>
+					<hr>
+					@endforeach
+				@endif
+			</div>
 		</div>
-		<hr>
 		<div class="row backgroud_white">
 			<div class="col-md-10 offset-md-1 col-lg-12">
 				<button type="submit" class="btn btn-danger"><i class="fa fa-save bigfonts" aria-hidden="true"></i> Cập nhật</button>
@@ -91,7 +97,39 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 	'use-strict';
+	    $('#filer_example0').filer({
+	        limit: 3,
+	        maxSize: 3,
+	        extensions: ['jpg', 'jpeg', 'png', 'gif', 'psd'],
+	        changeInput: true,
+	        showThumbs: true,
+	        addMore: true
+	    });
+	    $('#filer_example1').filer({
+	        limit: 3,
+	        maxSize: 3,
+	        extensions: ['jpg', 'jpeg', 'png', 'gif', 'psd'],
+	        changeInput: true,
+	        showThumbs: true,
+	        addMore: true
+	    });
 	    $('#filer_example2').filer({
+	        limit: 3,
+	        maxSize: 3,
+	        extensions: ['jpg', 'jpeg', 'png', 'gif', 'psd'],
+	        changeInput: true,
+	        showThumbs: true,
+	        addMore: true
+	    });
+	    $('#filer_example3').filer({
+	        limit: 3,
+	        maxSize: 3,
+	        extensions: ['jpg', 'jpeg', 'png', 'gif', 'psd'],
+	        changeInput: true,
+	        showThumbs: true,
+	        addMore: true
+	    });
+	    $('#filer_example4').filer({
 	        limit: 3,
 	        maxSize: 3,
 	        extensions: ['jpg', 'jpeg', 'png', 'gif', 'psd'],

@@ -12,18 +12,21 @@
 							<tr>
 								<th>#</th>
 								<th>Tuần</th>
+								<th>Từ ngày (dd-mm)</th>
+								<th>Đến ngày (dd-mm)</th>
 								<th>Ghi chú</th>
-								<th></th>
 							</tr>
 						</thead>										
 						<tbody>
 							<?php foreach($data as $key=>$item) { ?>
-							<tr>
-								<td><?php echo $key + 1; ?></td>
-								<td><?php echo $item->name; ?></td>
-								<td><?php echo $item->code; ?></td>
-								<td><?php echo $item->lesson; ?></td>
-							</tr>
+								<tr>
+									<td><?php echo $key + 1; ?></td>
+									<td>
+										<a href="{{ route('get.admin.exam.weeks.edit',['id'=>fencrypt($item->id)]) }}"><?php echo $item->name; ?></a></td>
+									<td><?php echo $item->from_date; ?></td>
+									<td><?php echo $item->to_date; ?></td>
+									<td></td>
+								</tr>
 							<?php } ?>
 						</tbody>
 					</table>

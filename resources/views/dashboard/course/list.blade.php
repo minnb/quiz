@@ -38,9 +38,22 @@
                                                         <p class="text-muted">Học phí: {{ number_format($item->unit_price) }} <ins>đ</ins></p>
                                                     </div>
                                                 </div>
-                                                <div class="text-center">
-                                                    <a href="{{ route('home.register.course.try', ['course'=>fencrypt($item->code)]) }}" class="btn btn-sm btn-white">Đăng ký học thử</a>
-                                                </div>
+                                                <?php $check = App\Models\Course::checkUserCourse($item->code); ?>
+                                                @if(count($check) > 0)
+                                                    @if($check[0]->status == 0)
+                                                    <div class="text-center">
+                                                        <a href="{{ route('home.register.course.try', ['course'=>fencrypt($item->code)]) }}" class="btn btn-sm btn-primary">Vào học thử</a>
+                                                    </div>
+                                                    @else
+                                                    <div class="text-center">
+                                                        <a href="{{ route('home.register.course.try', ['course'=>fencrypt($item->code)]) }}" class="btn btn-sm btn-success">Vào lớp học</a>
+                                                    </div>
+                                                    @endif
+                                                @else
+                                                    <div class="text-center">
+                                                        <a href="{{ route('home.register.course.try', ['course'=>fencrypt($item->code)]) }}" class="btn btn-sm btn-primary">Vào học thử</a>
+                                                    </div>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>

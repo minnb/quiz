@@ -2,6 +2,20 @@
 @section('title', 'Kết quả')
 @section('stylesheet')
     <link href="{{ asset('public/dashboard/quiz/css/quiz.css') }}" rel="stylesheet" type="text/css" />
+        <meta name="csrf-token" content="<?= csrf_token() ?>">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="{{ asset('public/dashboard/quiz/js/TemplateQuestion.js') }}"></script>
+    <script src="{{ asset('public/dashboard/quiz/js/ServiceQuestion.js') }}"></script>
+    <script src="{{ asset('public/dashboard/quiz/js/ServiceCommon.js') }}"></script>
+    <script src="{{ asset('public/dashboard/quiz/js/Http.js') }}"></script>
+    <script src="{{ asset('public/dashboard/quiz/js/test_question.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('public/dashboard/quiz/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/dashboard/css/sweetalert.css') }}">
+    <style type="text/css">
+        [dir=ltr] .modal-backdrop{
+            display: none;
+        }
+    </style>
 @endsection
 @section('content')
 	<div data-push data-responsive-width="992px" class="mdk-drawer-layout js-mdk-drawer-layout">
@@ -24,7 +38,15 @@
                             <span class="text-muted-light">{{ App\Models\XepLoai::getXepLoai($point) }}</span>
                         </div>
                         <div class="media-right">
+                            <?php 
+                                $test_id = $quiz_id;
+                            ?>
+                            <button class="btn btn-primary" onclick='test_again(<?php echo json_encode($test_id); ?>)'>
+                                Luyệt tập Quiz <i class="material-icons btn__icon--right">refresh</i>
+                            </button>
+                            <!--
                             <a href="{{ route('get.dashboard.take.again', ['quiz_id'=>fencrypt($quiz_id)])}}" class="btn btn-primary">Luyện tập lại <i class="material-icons btn__icon--right">refresh</i></a>
+                            -->
                         </div>
                     </div>
                 </div>
@@ -41,7 +63,7 @@
                                 </div>
                                 <div class="media-body">{!! App\Models\Quesstion::find($item->question_id)->name !!}</div>
                                 <div class="media-right">
-                                    @if($item->answer == $item->result)
+                                    @if($item->result == 1)
                                         <span class="badge badge-success ">Đúng </span>
                                     @ELSE
                                         <span class="badge badge-danger  ">Sai </span>
@@ -54,7 +76,11 @@
                 </div>
             </div>
         </div>
+
+        @include('dashboard.layouts.form_quiz')
 @endsection
 @section('javascript')
 <script type="text/javascript" src="{{ asset('public/dashboard/quiz/js/math.js')}}"></script>
+<script type="text/javascript" src="{{ asset('public/dashboard/vendor/sweetalert.min.js')}}"></script>
+<script type="text/javascript" src="{{ asset('public/dashboard/js/sweetalert.js')}}"></script>
 @endsection

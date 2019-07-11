@@ -3,9 +3,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
-use DB;
-use Auth;
+use DB;use Auth;use Excel;
 use App\Models\Subject;
+use App\Models\TempQuestion;
+use App\Models\QuestionImport;
+use App\Models\AnswerImport;
+use App\Models\Quesstion;
+use App\Models\TempAnswer;
+use App\Models\Answer;
 use App\Models\Exam;use App\Models\Week;
 class ExamController extends Controller
 {
@@ -16,7 +21,7 @@ class ExamController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('admin');
     }
 
     public function getList(){
@@ -141,6 +146,26 @@ class ExamController extends Controller
         return view('admin.exam.week', compact('data'));
     }
 
+    public function getEditWeeks($idd){
+        $id = fdecrypt($idd); 
+        $data = Week::findOrFail($id);
+        return view('admin.exam.edit_week', compact('id', 'data'));
+    }
+
+    public function postEditWeeks(Request $request, $idd){
+        $id = fdecrypt($idd); 
+        try{
+            $data = Week::findOrFail($id);
+            $data->to_date = convertDateTo2Char($request->singledatepicker2,'-');
+            $data->from_date = convertDateTo2Char($request->singledatepicker1,'-');
+            $data->save();
+            return redirect()->route('get.admin.exam.weeks')->with(['flash_message'=>'Chỉnh sửa thành công']);
+        }catch (\Exception $e) {
+            DB::rollBack();
+            return back()->withErrors($e->getMessage())->withInput();
+        }
+    }
+
     public function createWeek(){
         for($i=1; $i<=35; $i++){
             $a = new Week();
@@ -150,5 +175,119 @@ class ExamController extends Controller
             $a->save();
         }
         return 0;
+    }
+
+    public function getExamImportExcel(){
+        try {
+            $data = Exam::where('type','like','HK%')->orderBy('type')->get();
+            return view('admin.exam.exam_list', compact('data'));
+        } catch (Exception $e) {
+            return back()->withErrors($e->getMessage())->withInput();
+        }
+    }
+
+    public function getPageExamImportExcel($course, $types){
+        $type = fdecrypt($types);
+        try {
+            $exam_data = Exam::where('type', $type)->get();
+            $data =TempQuestion::where('user_id', Auth::user()->id)->get();
+            return view('admin.exam.import_quiz_by_hk', compact('type','exam_data','data','course'));              
+        } catch (\Exception $e) {
+            return back()->withErrors($e->getMessage())->withInput();
+        }
+    }
+
+    public function postPageExamImportExcel(Request $request,$course, $types){
+        $type = fdecrypt($types);
+        $user_id = Auth::user()->id;
+        $file_name = '';
+         try{
+            if($request->hasFile('fileExcel')){
+                $file = Input::file('fileExcel');
+                $destinationPath = public_path().env('APP_DIR_DATA_FILE');
+                $file_name =  'tmp_import_question'.'.'.$file->getClientOriginalExtension();
+               
+                $file->move($destinationPath, $file_name);
+
+                DB::beginTransaction();
+                
+                DB::table('temp_questions')->where('user_id', Auth::user()->id)->delete();
+                DB::table('temp_answer')->where('user_id', Auth::user()->id)->delete();
+                Excel::import(new QuestionImport(), $destinationPath.'/'.$file_name);
+                Excel::import(new AnswerImport() , $destinationPath.'/'.$file_name);
+                DB::commit();
+                return back()->with(['flash_message'=>'Upload thành công']);
+            }
+        }catch (\Exception $e) {
+            DB::rollBack();
+            return back()->withErrors($e->getMessage())->withInput();
+        } 
+    }
+    
+    public function postDataExamImportExcel(Request $request,$course, $types){
+        $type = fdecrypt($types);
+        try{
+            $data_question = TempQuestion::select('question_id')->groupby('question_id')->get();
+            DB::beginTransaction();
+            if($data_question->count() > 0){
+                foreach($data_question as $key=>$item){
+                    $data_ins = TempQuestion::where('question_id', $item->question_id)->get();
+                    if($data_ins->count() > 0){
+                        $dtaq = new Quesstion;
+                        $dtaq->type = getTypeQuestion($data_ins[0]->style);;
+                        $dtaq->used = $data_ins[0]->used;
+                        $dtaq->course = $course;
+                        $dtaq->thematic = 0;
+                        $dtaq->lesson = 0;
+                        $dtaq->name = $data_ins[0]->question;
+                        $dtaq->alias = '';
+                        $dtaq->image = '';
+                        $dtaq->level = $data_ins[0]->level;
+                        $dtaq->status = 1;
+                        $dtaq->answer = $data_ins[0]->result;
+                        $dtaq->user_id = Auth::user()->id;
+                        $dtaq->quiz = $type;
+                        $dtaq->save();
+                        $q_id = $dtaq->id;
+
+                        $data_answer = TempAnswer::where('question_id', $item->question_id)->orderBy('stt')->get();
+                        if($data_answer->count() > 0){
+                            foreach($data_answer as $key=>$value){
+                                $dtAnswer = new Answer;
+                                $dtAnswer->stt = $value->stt;
+                                $dtAnswer->quesstion_id = $q_id ;
+                                $dtAnswer->name = $value->answer;
+                                $dtAnswer->alias ='';
+                                $dtAnswer->value ='';
+                                $dtAnswer->result = $value->result;
+                                $dtAnswer->image ='';
+                                $dtAnswer->save();
+                            }
+                        }
+                    }
+                }
+            }           
+            DB::table('temp_questions')->where('user_id', Auth::user()->id)->delete();
+            DB::table('temp_answer')->where('user_id', Auth::user()->id)->delete();
+            DB::commit();
+           return redirect()->route('get.admin.exam.import.list')->with(['flash_message'=>'Import câu hỏi thành công']);
+        }catch (\Exception $e) {
+            DB::rollBack();
+            return back()->withErrors($e->getMessage())->withInput();
+        }
+    }
+
+    public function getUndoExamImportExcel($types){
+        $type = fdecrypt($types);
+        try {
+            DB::beginTransaction();
+                DB::table('temp_questions')->where('user_id', Auth::user()->id)->delete();
+                DB::table('temp_answer')->where('user_id', Auth::user()->id)->delete();
+            DB::commit();
+            return redirect()->route('get.admin.exam.import.excel',['type'=>fencrypt($type)])->with(['flash_message'=>'Xóa dữ liệu thành công']);     
+        } catch (\Exception $e) {
+            B::rollBack();
+            return back()->withErrors($e->getMessage())->withInput();
+        }
     }
 }

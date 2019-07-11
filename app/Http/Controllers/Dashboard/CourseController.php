@@ -26,7 +26,7 @@ class CourseController extends Controller
 
     public function getMyCourse(){
         try{
-            $user_id = User::getInfoUser()['id'];
+            $user_id = Auth::user()->id;
             //$user_course = User_Course::getCourseByUserId($user_id);
             $user_course = DB::table('m_khoa_hoc')
                 ->join('user_course', 'user_course.course','=','m_khoa_hoc.code')
@@ -43,7 +43,7 @@ class CourseController extends Controller
 
     public function getDetail($idd){
         $course_id = fdecrypt($idd); 
-        $user_id = User::getInfoUser()['id'];
+        $user_id = Auth::user()->id;
         
         $lesson_data = Lesson::where([
                 ['course', $course_id],
@@ -76,7 +76,7 @@ class CourseController extends Controller
     public function getDetailLesson($course, $lesson){
         $course_id = fdecrypt($course); 
         $lesson_id = fdecrypt($lesson); 
-        $user_id = User::getInfoUser()['id'];
+        $user_id = Auth::user()->id;
         $lesson_data = Lesson::where([
                 ['course', $course_id],
                 ['status', 1],

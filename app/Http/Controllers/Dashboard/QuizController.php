@@ -206,7 +206,8 @@ class QuizController extends Controller
     public function getTakeQuizResult($idd){
         $quiz_id = fdecrypt($idd); 
         try{
-            $data_result = HeaderQuiz::find($quiz_id);
+            $data_result = HeaderQuiz::calcResultQuiz($quiz_id);
+            //$data_result = HeaderQuiz::find($quiz_id);
             $point = calcPoint($data_result->total, $data_result->kq);
             $answer_result = DetailQuiz::where('quiz_id', $quiz_id)->orderBy('id')->get();
             

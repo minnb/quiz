@@ -1,4 +1,5 @@
 <?php
+include('ConvertDateTime.php');
 
 function getStatus(){
     $arrStatus = [
@@ -82,7 +83,12 @@ function getTypeAnswer(){
     return $arrStatus;
 }
 function calcPoint($total, $kq){
-  return round((10/$total)*$kq,1);
+  if($total >0 ){
+    return round((10/$total)*$kq,1);
+  }else{
+    return 0;
+  }
+  
 }
 function xeploai($point){
   $xep = '';

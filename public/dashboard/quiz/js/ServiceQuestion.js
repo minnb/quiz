@@ -10,8 +10,8 @@ ServiceQuestion.prototype.getListQuestions = async function (id) {
     return result;
 }
 
-ServiceQuestion.prototype.getQuizId = async function (type, course, thematic, lesson, strToken) {
-    let uri = '/api/v1/quiz/' + type +'/' + course + '/' + thematic + '/' + lesson + '/' + strToken;
+ServiceQuestion.prototype.getQuizId = async function (user_id, type, course, thematic, lesson, strToken) {
+    let uri = '/api/v1/quiz/' + user_id + '/' + type +'/' + course + '/' + thematic + '/' + lesson + '/' + strToken;
     let result = await this.http.get(uri);
     return result;
 }

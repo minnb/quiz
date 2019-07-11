@@ -1,6 +1,7 @@
 // -----------------------------đối tượng Http dùng truy vấn hai phương thức post , get-------------------------------------------
 function Http() {
     this.host = "http://localhost:8000/quiz";
+    //this.host = "https://hochieuqua.vn";
     this.token = "0795879133";
 }
 // truy vấn phương thức post 
@@ -15,7 +16,13 @@ Http.prototype.post = function (uri, body) {
         contentType: 'application/json',
         data: JSON.stringify( body ), 
         success: function(){
-           alert('hello');
+           swal({
+              title: "Good job!",
+              text: "You clicked the button!",
+              icon: "success",
+              button: "Aww yiss!",
+            });
+           location.reload();
         },
         error: function(){
             alert('error');
@@ -48,7 +55,7 @@ Http.prototype.post = function (uri, body) {
    */
 }
 // truy vấn phương thức get
-Http.prototype.get = function (uri) { //đúng rùi nó gọi đền đây hiểu ko chạy thử đi
+Http.prototype.get = function (uri) { 
     let url = this.host + uri + "/" + this.token;
     return new Promise(function (resolve, reject) {
         try {

@@ -15,16 +15,25 @@ var serviceCommon = new ServiceCommon();
 var totalQuestion = 0;
 var currentQuestion = 0;
 //bắt đầu mở bài test
-function start_test(type, course, thematic, lesson, str_token) {
-    serviceQuestion.getQuizId(type, course, thematic, lesson, str_token).then(quiz_idz=>{
-    //console.log(quiz_idz);
-    let { error, datas } = quiz_idz;
-    if (!error){
-        quiz_id = datas.quiz_id
-    }
-    //console.log(quiz_id);
-    //get list question 
-        serviceQuestion.getListQuestions(quiz_id).then(tempResult => {
+function start_test(user_id, type, course, thematic, lesson, str_token) {
+    serviceQuestion.getQuizId(user_id, type, course, thematic, lesson, str_token).then(quiz_idz=>{
+        //console.log(quiz_idz);
+        let { error, datas } = quiz_idz;
+        if (!error){
+            quiz_id = datas.quiz_id
+        }
+        //console.log(quiz_id);
+        //get list question 
+        test_quiz(quiz_id);
+    });
+}
+
+function test_again(test_id) {
+    test_quiz(test_id);
+}
+
+function test_quiz(quiz_idd){
+    serviceQuestion.getListQuestions(quiz_idd).then(tempResult => {
             let { error, datas } = tempResult;
             $("#titleUnitTest").html(datas.quiz + " " + datas.thematic);
             if (!error) {
@@ -130,7 +139,6 @@ function start_test(type, course, thematic, lesson, str_token) {
                 // mở phần kiểm tra câu hỏi 
                 $("#unit_test").modal('show');
             }
-        })
     });
 }
 //thao tác điều khiển hiện nút next , prevew, nộp bài 
@@ -176,43 +184,32 @@ function markTest() {
         switch (element.type) {
             case "radio":
                 {
-                    let findAnswer = listAnswers.filter(e => {
-                        return e.T_value;
-                    });
-                    if (findAnswer.length > 0) {
+                   listAnswers.forEach(e => {
                         let answer = {
-                            stt: findAnswer[0].stt,
-                            result: findAnswer[0].result,
-                            value: findAnswer[0].stt
+                            stt: e.stt,
+                            result: e.result,
+                            value: (e.T_value) ? e.stt : 0
                         }
-
                         element.answer.push(answer);
-                    }
+                    });
                     break;
 
                 }
             case "checkbox":
                 {
-                    let findAnswer = listAnswers.filter(e => {
-                        return e.T_value;
-                    });
-                    findAnswer.forEach(e => {
+                    listAnswers.forEach(e => {
                         let answer = {
                             stt: e.stt,
                             result: e.result,
-                            value: (e.T_value)?1:0
+                            value: (e.T_value) ? e.stt : 0
                         };
                         element.answer.push(answer);
                     });
-
                     break;
                 }
             case "value":
                 {
-                    let findAnswer = listAnswers.filter(e => {
-                        return e.T_value;
-                    });
-                    findAnswer.forEach(e => {
+                    listAnswers.forEach(e => {
                         let answer = {
                             stt: e.stt,
                             result: e.result,

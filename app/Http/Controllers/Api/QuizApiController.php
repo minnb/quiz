@@ -13,7 +13,7 @@ use App\Models\QuizCollection;
 use App\Models\Thematic;
 use App\Models\Lesson;
 use App\Models\Quesstion;
-use App\Models\HeaderQuiz;
+use App\Models\HeaderQuiz; 
 use App\Models\DetailQuiz;
 use App\Models\Exam;
 class QuizApiController extends Controller
@@ -21,9 +21,9 @@ class QuizApiController extends Controller
     public function getQuizTest($id, $token){
         return $token;
     }
-    public function getQuizId($type, $course, $thematic, $lesson, $strToken, $token){
+    public function getQuizId($user_id, $type, $course, $thematic, $lesson, $strToken, $token){
         try{
-            $id = Exam::insertTabkeQuiz($type,$course,$thematic, $lesson, $strToken);
+            $id = Exam::insertTabkeQuiz($user_id, $type,$course,$thematic, $lesson, $strToken);
             $response = [
                 'type' => $type,
                 'course'=> $course,
@@ -33,7 +33,7 @@ class QuizApiController extends Controller
                 'quiz_id' => $id
             ];
             return response()->json($response, 200);
-        }catch(\Exception $e){
+        }catch(Exception $e){
              return response()->json($e->getMessage(), 200);
         }
        
@@ -71,24 +71,10 @@ class QuizApiController extends Controller
                     DetailQuiz::where('quiz_id', $quiz_id)
                     ->where('question_id', $dataAnswer['question_id'])
                     ->update(['comment' => json_encode($dataAnswer['answer'])]);
-                /*
-            	if($dataAnswer['type'] == 'radio'){
-            		foreach($dataAnswer['answer'] as $item){
-            			DetailQuiz::where('quiz_id', $quiz_id)
-                        ->where('question_id', $dataAnswer['question_id'])
-                        ->update(['answer' => $item['result']]);
-            		}    
-            	}else{
-        			DetailQuiz::where('quiz_id', $quiz_id)
-                    ->where('question_id', $dataAnswer['question_id'])
-                    ->update(['comment' => json_encode($dataAnswer['answer'])]);
-            	}
-                */
             }
-            HeaderQuiz::where('id', $quiz_id)->update(['status' => 1]);
-            HeaderQuiz::calcResultQuiz($quiz_id);
-            //HeaderQuiz::insertQueeEmail('QUIZ',$quiz_id);
-            $quizResult = DetailQuiz::where('quiz_id', $quiz_id)->get();
+           
+            /*
+            $quizResult = DetailQuiz::where('quiz_id', $quiz_id)->get();           
             $arrAnswer = [];
             foreach($quizResult as $key=>$item){
             	$arr = array(
@@ -99,6 +85,10 @@ class QuizApiController extends Controller
 					);
 				array_push($arrAnswer,$arr);
             }
+            */
+            HeaderQuiz::where('id', $quiz_id)->update(['status' => 1]);
+            HeaderQuiz::calcResultQuiz($quiz_id);
+            HeaderQuiz::insertQueeEmail('QUIZ',$quiz_id);
             DB::commit();
             //return response()->json($arrAnswer, 200);
             //return $arrAnswer;

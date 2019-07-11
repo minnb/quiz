@@ -1,7 +1,10 @@
 <?php
 namespace App\Http\Middleware;
+use Closure;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
-class AuthenticationMember //extends Middleware
+use App\Models\User;
+use Auth;
+class AuthenticationMember 
 {
     /**
      * Handle an incoming request.
@@ -12,10 +15,12 @@ class AuthenticationMember //extends Middleware
      */
     public function handle($request, Closure $next)
     {
-        if (!Session::has('hochieuqua_vn')) {
-            return redirect('/dang-nhap');
+        if (Auth::check()) {
+            if(User::checkRole(Auth::user()->email) == 'manager' || User::checkRole(Auth::user()->email) == 'employee'){
+                return $next($request);
+            }
         }
-        return $next($request);
+        return redirect('/');
     }
 
 }

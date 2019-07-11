@@ -6,7 +6,7 @@
                     <ul class="sidebar-menu sm-active-button-bg">
                         <li class="sidebar-menu-item active">
                             <a class="sidebar-menu-button" href="{{ route('dashboard')}}">
-                                <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">account_box</i> {{ App\Models\User::getInfoUser()['name'] }}
+                                <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">account_box</i> {{ Auth::user()->name }}
                             </a>
                         </li>
                         <!--

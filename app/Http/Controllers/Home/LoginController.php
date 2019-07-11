@@ -39,17 +39,21 @@ class LoginController extends Controller
 	    		Auth::login($authUser);
 		    	$u_id = User::where('email',$authUser->email)->get()[0]->id;
 		    	Role_User::insertRoleUser($u_id);
-		    	Session::put('hochieuqua_vn', $authUser->email);
-				Session::put('infoUser', fencrypt(json_encode($authUser)));
-				Session::save();
-		        return redirect()->route('dashboard')->with(['flash_message'=>'Đăng nhập thành công']);
+		    	//Session::put('hochieuqua_vn', $authUser->email);
+				//Session::put('infoUser', fencrypt(json_encode($authUser)));
+				//Session::save();
+                //return redirect()->route('dashboard')->with(['flash_message'=>'Đăng nhập thành công']);
+                if(User::checkRole(trim($authUser->email)) == 'guest'){
+                    return redirect()->route('dashboard')->with(['flash_message'=>'Đăng nhập thành công']);
+                }elseif(User::checkRole(trim($authUser->email)) == 'employee' || User::checkRole(trim($authUser->email)) == 'manager'){
+                    return redirect()->route('admin')->with(['flash_message'=>'Đăng nhập thành công']);
+                }
 	    	}else{
-	    		return back()->withErrors(['errors'=>'Lỗi đăng nhập'])->withInput();
+	    		return back()->withErrors(['errors'=>'Lỗi đăng nhập'])->withInput()->with(['flash_message'=>'Vui lòng đăng nhập lại']);
 	    	}
-	    }catch (Exception $e) {
+	    }catch (\Exception $e) {
             return back()->withErrors($e->getMessage())->withInput();
         }
-	   
     }
 
     public function findOrCreateUser($user)
@@ -81,15 +85,15 @@ class LoginController extends Controller
             'password'=> 'required'
         ]);
         $credentials = $request->only('email', 'password');
-        if(User::checkRole(trim($request->email)) == 'guest' || User::checkRole(trim($request->email)) == ''){
-            return redirect()->route('home.login')->withErrors(['errors'=>'Vui lòng đăng nhập lại']);
-        }else{
-            if (Auth::attempt($credentials)) {
-                // Authentication passed...
-                return redirect()->intended('admin');
-            }else{
-                return back()->withErrors(['errors'=>'Địa chỉ email hoặc mật khẩu không đúng'])->withInput();
+        if(Auth::attempt($credentials)){
+            if (User::checkRole(trim($request->email)) == 'guest' || User::checkRole(trim($request->email)) == ''){
+                return redirect()->route('dashboard')->with(['flash_message'=>'Đăng nhập thành công']);
             }
+            elseif(Auth::attempt($credentials) && User::checkRole(trim($request->email)) == 'manager') {
+                return redirect()->intended('admin');
+            }
+        }else{
+            return redirect()->route('home.login')->withErrors(['errors'=>'Địa chỉ email hoặc mật khẩu không đúng'])->withInput();
         }
 	}    
 }

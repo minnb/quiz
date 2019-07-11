@@ -15,6 +15,7 @@
 						<li><a href="{{ route('get.admin.subject.list') }}">Môn học</a></li>
 						<li><a href="{{ route('get.admin.course.list') }}">Khoá học</a></li>
 						<li><a href="{{ route('get.admin.class.list') }}">Lớp học</a></li>
+						<li><a href="{{ route('get.admin.exam.weeks') }}">DS Tuần</a></li>
 					</ul>
                 </li>
                  <li class="submenu">
@@ -25,11 +26,11 @@
 					</ul>
                 </li>
                 <li class="submenu">
-                    <a href="#"><i class="fa fa-delicious bigfonts"></i> <span> Luyện thi </span> <span class="menu-arrow"></span></a>
+                    <a href="#"><i class="fa fa-delicious bigfonts"></i> <span> Luyện thi học kỳ </span> <span class="menu-arrow"></span></a>
 					<ul class="list-unstyled">
-						<li><a href="{{ route('get.admin.thematic.list') }}">Danh sách Chuyên đề</a></li>
+						<li><a href="{{ route('get.admin.exam.import.list') }}">Danh sách kỳ thi</a></li>
 						<li><a href="{{ route('get.admin.quesstion.list.question') }}">Câu hỏi luyện thi</a></li>
-						<li><a href="{{ route('get.admin.exam.weeks') }}">Danh mục luyện thi tuần</a></li>
+
 					</ul>
                 </li>
                 <li class="submenu">

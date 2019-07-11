@@ -6,7 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\Role;
 use App\Models\Role_User;
-use Session;
+use Session; use Auth;
 class User extends Authenticatable
 {
     use Notifiable;
@@ -90,10 +90,10 @@ class User extends Authenticatable
 	
     public static function getInfoUser(){
       $infoUser = '';
-      if (Session::has('infoUser')) {
-          $infoUser = fdecrypt(Session::get('infoUser'));
+      if (Auth::check()) {
+          $infoUser = User::find(Auth::user()->id);
       }
-      return json_decode($infoUser,true);
+      return $infoUser;
     }
 
 }

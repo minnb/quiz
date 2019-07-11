@@ -1,9 +1,10 @@
 <?php
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
-use DB;
+use DB;use Auth;
 use App\Models\ClassRoom;
 use App\Models\Course_Subject;
+use App\Models\User;
 class Course extends Model
 {
     protected $table ="m_khoa_hoc";
@@ -14,6 +15,30 @@ class Course extends Model
     		return "Nâng cao";
     	}
     }
+    public static function checkMemberDashboard(){
+        $data = Course::getMyCourse();
+        if(isset($data) && $data->count() > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public static function checkUserCourse($code){
+        $course = DB::table('user_course')->where([
+            ['course', $code],
+            ['user_id', Auth::user()->id]
+        ])->get()->toArray();
+        return $course;
+    }
+    public static function getMyCourse(){
+        $course = DB::table('m_khoa_hoc')
+            ->join('user_course', 'm_khoa_hoc.code', '=', 'user_course.course')
+            ->where('user_course.status', 0)->where('user_course.user_id', Auth::user()->id)
+            ->select('m_khoa_hoc.*')
+            ->get();
+        return $course;
+    }
+
 
     public static function getCourseSelect($status){
         return DB::table('m_khoa_hoc')->where('status', $status)->select('code as id', 'full_name as name')->get();

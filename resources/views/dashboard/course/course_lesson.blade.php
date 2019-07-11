@@ -8,6 +8,8 @@
     <script src="{{ asset('public/dashboard/quiz/js/Http.js') }}"></script>
     <script src="{{ asset('public/dashboard/quiz/js/test_question.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('public/dashboard/quiz/css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('public/dashboard/quiz/css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('public/dashboard/quiz/css/style.css') }}">
     <style type="text/css">
         [dir=ltr] .modal-backdrop{
             display: none;
@@ -40,8 +42,9 @@
         $thematic = $lesson_detail['thematic'];
         $lesson = $lesson_detail['id'];
         $token = getToken(20);
+        $user_id = Auth::user()->id;
 ?>
-    <button class="btn btn-sm btn-danger" onclick='start_test(<?php echo json_encode($type); ?>, <?php echo json_encode($course); ?>, <?php echo json_encode($thematic); ?>, <?php echo json_encode($lesson); ?>, <?php echo json_encode($token); ?>)'>
+    <button class="btn btn-sm btn-danger" onclick='start_test(<?php echo json_encode($user_id); ?>,<?php echo json_encode($type); ?>, <?php echo json_encode($course); ?>, <?php echo json_encode($thematic); ?>, <?php echo json_encode($lesson); ?>, <?php echo json_encode($token); ?>)'>
     Luyệt tập Quiz</button>
                         </div>
                     </div>
@@ -164,35 +167,10 @@
             </div>
         </div>
     </div>
-    <div id="unit_test" class="modal fade" role="dialog">
-            <div class="modal-dialog modal-dialog-centered">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title" id="titleUnitTest">Bài tập trắc nghiệm </h4>
-                    </div>
-                    <div class="modal-body">
-                        <div id="templateQuestion">
-
-                        </div>
-                    </div>
-                    <div class="modal-footer buttons">
-                        <button type="button " onclick="previewAnswer()" class="btn btn-success preview"><i
-                                class="fa fa-angle-double-left" aria-hidden="true"></i> Preview </button>
-                        <button type="button" onclick="markTest()" class="btn btn-success finish">Nộp bài</button>
-                        <button type="button " onclick="nextAnswer()" class="btn btn-success next">Next <i
-                                class="fa fa-angle-double-right" aria-hidden="true"></i> </i></button>
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-    <div class="container disappear" id="answer_question">
-        <div class="title">Đáp án câu trả lời</div>
-        <div class="content">
-        </div>
-    </div>
+@include('dashboard.layouts.form_quiz')
+@endsection
+@section('javascript')
+<script type="text/javascript" src="{{ asset('public/dashboard/quiz/js/math.js')}}"></script>
+<script type="text/javascript" src="{{ asset('public/dashboard/vendor/sweetalert.min.js')}}"></script>
+<script type="text/javascript" src="{{ asset('public/dashboard/js/sweetalert.js')}}"></script>
 @endsection
