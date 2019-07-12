@@ -2,7 +2,7 @@
 @section('title', 'Kết quả')
 @section('stylesheet')
     <link href="{{ asset('public/dashboard/quiz/css/quiz.css') }}" rel="stylesheet" type="text/css" />
-        <meta name="csrf-token" content="<?= csrf_token() ?>">
+    <meta name="csrf-token" content="<?= csrf_token() ?>">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="{{ asset('public/dashboard/quiz/js/TemplateQuestion.js') }}"></script>
     <script src="{{ asset('public/dashboard/quiz/js/ServiceQuestion.js') }}"></script>
@@ -20,7 +20,6 @@
 @section('content')
 	<div data-push data-responsive-width="992px" class="mdk-drawer-layout js-mdk-drawer-layout">
         <div class="mdk-drawer-layout__content page ">
-
             <div class="container-fluid page__container">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dasboard</a></li>

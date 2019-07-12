@@ -36,9 +36,12 @@ TemplateQuestion.prototype.render = function () {
 // render ra câu hỏi dạng điền đúng sai 
 //data:object dữ liệu câu hỏi 
 //index: int vị trí của câu hỏi trong danh sách câu hỏi
+
+
 TemplateQuestion.prototype.renderQuestion1 = function (data, index, showAnswer = false) {
-    let title = '<div class="form-group"><label for="title">' + (index + 1) + ' '
-        + data.title + '</label></div>';
+    let title = '<div class="card"> <div class="card-header"><div class="media align-items-center"><div class="media-left"><label for="title">' 
+        + '<h4 class="mb-0"><strong>#' + (index + 1) + '</strong></h4></div><div class="media-body"> <h4 class="card-title">'
+        + data.title + '</h4></div></div></div> <div class="card-body">';
     let subQuestion = '';
     data.listAnswers.forEach((answer, index) => {
         let value = "";
@@ -50,7 +53,7 @@ TemplateQuestion.prototype.renderQuestion1 = function (data, index, showAnswer =
             + '</span></label><input type="text" class="form-control" onclick="update()" value="' + value + '"></div>';
     });
     return ('<form class="form-inline ' + data.identifyClass + ' ' + ((data.active) ? 'active' : '') + '">'
-        + title + subQuestion + '</form>');
+        + title + subQuestion + '</div></form></div>');
 }
 // render ra cậu hỏi dạng option lựa chọn duy nhất
 //data:object dữ liệu câu hỏi 
