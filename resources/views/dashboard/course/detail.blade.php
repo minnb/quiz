@@ -2,6 +2,7 @@
 @section('title', 'Khóa học')
 <?php
     $_url_api = env('APP_API');
+    $user = Auth::user()->id;
 ?>
 @section('stylesheet')
     <meta name="csrf-token" content="<?= csrf_token() ?>">
@@ -40,9 +41,9 @@ aaaaaa{{$_url_api}}
 
                         <div class="card-body">
                            {!! $lesson_data[0]->description !!}
-                           <!--
-                           <a href="{{ route('get.dashboard.quiz.take',['type'=>fencrypt('QUIZ'),'course'=>fencrypt($lesson_data[0]->course),'thematic'=>fencrypt($lesson_data[0]->thematic), 'lesson'=>fencrypt($lesson_data[0]->id), 'token'=>getToken(20)])}}" class="btn btn-sm btn-danger" onclick='start_test()'>Luyệt tập Quiz</a>
-                       -->
+
+                           <a href="{{ route('get.dashboard.quiz.take',['user_id'=>$user, 'type'=>fencrypt('QUIZ'),'course'=>fencrypt($lesson_data[0]->course),'thematic'=>fencrypt($lesson_data[0]->thematic), 'lesson'=>fencrypt($lesson_data[0]->id), 'token'=>getToken(20)])}}" class="btn btn-sm btn-danger">Luyệt tập Quiz</a>
+                    <!--
                         <?php 
                                 $type = 'QUIZ';
                                 $course = $lesson_data[0]->course;
@@ -59,6 +60,7 @@ aaaaaa{{$_url_api}}
                                     <?php echo json_encode($lesson); ?>, 
                                     <?php echo json_encode($token); ?>)'
                             >Luyệt tập Quiz</button>
+                        -->
                         </div>
                     </div>
                     <ul class="card list-group list-group-fit">

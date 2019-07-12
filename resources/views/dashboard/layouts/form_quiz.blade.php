@@ -1,5 +1,6 @@
-<div id="unit_test" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-dialog-centered">
+<link href="{{ asset('public/dashboard/quiz/css/quiz.css') }}" rel="stylesheet" type="text/css" />
+<div id="unit_test" class="modal fade lager" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title media align-items-center" id="titleUnitTest">Bài tập trắc nghiệm </h4>

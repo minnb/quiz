@@ -40,12 +40,13 @@
                             <?php 
                                 $test_id = $quiz_id;
                             ?>
+                            <!--
                             <button class="btn btn-primary" onclick='test_again(<?php echo json_encode($test_id); ?>)'>
                                 Luyệt tập Quiz <i class="material-icons btn__icon--right">refresh</i>
                             </button>
-                            <!--
+                           -->
                             <a href="{{ route('get.dashboard.take.again', ['quiz_id'=>fencrypt($quiz_id)])}}" class="btn btn-primary">Luyện tập lại <i class="material-icons btn__icon--right">refresh</i></a>
-                            -->
+                        
                         </div>
                     </div>
                 </div>

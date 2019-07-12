@@ -130,3 +130,17 @@ input[type=checkbox], input[type=radio] {
 .img-thumb-question{
     max-height: 100px;
 }
+.number_question{
+    border-right: : 1px solid #ddd;
+    padding-right: 10px;
+}
+[dir="ltr"] .form-inline label {
+    justify-content: left;
+}
+input[type="checkbox"], input[type="radio"] {
+    margin: 10px 10px;
+    line-height: normal;
+}
+div.form-group{
+     margin: 10px 10px;
+}

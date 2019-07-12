@@ -9,6 +9,23 @@ class HeaderQuiz extends Model
 {
     protected $table ="m_ket_qua_quiz";
 
+    public static function calcResultQuizV1($quiz_id){
+        $answer = DetailQuiz::where([
+            ['quiz_id', $quiz_id]
+        ])->get();
+        $kq = 0;
+        $success = 0;
+        foreach($answer as $item){
+            $q_type = Quesstion::find($item->question_id)->type;
+            $arr_anser = json_decode($item->comment);
+            if (count($arr_anser) > 0) {
+
+            }else{
+                DetailQuiz::where('id', $item->id)->update(['result'=>0]);
+            }
+        }
+    }
+
     public static function calcResultQuiz($quiz_id){
     	$answer = DetailQuiz::where([
     		['quiz_id', $quiz_id]

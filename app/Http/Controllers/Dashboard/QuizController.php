@@ -9,6 +9,8 @@ use App\Models\User_Course;
 use App\Models\Lesson;
 use App\Models\Course;
 use App\Models\Exam;
+use App\Models\c_answer;
+use App\Models\c_result;
 use App\Models\HeaderQuiz;use App\Models\JobSendEmail;
 use App\Models\DetailQuiz;use App\Models\Subject;
 use App\Models\Quesstion;use App\Models\Thematic;
@@ -52,7 +54,7 @@ class QuizController extends Controller
         $quiz_id = 0;
     	try{
            
-            $quiz_id = Exam::insertTabkeQuiz($type,$course, $thematic, $lesson, $token);
+            $quiz_id = Exam::insertTabkeQuiz(Auth::user()->id, $type,$course, $thematic, $lesson, $token);
             $question_data = Quesstion::getQuestionData($quiz_id)->toArray();
             if(count($question_data) > 0){
                 return view('dashboard.quiz.quiz', compact('question_data', 'course','thematic', 'type','quiz_id','lesson'));           
@@ -112,25 +114,66 @@ class QuizController extends Controller
     	$quiz_id = fdecrypt($idd); 
         $result = [];
         try{
-
-            DB::beginTransaction();
+            $lstAnswer = new Collection();
             foreach ($request->input('questions', []) as $key => $question){
-                if($request->input('questions', [$key]) != null and $request->answer[$key] == true){
-                    $result[$key] = $request->answer[$key];
-                    DetailQuiz::where([
-                        ['quiz_id', $quiz_id],
-                        ['question_id', $question]
-                    ])->update(['answer' => $request->answer[$key]]);
-                }               
+                $answer = new c_answer();
+                $c_result = new c_result();
+                $answer->question_id = $question;
+                $answer->ztype = $request->qtype[$key];
+
+                $r=[];
+                if($request->qtype[$key]=='radio'){
+                    if(isset($request->aradio)){
+                        $v= array(
+                                'stt' => $request->aradio[0],
+                                'result' => $request->rresult[0],
+                                'value' =>$request->aradio[0]
+                        );
+                        array_push($r,$v);
+                    }
+                }
+                if($request->qtype[$key]=='checkbox'){
+                    if(isset($request->acheckbox)){
+                        foreach($request->acheckbox as $i=>$item){
+                            $v= array(
+                                'stt' => $request->cstt[$i+1],
+                                'result' => $request->cresult[$i],
+                                'value' => $item
+                            );
+                            array_push($r,$v);
+                        }
+                    }
+                    
+                }
+                if($request->qtype[$key]=='value'){
+                    if(isset($request->atext)){
+                       foreach($request->atext as $i=>$item){
+                            $v= array(
+                                'stt' => $request->vstt[$i],
+                                'result' => $request->rresult[$i],
+                                'value' => $item
+                            );
+                            array_push($r,$v);
+                        }
+                    }
+                }
+
+                $answer->answer=$r;
+                $lstAnswer->prepend($answer);
+
+                DetailQuiz::where('quiz_id', $quiz_id)
+                    ->where('question_id', $question)
+                    ->update(['comment' => json_encode($answer['answer'])]);
+
             }
+            DB::beginTransaction();
             HeaderQuiz::where('id', $quiz_id)->update(['status' => 1]);
             HeaderQuiz::calcResultQuiz($quiz_id);
-            HeaderQuiz::insertQueeEmail('QUIZ',$quiz_id);
+            //HeaderQuiz::insertQueeEmail('QUIZ',$quiz_id);
             //DB::table('w_job_send_email')->insert(['type'=>'QUIZ','quiz_id'=>$quiz_id, 'status'=>0]);
-            DB::commit();
+             DB::commit();
             return redirect()->route('get.dashboard.quiz.take.result', ['quiz_id'=>fencrypt($quiz_id)]);
-          
-            //return $request->all();
+           
         }catch(Exception $e){
             DB::rollBack();
             return back();

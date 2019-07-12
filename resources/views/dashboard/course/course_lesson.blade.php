@@ -17,6 +17,10 @@
     </style>
 @endsection
 @section('content')
+<?php
+    $_url_api = env('APP_API');
+    $user = Auth::user()->id;
+?>
 <div data-push data-responsive-width="992px" class="mdk-drawer-layout js-mdk-drawer-layout">
     <div class="mdk-drawer-layout__content page ">
         <div class="container-fluid page__container">
@@ -34,8 +38,10 @@
                         </div>
                         <div class="card-body">
                            {!! $lesson_detail['description'] !!}
-                           <!--
-                           <a href="{{ route('get.dashboard.quiz.take',['type'=>fencrypt('QUIZ'), 'course'=>fencrypt($lesson_detail['course']),'thematic'=>fencrypt($lesson_detail['thematic']), 'lesson'=>fencrypt($lesson_detail['id']), 'token'=>getToken(20)])}}" class="btn btn-sm btn-danger">Luyệt tập Quiz</a>-->
+                           <a href="{{ route('get.dashboard.quiz.take',['user_id'=>$user,'type'=>fencrypt('QUIZ'), 'course'=>fencrypt($lesson_detail['course']),'thematic'=>fencrypt($lesson_detail['thematic']), 'lesson'=>fencrypt($lesson_detail['id']), 'token'=>getToken(20)])}}" class="btn btn-sm btn-danger">Luyệt tập Quiz</a>
+                        </div>
+
+                                                   <!--
 <?php 
         $type = 'QUIZ';
         $course = $lesson_detail['course'];
@@ -45,8 +51,7 @@
         $user_id = Auth::user()->id;
 ?>
     <button class="btn btn-sm btn-danger" onclick='start_test(<?php echo json_encode($user_id); ?>,<?php echo json_encode($type); ?>, <?php echo json_encode($course); ?>, <?php echo json_encode($thematic); ?>, <?php echo json_encode($lesson); ?>, <?php echo json_encode($token); ?>)'>
-    Luyệt tập Quiz</button>
-                        </div>
+    Luyệt tập Quiz</button>-->
                     </div>
                     <!-- Lessons -->
                     <ul class="card list-group list-group-fit">
