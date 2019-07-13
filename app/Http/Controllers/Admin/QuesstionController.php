@@ -123,7 +123,7 @@ class QuesstionController  extends Controller
     public function postEdit(Request $request, $idd){
         $id = fdecrypt($idd); 
         try{
-            DB::beginTransaction();
+//            DB::beginTransaction();
             $quesstion = Quesstion::findOrFail($id);
             $old_img = $quesstion->image;
             $quesstion->name = $request->name;
@@ -145,20 +145,14 @@ class QuesstionController  extends Controller
             }
             $quesstion->save();
             $quesstion_id = $quesstion->id;
-
             $result = 0;
-            $i = 0;
-
-            foreach(Input::get('answer') as $answer_value ){
-                $i++;
+            foreach(Input::get('answer') as $i=>$answer_value ){
+                $stt = $i+1;
                 $update = [
                         'name' =>$answer_value,
                         'value'=>'',
                     ];
-                DB::table('m_cau_dap_an')->where([
-                        ['quesstion_id', $quesstion_id],
-                        ['stt', $i+1 ]
-                    ])->update($update);
+                DB::table('m_cau_dap_an')->where([['quesstion_id', $quesstion_id],['stt', $stt]])->update($update);
             }
 
             if($quesstion->type == 'radio'){
@@ -168,48 +162,39 @@ class QuesstionController  extends Controller
                     ])->update(['result'=> $request->result]);
                 
             }elseif($quesstion->type == 'checkbox'){
-                $k = 0;
-                foreach(Input::get('anserChoose') as $anserChoose){
-                    if($anserChoose == true){
-                        $result = $k+1;
+                foreach(Input::get('anserChoose') as $c=>$anserChoose){
+                    if($anserChoose == $c+1){
+                        $result = $c+1;
                     }else{
                         $result = 0;
                     }
-                    $update = [
-                        'result' => $result
-                    ];
-                
-                    DB::table('m_cau_dap_an')->where([
-                        ['quesstion_id', $quesstion_id],
-                        ['stt', $k+1]
-                    ])->update($update);
+                    DB::table('m_cau_dap_an')->where([['quesstion_id', $quesstion_id],['stt', $c+1]])->update(['result' => $result]);
                 }               
             }
-
-            if($request->file('fileImage2')){
-                $f = 0;
-                foreach(Input::file('fileImage2') as $file ){
+            
+            if($request->file('imgAnswer')){
+                foreach(Input::file('imgAnswer') as $f=>$file2 ){
                     $destinationPath = checkFolderImage();
-                    if(isset($file)){
-                        $file_name = randomString().'.'.$file->getClientOriginalExtension();
-                        $image_ans = $destinationPath.'/'.$file_name;
-                        $file->move($destinationPath, $file_name);
-                        DB::table('m_cau_dap_an')->where([
-                            ['quesstion_id', $quesstion_id],
-                            ['stt', $f+1]
-                        ])->update(['image'=>$image_ans]);
+                    if(isset($file2)){
+                        $file_name = randomString().'.'.$file2->getClientOriginalExtension();
+                        $file_img_ans = $destinationPath.'/'.$file_name;
+                        DB::table('m_cau_dap_an')->where([['quesstion_id', $quesstion_id],['stt', $f+1]])->update(['image'=>$file_img_ans]);
+                        $file2->move($destinationPath, $file_name);
                         //delete_image_no_path($old_img);
                     }
                 }
             }
-
+            
+           
             DB::commit();
-            if($request->used == 0){
-                return redirect()->route('get.admin.quesstion.list.quiz')->with(['flash_message'=>'Chỉnh sửa thành công']);
+            //return $request->file('imgAnswer');
+            //print_result($request->all());
+            if(substr($quesstion->quiz, 0, 2)  == 'HK'){
+                return back()->with(['flash_message'=>'Chỉnh sửa thành công']);
             }else{
-                return redirect()->route('get.admin.quesstion.list.question')->with(['flash_message'=>'Chỉnh sửa thành công']);
+                return back()->with(['flash_message'=>'Chỉnh sửa thành công']);
             }
-        }catch (\Exception $e) {
+        }catch (Exception $e) {
             DB::rollBack();
             return back()->withErrors($e->getMessage())->withInput();
         }

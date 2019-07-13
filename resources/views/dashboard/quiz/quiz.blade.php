@@ -36,24 +36,48 @@
                   <div class="privew">
                     <?php $j = 0; ?>
                     @foreach($question_data as $key=>$item)
-                      <input type="hidden" name="questions[{{ $item['question_id'] }}]" value="{{ $item['question_id'] }}">
+                      <input type="hidden" name="questions[]" value="{{ $item['question_id'] }}">
+                      <input type="hidden" name="qtype[{{$key}}]" value="{{ $item['type'] }}">
                       <div id="step-{{$key+1}}">
                           <div class="card no-border questionsBox">
                               <div class="card-header alert alert-primary">
-                                <strong>Câu hỏi {{$j+1}}:</strong> <span> {!! $item['name'] !!}</span><?php $j++; ?>
+                                <strong>Câu hỏi {{$j+1}}:</strong> <span> {!! $item['name'] !!}</span><?php $j++; ?> {{$item['type']}}
                                 @if($item['image'] != '')
                                   <img src="{{ asset($item['image']) }}" class="img-thumb-question">
                                 @endif
                               </div>
                                <ul class="answerList">
-                                @foreach($item['answer'] as $i=>$value)
-                                  <li>
-                                    <label>
-                                      <input type="radio" name="answer[{{$value['question_id']}}]" value="{{$value['stt']}}" id="radio{{$i}}">{!! $value['name'] !!}
-                                    </label>
-                                  </li>
-                                @endforeach
-                                <input type="radio" name="answer[{{$value['question_id']}}]" value="99" id="radio{{$i}}" checked="true" class="hidden">
+                                @if($item['type']=='radio')
+                                  @foreach($item['answer'] as $i=>$value)
+                                    <li>
+                                      <label>
+                                        <input type="radio" name="aradio[]" value="{{$value['stt']}}" id="radio{{$i}}">{!! $value['name'] !!}
+                                        <input type="hidden" name="rstt[{{$i}}]" value="{{ $value['stt'] }}">
+                                        <input type="hidden" name="rresult[{{$i}}]" value="{{ $value['result'] }}">
+                                      </label>
+                                    </li>
+                                  @endforeach
+                                @elseif($item['type']=='checkbox')
+                                   @foreach($item['answer'] as $i=>$value)
+                                    <li>
+                                      <label>
+                                        <input type="checkbox" name="acheckbox[]" value="{{$value['stt']}}" id="checkbox{{$i}}">{!! $value['name'] !!}
+                                        <input type="hidden" name="cstt[{{$i}}]" value="{{ $value['stt'] }}">
+                                        <input type="hidden" name="cresult[{{$i}}]" value="{{ $value['result'] }}">
+                                      </label>
+                                    </li>
+                                  @endforeach
+                                @else
+                                  @foreach($item['answer'] as $i=>$value)
+                                    <li>
+                                      <label>
+                                        {!! $value['name'] !!} <input type="text" name="atext[]" value="" id="value{{$i}}">
+                                        <input type="hidden" name="vstt[{{$i}}]" value="{{ $value['stt'] }}">
+                                        <input type="hidden" name="vresult[{{$i}}]" value="{{ $value['result'] }}">
+                                      </label>
+                                    </li>
+                                  @endforeach
+                                @endif
                               </ul>
                           </div>
                       </div>

@@ -36,9 +36,11 @@ TemplateQuestion.prototype.render = function () {
 // render ra câu hỏi dạng điền đúng sai 
 //data:object dữ liệu câu hỏi 
 //index: int vị trí của câu hỏi trong danh sách câu hỏi
+
 TemplateQuestion.prototype.renderQuestion1 = function (data, index, showAnswer = false) {
-    let title = '<div class="form-group"><label for="title">' + (index + 1) + ' '
-        + data.title + '</label></div>';
+    let title = '<div class="card"> <div class="card-header"><div class="media align-items-center"><div class="media-left"><label for="title">' 
+        + '<h4 class="mb-0 number_question"><strong>' + (index + 1) + '#</strong></h4></div><div class="media-body"> <h4 class="card-title">'
+        + data.title + '</h4></div></div></div> <div class="card-body">';
     let subQuestion = '';
     data.listAnswers.forEach((answer, index) => {
         let value = "";
@@ -50,14 +52,15 @@ TemplateQuestion.prototype.renderQuestion1 = function (data, index, showAnswer =
             + '</span></label><input type="text" class="form-control" onclick="update()" value="' + value + '"></div>';
     });
     return ('<form class="form-inline ' + data.identifyClass + ' ' + ((data.active) ? 'active' : '') + '">'
-        + title + subQuestion + '</form>');
+        + title + subQuestion + '</div></form></div>');
 }
 // render ra cậu hỏi dạng option lựa chọn duy nhất
 //data:object dữ liệu câu hỏi 
 //index: int vị trí của câu hỏi trong danh sách câu hỏi
 TemplateQuestion.prototype.renderQuestion2 = function (data, index, showAnswer = false) {
-    let title = '<div class="form-group"><label for="title">' + (index + 1) + ' '
-        + data.title + ' ?</label></div>';
+    let title = '<div class="card"> <div class="card-header"><div class="media align-items-center"><div class="media-left"><label for="title">' 
+        + '<h4 class="mb-0"><strong>' + (index + 1) + '#</strong></h4></div><div class="media-body"> <h4 class="card-title">'
+        + data.title + '</h4></div></div></div> <div class="card-body">';
     let subQuestion = '';
 
     data.listAnswers.forEach((answer, index) => {
@@ -66,19 +69,20 @@ TemplateQuestion.prototype.renderQuestion2 = function (data, index, showAnswer =
         if (showAnswer && answer.T_value) {
             isChecked = "checked";
         }
-        subQuestion += ' <div class="form-groups"><div class="checkbox"><label><input type="radio" name="optradio" value="'
+        subQuestion += ' <div class="form-groups"><div class="checkbox"><label class="lbCheckbox"><input type="radio" name="optradio" value="'
             + answer.content + '"' + isChecked + ((showAnswer) ? ' disabled' : '') + ' >  ' + answer.content
             + '</label></div></div>';
     });
     return ('<form class="form-inline ' + data.identifyClass + ' ' + ((data.active) ? 'active' : '') + '">'
-        + title + subQuestion + '</form>');
+        + title + subQuestion + '</div></form></div>');
 }
 // render ra câu hỏi dạng chọn nhiều đáp án checkbox
 //data:object dữ liệu câu hỏi 
 //index: int vị trí của câu hỏi trong danh sách câu hỏi
 TemplateQuestion.prototype.renderQuestion3 = function (data, index, showAnswer = false) {
-    let title = '<div class="form-group"><label for="title">' + (index + 1) + ' '
-        + data.title + '</label></div>';
+    let title = '<div class="card"> <div class="card-header"><div class="media align-items-center"><div class="media-left"><label for="title">' 
+        + '<h4 class="mb-0"><strong>' + (index + 1) + '#</strong></h4></div><div class="media-body"> <h4 class="card-title">'
+        + data.title + '</h4></div></div></div> <div class="card-body">';
     let subQuestion = '';
     data.listAnswers.forEach((answer, index) => {
         let isChecked = "";
@@ -91,7 +95,7 @@ TemplateQuestion.prototype.renderQuestion3 = function (data, index, showAnswer =
             + '</label></div>';
     });
     return ('<form class="form-inline ' + data.identifyClass + ' ' + ((data.active) ? 'active' : '') + '">'
-        + title + subQuestion + '</form>');
+        + title + subQuestion + '</div></form></div>');
 }
 // hiển thị câu hỏi trước đó
 TemplateQuestion.prototype.previewQuestion = function () {

@@ -26,7 +26,7 @@
 							<tr>
 								<td><?php echo $key + 1; ?></td>
 								<td>{{ App\Models\Course::getFullNameCourse($item->course)}}</td>
-								<td><a href="{{ route('get.admin.quesstion.edit',['id'=>fencrypt($item->id)])}}">{!! $item->name !!}</a></td>
+								<td><a href="{{ route('get.admin.quesstion.edit',['id'=>fencrypt($item->id)])}}">{!! $item->name !!}- #{{$item->id}}</a></td>
 								<td>{{ $item->level }}</td>
 								<td>{{ $item->lesson != '' ? App\Models\Lesson::find($item->lesson)->name : '' }}</td>
 								<td>
