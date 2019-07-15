@@ -145,7 +145,6 @@ class QuesstionController  extends Controller
             }
             $quesstion->save();
             $quesstion_id = $quesstion->id;
-            $result = 0;
             foreach(Input::get('answer') as $i=>$answer_value ){
                 $stt = $i+1;
                 $update = [
@@ -156,10 +155,18 @@ class QuesstionController  extends Controller
             }
 
             if($quesstion->type == 'radio'){
-                DB::table('m_cau_dap_an')->where([
+                $result = 0;
+                foreach(Input::get('sttAnser') as $ir=>$stt_Anser){
+                    if($request->result == $stt_Anser){
+                        $result = $request->result;
+                    }else{
+                        $result=0;
+                    }
+                    DB::table('m_cau_dap_an')->where([
                         ['quesstion_id', $quesstion_id],
-                        ['stt', $request->result ]
-                    ])->update(['result'=> $request->result]);
+                        ['stt', $ir+1 ]
+                    ])->update(['result'=> $result]);
+                }
                 
             }elseif($quesstion->type == 'checkbox'){
                 foreach(Input::get('anserChoose') as $c=>$anserChoose){
@@ -169,7 +176,11 @@ class QuesstionController  extends Controller
                         $result = 0;
                     }
                     DB::table('m_cau_dap_an')->where([['quesstion_id', $quesstion_id],['stt', $c+1]])->update(['result' => $result]);
-                }               
+                  } 
+            }elseif ($quesstion->type == 'value') {
+                foreach(Input::get('answer_result') as $iii=>$answer_value3){
+                    DB::table('m_cau_dap_an')->where([['quesstion_id', $quesstion_id],['stt', $iii+1]])->update(['result' => $answer_value3]);
+                }
             }
             
             if($request->file('imgAnswer')){

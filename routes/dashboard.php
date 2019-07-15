@@ -42,4 +42,4 @@ Route::group(['prefix'=> 'dashboard'], function(){
 		Route::post('send/comment/{course}/{lesson}', ['as'=>'post.forum.comment.by.lesson','uses'=>'Dashboard\ForumController@postCommnetByLesson']);
 	});
 });
- 
+  

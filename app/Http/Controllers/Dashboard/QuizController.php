@@ -94,18 +94,17 @@ class QuizController extends Controller
         $type = fdecrypt($type_); 
         $quiz_id = 0;
         try{
-           
             $quiz_id = Exam::insertTabkeQuizPeriod($type, $course, $token);
             $question_data = Quesstion::getQuestionData($quiz_id)->toArray();
             if(count($question_data) > 0){
-                return $question_data;
-                //return  view('dashboard.quiz.quiz_period', compact('question_data', 'course', 'type','quiz_id'));           
+                //return $question_data;
+                return  view('dashboard.quiz.quiz_period', compact('question_data', 'course', 'type','quiz_id'));           
             }else{
                 HeaderQuiz::where('total', 0)->delete();
                 return back();
             }
-        }catch(Exception $e){
-            return back();
+        }catch(\Exception $e){
+            return back()->withErrors($e->getMessage())->withInput();
         }
     }
 
@@ -114,6 +113,7 @@ class QuizController extends Controller
     	$quiz_id = fdecrypt($idd); 
         $result = [];
         try{
+            DB::beginTransaction();
             $lstAnswer = new Collection();
             foreach ($request->input('questions', []) as $key => $question){
                 $answer = new c_answer();
@@ -136,21 +136,20 @@ class QuizController extends Controller
                     if(isset($request->acheckbox)){
                         foreach($request->acheckbox as $i=>$item){
                             $v= array(
-                                'stt' => $request->cstt[$i+1],
+                                'stt' => $request->cstt[$i],
                                 'result' => $request->cresult[$i],
                                 'value' => $item
                             );
                             array_push($r,$v);
                         }
                     }
-                    
                 }
                 if($request->qtype[$key]=='value'){
                     if(isset($request->atext)){
                        foreach($request->atext as $i=>$item){
                             $v= array(
                                 'stt' => $request->vstt[$i],
-                                'result' => $request->rresult[$i],
+                                'result' => $request->vresult[$i],
                                 'value' => $item
                             );
                             array_push($r,$v);
@@ -166,17 +165,15 @@ class QuizController extends Controller
                     ->update(['comment' => json_encode($answer['answer'])]);
 
             }
-            DB::beginTransaction();
             HeaderQuiz::where('id', $quiz_id)->update(['status' => 1]);
             HeaderQuiz::calcResultQuiz($quiz_id);
             //HeaderQuiz::insertQueeEmail('QUIZ',$quiz_id);
             //DB::table('w_job_send_email')->insert(['type'=>'QUIZ','quiz_id'=>$quiz_id, 'status'=>0]);
              DB::commit();
             return redirect()->route('get.dashboard.quiz.take.result', ['quiz_id'=>fencrypt($quiz_id)]);
-           
-        }catch(Exception $e){
+        }catch(\Exception $e){
             DB::rollBack();
-            return back();
+            return back()->withErrors($e->getMessage())->withInput();
         } 
        
     }
@@ -213,13 +210,54 @@ class QuizController extends Controller
         $result = [];
         try{
             DB::beginTransaction();
+            $lstAnswer = new Collection();
             foreach ($request->input('questions', []) as $key => $question){
-                if($request->input('questions', [$key]) != null and $request->answer[$key] == true){
-                    $result[$key] = $request->answer[$key];
-                    DetailQuiz::where('quiz_id', $quiz_id)
-                        ->where('question_id', $question)
-                        ->update(['answer' => $request->answer[$key]]);
-                }               
+                $answer = new c_answer();
+                $c_result = new c_result();
+                $answer->question_id = $question;
+                $answer->ztype = $request->qtype[$key];
+
+                $r=[];
+                if($request->qtype[$key]=='radio'){
+                    //if(isset($request->aradio)){
+                        $v= array(
+                                'stt' => $request->aradio[0],
+                                'result' => $request->rresult[0],
+                                'value' =>$request->aradio[0]
+                        );
+                        array_push($r,$v);
+                    //}
+                }
+                if($request->qtype[$key]=='checkbox'){
+                    //if(isset($request->acheckbox)){
+                        foreach($request->acheckbox as $i=>$item){
+                            $v= array(
+                                'stt' => $request->cstt[$i],
+                                'result' => $request->cresult[$i],
+                                'value' => $item
+                            );
+                            array_push($r,$v);
+                        }
+                    //}
+                }
+                if($request->qtype[$key]=='value'){
+                    if(isset($request->atext)){
+                       foreach($request->atext as $i=>$item){
+                            $v= array(
+                                'stt' => $request->vstt[$i],
+                                'result' => $request->vresult[$i],
+                                'value' => $item
+                            );
+                            array_push($r,$v);
+                        }
+                    }
+                }
+                $answer->answer=$r;
+                $lstAnswer->prepend($answer);
+
+                DetailQuiz::where('quiz_id', $quiz_id)
+                    ->where('question_id', $question)
+                   ->update(['comment' => json_encode($answer['answer'])]);
             }
             HeaderQuiz::where('id', $quiz_id)->update(['status' => 1]);
             HeaderQuiz::calcResultQuiz($quiz_id);
@@ -227,40 +265,25 @@ class QuizController extends Controller
             //DB::table('w_job_send_email')->insert(['type'=>$type,'quiz_id'=>$quiz_id, 'status'=>0]);
             DB::commit();
             return redirect()->route('get.dashboard.period.take.result', ['quiz_id'=>fencrypt($quiz_id)]);
-
-        }catch(\Exception $e){
+        }catch(Exception $e){
             DB::rollBack();
-            return back()->withInput();;
+            return back()->withErrors($e->getMessage())->withInput();
         }       
-    }
-
-    public function getTakeWeekResult($idd){
-        $quiz_id = fdecrypt($idd); 
-        try{
-            $data_result = HeaderQuiz::find($quiz_id);
-            $point = calcPoint($data_result->total, $data_result->kq);
-            $answer_result = DetailQuiz::where('quiz_id', $quiz_id)->orderBy('id')->get();
-            
-            return view('dashboard.quiz.result_week', compact('data_result','answer_result','quiz_id','point'));
-        }catch(\Exception $e){
-            return back()->withInput();
-        }
     }
     public function getTakeQuizResult($idd){
         $quiz_id = fdecrypt($idd); 
         try{
-            $data_result = HeaderQuiz::calcResultQuiz($quiz_id);
-            //$data_result = HeaderQuiz::find($quiz_id);
+            //$data_result = HeaderQuiz::calcResultQuiz($quiz_id);
+            $data_result = HeaderQuiz::find($quiz_id);
             $point = calcPoint($data_result->total, $data_result->kq);
             $answer_result = DetailQuiz::where('quiz_id', $quiz_id)->orderBy('id')->get();
-            
             return view('dashboard.quiz.result_quiz', compact('data_result','answer_result','quiz_id','point'));
         }catch(\Exception $e){
-            return back()->withInput();;
+            return back()->withErrors($e->getMessage())->withInput();
         }
     }
 
-     public function getTakePeriodResult($idd){
+    public function getTakePeriodResult($idd){
         $quiz_id = fdecrypt($idd); 
         try{
             $data_result = HeaderQuiz::find($quiz_id);
@@ -269,7 +292,20 @@ class QuizController extends Controller
             $period_name = Exam::where('type', $data_result->type)->get()[0]->name;
             return view('dashboard.quiz.result_period', compact('data_result','answer_result','quiz_id','point','period_name'));
         }catch(\Exception $e){
-            return back()->withInput();;
+            return back()->withErrors($e->getMessage())->withInput();
+        }
+    }
+
+    public function getTakeWeekResult($idd){
+        $quiz_id = fdecrypt($idd); 
+        try{
+            $data_result = HeaderQuiz::find($quiz_id);
+            $point = calcPoint($data_result->total, $data_result->kq);
+            $answer_result = DetailQuiz::where('quiz_id', $quiz_id)->orderBy('id')->get();
+  
+            return view('dashboard.quiz.result_week', compact('data_result','answer_result','quiz_id','point'));
+        }catch(\Exception $e){
+            return back()->withInput();
         }
     }
     public function getTakeThematicResult($idd){
@@ -280,7 +316,7 @@ class QuizController extends Controller
             $answer_result = DetailQuiz::where('quiz_id', $quiz_id)->orderBy('id')->get();
             return view('dashboard.quiz.result_thematic', compact('data_result','answer_result','quiz_id','point'));
         }catch(\Exception $e){
-            return back()->withInput();;
+            return back()->withInput();
         }
     }
     /*

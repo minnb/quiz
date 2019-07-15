@@ -27,11 +27,7 @@ class HeaderQuiz extends Model
     }
 
     public static function calcResultQuiz($quiz_id){
-    	$answer = DetailQuiz::where([
-    		['quiz_id', $quiz_id]
-    	])->get();
-    	$kq = 0;
-        $success = 0;
+    	$answer = DetailQuiz::where([['quiz_id', $quiz_id]])->orderBy('id')->get();
     	foreach($answer as $item){
             $q_type = Quesstion::find($item->question_id)->type;
             $arr_anser = json_decode($item->comment);
@@ -83,23 +79,19 @@ class HeaderQuiz extends Model
             
     	}
 
+        $kq = 0;
+        $success = 0;
         foreach($answer as $item){
             if($item->result == 1){
-                $kq ++;
+                $kq = $kq + 1;
             }
         }
-
     	$header = HeaderQuiz::where('id', $quiz_id)->get();
-    	$cal = calcPoint($header[0]->total, $kq) ; //round((10/$header[0]->total)*$kq,0);
-    	if($cal >= 7){
-    		$success = 1;
-    	}
-
         $data_result = HeaderQuiz::find($quiz_id);
         $data_result->kq = $kq;
-        $data_result->success = $success;
+        $data_result->success = calcPoint($header[0]->total, $kq) > 7 ? 1 : 0;
         $data_result->save();
-    	//HeaderQuiz::where('id',$quiz_id)->update(['kq'=>$kq, 'success'=>$success]);
+        //HeaderQuiz::where('id',$quiz_id)->update(['kq'=>$kq, 'success'=>$success]);    	
     	return $data_result;
     }
 

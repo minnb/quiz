@@ -178,18 +178,18 @@ class Exam extends Model
 				$heder_quiz->token = $token;
 				$heder_quiz->save();
 				$heder_quiz_id = $heder_quiz->id;
-
-				Exam::insertDetailQuizPeriod($heder_quiz_id, $course, $info_exam[0]->from_week, $info_exam[0]->to_week, $info_exam[0]->lv4, 4);
-				Exam::insertDetailQuizPeriod($heder_quiz_id, $course, $info_exam[0]->from_week, $info_exam[0]->to_week, $info_exam[0]->lv3, 3);
-				Exam::insertDetailQuizPeriod($heder_quiz_id, $course, $info_exam[0]->from_week, $info_exam[0]->to_week, $info_exam[0]->lv2, 2);
-				Exam::insertDetailQuizPeriod($heder_quiz_id, $course, $info_exam[0]->from_week, $info_exam[0]->to_week, $info_exam[0]->lv1, 1);		
+				//insertDetailQuizPeriod($quiz_id, $course, $level_question, $hk)
+				Exam::insertDetailQuizPeriod($heder_quiz_id, $course, $info_exam[0]->lv4,4, $type);
+				Exam::insertDetailQuizPeriod($heder_quiz_id, $course, $info_exam[0]->lv3,3, $type);
+				Exam::insertDetailQuizPeriod($heder_quiz_id, $course, $info_exam[0]->lv2,2, $type);
+				Exam::insertDetailQuizPeriod($heder_quiz_id, $course, $info_exam[0]->lv1,1, $type);		
 
 				$total = DetailQuiz::where('quiz_id', $heder_quiz_id)->get();
 				HeaderQuiz::where('id', $heder_quiz_id)->update(['total'=>$total->count()]);
 
 	            DB::commit();
 	            return $heder_quiz_id;
-	        }catch (\Exception $e) {
+	        }catch (Exception $e) {
 	            DB::rollBack();
 	            return 0;
 	        }
@@ -249,16 +249,13 @@ class Exam extends Model
 		}
 		return 0;
     }
-    public static function insertDetailQuizPeriod($quiz_id, $course, $from, $to, $level_question, $number){
+    public static function insertDetailQuizPeriod($quiz_id, $course, $level_question, $number, $hk){
         for($i = 1; $i <= $level_question; $i++){
-        	$thematic = DB::table('m_chuyen_de')->where('course', $course)
-                    ->whereBetween('week', [$from, $to])->inRandomOrder()->limit(1)->get();
-
+    		
     		$question_data = Quesstion::where([
 				['course', $course],
 				['level', $number],
-				['thematic', $thematic[0]->id],
-				['used', 1],
+				['quiz', $hk],
 				['status', 1]
 			])->inRandomOrder()->limit(1)->distinct()->get();
 /*
@@ -279,15 +276,14 @@ class Exam extends Model
 					$detail_quiz->question_id = $value->id;
 					$detail_quiz->answer = 0;
 					$detail_quiz->comment = '';
-					$detail_quiz->result = $value->answer;
+					$detail_quiz->result = 0;
 					$detail_quiz->answer_time = 0;
 					$detail_quiz->save();
 				}
     		}
     		
     	}
-
-    	return 0;
+	    return 0;
     }
 
     public static function getWeeks($course){

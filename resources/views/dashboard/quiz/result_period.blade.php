@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="media-body">{!! App\Models\Quesstion::find($item->question_id)->name !!}</div>
                                 <div class="media-right">
-                                    @if($item->answer == $item->result)
+                                    @if($item->result == 1)
                                         <span class="badge badge-success ">Đúng </span>
                                     @ELSE
                                         <span class="badge badge-danger  ">Sai </span>
