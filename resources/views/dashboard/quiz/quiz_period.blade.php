@@ -26,7 +26,7 @@
          <form action="{{ route('post.dashboard.quiz.take.period',['quiz_id'=>fencrypt($quiz_id), 'type'=>fencrypt($type)])}}" method="POST">
            <input type="hidden" name="_token" value="{!! csrf_token() !!}">
             <div id="smartwizard" class="smartwizard">
-                  <h1 class="questions"><strong>Luyện thi Quiz</strong></h1>
+                  <h1 class="questions"><strong>Luyện thi</strong></h1>
                   <ul>
                     <?php $i = 0; ?>
                     @foreach($question_data as $key=>$item)
@@ -37,7 +37,7 @@
                     <?php $j = 0; ?>
                     @foreach($question_data as $key=>$item)
                       <input type="hidden" name="questions[]" value="{{ $item['question_id'] }}">
-                      <input type="hidden" name="qtype[{{$key}}]" value="{{ $item['type'] }}">
+                      <input type="hidden" name="qtype[{{ $item['question_id'] }}]" value="{{ $item['type'] }}">
                       <div id="step-{{$key+1}}">
                           <div class="card no-border questionsBox">
                               <div class="card-header alert alert-primary">
@@ -51,9 +51,8 @@
                                   @foreach($item['answer'] as $i=>$value)
                                     <li>
                                       <label>
-                                        <input type="radio" name="aradio[]" value="{{$value['stt']}}" id="radio{{$i}}">{!! $value['name'] !!}
-                                        <input type="hidden" name="rstt[{{$i}}]" value="{{ $value['stt'] }}">
-                                        <input type="hidden" name="rresult[{{$i}}]" value="{{ $value['result'] }}">
+                                        <input type="radio" name="aradio[{{$item['question_id']}}]" value="{{$value['stt']}}" id="radio{{$item['question_id'].$i}}">{!! $value['name'] !!}
+                                        <input type="hidden" name="rresult[{{$item['question_id']}}][{{$value['stt']}}]" value="{{ $value['result'] }}">
                                       </label>
                                     </li>
                                   @endforeach
@@ -61,9 +60,8 @@
                                    @foreach($item['answer'] as $i=>$value)
                                     <li>
                                       <label>
-                                        <input type="checkbox" name="acheckbox[]" value="{{$value['stt']}}" id="checkbox{{$i}}">{!! $value['name'] !!}
-                                        <input type="hidden" name="cstt[{{$i}}]" value="{{ $value['stt'] }}">
-                                        <input type="hidden" name="cresult[{{$i}}]" value="{{ $value['result'] }}">
+                                        <input type="checkbox" name="acheckbox[]" value="{{$value['stt']}}" id="checkbox{{$item['question_id'].$i}}">{!! $value['name'] !!}
+                                        <input type="hidden" name="cresult[{{$item['question_id']}}][{{$value['stt']}}]" value="{{ $value['result'] }}">
                                       </label>
                                     </li>
                                   @endforeach
@@ -72,7 +70,6 @@
                                     <li>
                                       <label>
                                         {!! $value['name'] !!} <input type="text" name="atext[]" value="" id="value{{$i}}">
-                                        <input type="hidden" name="vstt[{{$i}}]" value="{{ $value['stt'] }}">
                                         <input type="hidden" name="vresult[{{$i}}]" value="{{ $value['result'] }}">
                                       </label>
                                     </li>

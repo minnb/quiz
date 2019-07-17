@@ -53,9 +53,10 @@ class HeaderQuiz extends Model
                         if(trim($kc->result) == trim($kc->stt) && trim($kc->stt) == trim($kc->value)){
                             $cr ++;
                         }
-                        if(trim($kc->result) == trim($kc->stt)){
-                            $cb ++;
-                        }
+                        $cb = Answer::where('id', $item->question_id)->where('result', '>',0)->get()->count();
+                        //if(trim($kc->result) == trim($kc->stt)){
+                            //$cb ++;
+                        //}
                     }
                     if($cr == $cb){
                         DetailQuiz::where('id', $item->id)->update(['result'=>1]);
@@ -78,7 +79,12 @@ class HeaderQuiz extends Model
             }
             
     	}
+        return 0;       
+    }
 
+    public static function RatingScore($quiz_id){
+        $answer = DetailQuiz::where([['quiz_id', $quiz_id]])->orderBy('id')->get();
+        $header = HeaderQuiz::where('id', $quiz_id)->get();
         $kq = 0;
         $success = 0;
         foreach($answer as $item){
@@ -86,15 +92,13 @@ class HeaderQuiz extends Model
                 $kq = $kq + 1;
             }
         }
-    	$header = HeaderQuiz::where('id', $quiz_id)->get();
         $data_result = HeaderQuiz::find($quiz_id);
         $data_result->kq = $kq;
         $data_result->success = calcPoint($header[0]->total, $kq) > 7 ? 1 : 0;
         $data_result->save();
-        //HeaderQuiz::where('id',$quiz_id)->update(['kq'=>$kq, 'success'=>$success]);    	
-    	return $data_result;
-    }
 
+        return $data_result;
+    }
     public static function getListQuiz($limit = ''){
         $data = '';
         $user_id =  Auth::user()->id;

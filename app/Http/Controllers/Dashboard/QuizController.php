@@ -160,22 +160,95 @@ class QuizController extends Controller
                 $answer->answer=$r;
                 $lstAnswer->prepend($answer);
 
-                DetailQuiz::where('quiz_id', $quiz_id)
-                    ->where('question_id', $question)
-                    ->update(['comment' => json_encode($answer['answer'])]);
+                //DetailQuiz::where('quiz_id', $quiz_id)
+                 //   ->where('question_id', $question)
+                 //   ->update(['comment' => json_encode($answer['answer'])]);
 
             }
-            HeaderQuiz::where('id', $quiz_id)->update(['status' => 1]);
-            HeaderQuiz::calcResultQuiz($quiz_id);
+            //HeaderQuiz::where('id', $quiz_id)->update(['status' => 1]);
+            ///HeaderQuiz::calcResultQuiz($quiz_id);
             //HeaderQuiz::insertQueeEmail('QUIZ',$quiz_id);
             //DB::table('w_job_send_email')->insert(['type'=>'QUIZ','quiz_id'=>$quiz_id, 'status'=>0]);
              DB::commit();
-            return redirect()->route('get.dashboard.quiz.take.result', ['quiz_id'=>fencrypt($quiz_id)]);
+             return $lstAnswer;
+            //return redirect()->route('get.dashboard.quiz.take.result', ['quiz_id'=>fencrypt($quiz_id)]);
         }catch(\Exception $e){
             DB::rollBack();
             return back()->withErrors($e->getMessage())->withInput();
         } 
        
+    }
+
+    public function postExamPeriod(Request $request, $idd, $type_){
+        $quiz_id = fdecrypt($idd); 
+        $type = fdecrypt($type_); 
+        $result = [];
+        try{
+            DB::beginTransaction();
+            $lstAnswer = new Collection();
+            foreach ($request->input('questions', []) as $key => $question){
+                $answer = new c_answer();
+                $c_result = new c_result();
+                $answer->question_id = $question;
+                $answer->ztype = $request->qtype[$question];
+
+                $r=array();
+
+                if($request->qtype[$question]=='radio'){               
+                    foreach($request->aradio as $i=>$item){
+                        if($request->aradio[$question]){
+                            $v =[
+                                'stt' => $request->aradio[$question],
+                                'result' => $request->rresult[$question][$request->aradio[$question]],
+                                'value' => $request->aradio[$question]
+                            ];
+                        }
+ 
+                    }
+                    array_push($r,$v);
+                }
+                
+                if($request->qtype[$question]=='checkbox'){
+                    foreach($request->acheckbox as $i=>$item){
+                        array_push($r, array(
+                                'stt' => $item,
+                                'result' => $request->cresult[$question][$item],
+                                'value' => isset($item) ? $item : 0
+                            ));
+                    }
+                }
+              
+                if($request->qtype[$question]=='value'){
+                   foreach($request->atext as $i=>$item){
+                        if(isset($request->atext)){
+                            array_push($r,array(
+                                'stt' => $item,
+                                'result' => $request->vresult[$i],
+                                'value' => $item
+                            ));
+                        }
+                    }
+                }
+                $answer->answer=$r;
+                $lstAnswer->prepend($answer);
+                DetailQuiz::where('quiz_id', $quiz_id)
+                    ->where('question_id', $question)
+                   ->update(['comment' => json_encode($answer['answer'])]);
+                
+            }
+
+            HeaderQuiz::where('id', $quiz_id)->update(['status' => 1]);
+            HeaderQuiz::calcResultQuiz($quiz_id);
+            HeaderQuiz::RatingScore($quiz_id);
+            //HeaderQuiz::insertQueeEmail($type,$quiz_id);
+            //DB::table('w_job_send_email')->insert(['type'=>$type,'quiz_id'=>$quiz_id, 'status'=>0]);
+            DB::commit();
+            //return $lstAnswer;
+            return redirect()->route('get.dashboard.period.take.result', ['quiz_id'=>fencrypt($quiz_id)]);
+        }catch(Exception $e){
+            DB::rollBack();
+            return back()->withErrors($e->getMessage())->withInput();
+        }       
     }
 
     public function postTakeQuizWeek(Request $request, $idd){
@@ -204,72 +277,6 @@ class QuizController extends Controller
         }       
     }
 
-    public function postExamPeriod(Request $request, $idd, $type_){
-        $quiz_id = fdecrypt($idd); 
-        $type = fdecrypt($type_); 
-        $result = [];
-        try{
-            DB::beginTransaction();
-            $lstAnswer = new Collection();
-            foreach ($request->input('questions', []) as $key => $question){
-                $answer = new c_answer();
-                $c_result = new c_result();
-                $answer->question_id = $question;
-                $answer->ztype = $request->qtype[$key];
-
-                $r=[];
-                if($request->qtype[$key]=='radio'){
-                    //if(isset($request->aradio)){
-                        $v= array(
-                                'stt' => $request->aradio[0],
-                                'result' => $request->rresult[0],
-                                'value' =>$request->aradio[0]
-                        );
-                        array_push($r,$v);
-                    //}
-                }
-                if($request->qtype[$key]=='checkbox'){
-                    //if(isset($request->acheckbox)){
-                        foreach($request->acheckbox as $i=>$item){
-                            $v= array(
-                                'stt' => $request->cstt[$i],
-                                'result' => $request->cresult[$i],
-                                'value' => $item
-                            );
-                            array_push($r,$v);
-                        }
-                    //}
-                }
-                if($request->qtype[$key]=='value'){
-                    if(isset($request->atext)){
-                       foreach($request->atext as $i=>$item){
-                            $v= array(
-                                'stt' => $request->vstt[$i],
-                                'result' => $request->vresult[$i],
-                                'value' => $item
-                            );
-                            array_push($r,$v);
-                        }
-                    }
-                }
-                $answer->answer=$r;
-                $lstAnswer->prepend($answer);
-
-                DetailQuiz::where('quiz_id', $quiz_id)
-                    ->where('question_id', $question)
-                   ->update(['comment' => json_encode($answer['answer'])]);
-            }
-            HeaderQuiz::where('id', $quiz_id)->update(['status' => 1]);
-            HeaderQuiz::calcResultQuiz($quiz_id);
-            HeaderQuiz::insertQueeEmail($type,$quiz_id);
-            //DB::table('w_job_send_email')->insert(['type'=>$type,'quiz_id'=>$quiz_id, 'status'=>0]);
-            DB::commit();
-            return redirect()->route('get.dashboard.period.take.result', ['quiz_id'=>fencrypt($quiz_id)]);
-        }catch(Exception $e){
-            DB::rollBack();
-            return back()->withErrors($e->getMessage())->withInput();
-        }       
-    }
     public function getTakeQuizResult($idd){
         $quiz_id = fdecrypt($idd); 
         try{
